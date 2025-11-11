@@ -1,21 +1,19 @@
 <header class="main-header">
     <div class="container">
-        <a href="#" class="logo">
+        <a routerLink="/inicio" class="logo">
             <img src="/img/logo-de-neurobrigdge.jpg" alt="NeuroBridge Logo">
             <span>NeuroBridge</span>
         </a>
         <nav class="main-nav">
             <ul>
-                <li><a href="#iniciodepagina">Inicio Rápido</a></li>
-                <li><a href="#sobrenosotros">Sobre Nosotros</a></li>
-                <li><a href="#contactanos">Contáctanos</a></li>
-                <!-- <li><a href="#video-grupo4">Videos</a></li> -->
-                
+                <li><a routerLink="/inicio">Inicio Rápido</a></li>
+                <li><a routerLink="/conocer">Sobre Nosotros</a></li>
+                <li><a routerLink="/sintomas">Síntomas</a></li>
             </ul>
         </nav>
         <div class="header-buttons">
             <button class="btn btn-secondary">Iniciar</button>
-            <button class="btn btn-primary">Unirse</button>
+            <button class="btn btn-primary" routerLink="/sintomas">Unirse</button>
         </div>
     </div>
 </header>
@@ -25,13 +23,11 @@
         <div class="hero-text">
             <h1>Transformando el bienestar emocional con tecnología</h1>
             <p>Nuestras soluciones están diseñadas para facilitar la autorregulación emocional, permitiendo a las
-                personas
-                neurodivergentes gestionar sus emociones de manera efectiva. Además, mejoramos la calidad de vida y
-                fomentamos
-                relaciones interpersonales más saludables.</p>
+                personas neurodivergentes gestionar sus emociones de manera efectiva. Además, mejoramos la calidad de vida y
+                fomentamos relaciones interpersonales más saludables.</p>
             <div class="hero-buttons">
                 <a routerLink="/conocer" class="btn btn-primary">Conocer</a>
-                <button class="btn btn-secondary">Aprender</button>
+                <a routerLink="/sintomas" class="btn btn-secondary">Aprender</a>
             </div>
         </div>
         <div class="hero-image">
@@ -40,7 +36,7 @@
     </div>
 </section>
 
-
+<!-- Resto del contenido igual -->
 <section class="hero-section">
     <div class="container">
         <div class="hero-container">
@@ -48,7 +44,7 @@
                 <h2>Bienestar Emocional</h2>
                 <p>Transforma tu salud emocional con nuestra plataforma que integra tecnología y bienestar mental.</p>
                 <div class="hero-buttons">
-                    <a href="#consulta" class="btn btn-primary">Haz tu consulta</a>
+                    <a routerLink="/sintomas" class="btn btn-primary">Haz tu consulta</a>
                 </div>
             </div>
             <div class="hero-image">
@@ -57,95 +53,3 @@
         </div>
     </div>
 </section>
-<!-- Sección: Formulario de Consultas -->
-<section class="section formulario" id="consulta" data-animate>
-    <h2>Realiza tu Consulta</h2>
-    <form class="form-consulta">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" required />
-
-        <label for="correo">Correo Electrónico:</label>
-        <input type="email" id="correo" name="correo" required />
-
-        <label for="mensaje">Mensaje:</label>
-        <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
-
-        <button type="submit">Enviar Consulta</button>
-    </form>
-</section>
-<!-- Sección: Sobre Nosotros -->
-
-<section id="sobrenosotros" class="section sobre-nosotros" data-animate>
-    <h2>Sobre Nosotros</h2>
-    <p class="descripcion">
-        Somos NeuroBridge, una iniciativa centrada en brindar apoyo emocional a personas neurodivergentes mediante
-        herramientas tecnológicas diseñadas con empatía y conocimiento científico.
-    </p>
-</section>
-<!-- Sección: Desarrolladores -->
-<section class="section devs-section" data-animate>
-    <h2>Desarrolladores a cargo</h2>
-    <div class="devs-grid">
-        <div class="dev-card">
-            <img src="/img/yohana.png" alt="Yohana Martinez">
-            <h4>Yohana Martinez</h4>
-            <p>Scrum Master (Fullstack Developer)</p>
-        </div>
-        <div class="dev-card">
-            <img src="/img/Seb-Alvarez.png" alt="Sebastian Alvarez">
-            <h4>Sebastian Alvarez</h4>
-            <p>Fullstack Developer</p>
-        </div>
-        <div class="dev-card">
-            <img src="/img/zarzosa.png" alt="Sebastian Zarzosa">
-            <h4>Sebastian Zarzosa</h4>
-            <p>Product Owner (Fullstack Developer)</p>
-        </div>
-        <div class="dev-card">
-            <img src="/img/Anthony.png" alt="Anthony Lara">
-            <h4>Anthony Lara</h4>
-            <p>Fullstack Developer</p>
-        </div>
-        <div class="dev-card">
-            <img src="/img/gerardo.png" alt="Gerardo Huaman">
-            <h4>Gerardo Huaman</h4>
-            <p>Fullstack Developer</p>
-        </div>
-    </div>
-</section>
-<!--Sección: videos about the team y expo-->
-<!-- <h2 id="video-grupo4" class="section-title centered">Videos del equipo</h2>
-<div class="video-section">
-    <h3>About the Team:</h3>
-    <a href="https://youtu.be/8acGo_lcY2I" target="_blank" class="video-thumbnail">
-        <img src="https://img.youtube.com/vi/8acGo_lcY2I/hqdefault.jpg" alt="About the Team video">
-        <div class="play-button">▶</div>
-    </a>
-</div>
-<div class="video-section">
-    <h3>Exposición Final:</h3>
-    <a href="https://youtu.be/fvs6Xlxd6j4" target="_blank" class="video-thumbnail">
-        <img src="https://img.youtube.com/vi/fvs6Xlxd6j4/hqdefault.jpg" alt="Exposición Final">
-        <div class="play-button">▶</div>
-    </a>
-</div> -->
-
-<!-- Sección: Contáctanos -->
-<section id="contactanos" class="contact-section" data-animate>
-    <h2>Contáctanos</h2>
-    <p>
-        Puedes escribirnos a <a href="mailto:contacto@neurobridge.com">contacto@neurobridge.com</a>
-        o seguirnos en nuestras redes sociales.
-    </p>
-</section>
-<!-- Footer -->
-<footer class="main-footer">
-    <div class="container">
-        <p>&copy; 2025 NeuroBridge. Todos los derechos reservados.</p>
-        <div class="social-links">
-            <a href="#">Facebook</a> |
-            <a href="#">Instagram</a> |
-            <a href="#">LinkedIn</a>
-        </div>
-    </div>
-</footer>
