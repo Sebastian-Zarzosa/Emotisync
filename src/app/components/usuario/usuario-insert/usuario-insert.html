@@ -1,0 +1,143 @@
+<div class="container">
+  <div style="text-align: center; margin: 5%">
+    <h2>{{ edicion ? 'Editar Usuario' : 'Registro de Usuario' }}</h2>
+  </div>
+  <div style="text-align: center; margin: 5%">
+    <form [formGroup]="form" (submit)="aceptar()">
+      @if(edicion){
+      <mat-form-field>
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="idUsuario" readonly />
+      </mat-form-field>
+      <br />
+      }
+
+      <mat-form-field>
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre" />
+        <mat-error>
+          @if (form.get('nombre')?.hasError('required')) { El nombre es
+          obligatorio!!!! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Apellido</mat-label>
+        <input matInput formControlName="apellido" />
+        <mat-error>
+          @if (form.get('apellido')?.hasError('required')) { El apellido es
+          obligatorio!!!! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" />
+        <mat-error>
+          @if (form.get('email')?.hasError('required')) { El email es
+          obligatorio!!!! } @if (form.get('email')?.hasError('email')) { El
+          email no es válido!!!! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Teléfono</mat-label>
+        <input matInput formControlName="telefono" />
+        <mat-error>
+          @if (form.get('telefono')?.hasError('required')) { El teléfono es
+          obligatorio!!!! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Fecha de Nacimiento</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="fechaNacimiento"
+        />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error>
+          @if (form.get('fechaNacimiento')?.hasError('required')) { La fecha de
+          nacimiento es obligatoria!!!! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Institución</mat-label>
+        <input matInput formControlName="institucion" />
+        <mat-error>
+          @if (form.get('institucion')?.hasError('required')) { La institución
+          es obligatoria!!!! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Nro. Colegiatura</mat-label>
+        <input matInput formControlName="nroColegiatura" />
+        <mat-error>
+          @if (form.get('nroColegiatura')?.hasError('required')) { El número de
+          colegiatura es obligatorio!!!! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Especialidad</mat-label>
+        <input matInput formControlName="especialidad" />
+        <mat-error>
+          @if (form.get('especialidad')?.hasError('required')) { La especialidad
+          es obligatoria!!!! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <div>
+        <mat-radio-group
+          aria-label="Select an option"
+          formControlName="enabled"
+        >
+          <mat-radio-button [value]="true">Activo</mat-radio-button>
+          <mat-radio-button [value]="false">Inactivo</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <br />
+      <mat-form-field>
+        <mat-label>ID Familiar</mat-label>
+        <input matInput type="number" formControlName="familiarId" />
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>ID Especialista</mat-label>
+        <input matInput type="number" formControlName="especialistaId" />
+      </mat-form-field>
+      <br />
+
+      <div>
+        <button mat-raised-button color="primary" type="submit">
+          {{ edicion ? 'Actualizar' : 'Registrar' }}
+        </button>
+        <button
+          mat-raised-button
+          color="warn"
+          type="button"
+          style="margin-left: 10px"
+        >
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
