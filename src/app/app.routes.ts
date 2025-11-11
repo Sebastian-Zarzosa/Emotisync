@@ -14,12 +14,11 @@ export const routes: Routes = [
   {
     path: 'sintomas',
     component: Sintoma,
-    children: [
-      { path: '', component: SintomaList },        
+    children: [  
       { path: 'new', component: SintomaInsert },
       { path: 'edits/:id', component: SintomaInsert },
     ],
   },
 
-  { path: '**', redirectTo: 'inicio' },
+  { path: '', redirectTo: 'sintomas', pathMatch: 'full' },
 ];
