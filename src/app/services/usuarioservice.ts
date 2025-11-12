@@ -31,6 +31,14 @@ export class Usuarioservice {
     return this.listaCambio.asObservable();
   }
 
+  getListaEspecialistas() {
+    return this.http.get<Usuario[]>(`${this.url}/especialistas`);
+  }
+
+  getListaFamiliares() {
+    return this.http.get<Usuario[]>(`${this.url}/familiares`);
+  }
+
   listarId(id: number) {
     return this.http.get<Usuario>(`${this.url}/${id}`);
   }

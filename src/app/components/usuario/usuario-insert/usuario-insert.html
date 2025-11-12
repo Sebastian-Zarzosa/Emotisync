@@ -74,6 +74,26 @@
       <br />
 
       <mat-form-field>
+        <mat-label>Contraseña</mat-label>
+        <input matInput formControlName="password" />
+        <mat-error>
+          @if (form.get('password')?.hasError('required')) { La contraseña es
+          obligatoria!!!! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username" />
+        <mat-error>
+          @if (form.get('username')?.hasError('required')) { El nombre de
+          usuario es obligatorio!!!! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
         <mat-label>Institución</mat-label>
         <input matInput formControlName="institucion" />
         <mat-error>
@@ -113,17 +133,42 @@
         </mat-radio-group>
       </div>
       <br />
-      <mat-form-field>
-        <mat-label>ID Familiar</mat-label>
-        <input matInput type="number" formControlName="familiarId" />
-      </mat-form-field>
+
+      <div>
+        <mat-form-field class="example-full-width">
+          <mat-label>Especialista:</mat-label>
+          <mat-select formControlName="especialista">
+            @for (p of listaEspecialistas; track p.idUsuario) {
+            <mat-option [value]="p.idUsuario"> {{ p.nombre }} </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+
       <br />
 
-      <mat-form-field>
-        <mat-label>ID Especialista</mat-label>
-        <input matInput type="number" formControlName="especialistaId" />
-      </mat-form-field>
+      <div>
+        <mat-form-field class="example-full-width">
+          <mat-label>Rol:</mat-label>
+          <mat-select formControlName="rol" required>
+            @for (p of listaRoles; track p.idRol) {
+            <mat-option [value]="p.idRol"> {{ p.rol }} </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+
       <br />
+      <div>
+        <mat-form-field class="example-full-width">
+          <mat-label>Familiar:</mat-label>
+          <mat-select formControlName="familiar">
+            @for (p of listaFamiliares; track p.idUsuario) {
+            <mat-option [value]="p.idUsuario"> {{ p.nombre }} </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
 
       <div>
         <button mat-raised-button color="primary" type="submit">
