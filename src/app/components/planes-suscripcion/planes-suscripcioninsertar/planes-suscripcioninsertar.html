@@ -1,0 +1,50 @@
+<div class="container">
+    <div style="text-align: center; margin: 5%">
+        <h2>Registro de plan de suscripcion</h2>
+    </div>
+    <div style="text-align: center; margin: 5%">
+        <form [formGroup]="form" (submit)="aceptar()">
+            @if(edicion){
+            <mat-form-field>
+                <mat-label>ID</mat-label>
+                <input matInput formControlName="codigo" />
+            </mat-form-field>
+            }
+            <br />
+            <mat-form-field>
+                <mat-label>Planes</mat-label>
+                <mat-select formControlName="nombre_plan">
+                    @for (food of tipos; track food) {
+                    <mat-option [value]="food.value">{{ food.viewValue }}</mat-option>
+                    }
+                </mat-select>
+                <mat-error>
+                    @if (form.get('nombre_plan')?.hasError('required')) { El campo es obligatorio!!!! }
+                </mat-error>
+            </mat-form-field>
+            <br />
+
+            <mat-form-field>
+                <mat-label>Precio</mat-label>
+                <input matInput formControlName="precio" />
+                <mat-error>
+                    @if (form.get('precio')?.hasError('required')) { El precio es obligatorio!!!! }
+                </mat-error>
+            </mat-form-field>
+            <br />    
+            <mat-form-field>
+                <mat-label>Descripcion</mat-label>
+                <input matInput formControlName="descripcion" />
+
+                <mat-error>
+                    @if (form.get('descripcion')?.hasError('required')) { El campo es obligatorio!!!! }
+                </mat-error>
+            </mat-form-field>
+
+            <br />
+            <div>
+                <button matButton="elevated">Agregar</button>
+            </div>
+        </form>
+    </div>
+</div>
