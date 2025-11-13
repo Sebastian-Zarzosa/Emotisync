@@ -41,7 +41,6 @@
                 <td mat-cell *matCellDef="let element">
                     <button matButton [routerLink]="['editar',element.idPlanesSuscripcion]">
                         <mat-icon>edit</mat-icon>
-                        Actualizar
                     </button>
                 </td>
             </ng-container>
@@ -51,7 +50,6 @@
                 <td mat-cell *matCellDef="let element">
                     <button matButton (click)="eliminar(element.idPlanesSuscripcion)">
                         <mat-icon>delete</mat-icon>
-                        Eliminar
                     </button>
                 </td>
             </ng-container>

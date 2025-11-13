@@ -31,12 +31,23 @@ export class Usuarioservice {
     return this.listaCambio.asObservable();
   }
 
+  getListaEspecialistas() {
+    return this.http.get<Usuario[]>(`${this.url}/especialistas`);
+  }
+
+  getListaFamiliares() {
+    return this.http.get<Usuario[]>(`${this.url}/familiares`);
+  }
+
   listarId(id: number) {
     return this.http.get<Usuario>(`${this.url}/${id}`);
   }
 
   update(usuario: Usuario) {
-    return this.http.put(`${this.url}`, usuario, { responseType: 'text' });
+    // PUT a /usuarios/{id} con el body del usuario
+    return this.http.put(`${this.url}`, usuario, {
+      responseType: 'text',
+    });
   }
 
   delete(id: number) {
