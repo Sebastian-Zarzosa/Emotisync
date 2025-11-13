@@ -16,6 +16,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-sintomainsert',
+  standalone: true,
   imports: [
     ReactiveFormsModule,
     MatFormFieldModule,
@@ -24,7 +25,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
   ],
   templateUrl: './sintoma-insert.html',
   providers: [provideNativeDateAdapter()],
-  styleUrl: './sintoma-insert.css',
+  styleUrls: ['./sintoma-insert.css'],
 })
 export class SintomaInsert implements OnInit {
   form: FormGroup = new FormGroup({});
@@ -49,9 +50,21 @@ export class SintomaInsert implements OnInit {
 
     this.form = this.formBuilder.group({
       codigo: [''],
-      nombre: ['', Validators.required],
-      descripcion: ['', Validators.required],
+      nombre: ['', Validators.required, Validators.minLength(3)],
+      descripcion: ['', Validators.required, Validators.minLength(5)],
     });
+  }
+
+  init(): void {
+    if (this.edicion) {
+      this.sS.listId(this.id).subscribe((data) => {
+        this.form.patchValue({
+          codigo: data.id,
+          nombre: data.nombre,
+          descripcion: data.descripcion,
+        });
+      });
+    }
   }
 
   aceptar(): void {
@@ -62,30 +75,13 @@ export class SintomaInsert implements OnInit {
 
       if (this.edicion) {
         this.sS.update(this.sintoma).subscribe(() => {
-          this.sS.list().subscribe((data) => {
-            this.sS.setList(data);
-          });
+          this.router.navigate(['sintomas']);
         });
       } else {
         this.sS.insert(this.sintoma).subscribe(() => {
-          this.sS.list().subscribe((data) => {
-            this.sS.setList(data);
-          });
+          this.router.navigate(['sintomas']);
         });
       }
-      this.router.navigate(['sintomas']);
-    }
-  }
-
-  init() {
-    if (this.edicion) {
-      this.sS.listId(this.id).subscribe((data) => {
-        this.form = new FormGroup({
-          codigo: new FormControl(data.id),
-          nombre: new FormControl(data.nombre),
-          descripcion: new FormControl(data.descripcion),
-        });
-      });
     }
   }
 }

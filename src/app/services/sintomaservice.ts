@@ -20,7 +20,7 @@ export class Sintomaservice {
   }
 
   insert(s: Sintoma) {
-    return this.http.post(this.url, s);
+    return this.http.post(this.url, s, { responseType: 'text' });
   }
 
   listId(id: number) {

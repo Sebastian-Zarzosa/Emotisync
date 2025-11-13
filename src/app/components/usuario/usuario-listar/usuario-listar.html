@@ -1,65 +1,61 @@
 <app-menu></app-menu>
-<div class="container">
-  <div style="text-align: center; margin: 5%">
-    <h2>Lista de Usuarios</h2>
-  </div>
-  <div>
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-      <!-- Name Column -->
+<div class="container" style="padding: 20px;">
+  <mat-card>
+    <mat-card-header style="justify-content: center; margin-bottom: 20px;">
+      <mat-card-title>Lista de Usuarios</mat-card-title>
+    </mat-card-header>
 
-      <ng-container matColumnDef="nombre">
-        <th mat-header-cell *matHeaderCellDef>Nombre</th>
-        <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
-      </ng-container>
+    <mat-card-content>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef>Nombre</th>
+          <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+        </ng-container>
 
-      <!-- Weight Column -->
+        <ng-container matColumnDef="apellido">
+          <th mat-header-cell *matHeaderCellDef>Apellido</th>
+          <td mat-cell *matCellDef="let element">{{ element.apellido }}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="apellido">
-        <th mat-header-cell *matHeaderCellDef>Apellido</th>
-        <td mat-cell *matCellDef="let element">{{ element.apellido }}</td>
-      </ng-container>
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef>Email</th>
+          <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+        </ng-container>
 
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef>Email</th>
-        <td mat-cell *matCellDef="let element">{{ element.email }}</td>
-      </ng-container>
+        <ng-container matColumnDef="telefono">
+          <th mat-header-cell *matHeaderCellDef>Telefono</th>
+          <td mat-cell *matCellDef="let element">{{ element.telefono }}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="telefono">
-        <th mat-header-cell *matHeaderCellDef>Telefono</th>
-        <td mat-cell *matCellDef="let element">{{ element.telefono }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="fechaNacimiento">
+        <ng-container matColumnDef="fechaNacimiento">
         <th mat-header-cell *matHeaderCellDef>Fecha de Nacimiento</th>
         <td mat-cell *matCellDef="let element">
           {{ element.fechaNacimiento }}
         </td>
       </ng-container>
 
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="editar">
-        <th mat-header-cell *matHeaderCellDef>Actualizar</th>
-        <td mat-cell *matCellDef="let element">
-          <button matButton [routerLink]="['edit', element.idUsuario]">
-            <mat-icon>edit</mat-icon>
-            Actualizar
-          </button>
-        </td>
-      </ng-container>
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="eliminar">
-        <th mat-header-cell *matHeaderCellDef>Eliminar</th>
-        <td mat-cell *matCellDef="let element">
-          <button matButton (click)="eliminar(element.idUsuario)">
-            <mat-icon>delete</mat-icon>
-            Eliminar
-          </button>
-        </td>
-      </ng-container>
+        <ng-container matColumnDef="editar">
+          <th mat-header-cell *matHeaderCellDef>Actualizar</th>
+          <td mat-cell *matCellDef="let element">
+            <button matButton [routerLink]="['edit', element.idUsuario]">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </td>
+        </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
-  </div>
+        <ng-container matColumnDef="eliminar">
+          <th mat-header-cell *matHeaderCellDef>Eliminar</th>
+          <td mat-cell *matCellDef="let element">
+            <button matButton color="warn" (click)="eliminar(element.idUsuario)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+    </mat-card-content>
+  </mat-card>
 </div>

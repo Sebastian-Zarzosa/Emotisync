@@ -76,7 +76,7 @@
       @if(!edicion){
       <mat-form-field>
         <mat-label>Contraseña</mat-label>
-        <input matInput formControlName="password" />
+        <input matInput formControlName="password" type="password"/>
         <mat-error>
           @if (form.get('password')?.hasError('required')) { La contraseña es
           obligatoria!!!! }
