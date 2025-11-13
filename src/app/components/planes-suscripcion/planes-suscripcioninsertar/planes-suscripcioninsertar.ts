@@ -49,18 +49,18 @@ export class PlanesSuscripcioninsertar implements OnInit {
   ) { }
   
   ngOnInit(): void {
-    this.route.params.subscribe((data: Params) => {
-      this.id = data['id'];
-      this.edicion = data['id'] != null;
-      this.init();
-    })
-
     this.form = this.formBuilder.group({
       codigo: [''],
       nombre_plan: ['', Validators.required],
       precio: ['', Validators.required],
       descripcion: ['', Validators.required]
     });
+    
+    this.route.params.subscribe((data: Params) => {
+      this.id = data['id'];
+      this.edicion = data['id'] != null;
+      this.init();
+    })
   }
 
   aceptar(): void{
@@ -90,7 +90,7 @@ export class PlanesSuscripcioninsertar implements OnInit {
   init() {
     if (this.edicion) {
       this.pS.listId(this.id).subscribe((data) => {
-        this.form = this.formBuilder.group({
+        this.form = new FormGroup({
           codigo: new FormControl(data.idPlanesSuscripcion),
           nombre_plan: new FormControl(data.nombre_plan),
           precio: new FormControl(data.precio),
