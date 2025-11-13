@@ -4,35 +4,35 @@ import { FormBuilder,
   FormGroup,
   ReactiveFormsModule,
   Validators } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { provideNativeDateAdapter } from '@angular/material/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatSelectModule } from '@angular/material/select';
-
-import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Rol } from '../../../models/rol';
 import { RolService } from '../../../services/rol.service';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSelectModule } from '@angular/material/select';
+import { CommonModule } from '@angular/common';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatNativeDateModule} from '@angular/material/core';
+// import { provideNativeDateAdapter} from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-softwareinsert',
+  selector: 'app-insertarrol',
   imports: [
     ReactiveFormsModule,
-    MatFormFieldModule,
     MatInputModule,
-    MatSelectModule,
-    MatRadioModule,
     MatDatepickerModule,
-    MatButtonModule,
+    MatSelectModule,
+    CommonModule,
+    MatRadioModule,
+    MatNativeDateModule,
+    MatButtonModule,   
   ],
   templateUrl: './insertarrol.html',
-  providers: [provideNativeDateAdapter()],
-
+  // providers: [provideNativeDateAdapter()],
   styleUrl: './insertarrol.css',
 })
-export class Softwareinsert implements OnInit {
+export class Insertarrol implements OnInit {
   form: FormGroup = new FormGroup({});
   ro: Rol = new Rol();
 
@@ -54,19 +54,14 @@ export class Softwareinsert implements OnInit {
     });
 
     this.form = this.formBuilder.group({
-      codigo: [''],
-      nombre: ['', Validators.required],
-      version: ['', Validators.required],
-      tipo: ['', Validators.required],
-      estado: [false, Validators.required],
-      fecha: ['', Validators.required],
-      proveedor: ['', Validators.required],
+      // id: [''],
+      rol: ['', Validators.required],
     });
   }
   aceptar(): void {
     if (this.form.valid) {
-      this.ro.id = this.form.value.codigo;
-      this.ro.nombre = this.form.value.nombre;
+      // this.ro.id = this.form.value.codigo;
+      this.ro.rol = this.form.value.rol;
       if (this.edicion) {
          this.rS.update(this.ro).subscribe((data) => {
         this.rS.list().subscribe((data) => {
@@ -87,8 +82,8 @@ export class Softwareinsert implements OnInit {
     if (this.edicion) {
       this.rS.listId(this.id).subscribe((data) => {
         this.form = new FormGroup({
-          codigo: new FormControl(data.id),
-          nombre: new FormControl(data.nombre),
+          id: new FormControl(data.id),
+          rol: new FormControl(data.rol),
         });
       });
     }

@@ -3,9 +3,11 @@ import { RouterLink } from '@angular/router';
 import { RolService } from '../../../services/rol.service';
 import { Rol } from '../../../models/rol';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-softwarelistar',
+  selector: 'app-listarrol',
   imports: [MatTableModule, MatButtonModule, MatIconModule, RouterLink],
   templateUrl: './listarrol.html',
   styleUrl: './listarrol.css',

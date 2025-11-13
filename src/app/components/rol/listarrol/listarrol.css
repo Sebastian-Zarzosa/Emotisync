@@ -1,6 +1,6 @@
 /* --- Botones dentro de la tabla --- */
 
-button[matButton] {
+/* button[matButton] {
  font-size: 0.8rem;
  font-weight: 500;
  border-radius: 6px;
@@ -13,9 +13,153 @@ button[matButton] {
 }
 
 /* --- Responsivo (botones más compactos en pantallas pequeñas) --- */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
  button[matButton] [matIconButton]{
   font-size: 0.7rem;
   padding: 3px 8px;
  }
+} */
+
+
+/* probando */
+/* Contenedor de la tabla */
+.table-container {
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+/* Tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Encabezado de la tabla */
+thead {
+  background-color: #2563eb;
+  color: white;
+}
+
+thead th {
+  padding: 16px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Cuerpo de la tabla */
+tbody tr {
+  border-bottom: 1px solid #e5e7eb;
+  transition: background-color 0.2s ease;
+}
+
+tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+tbody tr:last-child {
+  border-bottom: none;
+}
+
+tbody td {
+  padding: 16px;
+  font-size: 14px;
+  color: #374151;
+}
+
+/* Columna de ID */
+tbody td:first-child {
+  font-weight: 500;
+  color: #6b7280;
+}
+
+/* Columna de nombre del rol */
+tbody td:nth-child(2) {
+  color: #1f2937;
+  font-weight: 500;
+}
+
+/* Contenedor de botones de acción */
+.actions-container {
+  display: flex;
+  gap: 8px;
+}
+
+/* Estilos comunes para botones */
+button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Botón Actualizar */
+.btn-actualizar {
+  background-color: #2563eb;
+  color: white;
+}
+
+.btn-actualizar:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
+}
+
+.btn-actualizar:active {
+  transform: translateY(0);
+}
+
+/* Botón Eliminar */
+.btn-eliminar {
+  background-color: #dc2626;
+  color: white;
+}
+
+.btn-eliminar:hover {
+  background-color: #b91c1c;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(220, 38, 38, 0.3);
+}
+
+.btn-eliminar:active {
+  transform: translateY(0);
+}
+
+/* Iconos dentro de los botones (si usas Font Awesome u otro) */
+button i {
+  font-size: 12px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  table {
+    font-size: 12px;
+  }
+  
+  thead th,
+  tbody td {
+    padding: 12px 8px;
+  }
+  
+  button {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  
+  .actions-container {
+    flex-direction: column;
+    gap: 4px;
+  }
 }

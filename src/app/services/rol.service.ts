@@ -10,7 +10,7 @@ const base_url=environment.base;
   providedIn: "root",  
 })
 export class RolService{
-    private url = `${base_url}/rol`;
+    private url = `${base_url}/roles`;
   private listaCambio = new Subject<Rol[]>();
 
   constructor(private http: HttpClient) {}
