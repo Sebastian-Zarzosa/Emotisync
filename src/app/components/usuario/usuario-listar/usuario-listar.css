@@ -1,31 +1,362 @@
-/* --- Botones dentro de la tabla --- */
+/* ============================================
+   Diseño Premium con Paleta Personalizada
+   Fondo: #0C2B4E | Texto: #F4F4F4
+   Acentos: #1A3D64, #1D546C
+   ============================================ */
 
-button[matButton] {
-  font-size: 0.8rem;
-
-  font-weight: 500;
-
-  border-radius: 6px;
-
-  padding: 4px 12px;
-
-  color: rgb(238, 244, 241);
-
-  text-transform: none;
-
-  transition: all 0.25s ease;
-
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
-
-  background-color: rgb(246, 65, 24);
+:host {
+  display: block;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0c2b4e 0%, #153655 50%, #1a3d64 100%);
+  position: relative;
+  padding: 2rem 0;
 }
 
-/* --- Responsivo (botones más compactos en pantallas pequeñas) --- */
+/* Patrón de fondo decorativo */
+:host::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+      circle at 20% 30%,
+      rgba(29, 84, 108, 0.15) 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(26, 61, 100, 0.2) 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(29, 84, 108, 0.1) 0%,
+      transparent 50%
+    );
+  animation: breathe 15s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Container principal */
+.container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Header Section mejorado */
+.header-section {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  padding: 2.5rem 2rem;
+  background: linear-gradient(
+    135deg,
+    rgba(29, 84, 108, 0.15),
+    rgba(26, 61, 100, 0.1)
+  );
+  border-radius: 24px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(244, 244, 244, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+h2 {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI",
+    sans-serif;
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: -2px;
+  margin-bottom: 0.5rem;
+  color: #f4f4f4;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(135deg, #f4f4f4 0%, #c5d9e8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: rgba(244, 244, 244, 0.75);
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+/* Table wrapper mejorado */
+.table-wrapper {
+  background: linear-gradient(
+    135deg,
+    rgba(26, 61, 100, 0.4),
+    rgba(29, 84, 108, 0.25)
+  );
+  backdrop-filter: blur(50px) saturate(180%);
+  -webkit-backdrop-filter: blur(50px) saturate(180%);
+  border-radius: 32px;
+  overflow: hidden;
+  border: 2px solid rgba(244, 244, 244, 0.15);
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(244, 244, 244, 0.1) inset,
+    0 4px 0 rgba(29, 84, 108, 0.3) inset;
+}
+
+/* Tabla base */
+::ng-deep .mat-mdc-table,
+.users-table {
+  width: 100%;
+  background: transparent;
+  border-radius: 0;
+}
+
+/* Headers elegantes */
+::ng-deep .mat-mdc-header-cell {
+  background: linear-gradient(
+    180deg,
+    rgba(12, 43, 78, 0.8),
+    rgba(12, 43, 78, 0.6)
+  );
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  color: #f4f4f4 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Google Sans Code", sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 1.25rem 1.75rem !important;
+  border: none;
+  border-bottom: 2px solid rgba(29, 84, 108, 0.5);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+::ng-deep .mat-mdc-header-cell:first-child {
+  padding-left: 2.5rem !important;
+}
+
+/* Header row */
+::ng-deep .mat-mdc-header-row {
+  background: transparent;
+}
+
+/* Filas mejoradas */
+::ng-deep .mat-mdc-row {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-bottom: 1px solid rgba(244, 244, 244, 0.06);
+  position: relative;
+  background: transparent;
+}
+
+::ng-deep .mat-mdc-row::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(29, 84, 108, 0.1) 0%,
+    rgba(29, 84, 108, 0.2) 50%,
+    rgba(29, 84, 108, 0.1) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+::ng-deep .mat-mdc-row:hover::after {
+  opacity: 1;
+}
+
+::ng-deep .mat-mdc-row:hover {
+  background: rgba(29, 84, 108, 0.15);
+  transform: scale(1.005);
+  box-shadow: 0 4px 20px rgba(29, 84, 108, 0.25);
+  border-left: 4px solid #1d546c;
+}
+
+::ng-deep .mat-mdc-row:nth-child(even) {
+  background: rgba(26, 61, 100, 0.05);
+}
+
+::ng-deep .mat-mdc-row:last-child {
+  border-bottom: none;
+}
+
+/* Celdas con mejor contraste */
+::ng-deep .mat-mdc-cell {
+  color: #f4f4f4 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Google Sans Code", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: 0.2px;
+  padding: 1.25rem 1.75rem !important;
+  border: none;
+}
+
+::ng-deep .mat-mdc-cell:first-child {
+  padding-left: 2.5rem !important;
+  font-weight: 600;
+}
+
+/* Botones con diseño pill redondeado */
+.btn-action {
+  min-height: 40px;
+  padding: 0.5rem 1.25rem !important;
+  border-radius: 30px !important;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: visible;
+  border: 2px solid transparent !important;
+  display: inline-flex !important;
+  align-items: center;
+  gap: 6px;
+  text-transform: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-action span {
+  position: relative;
+  z-index: 1;
+}
+
+.btn-action mat-icon {
+  font-size: 18px !important;
+  width: 18px !important;
+  height: 18px !important;
+  position: relative;
+  z-index: 1;
+}
+
+/* Botón Editar - Teal brillante */
+.btn-edit {
+  background: linear-gradient(135deg, #1d546c, #1a3d64) !important;
+  color: #f4f4f4 !important;
+  border-color: rgba(29, 84, 108, 0.4) !important;
+}
+
+.btn-edit:hover {
+  background: linear-gradient(135deg, #246b88, #1d546c) !important;
+  border-color: #1d546c !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 24px rgba(29, 84, 108, 0.5) !important;
+}
+
+.btn-edit:active {
+  transform: translateY(-1px) scale(0.97) !important;
+}
+
+/* Botón Eliminar - Azul oscuro */
+.btn-delete {
+  background: linear-gradient(135deg, #1a3d64, #0c2b4e) !important;
+  color: #f4f4f4 !important;
+  border-color: rgba(26, 61, 100, 0.4) !important;
+}
+
+.btn-delete:hover {
+  background: linear-gradient(135deg, #224a7a, #1a3d64) !important;
+  border-color: #1a3d64 !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 24px rgba(26, 61, 100, 0.5) !important;
+}
+
+.btn-delete:active {
+  transform: translateY(-1px) scale(0.97) !important;
+}
+
+/* Icons */
+mat-icon {
+  transition: all 0.3s ease;
+  color: #f4f4f4 !important;
+}
+
+/* Estado vacío */
+::ng-deep .mat-mdc-table:empty::after {
+  content: "No hay usuarios registrados";
+  display: block;
+  text-align: center;
+  padding: 4rem 2rem;
+  color: rgba(244, 244, 244, 0.5);
+  font-size: 1.1rem;
+  font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  h2 {
+    font-size: 2.5rem;
+  }
+}
 
 @media (max-width: 768px) {
-  button[matButton] [matIconButton] {
-    font-size: 0.7rem;
+  .container {
+    padding: 0 1rem;
+  }
 
-    padding: 3px 8px;
+  h2 {
+    font-size: 2rem;
+    letter-spacing: -1px;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .table-wrapper {
+    border-radius: 24px;
+  }
+
+  ::ng-deep .mat-mdc-header-cell {
+    font-size: 0.65rem;
+    padding: 1rem !important;
+  }
+
+  ::ng-deep .mat-mdc-cell {
+    font-size: 0.85rem;
+    padding: 1rem !important;
+  }
+
+  ::ng-deep .mat-mdc-cell:first-child,
+  ::ng-deep .mat-mdc-header-cell:first-child {
+    padding-left: 1.25rem !important;
+  }
+
+  .btn-action {
+    padding: 0.45rem 1rem !important;
+    font-size: 0.8rem;
+    min-height: 36px;
+  }
+
+  .btn-action span {
+    display: none;
+  }
+
+  .btn-action mat-icon {
+    margin-right: 0;
   }
 }

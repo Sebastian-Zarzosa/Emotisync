@@ -1,12 +1,12 @@
-/* Contenedor principal - iOS Glass Compacto */
+/* Contenedor principal - iOS Glass */
 .container {
   max-width: 1400px;
-  margin: 1.5rem auto;
-  padding: 1.5rem;
+  margin: 2rem auto;
+  padding: 2rem;
   background: transparent;
 }
 
-/* Wrapper de la tabla - iOS Glass Dark Compacto */
+/* Wrapper de la tabla - iOS Glass Dark */
 .table-wrapper {
   background: rgba(28, 28, 30, 0.6);
   border-radius: 16px;
@@ -22,25 +22,21 @@
 ::ng-deep .mat-mdc-table {
   width: 100%;
   background: transparent;
-  /* Compact row heights using Material 3 CSS vars */
-  --mat-table-row-item-container-height: 44px;
-  --mat-table-header-container-height: 44px;
 }
 
-/* Encabezados - iOS Glass Dark Compacto */
+/* Encabezados - iOS Glass Dark */
 ::ng-deep .mat-mdc-header-cell {
   background: rgba(44, 44, 46, 0.6);
   backdrop-filter: blur(30px) saturate(180%);
   -webkit-backdrop-filter: blur(30px) saturate(180%);
   color: #f2f2f7;
   font-weight: 700;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   text-transform: uppercase;
-  letter-spacing: 1.2px;
-  padding: 0.9rem 1rem;
+  letter-spacing: 1px;
+  padding: 1.1rem 1rem;
   border: none;
   border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
 }
 
 /* Filas */
@@ -59,60 +55,36 @@
   box-shadow: inset 0 0 0 1px rgba(10, 132, 255, 0.12);
 }
 
-/* Celdas - iOS Typography Compacto */
+/* Celdas - iOS Typography */
 ::ng-deep .mat-mdc-cell {
   color: #f2f2f7;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.4;
+  font-size: 15px;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
-  letter-spacing: -0.2px;
-  padding: 0.75rem 1rem;
+  padding: 1rem;
   border: none;
 }
 
-/* Ensure compact row height across MDC containers */
-:host ::ng-deep .mat-mdc-header-row,
-:host ::ng-deep .mat-mdc-row {
-  height: 44px;
-}
-
-/* Botones de acción - Compactos */
+/* Botones de acción */
 button[mat-icon-button] {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.06);
-  transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 button[mat-icon-button]:hover {
-  transform: scale(1.08);
+  transform: scale(1.06);
   background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-}
-
-button[mat-icon-button]:active {
-  transform: scale(0.96);
-  opacity: 0.75;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
 /* Icono de editar - iOS Blue */
-button[mat-icon-button] mat-icon[fontIcon="edit"] {
-  color: #a1a1a7;
-  transition: color 0.25s ease;
-}
-
 button[mat-icon-button]:hover mat-icon[fontIcon="edit"] {
   color: #007aff;
 }
 
 /* Icono de eliminar - iOS Red */
-button[mat-icon-button] mat-icon[fontIcon="delete"] {
-  color: #a1a1a7;
-  transition: color 0.25s ease;
-}
-
 button[mat-icon-button]:hover mat-icon[fontIcon="delete"] {
   color: #ff3b30;
 }
@@ -120,6 +92,7 @@ button[mat-icon-button]:hover mat-icon[fontIcon="delete"] {
 /* Iconos generales */
 mat-icon {
   transition: all 0.3s ease;
+  color: #a1a1a7;
 }
 
 /* Espaciado entre botones */
@@ -163,34 +136,10 @@ button[mat-icon-button] + button[mat-icon-button] {
 
 /* Estado vacío */
 ::ng-deep .mat-mdc-table:empty::after {
-  content: "No hay usuarios para mostrar";
+  content: "No hay registros para mostrar";
   display: block;
   text-align: center;
   padding: 3rem;
   color: #95a5a6;
   font-style: italic;
-}
-
-/* Badges para roles - iOS Style */
-.role-badge {
-  display: inline-block;
-  padding: 4px 12px;
-  border-radius: 12px;
-  font-size: 13px;
-  font-weight: 600;
-  margin: 2px;
-  background: #007aff;
-  color: white;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
-}
-
-/* Estado activo/inactivo - iOS Green/Red */
-.status-active {
-  color: #34c759;
-  font-weight: 600;
-}
-
-.status-inactive {
-  color: #ff3b30;
-  font-weight: 600;
 }
