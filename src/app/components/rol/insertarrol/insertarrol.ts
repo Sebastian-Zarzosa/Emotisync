@@ -13,7 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatNativeDateModule} from '@angular/material/core';
-// import { provideNativeDateAdapter} from '@angular/material/core';
+import { provideNativeDateAdapter} from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
@@ -29,7 +29,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule,   
   ],
   templateUrl: './insertarrol.html',
-  // providers: [provideNativeDateAdapter()],
+  providers: [provideNativeDateAdapter()],
   styleUrl: './insertarrol.css',
 })
 export class Insertarrol implements OnInit {
@@ -54,13 +54,13 @@ export class Insertarrol implements OnInit {
     });
 
     this.form = this.formBuilder.group({
-      // id: [''],
+      id: [''],
       rol: ['', Validators.required],
     });
   }
   aceptar(): void {
     if (this.form.valid) {
-      // this.ro.id = this.form.value.codigo;
+      this.ro.id = this.form.value.id;
       this.ro.rol = this.form.value.rol;
       if (this.edicion) {
          this.rS.update(this.ro).subscribe((data) => {

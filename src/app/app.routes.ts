@@ -9,6 +9,7 @@ export const routes: Routes = [
     {path: '', redirectTo: 'inicio', pathMatch: 'full'},
     {path: 'inicio', component: Inicio},
     {path: 'conocer', component: Conocer},
+    // Rutas de roles
     {
     path: 'roles',
     component: Rol,

@@ -19,8 +19,8 @@ export class RolService{
     return this.http.get<Rol[]>(this.url);
   }
 
-  insert(s: Rol) {
-    return this.http.post(this.url, s);
+  insert(r: Rol) {
+    return this.http.post(this.url, r);
   }
 
   setList(listaNueva: Rol[]) {
@@ -34,8 +34,8 @@ export class RolService{
     return this.http.get<Rol>(`${this.url}/${id}`);
   }
 
-  update(s: Rol) {
-    return this.http.put(`${this.url}`, s, { responseType: 'text' });
+  update(r: Rol) {
+    return this.http.put(`${this.url}`, r, { responseType: 'text' });
   }
 
   delete(id: number) {
