@@ -44,7 +44,10 @@ export class Usuarioservice {
   }
 
   update(usuario: Usuario) {
-    return this.http.put(`${this.url}`, usuario, { responseType: 'text' });
+    // PUT a /usuarios/{id} con el body del usuario
+    return this.http.put(`${this.url}`, usuario, {
+      responseType: 'text',
+    });
   }
 
   delete(id: number) {
