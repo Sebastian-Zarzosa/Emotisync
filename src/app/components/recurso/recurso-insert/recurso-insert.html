@@ -1,0 +1,80 @@
+<div class="container">
+  <div style="text-align: center; margin: 3%">
+    <h2>{{ edicion ? 'Editar Recurso' : 'Registrar Recurso' }}</h2>
+  </div>
+
+  <form [formGroup]="form" (submit)="aceptar()" style="text-align: center">
+    <mat-form-field>
+      <mat-label>Título</mat-label>
+      <input matInput formControlName="titulo" />
+      <mat-error *ngIf="form.get('titulo')?.hasError('required')">
+        El título es obligatorio
+      </mat-error>
+    </mat-form-field>
+
+    <br />
+
+    <mat-form-field>
+      <mat-label>Descripción</mat-label>
+      <input matInput formControlName="descripcion" />
+    </mat-form-field>
+
+    <br />
+
+    <mat-form-field>
+      <mat-label>Tipo</mat-label>
+      <input matInput formControlName="tipo" />
+    </mat-form-field>
+
+    <br />
+
+    <mat-form-field>
+      <mat-label>Enlace</mat-label>
+      <input matInput formControlName="enlace" />
+    </mat-form-field>
+
+    <br />
+
+    <mat-form-field>
+      <mat-label>Fecha de creación</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="fechaCr" />
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <br />
+
+    <mat-form-field>
+      <mat-label>Creador</mat-label>
+      <mat-select formControlName="pruebaf1">
+        <mat-option *ngFor="let u of listaUsuarios" [value]="u.idUsuario">
+          {{ u.nombre }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <br />
+
+    <mat-form-field>
+      <mat-label>Destinatario</mat-label>
+      <mat-select formControlName="pruebaf2">
+        <mat-option *ngFor="let u of listaUsuarios" [value]="u.idUsuario">
+          {{ u.nombre }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <br />
+
+    <mat-radio-group formControlName="esPublico">
+      <mat-radio-button [value]="true">Público</mat-radio-button>
+      <mat-radio-button [value]="false">Privado</mat-radio-button>
+    </mat-radio-group>
+
+    <br /><br />
+
+    <button mat-raised-button color="primary" type="submit">
+      {{ edicion ? 'Actualizar' : 'Registrar' }}
+    </button>
+  </form>
+</div>
