@@ -4,13 +4,16 @@ import { Conocer } from './components/conocer/conocer';
 import { Usuario } from './components/usuario/usuario';
 import { UsuarioInsert } from './components/usuario/usuario-insert/usuario-insert';
 import { Sintoma } from './components/sintoma/sintoma';
-import { SintomaList } from './components/sintoma/sintoma-list/sintoma-list';
 import { SintomaInsert } from './components/sintoma/sintoma-insert/sintoma-insert';
+import { PlanesSuscripcion } from './components/planes-suscripcion/planes-suscripcion';
+import { PlanesSuscripcioninsertar } from './components/planes-suscripcion/planes-suscripcioninsertar/planes-suscripcioninsertar';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   { path: 'inicio', component: Inicio },
   { path: 'conocer', component: Conocer },
+
+  //Rutas de usuario
   {
     path: 'usuarios',
     component: Usuario,
@@ -21,9 +24,7 @@ export const routes: Routes = [
   },
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
 
-  { path: 'inicio', component: Inicio },
-  { path: 'conocer', component: Conocer },
-
+  //Rutas de sintomas
   {
     path: 'sintomas',
     component: Sintoma,
@@ -34,4 +35,14 @@ export const routes: Routes = [
   },
 
   { path: '', redirectTo: 'sintomas', pathMatch: 'full' },
+
+  //Rutas de planes de suscripcion
+  { 
+        path: 'planes', 
+        component: PlanesSuscripcion,
+        children: [
+            { path: 'insertar', component: PlanesSuscripcioninsertar },
+            { path: 'editar/:id', component: PlanesSuscripcioninsertar }
+        ]
+    }
 ];

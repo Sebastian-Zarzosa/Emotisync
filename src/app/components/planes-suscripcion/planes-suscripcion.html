@@ -1,0 +1,7 @@
+<app-menu></app-menu>
+
+<router-outlet></router-outlet>
+
+<div [hidden]="route.children.length !== 0">
+    <app-planes-suscripcionlistar></app-planes-suscripcionlistar>
+</div>
