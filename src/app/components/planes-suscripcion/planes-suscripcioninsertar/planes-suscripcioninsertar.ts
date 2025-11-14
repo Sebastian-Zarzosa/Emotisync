@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from "@angular/material/card";
 
 @Component({
   selector: 'app-planes-suscripcioninsertar',
@@ -23,8 +24,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatButtonModule
-  ],
+    MatButtonModule,
+    MatCardModule
+],
   templateUrl: './planes-suscripcioninsertar.html',
   providers: [provideNativeDateAdapter()],
   styleUrl: './planes-suscripcioninsertar.css',
@@ -52,8 +54,8 @@ export class PlanesSuscripcioninsertar implements OnInit {
     this.form = this.formBuilder.group({
       codigo: [''],
       nombre_plan: ['', Validators.required],
-      precio: ['', Validators.required],
-      descripcion: ['', Validators.required]
+      precio: ['', [Validators.required, Validators.pattern('^[0-9]+(\\.[0-9]{1,2})?$'), Validators.min(0)]],
+      descripcion: ['', [Validators.required, Validators.maxLength(250)]]
     });
     
     this.route.params.subscribe((data: Params) => {
@@ -71,20 +73,35 @@ export class PlanesSuscripcioninsertar implements OnInit {
       this.plan.descripcion = this.form.value.descripcion;
 
       if (this.edicion) {
-        this.pS.update(this.plan).subscribe((data) => {
-          this.pS.list().subscribe((data) => {
-            this.pS.setList(data);
-          })
+        this.pS.update(this.plan).subscribe({
+          next: () => {
+            this.pS.list().subscribe((data) => {
+              this.pS.setList(data);
+              this.router.navigate(['/planes']);
+            })
+          },
+          error: (err) => {
+            console.error('Error al actualizar plan:', err);
+          }
         })
       } else {
-        this.pS.insert(this.plan).subscribe((data) => {
-          this.pS.list().subscribe((data) => {
-            this.pS.setList(data);
-          })
+        this.pS.insert(this.plan).subscribe({
+          next: () => {
+            this.pS.list().subscribe((data) => {
+              this.pS.setList(data);
+              this.router.navigate(['/planes']);
+            })
+          },
+          error: (err) => {
+            console.error('Error al insertar plan:', err);
+          }
         })
       }
-      this.router.navigate(['planes'])
     }
+  }
+
+  cancelar(): void {
+    this.router.navigate(['/planes']);
   }
 
   init() {

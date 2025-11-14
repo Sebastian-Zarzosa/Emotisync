@@ -1,0 +1,75 @@
+/* src/app/app.css */
+/* Ya no definimos variables aquí, las consumimos desde :root */
+
+.app-container {
+  width: 100%;
+  height: 100vh;
+  background-color: var(--admin-background); /* <- Variable */
+}
+
+/* 1. Estilos del Menú Lateral (Sidenav) */
+.app-sidenav {
+  width: 240px;
+  border-right: 1px solid var(--admin-border); /* <- Variable */
+  background-color: var(--admin-surface); /* <- Variable */
+}
+
+.sidenav-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--admin-text-primary); /* <- Variable */
+  cursor: pointer;
+  border-bottom: 1px solid var(--admin-border); /* <- Variable */
+}
+
+.sidenav-header mat-icon {
+  color: var(--admin-primary); /* <- Variable */
+}
+
+.mat-nav-list a[mat-list-item] {
+  color: var(--admin-text-secondary); /* <- Variable */
+  font-weight: 500;
+  margin: 4px 8px;
+  border-radius: 8px;
+}
+
+.mat-nav-list a[mat-list-item] mat-icon {
+  color: var(--admin-text-secondary); /* <- Variable */
+  opacity: 0.8;
+}
+
+.mat-nav-list a.active-link {
+  background-color: var(--admin-active-bg); /* <- Variable */
+  color: var(--admin-primary-dark); /* <- Variable */
+}
+
+.mat-nav-list a.active-link mat-icon {
+  color: var(--admin-primary-dark); /* <- Variable */
+  opacity: 1;
+}
+
+/* 2. Estilos del Contenido Principal */
+.app-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.content-toolbar {
+  background-color: var(--admin-primary-light); /* <- Variable */
+  color: var(--admin-text-primary); /* <- Variable */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.page-content {
+  flex-grow: 1;
+  /* padding: 24px; */
+  overflow-y: auto;
+}
