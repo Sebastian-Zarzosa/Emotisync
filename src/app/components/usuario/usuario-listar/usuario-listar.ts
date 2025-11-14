@@ -8,10 +8,20 @@ import { RouterLink } from '@angular/router';
 import { Menu } from '../../menu/menu';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatCardModule } from "@angular/material/card";
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-usuario-listar',
-  imports: [MatTableModule, MatButtonModule, MatIconModule, RouterLink, Menu, MatPaginatorModule, MatCardModule],
+  imports: [
+    MatTableModule,
+    MatButtonModule,
+    MatIconModule,
+    RouterLink,
+    Menu,
+    MatPaginatorModule,
+    MatCardModule,
+    CommonModule
+  ],
   templateUrl: './usuario-listar.html',
   styleUrl: './usuario-listar.css',
 })

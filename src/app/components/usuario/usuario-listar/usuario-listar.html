@@ -1,12 +1,17 @@
-<app-menu></app-menu>
 <div class="container" style="padding: 20px;">
   <mat-card>
-    <mat-card-header style="justify-content: center; margin-bottom: 20px;">
+
+    <mat-card-header class="list-header">
       <mat-card-title>Lista de Usuarios</mat-card-title>
+      <button mat-raised-button color="primary" routerLink="insert">
+        <mat-icon>add</mat-icon>
+        Nuevo Usuario
+      </button>
     </mat-card-header>
 
     <mat-card-content>
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
         <ng-container matColumnDef="nombre">
           <th mat-header-cell *matHeaderCellDef>Nombre</th>
           <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
@@ -28,16 +33,16 @@
         </ng-container>
 
         <ng-container matColumnDef="fechaNacimiento">
-        <th mat-header-cell *matHeaderCellDef>Fecha de Nacimiento</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.fechaNacimiento }}
-        </td>
-      </ng-container>
+          <th mat-header-cell *matHeaderCellDef>Fecha de Nacimiento</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.fechaNacimiento | date:'dd/MM/yyyy' }}
+          </td>
+        </ng-container>
 
         <ng-container matColumnDef="editar">
           <th mat-header-cell *matHeaderCellDef>Actualizar</th>
           <td mat-cell *matCellDef="let element">
-            <button matButton [routerLink]="['edit', element.idUsuario]">
+            <button mat-icon-button color="primary" [routerLink]="['edit', element.idUsuario]">
               <mat-icon>edit</mat-icon>
             </button>
           </td>
@@ -46,7 +51,7 @@
         <ng-container matColumnDef="eliminar">
           <th mat-header-cell *matHeaderCellDef>Eliminar</th>
           <td mat-cell *matCellDef="let element">
-            <button matButton color="warn" (click)="eliminar(element.idUsuario)">
+            <button mat-icon-button color="warn" (click)="eliminar(element.idUsuario)">
               <mat-icon>delete</mat-icon>
             </button>
           </td>

@@ -1,194 +1,157 @@
-<div class="container">
-  <div style="text-align: center; margin: 5%">
-    <h2>{{ edicion ? 'Editar Usuario' : 'Registro de Usuario' }}</h2>
-  </div>
-  <div style="text-align: center; margin: 5%">
-    <form [formGroup]="form" (submit)="aceptar()">
-      @if(edicion){
-      <mat-form-field>
-        <mat-label>ID</mat-label>
-        <input matInput formControlName="idUsuario" readonly />
-      </mat-form-field>
-      <br />
-      }
+<div class="stepper-container">
+  <h2>{{ edicion ? 'Editar Usuario' : 'Registro de Usuario' }}</h2>
 
-      <mat-form-field>
-        <mat-label>Nombre</mat-label>
-        <input matInput formControlName="nombre" />
-        <mat-error>
-          @if (form.get('nombre')?.hasError('required')) { El nombre es
-          obligatorio!!!! }
-        </mat-error>
-      </mat-form-field>
-      <br />
+  <mat-horizontal-stepper [linear]="true" #stepper>
 
-      <mat-form-field>
-        <mat-label>Apellido</mat-label>
-        <input matInput formControlName="apellido" />
-        <mat-error>
-          @if (form.get('apellido')?.hasError('required')) { El apellido es
-          obligatorio!!!! }
-        </mat-error>
-      </mat-form-field>
-      <br />
+    <mat-step [stepControl]="formStep1">
+      <ng-template matStepLabel>Datos de Cuenta</ng-template>
+      <div [formGroup]="formStep1" class="form-step-content">
 
-      <mat-form-field>
-        <mat-label>Email</mat-label>
-        <input matInput type="email" formControlName="email" />
-        <mat-error>
-          @if (form.get('email')?.hasError('required')) { El email es
-          obligatorio!!!! } @if (form.get('email')?.hasError('email')) { El
-          email no es válido!!!! }
-        </mat-error>
-      </mat-form-field>
-      <br />
-
-      <mat-form-field>
-        <mat-label>Teléfono</mat-label>
-        <input matInput formControlName="telefono" />
-        <mat-error>
-          @if (form.get('telefono')?.hasError('required')) { El teléfono es
-          obligatorio!!!! }
-        </mat-error>
-      </mat-form-field>
-      <br />
-
-      <mat-form-field>
-        <mat-label>Fecha de Nacimiento</mat-label>
-        <input
-          matInput
-          [matDatepicker]="picker"
-          formControlName="fechaNacimiento"
-        />
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle
-          matIconSuffix
-          [for]="picker"
-        ></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-        <mat-error>
-          @if (form.get('fechaNacimiento')?.hasError('required')) { La fecha de
-          nacimiento es obligatoria!!!! }
-        </mat-error>
-      </mat-form-field>
-      <br />
-
-      @if(!edicion){
-      <mat-form-field>
-        <mat-label>Contraseña</mat-label>
-        <input matInput formControlName="password" type="password"/>
-        <mat-error>
-          @if (form.get('password')?.hasError('required')) { La contraseña es
-          obligatoria!!!! }
-        </mat-error>
-      </mat-form-field>
-      <br />
-      }
-
-      <mat-form-field>
-        <mat-label>Username</mat-label>
-        <input matInput formControlName="username" />
-        <mat-error>
-          @if (form.get('username')?.hasError('required')) { El nombre de
-          usuario es obligatorio!!!! }
-        </mat-error>
-      </mat-form-field>
-      <br />
-
-      <mat-form-field>
-        <mat-label>Institución</mat-label>
-        <input matInput formControlName="institucion" />
-        <mat-error>
-          @if (form.get('institucion')?.hasError('required')) { La institución
-          es obligatoria!!!! }
-        </mat-error>
-      </mat-form-field>
-      <br />
-
-      <mat-form-field>
-        <mat-label>Nro. Colegiatura</mat-label>
-        <input matInput formControlName="nroColegiatura" />
-        <mat-error>
-          @if (form.get('nroColegiatura')?.hasError('required')) { El número de
-          colegiatura es obligatorio!!!! }
-        </mat-error>
-      </mat-form-field>
-      <br />
-
-      <mat-form-field>
-        <mat-label>Especialidad</mat-label>
-        <input matInput formControlName="especialidad" />
-        <mat-error>
-          @if (form.get('especialidad')?.hasError('required')) { La especialidad
-          es obligatoria!!!! }
-        </mat-error>
-      </mat-form-field>
-      <br />
-
-      <div>
-        <mat-radio-group
-          aria-label="Select an option"
-          formControlName="enabled"
-        >
-          <mat-radio-button [value]="true">Activo</mat-radio-button>
-          <mat-radio-button [value]="false">Inactivo</mat-radio-button>
-        </mat-radio-group>
-      </div>
-      <br />
-
-      <div>
-        <mat-form-field class="example-full-width">
-          <mat-label>Especialista:</mat-label>
-          <mat-select formControlName="especialista">
-            @for (e of listaEspecialistas; track e.idUsuario) {
-            <mat-option [value]="e.idUsuario"> {{ e.nombre }} </mat-option>
-            }
-          </mat-select>
+        @if(edicion){
+        <mat-form-field>
+          <mat-label>ID</mat-label>
+          <input matInput formControlName="idUsuario" readonly />
         </mat-form-field>
+        }
+
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" />
+          <mat-error>Email no válido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="username" />
+          <mat-error>Username requerido</mat-error>
+        </mat-form-field>
+
+        @if(!edicion){
+        <mat-form-field>
+          <mat-label>Contraseña</mat-label>
+          <input matInput formControlName="password" type="password" />
+          <mat-error>Mínimo 6 caracteres</mat-error>
+        </mat-form-field>
+        }
+
+        <div class="step-actions">
+          <button mat-flat-button color="primary" matStepperNext>Siguiente</button>
+        </div>
       </div>
+    </mat-step>
 
-      <br />
+    <mat-step [stepControl]="formStep2">
+      <ng-template matStepLabel>Datos Personales</ng-template>
+      <div [formGroup]="formStep2" class="form-step-content">
 
-      <div>
-        <mat-form-field class="example-full-width">
-          <mat-label>Roles:</mat-label>
+        <mat-form-field>
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="nombre" />
+          <mat-error>Nombre requerido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Apellido</mat-label>
+          <input matInput formControlName="apellido" />
+          <mat-error>Apellido requerido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="telefono" />
+          <mat-error>Teléfono requerido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Fecha de Nacimiento</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento" />
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error>Fecha requerida</mat-error>
+        </mat-form-field>
+
+        <div class="step-actions">
+          <button mat-button matStepperPrevious>Atrás</button>
+          <button mat-flat-button color="primary" matStepperNext>Siguiente</button>
+        </div>
+      </div>
+    </mat-step>
+
+    <mat-step [stepControl]="formStep3">
+      <ng-template matStepLabel>Datos de Especialista</ng-template>
+      <div [formGroup]="formStep3" class="form-step-content">
+
+        <mat-form-field>
+          <mat-label>Institución (Opcional)</mat-label>
+          <input matInput formControlName="institucion" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Nro. Colegiatura (Opcional)</mat-label>
+          <input matInput formControlName="nroColegiatura" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Especialidad (Opcional)</mat-label>
+          <input matInput formControlName="especialidad" />
+        </mat-form-field>
+
+        <div class="step-actions">
+          <button mat-button matStepperPrevious>Atrás</button>
+          <button mat-flat-button color="primary" matStepperNext>Siguiente</button>
+        </div>
+      </div>
+    </mat-step>
+
+    <mat-step [stepControl]="formStep4">
+      <ng-template matStepLabel>Roles y Asignaciones</ng-template>
+      <div [formGroup]="formStep4" class="form-step-content">
+
+        <mat-form-field>
+          <mat-label>Roles</mat-label>
           <mat-select formControlName="roles" multiple>
             @for (p of listaRoles; track p.idRol) {
-            <mat-option [value]="p"> {{ p.rol }} </mat-option>
+            <mat-option [value]="p">{{ p.rol }}</mat-option>
             }
           </mat-select>
-          <mat-error>
-            @if (form.get('roles')?.hasError('required')) { Debe seleccionar al
-            menos un rol!!!! }
-          </mat-error>
+          <mat-error>Debe seleccionar al menos un rol</mat-error>
         </mat-form-field>
-      </div>
 
-      <br />
-      <div>
-        <mat-form-field class="example-full-width">
-          <mat-label>Familiar:</mat-label>
+        <mat-form-field>
+          <mat-label>Asignar Especialista (Opcional)</mat-label>
+          <mat-select formControlName="especialista">
+            @for (e of listaEspecialistas; track e.idUsuario) {
+            <mat-option [value]="e.idUsuario">{{ e.nombre }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Asignar Familiar (Opcional)</mat-label>
           <mat-select formControlName="familiar">
             @for (f of listaFamiliares; track f.idUsuario) {
-            <mat-option [value]="f.idUsuario"> {{ f.nombre }} </mat-option>
+            <mat-option [value]="f.idUsuario">{{ f.nombre }}</mat-option>
             }
           </mat-select>
         </mat-form-field>
-      </div>
 
-      <div>
-        <button mat-raised-button color="primary" type="submit">
-          {{ edicion ? 'Actualizar' : 'Registrar' }}
-        </button>
-        <button
-          mat-raised-button
-          color="warn"
-          type="button"
-          style="margin-left: 10px"
-        >
-          Cancelar
-        </button>
+        <div class="radio-group-container">
+          <mat-label>Estado:</mat-label>
+          <mat-radio-group aria-label="Estado" formControlName="enabled">
+            <mat-radio-button [value]="true">Activo</mat-radio-button>
+            <mat-radio-button [value]="false">Inactivo</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <div class="step-actions final-actions">
+          <button mat-button matStepperPrevious>Atrás</button>
+          <button mat-stroked-button color="warn" (click)="cancelar()">Cancelar</button>
+          <button mat-flat-button color="primary" (click)="aceptar()">
+            {{ edicion ? 'Actualizar' : 'Registrar' }}
+          </button>
+        </div>
       </div>
-    </form>
-  </div>
+    </mat-step>
+
+  </mat-horizontal-stepper>
 </div>

@@ -7,6 +7,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-inicio',
+  standalone: true,
   imports: [
     RouterLink,
     MatIconModule,

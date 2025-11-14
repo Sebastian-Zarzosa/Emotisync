@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
@@ -13,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-sintomainsert',
@@ -22,6 +22,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatCardModule
   ],
   templateUrl: './sintoma-insert.html',
   providers: [provideNativeDateAdapter()],
@@ -50,15 +51,15 @@ export class SintomaInsert implements OnInit {
 
     this.form = this.formBuilder.group({
       codigo: [''],
-      nombre: ['', Validators.required, Validators.minLength(3)],
-      descripcion: ['', Validators.required, Validators.minLength(5)],
+      nombre: ['', [Validators.required, Validators.minLength(3)]],
+      descripcion: ['', [Validators.required, Validators.minLength(5)]],
     });
   }
 
   init(): void {
     if (this.edicion) {
       this.sS.listId(this.id).subscribe((data) => {
-        this.form.patchValue({
+        this.form.setValue({
           codigo: data.id,
           nombre: data.nombre,
           descripcion: data.descripcion,
@@ -74,14 +75,34 @@ export class SintomaInsert implements OnInit {
       this.sintoma.descripcion = this.form.value.descripcion;
 
       if (this.edicion) {
-        this.sS.update(this.sintoma).subscribe(() => {
-          this.router.navigate(['sintomas']);
+        this.sS.update(this.sintoma).subscribe({
+          next: () => {
+            this.sS.list().subscribe((data) => {
+              this.sS.setList(data);
+              this.router.navigate(['/sintomas']);
+            });
+          },
+          error: (err) => {
+            console.error('Error al actualizar sintoma:', err);
+          }
         });
       } else {
-        this.sS.insert(this.sintoma).subscribe(() => {
-          this.router.navigate(['sintomas']);
+        this.sS.insert(this.sintoma).subscribe({
+          next: () => {
+            this.sS.list().subscribe((data) => {
+              this.sS.setList(data);
+              this.router.navigate(['/sintomas']);
+            });
+          },
+          error: (err) => {
+            console.error('Error al insertar sintoma:', err);
+          }
         });
       }
     }
+  }
+
+  cancelar(): void {
+    this.router.navigate(['/sintomas']);
   }
 }

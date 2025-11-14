@@ -16,13 +16,10 @@
     margin-bottom: 20px;
 }
 
-.plan-card {
-    display: flex;
-    flex-direction: column;
-    height: 100%; /* Para igualar alturas */
-    border-radius: 12px;
-    transition: transform 0.2s, box-shadow 0.2s;
-    border: 1px solid #e0e0e0;
+.plan-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-color: var(--admin-primary);
 }
 
 .plan-card:hover {
@@ -45,7 +42,7 @@ mat-card-title {
 
 .price-tag {
     font-size: 1.5rem !important;
-    color: rgb(246, 65, 24);
+    color: var(--admin-primary);
     font-weight: bold;
     margin-top: 8px !important;
 }
@@ -89,8 +86,8 @@ mat-card-title {
 }
 
 .btn-nuevo-plan {
-    background-color: rgb(76, 175, 80) !important;
-    color: white;
+    background-color: var(--admin-accent) !important;
+    color: var(--admin-text-primary) !important;
 }
 
 .no-records {
