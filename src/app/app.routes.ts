@@ -7,6 +7,8 @@ import { Sintoma } from './components/sintoma/sintoma';
 import { SintomaInsert } from './components/sintoma/sintoma-insert/sintoma-insert';
 import { PlanesSuscripcion } from './components/planes-suscripcion/planes-suscripcion';
 import { PlanesSuscripcioninsertar } from './components/planes-suscripcion/planes-suscripcioninsertar/planes-suscripcioninsertar';
+import { UsuarioSuscripcion } from './components/usuario-suscripcion/usuario-suscripcion';
+import { UsuarioSuscripcioninsertar } from './components/usuario-suscripcion/usuario-suscripcioninsertar/usuario-suscripcioninsertar';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -44,5 +46,16 @@ export const routes: Routes = [
             { path: 'insertar', component: PlanesSuscripcioninsertar },
             { path: 'editar/:id', component: PlanesSuscripcioninsertar }
         ]
-    }
+  },
+
+  {
+    path: 'usuario-suscripcion',
+    component: UsuarioSuscripcion,
+    children: [
+      { path: 'insertar', component: UsuarioSuscripcioninsertar },
+      { path: 'editar/:id', component: UsuarioSuscripcioninsertar }
+    ]
+  },
+
+  {path: '', redirectTo: 'usuario-suscripcion', pathMatch: 'full' }
 ];

@@ -1,23 +1,22 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Usuario } from '../../../models/Usuario';
-import { Usuarioservice } from '../../../services/usuarioservice';
+import { UsuarioService } from '../../../services/usuarioservice';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
-import { Menu } from '../../menu/menu';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatCardModule } from "@angular/material/card";
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-usuario-listar',
+  standalone: true,
   imports: [
     MatTableModule,
     MatButtonModule,
     MatIconModule,
     RouterLink,
-    Menu,
     MatPaginatorModule,
     MatCardModule,
     CommonModule
@@ -39,7 +38,7 @@ export class UsuarioListar implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private usuarioService: Usuarioservice) {}
+  constructor(private usuarioService: UsuarioService) {}
 
   ngOnInit(): void {
     this.usuarioService.listar().subscribe((data) => {
