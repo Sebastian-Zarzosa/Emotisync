@@ -5,7 +5,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { PlanesSuscripcionService } from '../../../services/planes_suscripcionservice';
 import { planesSuscripcion } from '../../../models/planes_suscripcionModel';
-import { Menu } from '../../menu/menu';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatCardModule } from "@angular/material/card";
 import { Observable } from 'rxjs';
@@ -16,8 +15,7 @@ import { AsyncPipe } from '@angular/common';
     MatButtonModule,
     MatIconModule,
     RouterLink,
-    RouterOutlet,
-    Menu, MatPaginatorModule, MatCardModule,
+    MatPaginatorModule, MatCardModule,
   AsyncPipe
   ],
   templateUrl: './planes-suscripcionlistar.html',

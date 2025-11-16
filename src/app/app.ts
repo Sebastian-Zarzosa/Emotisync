@@ -12,9 +12,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
   standalone: true,
   imports: [
     RouterOutlet,
-    Usuario,
     RouterLink,
-    RouterLinkActive,
     MatSidenavModule,
     MatListModule,
     MatIconModule,
