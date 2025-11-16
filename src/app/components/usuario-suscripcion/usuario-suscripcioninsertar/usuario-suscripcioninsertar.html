@@ -24,7 +24,7 @@
 
             <mat-form-field>
                 <mat-label>Plan</mat-label>
-                <mat-select formControlName="PlanesSuscripcion">
+                <mat-select formControlName="planesSuscripcion">
                     @for (p of listaPlanes; track p.idPlanesSuscripcion) {
                     <mat-option [value]="p.idPlanesSuscripcion">{{ p.nombre_plan }} (S/. {{p.precio}})</mat-option>
                     }

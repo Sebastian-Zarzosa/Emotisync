@@ -4,6 +4,7 @@ import { SintomaList } from './sintoma-list/sintoma-list';
 
 @Component({
   selector: 'app-sintoma',
+  standalone: true,
   imports: [RouterOutlet, SintomaList],
   templateUrl: './sintoma.html',
   styleUrl: './sintoma.css',
