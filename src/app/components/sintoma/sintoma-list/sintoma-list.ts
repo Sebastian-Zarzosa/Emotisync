@@ -10,8 +10,15 @@ import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-sintoma-list',
-  imports: [MatTableModule, MatButtonModule, MatIconModule, RouterLink,MatPaginatorModule, 
-    MatCardModule],
+  standalone: true,
+  imports: [
+    MatTableModule,
+    MatButtonModule,
+    MatIconModule,
+    RouterLink,
+    MatPaginatorModule, 
+    MatCardModule
+  ],
   templateUrl: './sintoma-list.html',
   styleUrl: './sintoma-list.css',
 })

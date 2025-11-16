@@ -1,20 +1,26 @@
+// Imports de Angular
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, ReactiveFormsModule} from '@angular/forms';
-import { usuarioSuscripcion } from '../../../models/usuario_suscripcion';
-import { Usuario } from '../../../models/Usuario';
-import { planesSuscripcion } from '../../../models/planes_suscripcionModel';
-import { UsuarioSuscripcionService } from '../../../services/usuario_suscripcionservice';
-import { UsuarioService } from '../../../services/usuarioservice';
-import { PlanesSuscripcionService } from '../../../services/planes_suscripcionservice';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
+
+// Imports de Angular Material
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { CommonModule } from '@angular/common';
+
+// Imports de Servicios
+import { PlanesSuscripcionService } from '../../../services/planes_suscripcionservice';
+import { UsuarioService } from '../../../services/usuarioservice';
+import { UsuarioSuscripcionService } from '../../../services/usuario_suscripcionservice';
+
+// Imports de Modelos
+import { planesSuscripcion } from '../../../models/planes_suscripcionModel';
+import { Usuario } from '../../../models/Usuario';
+import { usuarioSuscripcion } from '../../../models/usuario_suscripcion';
 
 @Component({
   selector: 'app-usuario-suscripcioninsertar',
@@ -56,7 +62,7 @@ export class UsuarioSuscripcioninsertar implements OnInit{
     this.form = this.formBuilder.group({
       idUsuarioSuscripcion: [''],
       usuario: ['', Validators.required],
-      PlanesSuscripcion: ['', Validators.required],
+      planesSuscripcion: ['', Validators.required],
       fechaInicio: ['', Validators.required],
       fechaFin: ['', Validators.required],
       estado: ['Activo', Validators.required]
@@ -78,27 +84,12 @@ export class UsuarioSuscripcioninsertar implements OnInit{
     })
   }
 
-  init() {
-    if (this.edicion) {
-      this.usS.listId(this.id).subscribe((data) => {
-        this.form.setValue({
-          idUsuarioSuscripcion: data.idUsuarioSuscripcion,
-          usuario: data.usuario.idUsuario,
-          PlanesSuscripcion: data.PlanesSuscripcion.idPlanesSuscripcion,
-          fechaInicio: data.fechaInicio,
-          fechaFin: data.fechaFin,
-          estado: data.estado
-        })
-      })
-    }
-  }
-
   aceptar(): void{
     if (this.form.valid) {
       let suscripcionParaEnviar = {
         idUsuarioSuscripcion: this.form.value.idUsuarioSuscripcion,
         usuario: { idUsuario: this.form.value.usuario }, // Construye el objeto Usuario
-        planesSuscripcion: { idPlanesSuscripcion: this.form.value.PlanesSuscripcion }, // Construye el objeto Plan
+        planesSuscripcion: { idPlanesSuscripcion: this.form.value.planesSuscripcion }, // Construye el objeto Plan
         fechaInicio: this.form.value.fechaInicio,
         fechaFin: this.form.value.fechaFin,
         estado: this.form.value.estado,
@@ -127,5 +118,20 @@ export class UsuarioSuscripcioninsertar implements OnInit{
 
   cancelar(): void{
     this.router.navigate(['/usuario-suscripcion']);
+  }
+
+  init() {
+    if (this.edicion) {
+      this.usS.listId(this.id).subscribe((data) => {
+        this.form = new FormGroup({
+          idUsuarioSuscripcion: new FormControl(data.idUsuarioSuscripcion),
+          usuario: new FormControl(data.usuario.idUsuario),
+          planesSuscripcion: new FormControl(data.planesSuscripcion.idPlanesSuscripcion),
+          fechaInicio: new FormControl(data.fechaInicio),
+          fechaFin: new FormControl(data.fechaFin),
+          estado: new FormControl(data.estado)
+        })
+      })
+    }
   }
 }

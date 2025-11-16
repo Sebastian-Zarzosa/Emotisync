@@ -7,5 +7,5 @@ export class usuarioSuscripcion {
     fechaInicio: Date = new Date()
     fechaFin: Date = new Date()
     estado: string = 'Activo'
-    PlanesSuscripcion: planesSuscripcion = new planesSuscripcion()
+    planesSuscripcion: planesSuscripcion = new planesSuscripcion()
 }
