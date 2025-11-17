@@ -56,18 +56,6 @@ export class SintomaInsert implements OnInit {
     });
   }
 
-  init(): void {
-    if (this.edicion) {
-      this.sS.listId(this.id).subscribe((data) => {
-        this.form.setValue({
-          codigo: data.id,
-          nombre: data.nombre,
-          descripcion: data.descripcion,
-        });
-      });
-    }
-  }
-
   aceptar(): void {
     if (this.form.valid) {
       this.sintoma.id = this.form.value.codigo;
@@ -104,5 +92,17 @@ export class SintomaInsert implements OnInit {
 
   cancelar(): void {
     this.router.navigate(['/sintomas']);
+  }
+
+  init(): void {
+    if (this.edicion) {
+      this.sS.listId(this.id).subscribe((data) => {
+        this.form.setValue({
+          codigo: data.id,
+          nombre: data.nombre,
+          descripcion: data.descripcion,
+        });
+      });
+    }
   }
 }

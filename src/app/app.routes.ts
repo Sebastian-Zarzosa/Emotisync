@@ -9,6 +9,8 @@ import { PlanesSuscripcion } from './components/planes-suscripcion/planes-suscri
 import { PlanesSuscripcioninsertar } from './components/planes-suscripcion/planes-suscripcioninsertar/planes-suscripcioninsertar';
 import { Diario } from './components/diario/diario';
 import { DiarioInsertar } from './components/diario/diario-insertar/diario-insertar';
+import { UsuarioSuscripcion } from './components/usuario-suscripcion/usuario-suscripcion';
+import { UsuarioSuscripcioninsertar } from './components/usuario-suscripcion/usuario-suscripcioninsertar/usuario-suscripcioninsertar';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -55,4 +57,14 @@ export const routes: Routes = [
       { path: 'edit/:id', component: DiarioInsertar },
     ],
   },
+  {
+    path: 'usuario-suscripcion',
+    component: UsuarioSuscripcion,
+    children: [
+      { path: 'insertar', component: UsuarioSuscripcioninsertar },
+      { path: 'editar/:id', component: UsuarioSuscripcioninsertar },
+    ],
+  },
+
+  { path: '', redirectTo: 'usuario-suscripcion', pathMatch: 'full' },
 ];

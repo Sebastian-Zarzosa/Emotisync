@@ -2,16 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Diario } from '../../../models/Diario';
 import { Diarioservice } from '../../../services/diarioservice';
-import { Menu } from '../../menu/menu';
 import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCardTitle, MatCardModule } from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-diario-listar',
   imports: [
-    Menu,
     MatTableModule,
     MatButtonModule,
     MatIconModule,

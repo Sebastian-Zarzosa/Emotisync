@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { Usuario } from '../../../models/Usuario';
-import { Usuarioservice } from '../../../services/usuarioservice';
+import { UsuarioService } from '../../../services/usuarioservice';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -58,7 +58,7 @@ export class UsuarioInsert implements OnInit {
   id: number = 0;
 
   constructor(
-    private usuarioService: Usuarioservice,
+    private usuarioService: UsuarioService,
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,

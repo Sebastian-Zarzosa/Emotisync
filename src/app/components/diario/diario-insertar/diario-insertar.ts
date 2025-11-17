@@ -8,7 +8,6 @@ import {
 import { Diario } from '../../../models/Diario';
 import { Diarioservice } from '../../../services/diarioservice';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Usuarioservice } from '../../../services/usuarioservice';
 import { Usuario } from '../../../models/Usuario';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -20,6 +19,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { Emocionesservice } from '../../../services/emocionesservice';
 import { Emociones } from '../../../models/Emociones';
 import { MatCardModule } from '@angular/material/card';
+import { UsuarioService } from '../../../services/usuarioservice';
 
 @Component({
   selector: 'app-diario-insertar',
@@ -53,7 +53,7 @@ export class DiarioInsertar implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private usuarioService: Usuarioservice,
+    private usuarioService: UsuarioService,
     private emocionesService: Emocionesservice
   ) {}
   ngOnInit(): void {
