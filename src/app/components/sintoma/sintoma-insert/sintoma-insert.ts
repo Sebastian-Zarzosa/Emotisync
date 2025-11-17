@@ -27,9 +27,9 @@ import { provideNativeDateAdapter } from '@angular/material/core';
   styleUrl: './sintoma-insert.css',
 })
 export class SintomaInsert implements OnInit {
-  form: FormGroup = new FormGroup({});
+  // El formulario se inicializa vacío, se construirá en ngOnInit
+  form!: FormGroup;
   sintoma: Sintoma = new Sintoma();
-
   edicion: boolean = false;
   id: number = 0;
 
@@ -41,51 +41,75 @@ export class SintomaInsert implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // 1. Construye el formulario UNA SOLA VEZ
+    this.form = this.formBuilder.group({
+      codigo: [''], // El ID no es requerido, se usa para editar
+      nombre: ['', Validators.required],
+      descripcion: ['', Validators.required],
+    });
+
+    // 2. Suscríbete a los parámetros de la ruta
     this.route.params.subscribe((data: Params) => {
       this.id = data['id'];
       this.edicion = data['id'] != null;
+      
+      // 3. Llama a init() DESPUÉS de construir el formulario
       this.init();
-    });
-
-    this.form = this.formBuilder.group({
-      codigo: [''],
-      nombre: ['', Validators.required],
-      descripcion: ['', Validators.required],
     });
   }
 
   aceptar(): void {
     if (this.form.valid) {
+      // Mapea los valores del formulario al objeto sintoma
       this.sintoma.id = this.form.value.codigo;
       this.sintoma.nombre = this.form.value.nombre;
       this.sintoma.descripcion = this.form.value.descripcion;
 
       if (this.edicion) {
-        this.sS.update(this.sintoma).subscribe(() => {
-          this.sS.list().subscribe((data) => {
-            this.sS.setList(data);
-          });
+        // --- BUENA PRÁCTICA: Añadir manejo de errores ---
+        this.sS.update(this.sintoma).subscribe({
+          next: () => {
+            // Actualiza la lista en el servicio
+            this.sS.list().subscribe((data) => {
+              this.sS.setList(data);
+            });
+            this.router.navigate(['sintomas']); // Navega de vuelta
+          },
+          error: (err) => {
+            console.error('Error al actualizar el síntoma:', err);
+          },
         });
       } else {
-        this.sS.insert(this.sintoma).subscribe(() => {
-          this.sS.list().subscribe((data) => {
-            this.sS.setList(data);
-          });
+        // --- BUENA PRÁCTICA: Añadir manejo de errores ---
+        this.sS.insert(this.sintoma).subscribe({
+          next: () => {
+            // Actualiza la lista en el servicio
+            this.sS.list().subscribe((data) => {
+              this.sS.setList(data);
+            });
+            this.router.navigate(['sintomas']); // Navega de vuelta
+          },
+          error: (err) => {
+            console.error('Error al insertar el síntoma:', err);
+          },
         });
       }
-      this.router.navigate(['sintomas']);
+    } else {
+      console.log('Formulario no es válido');
     }
   }
 
   init() {
     if (this.edicion) {
       this.sS.listId(this.id).subscribe((data) => {
-        this.form = new FormGroup({
-          codigo: new FormControl(data.id),
-          nombre: new FormControl(data.nombre),
-          descripcion: new FormControl(data.descripcion),
+        // 4. En lugar de RECREAR el form, usa setValue o patchValue para RELLENARLO
+        this.form.setValue({
+          codigo: data.id,
+          nombre: data.nombre,
+          descripcion: data.descripcion,
         });
       });
     }
+    // Si no es edición, el formulario ya está listo (vacío) desde ngOnInit
   }
 }
