@@ -7,7 +7,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
-import { Menu } from '../../menu/menu';
+
 import { Recurso } from '../../../models/recurso';
 import { RecursoService } from '../../../services/recurso-service';
 
@@ -22,7 +22,7 @@ import { RecursoService } from '../../../services/recurso-service';
     MatSortModule,
     MatIconModule,
     MatButtonModule,
-    Menu,
+    
   ],
   templateUrl: './recurso-list.html',
   styleUrls: ['./recurso-list.css'],

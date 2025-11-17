@@ -16,7 +16,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { Recurso } from '../../../models/recurso';
 import { RecursoService } from '../../../services/recurso-service';
-import { Usuarioservice } from '../../../services/usuarioservice';
+import { UsuarioService } from '../../../services/usuarioservice';
 import { Usuario } from '../../../models/Usuario';
 
 @Component({
@@ -45,7 +45,7 @@ export class RecursoInsert implements OnInit {
 
   constructor(
     private rS: RecursoService,
-    private uS: Usuarioservice,
+    private uS: UsuarioService,
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute
