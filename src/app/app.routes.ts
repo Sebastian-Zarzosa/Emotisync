@@ -9,6 +9,8 @@ import { PlanesSuscripcion } from './components/planes-suscripcion/planes-suscri
 import { PlanesSuscripcioninsertar } from './components/planes-suscripcion/planes-suscripcioninsertar/planes-suscripcioninsertar';
 import { UsuarioSuscripcion } from './components/usuario-suscripcion/usuario-suscripcion';
 import { UsuarioSuscripcioninsertar } from './components/usuario-suscripcion/usuario-suscripcioninsertar/usuario-suscripcioninsertar';
+import { Alertas } from './components/alertas/alertas';
+import { AlertasInsertar } from './components/alertas/alertas-insertar/alertas-insertar';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -57,5 +59,16 @@ export const routes: Routes = [
     ]
   },
 
-  {path: '', redirectTo: 'usuario-suscripcion', pathMatch: 'full' }
+  { path: '', redirectTo: 'usuario-suscripcion', pathMatch: 'full' },
+  
+  {
+    path: 'alerta',
+    component: Alertas,
+    children: [
+      { path: 'insertar', component: AlertasInsertar },
+      { path: 'editar/:id', component: AlertasInsertar }
+    ]
+  },
+
+  { path: '', redirectTo: 'alerta', pathMatch: 'full'}
 ];
