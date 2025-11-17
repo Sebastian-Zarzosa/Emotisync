@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
@@ -13,18 +12,21 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-sintomainsert',
+  standalone: true,
   imports: [
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatCardModule
   ],
   templateUrl: './sintoma-insert.html',
   providers: [provideNativeDateAdapter()],
-  styleUrl: './sintoma-insert.css',
+  styleUrls: ['./sintoma-insert.css'],
 })
 export class SintomaInsert implements OnInit {
   // El formulario se inicializa vacío, se construirá en ngOnInit
@@ -56,6 +58,12 @@ export class SintomaInsert implements OnInit {
       // 3. Llama a init() DESPUÉS de construir el formulario
       this.init();
     });
+
+    this.form = this.formBuilder.group({
+      codigo: [''],
+      nombre: ['', [Validators.required, Validators.minLength(3)]],
+      descripcion: ['', [Validators.required, Validators.minLength(5)]],
+    });
   }
 
   aceptar(): void {
@@ -66,43 +74,40 @@ export class SintomaInsert implements OnInit {
       this.sintoma.descripcion = this.form.value.descripcion;
 
       if (this.edicion) {
-        // --- BUENA PRÁCTICA: Añadir manejo de errores ---
         this.sS.update(this.sintoma).subscribe({
           next: () => {
-            // Actualiza la lista en el servicio
             this.sS.list().subscribe((data) => {
               this.sS.setList(data);
+              this.router.navigate(['/sintomas']);
             });
-            this.router.navigate(['sintomas']); // Navega de vuelta
           },
           error: (err) => {
-            console.error('Error al actualizar el síntoma:', err);
-          },
+            console.error('Error al actualizar sintoma:', err);
+          }
         });
       } else {
-        // --- BUENA PRÁCTICA: Añadir manejo de errores ---
         this.sS.insert(this.sintoma).subscribe({
           next: () => {
-            // Actualiza la lista en el servicio
             this.sS.list().subscribe((data) => {
               this.sS.setList(data);
+              this.router.navigate(['/sintomas']);
             });
-            this.router.navigate(['sintomas']); // Navega de vuelta
           },
           error: (err) => {
-            console.error('Error al insertar el síntoma:', err);
-          },
+            console.error('Error al insertar sintoma:', err);
+          }
         });
       }
-    } else {
-      console.log('Formulario no es válido');
     }
   }
 
-  init() {
+  cancelar(): void {
+    this.router.navigate(['/sintomas']);
+  }
+
+  init(): void {
     if (this.edicion) {
       this.sS.listId(this.id).subscribe((data) => {
-        // 4. En lugar de RECREAR el form, usa setValue o patchValue para RELLENARLO
         this.form.setValue({
           codigo: data.id,
           nombre: data.nombre,

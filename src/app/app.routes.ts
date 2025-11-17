@@ -5,14 +5,19 @@ import { Usuario } from './components/usuario/usuario';
 import { UsuarioInsert } from './components/usuario/usuario-insert/usuario-insert';
 import { Sintoma } from './components/sintoma/sintoma';
 import { SintomaInsert } from './components/sintoma/sintoma-insert/sintoma-insert';
-import { Recurso } from './components/recurso/recurso';
-import { RecursoInsert } from './components/recurso/recurso-insert/recurso-insert';
+import { PlanesSuscripcion } from './components/planes-suscripcion/planes-suscripcion';
+import { PlanesSuscripcioninsertar } from './components/planes-suscripcion/planes-suscripcioninsertar/planes-suscripcioninsertar';
+import { UsuarioSuscripcion } from './components/usuario-suscripcion/usuario-suscripcion';
+import { UsuarioSuscripcioninsertar } from './components/usuario-suscripcion/usuario-suscripcioninsertar/usuario-suscripcioninsertar';
+import { Alertas } from './components/alertas/alertas';
+import { AlertasInsertar } from './components/alertas/alertas-insertar/alertas-insertar';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   { path: 'inicio', component: Inicio },
   { path: 'conocer', component: Conocer },
 
+  //Rutas de usuario
   {
     path: 'usuarios',
     component: Usuario,
@@ -21,25 +26,49 @@ export const routes: Routes = [
       { path: 'edit/:id', component: UsuarioInsert },
     ],
   },
+  { path: '', redirectTo: 'inicio', pathMatch: 'full' },
 
+  //Rutas de sintomas
   {
     path: 'sintomas',
     component: Sintoma,
-    children: [
-      { path: 'insert', component: SintomaInsert },
-      { path: 'edit/:id', component: SintomaInsert },
+    children: [  
+      { path: 'new', component: SintomaInsert },
+      { path: 'edits/:id', component: SintomaInsert },
     ],
   },
 
-   {
-    path: 'recursos',
-    component: Recurso,
-    children: [
-     
-      { path: 'insert', component: RecursoInsert },
-      { path: 'edit/:id', component: RecursoInsert },
-    ],
+  { path: '', redirectTo: 'sintomas', pathMatch: 'full' },
+
+  //Rutas de planes de suscripcion
+  { 
+        path: 'planes', 
+        component: PlanesSuscripcion,
+        children: [
+            { path: 'insertar', component: PlanesSuscripcioninsertar },
+            { path: 'editar/:id', component: PlanesSuscripcioninsertar }
+        ]
   },
-  // Redirige cualquier ruta no encontrada a inicio
-  { path: '**', redirectTo: 'inicio' }
+
+  {
+    path: 'usuario-suscripcion',
+    component: UsuarioSuscripcion,
+    children: [
+      { path: 'insertar', component: UsuarioSuscripcioninsertar },
+      { path: 'editar/:id', component: UsuarioSuscripcioninsertar }
+    ]
+  },
+
+  { path: '', redirectTo: 'usuario-suscripcion', pathMatch: 'full' },
+  
+  {
+    path: 'alerta',
+    component: Alertas,
+    children: [
+      { path: 'insertar', component: AlertasInsertar },
+      { path: 'editar/:id', component: AlertasInsertar }
+    ]
+  },
+
+  { path: '', redirectTo: 'alerta', pathMatch: 'full'}
 ];

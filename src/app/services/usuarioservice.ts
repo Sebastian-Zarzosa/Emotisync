@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../environments/environment';
+import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { Usuario } from '../models/Usuario';
@@ -9,7 +9,7 @@ const base_url = environment.base;
 @Injectable({
   providedIn: 'root',
 })
-export class Usuarioservice {
+export class UsuarioService {
   private url = `${base_url}/usuarios`;
   private listaCambio = new Subject<Usuario[]>();
 

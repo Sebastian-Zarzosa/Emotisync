@@ -1,0 +1,84 @@
+/* src/app/app.css */
+
+.app-container {
+  width: 100%;
+  height: 100vh;
+  background-color: var(--admin-background); 
+}
+
+/* 1. Estilos del Menú Lateral (Sidenav) */
+.app-sidenav {
+  position: absolute;
+    height: 100%;
+    z-index: 1001;
+  width: 240px;
+  border-right: 1px solid var(--admin-border); 
+  background-color: var(--admin-surface);
+}
+
+.sidenav-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--admin-text-primary); 
+  cursor: pointer;
+  border-bottom: 1px solid var(--admin-border);
+}
+
+.sidenav-header mat-icon {
+  color: var(--admin-primary); 
+}
+
+.mat-nav-list a[mat-list-item] {
+  color: var(--admin-text-secondary);
+  font-weight: 500;
+  margin: 4px 8px;
+  border-radius: 8px;
+}
+
+.mat-nav-list a[mat-list-item] mat-icon {
+  color: var(--admin-text-secondary);
+  opacity: 0.8;
+}
+
+.mat-nav-list a.active-link {
+  background-color: var(--admin-active-bg);
+  color: var(--admin-primary-dark); 
+}
+
+.mat-nav-list a.active-link mat-icon {
+  color: var(--admin-primary-dark); 
+  opacity: 1;
+}
+
+/* 2. Estilos del Contenido Principal */
+.app-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.content-toolbar {
+  background-color: var(--admin-primary-light);
+  color: var(--admin-text-primary); 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  top: 0;
+  position: relative;
+    z-index: 1000;
+    padding-left: 70px;
+}
+
+.content-toolbar button[mat-icon-button] {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.page-content {
+  flex-grow: 1;
+  overflow-y: auto;
+}
