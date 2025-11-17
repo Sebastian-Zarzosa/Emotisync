@@ -11,6 +11,10 @@ import { Diario } from './components/diario/diario';
 import { DiarioInsertar } from './components/diario/diario-insertar/diario-insertar';
 import { UsuarioSuscripcion } from './components/usuario-suscripcion/usuario-suscripcion';
 import { UsuarioSuscripcioninsertar } from './components/usuario-suscripcion/usuario-suscripcioninsertar/usuario-suscripcioninsertar';
+import { Alertas } from './components/alertas/alertas';
+import { AlertasInsertar } from './components/alertas/alertas-insertar/alertas-insertar';
+import { Recurso } from './components/recurso/recurso';
+import { RecursoInsert } from './components/recurso/recurso-insert/recurso-insert';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -39,7 +43,15 @@ export const routes: Routes = [
   },
 
   { path: '', redirectTo: 'sintomas', pathMatch: 'full' },
-
+  
+  {
+    path: 'recursos',
+    component: Recurso,
+    children: [
+      { path: 'insert', component: RecursoInsert },
+      { path: 'edit/:id', component: RecursoInsert },
+    ],
+  },
   //Rutas de planes de suscripcion
   {
     path: 'planes',
@@ -67,4 +79,15 @@ export const routes: Routes = [
   },
 
   { path: '', redirectTo: 'usuario-suscripcion', pathMatch: 'full' },
+  
+  {
+    path: 'alerta',
+    component: Alertas,
+    children: [
+      { path: 'insertar', component: AlertasInsertar },
+      { path: 'editar/:id', component: AlertasInsertar }
+    ]
+  },
+
+  { path: '', redirectTo: 'alerta', pathMatch: 'full'}
 ];
