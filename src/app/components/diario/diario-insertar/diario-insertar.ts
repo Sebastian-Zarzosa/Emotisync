@@ -19,6 +19,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Emocionesservice } from '../../../services/emocionesservice';
 import { Emociones } from '../../../models/Emociones';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-diario-insertar',
@@ -31,6 +32,7 @@ import { Emociones } from '../../../models/Emociones';
     MatRadioModule,
     MatNativeDateModule,
     MatButtonModule,
+    MatCardModule,
   ],
   templateUrl: './diario-insertar.html',
   styleUrl: './diario-insertar.css',
@@ -118,5 +120,9 @@ export class DiarioInsertar implements OnInit {
         });
       });
     }
+  }
+
+  cancelar(): void {
+    this.router.navigate(['/diarios']);
   }
 }

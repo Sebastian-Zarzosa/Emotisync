@@ -6,10 +6,18 @@ import { Menu } from '../../menu/menu';
 import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardTitle, MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-diario-listar',
-  imports: [Menu, MatTableModule, MatButtonModule, MatIconModule, RouterLink],
+  imports: [
+    Menu,
+    MatTableModule,
+    MatButtonModule,
+    MatIconModule,
+    RouterLink,
+    MatCardModule,
+  ],
   templateUrl: './diario-listar.html',
   styleUrl: './diario-listar.css',
 })
