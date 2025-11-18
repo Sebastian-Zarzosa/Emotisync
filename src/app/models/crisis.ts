@@ -8,5 +8,5 @@ export class Crisis {
   articulacion: number = 0;
   f0_promedio: number = 0;
   formantesDetectados: string = '';
-  usuario: Usuario = new Usuario(); // <-- Objeto anidado, igual que en Recurso
+  usuario: Usuario = new Usuario();
 }
