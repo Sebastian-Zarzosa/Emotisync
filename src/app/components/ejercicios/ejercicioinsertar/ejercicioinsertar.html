@@ -1,0 +1,65 @@
+  <div class="container">
+    <div style="text-align: center; margin: 5%;"><h2>{{  edicion ? 'Editar' : 'Registrar' }}</h2></div>
+    <form [formGroup]="form" (submit)="aceptar()" style="text-align: center; margin: 5%;">
+        @if(edicion){
+          <mat-form-field class="example-full-width">
+            <mat-label>ID:</mat-label>
+            <input
+            matInput
+            formControlName="id"
+            />
+            <mat-error>
+              @if (form.get('id')?.hasError('required')) {
+                Ingrese ID obligatoriamente!
+              }
+            </mat-error>
+          </mat-form-field>
+        }
+        <br>
+        <mat-form-field class="example-full-width">
+          <mat-label>Ejercicio:</mat-label>
+          <input
+            matInput
+            formControlName="nombre"
+            required
+          />
+          <mat-error>
+            @if (form.get('nombre')?.hasError('required')) {
+              Ingrese nombre del ejercicio obligatoriamente!
+            }
+          </mat-error>
+          </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width">
+          <mat-label>Descripcion:</mat-label>
+          <input
+            matInput
+            formControlName="descripcion"
+            required
+          />
+          <mat-error>
+            @if (form.get('descripcion')?.hasError('required')) {
+              Ingrese descripcion del ejercicio obligatoriamente!
+            }
+          </mat-error>
+        </mat-form-field>
+        <br />
+        <br />
+        <mat-form-field>
+          <mat-label>Tipo de Ejercicio</mat-label>
+          <mat-select formControlName="tipoEjercicio" required>
+            @for (t of tipos; track t){
+              <mat-option [value]="t.value">{{t.viewValue}}</mat-option>
+            }
+          </mat-select>      
+          <mat-error>
+            @if (form.get('tipoEjercicio')?.hasError('required')) {
+              Seleccione tipo de ejercicio obligatoriamente!
+            }
+          </mat-error>
+        </mat-form-field>
+        <br />
+        <button matButton="elevated">{{ edicion ? 'Editar' : 'Registrar' }}</button>
+      </form>
+  </div>
+

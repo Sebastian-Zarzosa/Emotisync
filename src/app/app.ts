@@ -1,13 +1,23 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { Inicio } from './components/inicio/inicio';
-import { Conocer } from './components/conocer/conocer';
-import { Listarrol } from './components/rol/listarrol/listarrol';
-import { Menu } from './components/menu/menu';
-
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Usuario } from './components/usuario/usuario';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Menu],
+  standalone: true,
+  imports: [
+    RouterOutlet,
+    RouterLink,
+    MatSidenavModule,
+    MatListModule,
+    MatIconModule,
+    MatButtonModule,
+    MatToolbarModule
+  ],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
