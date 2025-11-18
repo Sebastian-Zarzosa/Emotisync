@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Alerta } from '../../../models/alertas';
 import { AlertasService } from '../../../services/alertasservice';
@@ -23,9 +23,9 @@ import { MatPaginatorModule } from "@angular/material/paginator";
   templateUrl: './alertas-listar.html',
   styleUrl: './alertas-listar.css',
 })
-export class AlertasListar {
+export class AlertasListar implements OnInit{
   dataSource: MatTableDataSource<Alerta> = new MatTableDataSource();
-  displayedColumns: string[] = ['id', 'tipoAlerta', 'mensaje', 'nivelAlerta', 'editar', 'eliminar'];
+  displayedColumns: string[] = ['id', 'tipoAlerta', 'mensaje', 'nivelAlerta','usuario', 'editar', 'eliminar'];
 
   constructor(private aS: AlertasService) { }
 

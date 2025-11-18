@@ -5,7 +5,7 @@ import { FormBuilder,
   ReactiveFormsModule,
   Validators } from '@angular/forms';
 import { Rol } from '../../../models/Rol';
-import { RolService } from '../../../services/rol.service';
+import { RolService } from '../../../services/rolservice';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';

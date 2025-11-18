@@ -17,7 +17,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonModule } from '@angular/material/button';
 import { Rol } from '../../../models/Rol';
-import { RolService } from '../../../services/rol.service';
+import { RolService } from '../../../services/rolservice';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatStepperModule } from '@angular/material/stepper';

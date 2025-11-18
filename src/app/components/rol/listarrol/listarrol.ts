@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { RolService } from '../../../services/rol.service';
+import { RolService } from '../../../services/rolservice';
 import { Rol } from '../../../models/Rol';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
