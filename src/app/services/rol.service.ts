@@ -1,5 +1,5 @@
 import { Subject } from "rxjs";
-import { Rol } from "../models/rol";
+import { Rol } from "../models/Rol";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../environments/environment";
@@ -24,7 +24,7 @@ export class RolService{
   }
 
   setList(listaNueva: Rol[]) {
-    this.listaCambio.next(listaNueva);
+    return this.listaCambio.next(listaNueva);
   }
   getList() {
     return this.listaCambio.asObservable();

@@ -114,14 +114,16 @@ export const routes: Routes = [
         { path: 'insertar', component: Insertarrol },
         { path: 'edits/:id', component: Insertarrol },
     ],
-      
-      {
-    path: 'crisis',
-    component: Rol,
-    children: [
-        { path: 'insertar', component: crisis-insert },
-        { path: 'edits/:id', component: crisis-insert },
-    ],
+    },
+  // {
+  //   path: 'crisis',
+  //       component: Rol,
+  //       children: [
+  //           { path: 'insertar', component: crisis-insert },
+  //           { path: 'edits/:id', component: crisis-insert },
+  //       ],
+  // }
+    
   
 ];
 

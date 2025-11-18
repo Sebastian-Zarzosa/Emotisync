@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { Listarrol } from './listarrol/listarrol';
-import { Menu } from '../menu/menu';
 
 @Component({
   selector: 'app-rol',
-  imports: [RouterOutlet, Listarrol, Menu],
+  imports: [RouterOutlet, Listarrol],
   templateUrl: './rol.html',
   styleUrl: './rol.css',
 })

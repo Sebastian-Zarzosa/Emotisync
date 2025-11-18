@@ -1,63 +1,32 @@
-<!-- <p>insertarrol works!</p> -->
-<!-- <div class="container">
-  <div style="text-align: center; margin: 5%"><h2>Registro de roles</h2></div>
-  <div style="text-align: center; margin: 5%">
-    <form [formGroup]="form" (submit)="aceptar()">
-      @if(edicion){
-      <mat-form-field>
-        <mat-label>ID</mat-label>
-        <input matInput formControlName="codigo" />
-      </mat-form-field>
-      }
-      <mat-form-field>
-        <mat-label>Nombre rol</mat-label>
-        <input matInput formControlName="rol" />
-        <mat-error>
-          @if (form.get('rol')?.hasError('required')) { El campo es obligatorio!!!! }
-        </mat-error>
-      </mat-form-field>
-      <div>
-        <button matButton="elevated">Insertar</button>
-      </div>
-    </form>
-  </div>
-</div> -->
+<mat-card class="simple-form-card">
+    <mat-card-title>
+        {{ edicion ? 'Editar Plan' : 'Registrar Rol' }}
+    </mat-card-title>
 
-<!-- ahora waaa -->
-<div class="container">
-  <div style="text-align: center; margin: 5%">
-    <h2>
-      @if (edicion) {
-        Actualizar rol
-      } @else {
-        Registro de roles
-      }</h2>
-  </div>
+    <mat-card-content>
+        <form [formGroup]="form" (submit)="aceptar()">
+            @if(edicion){
+            <mat-form-field>
+                <mat-label>ID</mat-label>
+                <input matInput formControlName="idRol" readonly />
+            </mat-form-field>
+            }
 
-  <div style="text-align: center; margin: 5%">
-    <form [formGroup]="form" (submit)="aceptar()">
-      @if(edicion){
-      <mat-form-field>
-        <mat-label>ID</mat-label>
-        <input matInput formControlName="id" />
-      </mat-form-field>
-      }
-      <mat-form-field>
-        <mat-label>Nombre rol</mat-label>
-        <input matInput formControlName="rol" />
-        <mat-error>
-          @if (form.get('rol')?.hasError('required')) { El campo es obligatorio!!!! }
-        </mat-error>
-      </mat-form-field>
-      <div>
-        <button matButton="elevated">
-          @if (edicion) {
-            Guardar
-          } @else {
-            Insertar
-          }
+            <mat-form-field>
+                <mat-label>Nombre de Rol</mat-label>
+                    <input matInput formControlName="rol">
+                <mat-error>
+                    @if (form.get('rol')?.hasError('required')) { El campo es obligatorio }
+                </mat-error>
+            </mat-form-field>
+
+        </form>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+        <button mat-stroked-button (click)="cancelar()">Cancelar</button>
+        <button mat-raised-button color="primary" (click)="aceptar()" [disabled]="form.invalid">
+            {{ edicion ? 'Actualizar' : 'Agregar' }}
         </button>
-      </div>
-    </form>
-  </div>
-</div>
+    </mat-card-actions>
+</mat-card>

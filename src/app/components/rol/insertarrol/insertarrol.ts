@@ -4,7 +4,7 @@ import { FormBuilder,
   FormGroup,
   ReactiveFormsModule,
   Validators } from '@angular/forms';
-import { Rol } from '../../../models/rol';
+import { Rol } from '../../../models/Rol';
 import { RolService } from '../../../services/rol.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
@@ -15,6 +15,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatNativeDateModule} from '@angular/material/core';
 import { provideNativeDateAdapter} from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from "@angular/material/card";
 
 @Component({
   selector: 'app-insertarrol',
@@ -26,8 +27,9 @@ import { MatButtonModule } from '@angular/material/button';
     CommonModule,
     MatRadioModule,
     MatNativeDateModule,
-    MatButtonModule,   
-  ],
+    MatButtonModule,
+    MatCardModule
+],
   templateUrl: './insertarrol.html',
   providers: [provideNativeDateAdapter()],
   styleUrl: './insertarrol.css',
@@ -47,29 +49,29 @@ export class Insertarrol implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.form = this.formBuilder.group({
+      idRol: [''],
+      rol: ['', Validators.required],
+    });
+
     this.route.params.subscribe((data: Params) => {
       this.id = data['id'];
       this.edicion = data['id'] != null;
       this.init();
     });
-
-    this.form = this.formBuilder.group({
-      id: [''],
-      rol: ['', Validators.required],
-    });
   }
   aceptar(): void {
     if (this.form.valid) {
-      this.ro.id = this.form.value.id;
       this.ro.rol = this.form.value.rol;
       if (this.edicion) {
-         this.rS.update(this.ro).subscribe((data) => {
-        this.rS.list().subscribe((data) => {
-          this.rS.setList(data);
-        });
-      });
+        this.ro.idRol = this.form.value.idRol
+        this.rS.update(this.ro).subscribe(() => {
+          this.rS.list().subscribe((data) => {
+            this.rS.setList(data)
+          })
+        })
       } else {
-        this.rS.insert(this.ro).subscribe((data) => {
+        this.rS.insert(this.ro).subscribe(() => {
           this.rS.list().subscribe((data) => {
             this.rS.setList(data);
           });
@@ -78,15 +80,20 @@ export class Insertarrol implements OnInit {
       this.router.navigate(['roles']);
     }
   }
+
   init() {
     if (this.edicion) {
       this.rS.listId(this.id).subscribe((data) => {
         this.form = new FormGroup({
-          id: new FormControl(data.id),
-          rol: new FormControl(data.rol),
+          idRol: new FormControl(data.idRol), 
+          rol: new FormControl(data.rol)
         });
       });
     }
+  }
+
+  cancelar() {
+    this.router.navigate(['/roles'])
   }
 }
 

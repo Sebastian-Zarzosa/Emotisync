@@ -17,7 +17,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonModule } from '@angular/material/button';
 import { Rol } from '../../../models/Rol';
-import { Rolservice } from '../../../services/rolservice';
+import { RolService } from '../../../services/rol.service';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -62,7 +62,7 @@ export class UsuarioInsert implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private rolService: Rolservice
+    private rolService: RolService
   ) {
     // Inicializar grupo
     this.formStep1 = this.formBuilder.group({
@@ -103,43 +103,17 @@ export class UsuarioInsert implements OnInit {
       this.edicion = data['id'] != null;
       this.init();
     });
-
-    // //Cargar listas
-    // this.usuarioService.getListaEspecialistas().subscribe((data) => this.listaEspecialistas = data);
-    // this.rolService.listar().subscribe((data) => this.listaRoles = data)
-    // this.usuarioService.getListaFamiliares().subscribe((data) => this.listaFamiliares = data);
-
     this.usuarioService.getListaEspecialistas().subscribe((data) => {
       this.listaEspecialistas = data;
     });
 
-    this.rolService.listar().subscribe((data) => {
+    this.rolService.list().subscribe((data) => {
       this.listaRoles = data;
     });
 
     this.usuarioService.getListaFamiliares().subscribe((data) => {
       this.listaFamiliares = data;
     });
-
-    /*
-    this.form = this.formBuilder.group({
-      idUsuario: [''],
-      nombre: ['', [Validators.required, Validators.minLength(2)]],
-      apellido: ['', [Validators.required, Validators.minLength(2)]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      username: ['', [Validators.required]],
-      telefono: ['', [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(9)]],
-      fechaNacimiento: ['', Validators.required],
-      institucion: [''],
-      nroColegiatura: ['', [Validators.pattern('^[0-9]*$')]],
-      especialidad: [''],
-      familiar: [''],
-      especialista: [''],
-      enabled: [true],
-      roles: [[], Validators.required],
-    });
-    */
   }
 
   init() {
@@ -168,25 +142,7 @@ export class UsuarioInsert implements OnInit {
           ?.setValue(data.especialista?.idUsuario);
         this.formStep4.get('enabled')?.setValue(data.enabled);
         this.formStep4.get('roles')?.setValue(data.roles);
-        /*
-        this.form = new FormGroup({
-          idUsuario: new FormControl(data.idUsuario),
-          nombre: new FormControl(data.nombre),
-          apellido: new FormControl(data.apellido),
-          email: new FormControl(data.email),
-          username: new FormControl(data.username),
-          password: new FormControl(data.password),
-          telefono: new FormControl(data.telefono),
-          fechaNacimiento: new FormControl(data.fechaNacimiento),
-          institucion: new FormControl(data.institucion),
-          nroColegiatura: new FormControl(data.nroColegiatura),
-          roles: new FormControl(data.roles),
-          especialidad: new FormControl(data.especialidad),
-          familiar: new FormControl(data.familiar?.idUsuario),
-          especialista: new FormControl(data.especialista?.idUsuario),
-          enabled: new FormControl(data.enabled),
-        });
-        */
+        
       });
     }
   }

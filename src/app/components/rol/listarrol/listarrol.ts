@@ -1,20 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { RolService } from '../../../services/rol.service';
-import { Rol } from '../../../models/rol';
+import { Rol } from '../../../models/Rol';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from "@angular/material/card";
+import { MatPaginatorModule } from "@angular/material/paginator";
 
 @Component({
   selector: 'app-listarrol',
-  imports: [MatTableModule, MatButtonModule, MatIconModule, RouterLink],
+  imports: [MatTableModule, MatButtonModule, MatIconModule, RouterLink, MatCardModule, MatPaginatorModule],
   templateUrl: './listarrol.html',
   styleUrl: './listarrol.css',
 })
 export class Listarrol implements OnInit {
   dataSource: MatTableDataSource<Rol> = new MatTableDataSource();
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4'];
+  displayedColumns: string[] = ['id', 'nombreRol', 'edit', 'delete'];
 
   constructor(private sS: RolService) {}
 
