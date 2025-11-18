@@ -1,0 +1,13 @@
+<div class="container">
+  <!-- Aquí se cargarán las rutas hijas (insertar/editar) -->
+  <router-outlet></router-outlet>
+
+  <!-- Mostrar lista de recursos y síntomas solo si no hay ruta hija activa -->
+  <div [hidden]="route.url.includes('insert') || route.url.includes('edit')">
+    
+    <app-recurso-list></app-recurso-list>
+
+    <hr style="margin: 40px 0" />
+
+   </div>
+</div>
