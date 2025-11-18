@@ -8,11 +8,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Ejercicio } from '../../../models/ejercicio';
 import { Ejerciciosservice } from '../../../services/ejerciciosservice';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-ejerciciolistar',
   standalone: true,
-  imports: [MatTableModule, CommonModule,MatIconModule,MatButtonModule,RouterLink],
+  imports: [MatTableModule, CommonModule,MatIconModule,MatButtonModule,RouterLink,MatCardModule,],
   templateUrl: './ejerciciolistar.html',
   styleUrls: ['./ejerciciolistar.css'],
 })

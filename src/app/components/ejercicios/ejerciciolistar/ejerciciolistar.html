@@ -3,6 +3,17 @@
     <h1>Lista de ejercicios</h1>
   </div>
   <div>
+  <mat-card>
+        <mat-card-header class="list-header">
+            <mat-card-title>Lista de Ejercicios</mat-card-title>
+            <button mat-raised-button color="primary" routerLink="news">
+                <mat-icon>add</mat-icon>
+                Nuevo Ejercicio
+            </button>
+        </mat-card-header>
+  </mat-card>
+</div>
+  <div>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->

@@ -101,4 +101,5 @@ export const routes: Routes = [
             {path: 'edits/:id', component: Ejercicioinsertar},
         ],
     },
+    { path: '', redirectTo: 'ejercicios', pathMatch: 'full'},
 ];
