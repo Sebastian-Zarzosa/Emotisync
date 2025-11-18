@@ -15,6 +15,10 @@ import { Alertas } from './components/alertas/alertas';
 import { AlertasInsertar } from './components/alertas/alertas-insertar/alertas-insertar';
 import { Recurso } from './components/recurso/recurso';
 import { RecursoInsert } from './components/recurso/recurso-insert/recurso-insert';
+import { Ejercicio } from './models/ejercicio';
+import { Ejercicioinsertar } from './components/ejercicios/ejercicioinsertar/ejercicioinsertar';
+import { Ejercicios } from './components/ejercicios/ejercicios';
+
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -89,5 +93,13 @@ export const routes: Routes = [
     ]
   },
 
-  { path: '', redirectTo: 'alerta', pathMatch: 'full'}
+  { path: '', redirectTo: 'alerta', pathMatch: 'full'},
+    {path: 'ejercicios',
+        component: Ejercicios,
+        children: [
+            {path: 'news', component: Ejercicioinsertar},
+            {path: 'edits/:id', component: Ejercicioinsertar},
+        ],
+    },
+    { path: '', redirectTo: 'ejercicios', pathMatch: 'full'},
 ];
