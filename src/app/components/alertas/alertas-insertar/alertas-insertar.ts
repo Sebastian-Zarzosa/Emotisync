@@ -69,7 +69,7 @@ export class AlertasInsertar implements OnInit{
       this.alert.tipo_alerta = this.form.value.alerta
       this.alert.mensaje = this.form.value.mensaje
       this.alert.nivel_alerta = this.form.value.nivel
-      this.alert.usuario = this.form.value.usuario
+      this.alert.usuario = this.form.value.usuario.id
 
       if (this.edicion) {
         this.aS.update(this.alert).subscribe(() => {
@@ -85,7 +85,7 @@ export class AlertasInsertar implements OnInit{
         })
       }
 
-      this.router.navigate(['/alertas'])
+      this.router.navigate(['/alerta'])
     }
   }
 
@@ -104,6 +104,6 @@ export class AlertasInsertar implements OnInit{
   }
 
   cancelar() {
-    this.router.navigate(['/alertas'])
+    this.router.navigate(['/alerta'])
   }
 }
