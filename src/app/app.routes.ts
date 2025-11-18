@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 import { Inicio } from './components/inicio/inicio';
 import { Conocer } from './components/conocer/conocer';
+import { Rol } from './components/rol/rol';
+import { Insertarrol } from './components/rol/insertarrol/insertarrol';
 import { Usuario } from './components/usuario/usuario';
 import { UsuarioInsert } from './components/usuario/usuario-insert/usuario-insert';
 import { Sintoma } from './components/sintoma/sintoma';
@@ -102,4 +104,24 @@ export const routes: Routes = [
         ],
     },
     { path: '', redirectTo: 'ejercicios', pathMatch: 'full'},
+  
+  
+  // Rutas de roles
+    {
+    path: 'roles',
+    component: Rol,
+    children: [
+        { path: 'insertar', component: Insertarrol },
+        { path: 'edits/:id', component: Insertarrol },
+    ],
+      
+      {
+    path: 'crisis',
+    component: Rol,
+    children: [
+        { path: 'insertar', component: crisis-insert },
+        { path: 'edits/:id', component: crisis-insert },
+    ],
+  
 ];
+

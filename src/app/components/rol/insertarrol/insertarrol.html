@@ -1,0 +1,63 @@
+<!-- <p>insertarrol works!</p> -->
+<!-- <div class="container">
+  <div style="text-align: center; margin: 5%"><h2>Registro de roles</h2></div>
+  <div style="text-align: center; margin: 5%">
+    <form [formGroup]="form" (submit)="aceptar()">
+      @if(edicion){
+      <mat-form-field>
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="codigo" />
+      </mat-form-field>
+      }
+      <mat-form-field>
+        <mat-label>Nombre rol</mat-label>
+        <input matInput formControlName="rol" />
+        <mat-error>
+          @if (form.get('rol')?.hasError('required')) { El campo es obligatorio!!!! }
+        </mat-error>
+      </mat-form-field>
+      <div>
+        <button matButton="elevated">Insertar</button>
+      </div>
+    </form>
+  </div>
+</div> -->
+
+<!-- ahora waaa -->
+<div class="container">
+  <div style="text-align: center; margin: 5%">
+    <h2>
+      @if (edicion) {
+        Actualizar rol
+      } @else {
+        Registro de roles
+      }</h2>
+  </div>
+
+  <div style="text-align: center; margin: 5%">
+    <form [formGroup]="form" (submit)="aceptar()">
+      @if(edicion){
+      <mat-form-field>
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="id" />
+      </mat-form-field>
+      }
+      <mat-form-field>
+        <mat-label>Nombre rol</mat-label>
+        <input matInput formControlName="rol" />
+        <mat-error>
+          @if (form.get('rol')?.hasError('required')) { El campo es obligatorio!!!! }
+        </mat-error>
+      </mat-form-field>
+      <div>
+        <button matButton="elevated">
+          @if (edicion) {
+            Guardar
+          } @else {
+            Insertar
+          }
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
