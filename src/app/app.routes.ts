@@ -7,6 +7,8 @@ import { Sintoma } from './components/sintoma/sintoma';
 import { SintomaInsert } from './components/sintoma/sintoma-insert/sintoma-insert';
 import { PlanesSuscripcion } from './components/planes-suscripcion/planes-suscripcion';
 import { PlanesSuscripcioninsertar } from './components/planes-suscripcion/planes-suscripcioninsertar/planes-suscripcioninsertar';
+import { Diario } from './components/diario/diario';
+import { DiarioInsertar } from './components/diario/diario-insertar/diario-insertar';
 import { UsuarioSuscripcion } from './components/usuario-suscripcion/usuario-suscripcion';
 import { UsuarioSuscripcioninsertar } from './components/usuario-suscripcion/usuario-suscripcioninsertar/usuario-suscripcioninsertar';
 import { Alertas } from './components/alertas/alertas';
@@ -36,7 +38,7 @@ export const routes: Routes = [
   {
     path: 'sintomas',
     component: Sintoma,
-    children: [  
+    children: [
       { path: 'new', component: SintomaInsert },
       { path: 'edits/:id', component: SintomaInsert },
     ],
@@ -62,22 +64,29 @@ export const routes: Routes = [
     ],
   },
   //Rutas de planes de suscripcion
-  { 
-        path: 'planes', 
-        component: PlanesSuscripcion,
-        children: [
-            { path: 'insertar', component: PlanesSuscripcioninsertar },
-            { path: 'editar/:id', component: PlanesSuscripcioninsertar }
-        ]
+  {
+    path: 'planes',
+    component: PlanesSuscripcion,
+    children: [
+      { path: 'insertar', component: PlanesSuscripcioninsertar },
+      { path: 'editar/:id', component: PlanesSuscripcioninsertar },
+    ],
   },
-
+  {
+    path: 'diarios',
+    component: Diario,
+    children: [
+      { path: 'insert', component: DiarioInsertar },
+      { path: 'edit/:id', component: DiarioInsertar },
+    ],
+  },
   {
     path: 'usuario-suscripcion',
     component: UsuarioSuscripcion,
     children: [
       { path: 'insertar', component: UsuarioSuscripcioninsertar },
-      { path: 'editar/:id', component: UsuarioSuscripcioninsertar }
-    ]
+      { path: 'editar/:id', component: UsuarioSuscripcioninsertar },
+    ],
   },
 
   { path: '', redirectTo: 'usuario-suscripcion', pathMatch: 'full' },
