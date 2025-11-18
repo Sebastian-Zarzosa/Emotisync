@@ -13,6 +13,8 @@ import { Alertas } from './components/alertas/alertas';
 import { AlertasInsertar } from './components/alertas/alertas-insertar/alertas-insertar';
 import { Recurso } from './components/recurso/recurso';
 import { RecursoInsert } from './components/recurso/recurso-insert/recurso-insert';
+import { Crisis } from './components/crisis/crisis';
+import { CrisisInsert } from './components/crisis/crisis-insert/crisis-insert';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -48,6 +50,15 @@ export const routes: Routes = [
     children: [
       { path: 'insert', component: RecursoInsert },
       { path: 'edit/:id', component: RecursoInsert },
+    ],
+  },
+
+  {
+    path: 'crisis',
+    component: Crisis,
+    children: [
+      { path: 'new', component: CrisisInsert },
+      { path: 'edits/:id', component: CrisisInsert },
     ],
   },
   //Rutas de planes de suscripcion
