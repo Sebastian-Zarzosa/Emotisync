@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Subject } from 'rxjs';
-import { planesSuscripcion } from '../models/planes_suscripcionModel';
+import { planesSuscripcion } from '../models/planes_suscripcion';
 
 const base_url = environment.base;
 

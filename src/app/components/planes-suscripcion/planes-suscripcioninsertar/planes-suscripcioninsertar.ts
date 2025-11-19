@@ -7,7 +7,7 @@ import {
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
-import { planesSuscripcion } from '../../../models/planes_suscripcionModel';
+import { planesSuscripcion } from '../../../models/planes_suscripcion';
 import { PlanesSuscripcionService } from '../../../services/planes_suscripcionservice';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';

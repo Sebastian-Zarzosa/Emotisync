@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { PlanesSuscripcionService } from '../../../services/planes_suscripcionservice';
-import { planesSuscripcion } from '../../../models/planes_suscripcionModel';
+import { planesSuscripcion } from '../../../models/planes_suscripcion';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatCardModule } from "@angular/material/card";
 import { Observable } from 'rxjs';
