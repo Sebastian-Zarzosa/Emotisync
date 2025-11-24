@@ -29,9 +29,9 @@ import { MatCardModule } from '@angular/material/card';
   styleUrls: ['./sintoma-insert.css'],
 })
 export class SintomaInsert implements OnInit {
-  form: FormGroup = new FormGroup({});
+  // El formulario se inicializa vacío, se construirá en ngOnInit
+  form!: FormGroup;
   sintoma: Sintoma = new Sintoma();
-
   edicion: boolean = false;
   id: number = 0;
 
@@ -43,9 +43,19 @@ export class SintomaInsert implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // 1. Construye el formulario UNA SOLA VEZ
+    this.form = this.formBuilder.group({
+      codigo: [''], // El ID no es requerido, se usa para editar
+      nombre: ['', Validators.required],
+      descripcion: ['', Validators.required],
+    });
+
+    // 2. Suscríbete a los parámetros de la ruta
     this.route.params.subscribe((data: Params) => {
       this.id = data['id'];
       this.edicion = data['id'] != null;
+      
+      // 3. Llama a init() DESPUÉS de construir el formulario
       this.init();
     });
 
@@ -58,6 +68,7 @@ export class SintomaInsert implements OnInit {
 
   aceptar(): void {
     if (this.form.valid) {
+      // Mapea los valores del formulario al objeto sintoma
       this.sintoma.id = this.form.value.codigo;
       this.sintoma.nombre = this.form.value.nombre;
       this.sintoma.descripcion = this.form.value.descripcion;
@@ -104,5 +115,6 @@ export class SintomaInsert implements OnInit {
         });
       });
     }
+    // Si no es edición, el formulario ya está listo (vacío) desde ngOnInit
   }
 }

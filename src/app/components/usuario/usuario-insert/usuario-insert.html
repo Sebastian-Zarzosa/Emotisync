@@ -2,11 +2,9 @@
   <h2>{{ edicion ? 'Editar Usuario' : 'Registro de Usuario' }}</h2>
 
   <mat-horizontal-stepper [linear]="true" #stepper>
-
     <mat-step [stepControl]="formStep1">
       <ng-template matStepLabel>Datos de Cuenta</ng-template>
       <div [formGroup]="formStep1" class="form-step-content">
-
         @if(edicion){
         <mat-form-field>
           <mat-label>ID</mat-label>
@@ -26,16 +24,16 @@
           <mat-error>Username requerido</mat-error>
         </mat-form-field>
 
-        @if(!edicion){
         <mat-form-field>
           <mat-label>Contraseña</mat-label>
           <input matInput formControlName="password" type="password" />
           <mat-error>Mínimo 6 caracteres</mat-error>
         </mat-form-field>
-        }
 
         <div class="step-actions">
-          <button mat-flat-button color="primary" matStepperNext>Siguiente</button>
+          <button mat-flat-button color="primary" matStepperNext>
+            Siguiente
+          </button>
         </div>
       </div>
     </mat-step>
@@ -43,7 +41,6 @@
     <mat-step [stepControl]="formStep2">
       <ng-template matStepLabel>Datos Personales</ng-template>
       <div [formGroup]="formStep2" class="form-step-content">
-
         <mat-form-field>
           <mat-label>Nombre</mat-label>
           <input matInput formControlName="nombre" />
@@ -58,21 +55,30 @@
 
         <mat-form-field>
           <mat-label>Teléfono</mat-label>
-          <input matInput formControlName="telefono" />
-          <mat-error>Teléfono requerido</mat-error>
+          <input matInput formControlName="telefono" (input)="formatearTelefono($event)" placeholder="999-999-999" />
+          <mat-error>Teléfono requerido, Formato requerido: 999-999-999</mat-error>
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Fecha de Nacimiento</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento" />
-          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="fechaNacimiento"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
           <mat-error>Fecha requerida</mat-error>
         </mat-form-field>
 
         <div class="step-actions">
           <button mat-button matStepperPrevious>Atrás</button>
-          <button mat-flat-button color="primary" matStepperNext>Siguiente</button>
+          <button mat-flat-button color="primary" matStepperNext>
+            Siguiente
+          </button>
         </div>
       </div>
     </mat-step>
@@ -80,7 +86,6 @@
     <mat-step [stepControl]="formStep3">
       <ng-template matStepLabel>Datos de Especialista</ng-template>
       <div [formGroup]="formStep3" class="form-step-content">
-
         <mat-form-field>
           <mat-label>Institución (Opcional)</mat-label>
           <input matInput formControlName="institucion" />
@@ -98,7 +103,9 @@
 
         <div class="step-actions">
           <button mat-button matStepperPrevious>Atrás</button>
-          <button mat-flat-button color="primary" matStepperNext>Siguiente</button>
+          <button mat-flat-button color="primary" matStepperNext>
+            Siguiente
+          </button>
         </div>
       </div>
     </mat-step>
@@ -106,10 +113,13 @@
     <mat-step [stepControl]="formStep4">
       <ng-template matStepLabel>Roles y Asignaciones</ng-template>
       <div [formGroup]="formStep4" class="form-step-content">
-
         <mat-form-field>
           <mat-label>Roles</mat-label>
-          <mat-select formControlName="roles" multiple>
+          <mat-select
+            formControlName="roles"
+            multiple
+            [compareWith]="compareRoles"
+          >
             @for (p of listaRoles; track p.idRol) {
             <mat-option [value]="p">{{ p.rol }}</mat-option>
             }
@@ -145,13 +155,14 @@
 
         <div class="step-actions final-actions">
           <button mat-button matStepperPrevious>Atrás</button>
-          <button mat-stroked-button color="warn" (click)="cancelar()">Cancelar</button>
+          <button mat-stroked-button color="warn" (click)="cancelar()">
+            Cancelar
+          </button>
           <button mat-flat-button color="primary" (click)="aceptar()">
             {{ edicion ? 'Actualizar' : 'Registrar' }}
           </button>
         </div>
       </div>
     </mat-step>
-
   </mat-horizontal-stepper>
 </div>

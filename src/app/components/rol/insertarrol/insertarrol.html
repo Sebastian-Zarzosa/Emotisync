@@ -1,0 +1,32 @@
+<mat-card class="simple-form-card">
+    <mat-card-title>
+        {{ edicion ? 'Editar Plan' : 'Registrar Rol' }}
+    </mat-card-title>
+
+    <mat-card-content>
+        <form [formGroup]="form" (submit)="aceptar()">
+            @if(edicion){
+            <mat-form-field>
+                <mat-label>ID</mat-label>
+                <input matInput formControlName="idRol" readonly />
+            </mat-form-field>
+            }
+
+            <mat-form-field>
+                <mat-label>Nombre de Rol</mat-label>
+                    <input matInput formControlName="rol">
+                <mat-error>
+                    @if (form.get('rol')?.hasError('required')) { El campo es obligatorio }
+                </mat-error>
+            </mat-form-field>
+
+        </form>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+        <button mat-stroked-button (click)="cancelar()">Cancelar</button>
+        <button mat-raised-button color="primary" (click)="aceptar()" [disabled]="form.invalid">
+            {{ edicion ? 'Actualizar' : 'Agregar' }}
+        </button>
+    </mat-card-actions>
+</mat-card>
