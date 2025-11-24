@@ -20,12 +20,18 @@ import { RecursoInsert } from './components/recurso/recurso-insert/recurso-inser
 import { Ejercicio } from './models/ejercicio';
 import { Ejercicioinsertar } from './components/ejercicios/ejercicioinsertar/ejercicioinsertar';
 import { Ejercicios } from './components/ejercicios/ejercicios';
+import { Login } from './components/login/login';
+import { Registro } from './components/registro/registro';
 
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   { path: 'inicio', component: Inicio },
   { path: 'conocer', component: Conocer },
+
+  //Rutas de login/registro
+  { path: 'login', component: Login },
+  {path: 'registro', component: Registro},
 
   //Rutas de usuario
   {
@@ -107,23 +113,16 @@ export const routes: Routes = [
   
   
   // Rutas de roles
-    {
+  {
     path: 'roles',
     component: Rol,
     children: [
         { path: 'insertar', component: Insertarrol },
         { path: 'edits/:id', component: Insertarrol },
-    ],
+      ],
     },
-  // {
-  //   path: 'crisis',
-  //       component: Rol,
-  //       children: [
-  //           { path: 'insertar', component: crisis-insert },
-  //           { path: 'edits/:id', component: crisis-insert },
-  //       ],
-  // }
-    
-  
+  { path: '', redirectTo: 'roles', pathMatch: 'full' },
+
+  {path: '**', redirectTo: 'inicio'}
 ];
 

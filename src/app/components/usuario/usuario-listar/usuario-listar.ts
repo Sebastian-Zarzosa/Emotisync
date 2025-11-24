@@ -32,6 +32,7 @@ export class UsuarioListar implements OnInit, AfterViewInit {
     'email',
     'telefono',
     'fechaNacimiento',
+    'roles',
     'editar',
     'eliminar',
   ];

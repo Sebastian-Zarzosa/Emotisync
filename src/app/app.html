@@ -1,3 +1,6 @@
+@if (!showPanel) {
+<router-outlet></router-outlet>
+} @else {
 <mat-sidenav-container class="app-container">
 
     <mat-sidenav #sidenav mode="side" opened class="app-sidenav">
@@ -33,11 +36,11 @@
                 <span matListItemTitle>Visualizar Alertas</span>
             </a>
             <a mat-list-item routerLink="/ejercicios">
-                <mat-icon matListItemIcon>add_alert</mat-icon>
+                <mat-icon matListItemIcon>fitness_center</mat-icon>
                 <span matListItemTitle>Visualizar Ejercicios</span>
             </a>
             <a mat-list-item routerLink="/roles">
-                <mat-icon matListItemIcon>add_role</mat-icon>
+                <mat-icon matListItemIcon>admin_panel_settings</mat-icon>
                 <span matListItemTitle>Visualizar Roles</span>
             </a>
         </mat-nav-list>
@@ -58,3 +61,4 @@
 
     </mat-sidenav-content>
 </mat-sidenav-container>
+}

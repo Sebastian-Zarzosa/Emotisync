@@ -65,7 +65,7 @@ export class UsuarioSuscripcioninsertar implements OnInit{
       planesSuscripcion: ['', Validators.required],
       fechaInicio: ['', Validators.required],
       fechaFin: ['', Validators.required],
-      estado: ['Activo', Validators.required]
+      estado: ['Activo', [Validators.required, Validators.maxLength(20)]]
     })
 
     this.route.params.subscribe((data) => {
@@ -88,8 +88,8 @@ export class UsuarioSuscripcioninsertar implements OnInit{
     if (this.form.valid) {
       let suscripcionParaEnviar = {
         idUsuarioSuscripcion: this.form.value.idUsuarioSuscripcion,
-        usuario: { idUsuario: this.form.value.usuario }, // Construye el objeto Usuario
-        planesSuscripcion: { idPlanesSuscripcion: this.form.value.planesSuscripcion }, // Construye el objeto Plan
+        usuario: { idUsuario: this.form.value.usuario },
+        planesSuscripcion: { idPlanesSuscripcion: this.form.value.planesSuscripcion },
         fechaInicio: this.form.value.fechaInicio,
         fechaFin: this.form.value.fechaFin,
         estado: this.form.value.estado,
