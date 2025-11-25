@@ -18,6 +18,8 @@ import { RecursoInsert } from './components/recurso/recurso-insert/recurso-inser
 import { Ejercicio } from './models/ejercicio';
 import { Ejercicioinsertar } from './components/ejercicios/ejercicioinsertar/ejercicioinsertar';
 import { Ejercicios } from './components/ejercicios/ejercicios';
+import { UsuarioEjercicios } from './components/usuario-ejercicios/usuario-ejercicios';
+import { UsuarioEjerciciosinsertar } from './components/usuario-ejercicios/usuario-ejerciciosinsertar/usuario-ejerciciosinsertar';
 
 
 export const routes: Routes = [
@@ -93,7 +95,16 @@ export const routes: Routes = [
     ]
   },
 
+
   { path: '', redirectTo: 'alerta', pathMatch: 'full'},
+  {
+    path: 'usuarioEjercicios',
+    component: UsuarioEjercicios,
+    children: [
+      {path: 'insertar', component: UsuarioEjerciciosinsertar},
+      {path: 'editar/:id', component: UsuarioEjerciciosinsertar}
+      ],
+  },
     {path: 'ejercicios',
         component: Ejercicios,
         children: [
@@ -102,4 +113,6 @@ export const routes: Routes = [
         ],
     },
     { path: '', redirectTo: 'ejercicios', pathMatch: 'full'},
+
+
 ];
