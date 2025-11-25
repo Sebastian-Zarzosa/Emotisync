@@ -1,0 +1,72 @@
+<div class="login-container">
+    <div class="login-card" style="max-width: 500px;">
+        <div class="header">
+            <h1 class="brand-title">Crea tu cuenta</h1>
+            <p class="subtitle">Únete a NeuroBridge</p>
+        </div>
+
+        <form [formGroup]="form" (submit)="registrarse()">
+
+            <mat-form-field appearance="outline" class="custom-input">
+                <mat-label>Soy un...</mat-label>
+                <mat-select formControlName="rolId">
+                    @for (rol of rolesDisponibles; track rol.id) {
+                    <mat-option [value]="rol.id">{{ rol.nombre }}</mat-option>
+                    }
+                </mat-select>
+                <mat-icon matPrefix>group</mat-icon>
+            </mat-form-field>
+
+            <div style="display: flex; gap: 10px;">
+                <mat-form-field appearance="outline" class="custom-input" style="flex: 1;">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput formControlName="nombre">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="custom-input" style="flex: 1;">
+                    <mat-label>Apellido</mat-label>
+                    <input matInput formControlName="apellido">
+                </mat-form-field>
+            </div>
+
+            <mat-form-field appearance="outline" class="custom-input">
+                <mat-label>Correo electrónico</mat-label>
+                <input matInput formControlName="email" placeholder="ejemplo@correo.com">
+                <mat-icon matPrefix>email</mat-icon>
+            </mat-form-field>
+
+            <div style="display: flex; gap: 10px;">
+                <mat-form-field appearance="outline" class="custom-input" style="flex: 1;">
+                    <mat-label>Teléfono</mat-label>
+                    <input matInput formControlName="telefono" (input)="formatearTelefono($event)"
+                        placeholder="999-999-999">
+                    <mat-icon matPrefix>phone</mat-icon>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="custom-input" style="flex: 1;">
+                    <mat-label>Fecha Nacimiento</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento">
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <mat-form-field appearance="outline" class="custom-input">
+                <mat-label>Contraseña</mat-label>
+                <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+                <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+                    <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+
+            <button mat-raised-button class="btn-login" type="submit" [disabled]="form.invalid">
+                REGISTRARSE
+            </button>
+
+            <div class="footer-text">
+                ¿Ya tienes cuenta? <a routerLink="/login">INICIA SESIÓN</a>
+            </div>
+
+        </form>
+    </div>
+</div>

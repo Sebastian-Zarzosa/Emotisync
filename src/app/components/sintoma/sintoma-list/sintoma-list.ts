@@ -44,10 +44,18 @@ export class SintomaList implements OnInit, AfterViewInit{
   }
 
   eliminar(id: number) {
-    this.sS.delete(id).subscribe(() => {
-      this.sS.list().subscribe((data) => {
-        this.sS.setList(data);
-      });
+    this.sS.delete(id).subscribe({
+      next: () => {
+        // Si tiene éxito, actualiza la lista
+        this.sS.list().subscribe((data) => {
+          this.sS.setList(data);
+        });
+      },
+      error: (err) => {
+        // Si falla, muestra un error
+        console.error('Error al eliminar el síntoma:', err);
+        alert('Error al eliminar: Es posible que este síntoma esté siendo usado por otros registros (ej. en Crisis) y no pueda ser borrado.');
+      },
     });
   }
 }
