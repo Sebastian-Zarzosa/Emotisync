@@ -24,6 +24,8 @@ import { Crisis } from './components/crisis/crisis';
 // import { CrisisInsert } from './components/crisis/crisis-insert/crisis-insert';
 import { Login } from './components/login/login';
 import { Registro } from './components/registro/registro';
+import { UsuarioEjercicios } from './components/usuario-ejercicios/usuario-ejercicios';
+import { UsuarioEjerciciosinsertar } from './components/usuario-ejercicios/usuario-ejerciciosinsertar/usuario-ejerciciosinsertar';
 
 
 export const routes: Routes = [
@@ -113,7 +115,16 @@ export const routes: Routes = [
     ]
   },
 
+
   { path: '', redirectTo: 'alerta', pathMatch: 'full'},
+  {
+    path: 'usuarioEjercicios',
+    component: UsuarioEjercicios,
+    children: [
+      {path: 'insertar', component: UsuarioEjerciciosinsertar},
+      {path: 'editar/:id', component: UsuarioEjerciciosinsertar}
+      ],
+  },
     {path: 'ejercicios',
         component: Ejercicios,
         children: [
