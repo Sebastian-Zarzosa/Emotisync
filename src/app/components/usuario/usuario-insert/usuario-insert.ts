@@ -66,7 +66,7 @@ export class UsuarioInsert implements OnInit {
   ) {
     // Inicializar grupo
     this.formStep1 = this.formBuilder.group({
-      idUsuario: [''],
+      idUsuario: [0],
       email: ['', [Validators.required, Validators.email]],
       username: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -78,15 +78,16 @@ export class UsuarioInsert implements OnInit {
         '',
         [
           Validators.required,
-          Validators.pattern('^[0-9]*$'),
-          Validators.minLength(9),
+          Validators.pattern('^[0-9]{3}-[0-9]{3}-[0-9]{3}$'),
+          Validators.maxLength(12),
         ],
       ],
       fechaNacimiento: ['', Validators.required],
     });
     this.formStep3 = this.formBuilder.group({
       institucion: [''],
-      nroColegiatura: ['', [Validators.pattern('^[0-9]*$')]],
+      nroColegiatura: ['',
+        [Validators.pattern('^[0-9]*$')]],
       especialidad: [''],
     });
     this.formStep4 = this.formBuilder.group({
@@ -95,6 +96,22 @@ export class UsuarioInsert implements OnInit {
       roles: [[], Validators.required],
       enabled: [true],
     });
+  }
+
+  formatearTelefono(event: any) {
+    const input = event.target;
+    let value = input.value.replace(/\D/g, '');
+
+    if (value.length > 9) {
+      value = value.substring(0, 9);
+    }
+    if (value.length > 6) {
+      value = `${value.substring(0, 3)}-${value.substring(3, 6)}-${value.substring(6)}`;
+    } else if (value.length > 3) {
+      value = `${value.substring(0, 3)}-${value.substring(3)}`;
+    }
+    input.value = value;
+    this.formStep2.get('telefono')?.setValue(value); 
   }
 
   ngOnInit(): void {
@@ -123,6 +140,7 @@ export class UsuarioInsert implements OnInit {
         this.formStep1.get('idUsuario')?.setValue(data.idUsuario);
         this.formStep1.get('email')?.setValue(data.email);
         this.formStep1.get('username')?.setValue(data.username);
+        this.formStep1.get('password')?.setValue(data.password);
 
         //Paso 2: info personal
         this.formStep2.get('nombre')?.setValue(data.nombre);
@@ -163,7 +181,7 @@ export class UsuarioInsert implements OnInit {
       ...this.formStep3.value,
       ...this.formStep4.value,
     };
-    this.user.idUsuario = finalUserData.idUsuario;
+    this.user.idUsuario = finalUserData.idUsuario ? finalUserData.idUsuario : 0;
     this.user.nombre = finalUserData.nombre;
     this.user.apellido = finalUserData.apellido;
     this.user.password = finalUserData.password;
@@ -172,7 +190,9 @@ export class UsuarioInsert implements OnInit {
     this.user.telefono = finalUserData.telefono;
     this.user.fechaNacimiento = finalUserData.fechaNacimiento;
     this.user.institucion = finalUserData.institucion;
-    this.user.nroColegiatura = finalUserData.nroColegiatura;
+
+    this.user.nroColegiatura = finalUserData.nroColegiatura ? finalUserData.nroColegiatura : 0;
+    
     this.user.especialidad = finalUserData.especialidad;
     this.user.enabled = finalUserData.enabled;
 

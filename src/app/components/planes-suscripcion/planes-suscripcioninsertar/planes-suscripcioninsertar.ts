@@ -53,9 +53,9 @@ export class PlanesSuscripcioninsertar implements OnInit {
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       codigo: [''],
-      nombre_plan: ['', Validators.required],
+      nombre_plan: ['', [Validators.required, Validators.maxLength(30)]],
       precio: ['', [Validators.required, Validators.pattern('^[0-9]+(\\.[0-9]{1,2})?$'), Validators.min(0)]],
-      descripcion: ['', [Validators.required, Validators.maxLength(250)]]
+      descripcion: ['', [Validators.required, Validators.maxLength(255)]]
     });
     
     this.route.params.subscribe((data: Params) => {

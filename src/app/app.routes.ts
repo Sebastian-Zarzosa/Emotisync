@@ -22,12 +22,18 @@ import { Ejercicioinsertar } from './components/ejercicios/ejercicioinsertar/eje
 import { Ejercicios } from './components/ejercicios/ejercicios';
 import { Crisis } from './components/crisis/crisis';
 // import { CrisisInsert } from './components/crisis/crisis-insert/crisis-insert';
+import { Login } from './components/login/login';
+import { Registro } from './components/registro/registro';
 
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   { path: 'inicio', component: Inicio },
   { path: 'conocer', component: Conocer },
+
+  //Rutas de login/registro
+  { path: 'login', component: Login },
+  {path: 'registro', component: Registro},
 
   //Rutas de usuario
   {
@@ -87,7 +93,17 @@ export const routes: Routes = [
   },
 
   { path: '', redirectTo: 'usuario-suscripcion', pathMatch: 'full' },
-  
+
+  // Rutas de crisis
+    {
+    path: 'crisis',
+    component: Crisis,
+    // children: [
+    //     { path: 'insertar', component: CrisisInsert },
+    //     { path: 'edits/:id', component: CrisisInsert },
+    // ],
+    },
+    
   {
     path: 'alerta',
     component: Alertas,
@@ -109,31 +125,18 @@ export const routes: Routes = [
   
   
   // Rutas de roles
-    {
+  {
     path: 'roles',
     component: Rol,
     children: [
         { path: 'insertar', component: Insertarrol },
         { path: 'edits/:id', component: Insertarrol },
-    ],
+      ],
     },
-  // {
-  //   path: 'crisis',
-  //       component: Rol,
-  //       children: [
-  //           { path: 'insertar', component: crisis-insert },
-  //           { path: 'edits/:id', component: crisis-insert },
-  //       ],
-  // }
-    
-  // Rutas de crisis
-    {
-    path: 'crisis',
-    component: Crisis,
-    // children: [
-    //     { path: 'insertar', component: CrisisInsert },
-    //     { path: 'edits/:id', component: CrisisInsert },
-    // ],
-    },
+  { path: '', redirectTo: 'roles', pathMatch: 'full' },
+
+  {path: '**', redirectTo: 'inicio'},
+
+  
 ];
 

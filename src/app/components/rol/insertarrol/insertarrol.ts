@@ -3,8 +3,9 @@ import { FormBuilder,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
-  Validators } from '@angular/forms';
-import { Rol } from '../../../models/Rol';
+  Validators
+} from '@angular/forms';
+
 import { RolService } from '../../../services/rolservice';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
@@ -16,6 +17,7 @@ import { MatNativeDateModule} from '@angular/material/core';
 import { provideNativeDateAdapter} from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from "@angular/material/card";
+import { Rol } from '../../../models/Rol';
 
 @Component({
   selector: 'app-insertarrol',

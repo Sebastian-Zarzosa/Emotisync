@@ -1,72 +1,68 @@
+@if (!showPanel) {
+<router-outlet></router-outlet>
+} @else {
 <mat-sidenav-container class="app-container">
+  <mat-sidenav #sidenav mode="side" opened class="app-sidenav">
+    <div class="sidenav-header" routerLink="/inicio">
+      <mat-icon>psychology</mat-icon>
+      <span>NeuroBridge</span>
+    </div>
 
-    <mat-sidenav #sidenav mode="side" opened class="app-sidenav">
+    <mat-nav-list>
+      <a mat-list-item routerLink="/inicio">
+        <mat-icon matListItemIcon>home</mat-icon>
+        <span matListItemTitle>Inicio</span>
+      </a>
+      <a mat-list-item routerLink="/sintomas">
+        <mat-icon matListItemIcon>healing</mat-icon>
+        <span matListItemTitle>Síntomas</span>
+      </a>
+      <a mat-list-item routerLink="/usuarios">
+        <mat-icon matListItemIcon>group</mat-icon>
+        <span matListItemTitle>Usuarios</span>
+      </a>
+      <a mat-list-item routerLink="/planes">
+        <mat-icon matListItemIcon>card_membership</mat-icon>
+        <span matListItemTitle>Planes</span>
+      </a>
+      <a mat-list-item routerLink="/usuario-suscripcion">
+        <mat-icon matListItemIcon>assignment_ind</mat-icon>
+        <span matListItemTitle>Asignar Planes</span>
+      </a>
+      <a mat-list-item routerLink="/alerta">
+        <mat-icon matListItemIcon>add_alert</mat-icon>
+        <span matListItemTitle>Visualizar Alertas</span>
+      </a>
+      <a mat-list-item routerLink="/ejercicios">
+        <mat-icon matListItemIcon>fitness_center</mat-icon>
+        <span matListItemTitle>Visualizar Ejercicios</span>
+      </a>
+      <a mat-list-item routerLink="/roles">
+        <mat-icon matListItemIcon>admin_panel_settings</mat-icon>
+        <span matListItemTitle>Visualizar Roles</span>
+      </a>
+      <a mat-list-item routerLink="/diarios">
+        <mat-icon matListItemIcon>book</mat-icon>
+        <span matListItemTitle>Diarios</span>
+      </a>
+      <!-- barra lateral izquierda, icon monitor_heart -->
+      <a mat-list-item routerLink="/crisis">
+        <mat-icon matListItemIcon>favorite</mat-icon>
+        <span matListItemTitle>Crisis</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content class="app-content">
+    <mat-toolbar class="content-toolbar">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Panel de Administración</span>
+    </mat-toolbar>
 
-        <div class="sidenav-header" routerLink="/inicio">
-            <mat-icon>psychology</mat-icon>
-            <span>NeuroBridge</span>
-        </div>
-
-        <mat-nav-list>
-            <a mat-list-item routerLink="/inicio">
-                <mat-icon matListItemIcon>home</mat-icon>
-                <span matListItemTitle>Inicio</span>
-            </a>
-            <a mat-list-item routerLink="/sintomas">
-                <mat-icon matListItemIcon>healing</mat-icon>
-                <span matListItemTitle>Síntomas</span>
-            </a>
-            <a mat-list-item routerLink="/usuarios">
-                <mat-icon matListItemIcon>group</mat-icon>
-                <span matListItemTitle>Usuarios</span>
-            </a>
-            <a mat-list-item routerLink="/planes">
-                <mat-icon matListItemIcon>card_membership</mat-icon>
-                <span matListItemTitle>Planes</span>
-            </a>
-            <a mat-list-item routerLink="/usuario-suscripcion">
-                <mat-icon matListItemIcon>assignment_ind</mat-icon>
-                <span matListItemTitle>Asignar Planes</span>
-            </a>
-            <a mat-list-item routerLink="/alerta">
-                <mat-icon matListItemIcon>add_alert</mat-icon>
-                <span matListItemTitle>Visualizar Alertas</span>
-            </a>
-            <a mat-list-item routerLink="/ejercicios">
-                <mat-icon matListItemIcon>add_alert</mat-icon>
-                <span matListItemTitle>Visualizar Ejercicios</span>
-            </a>
-            <a mat-list-item routerLink="/roles">
-                <mat-icon matListItemIcon>add_role</mat-icon>
-                <span matListItemTitle>Visualizar Roles</span>
-            </a>
-            <!-- barra lateral izquierda, icon monitor_heart -->
-            <a mat-list-item routerLink="/crisis">
-                <mat-icon matListItemIcon>favorite</mat-icon>
-                <span matListItemTitle>Crisis</span>
-            </a>
-            <!-- gato icon Pruebas roles -->
-            <a mat-list-item routerLink="/roles">
-                <span matListItemIcon
-                    style="font-size: 20px; line-height: 24px; text-align: center;">😺
-                </span>
-                <span matListItemTitle>Pruebas roles</span>
-            </a>
-        </mat-nav-list>
-
-    </mat-sidenav>
-    <mat-sidenav-content class="app-content">
-
-        <mat-toolbar class="content-toolbar">
-            <button mat-icon-button (click)="sidenav.toggle()">
-                <mat-icon>menu</mat-icon>
-            </button>
-            <span>Panel de Administración</span>
-        </mat-toolbar>
-
-        <div class="page-content">
-            <router-outlet></router-outlet>
-        </div>
-
-    </mat-sidenav-content>
+    <div class="page-content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
 </mat-sidenav-container>
+}
