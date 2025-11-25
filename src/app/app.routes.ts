@@ -21,7 +21,7 @@ import { Ejercicio } from './models/ejercicio';
 import { Ejercicioinsertar } from './components/ejercicios/ejercicioinsertar/ejercicioinsertar';
 import { Ejercicios } from './components/ejercicios/ejercicios';
 import { Crisis } from './components/crisis/crisis';
-import { CrisisInsert } from './components/crisis/crisis-insert/crisis-insert';
+// import { CrisisInsert } from './components/crisis/crisis-insert/crisis-insert';
 
 
 export const routes: Routes = [
@@ -130,10 +130,10 @@ export const routes: Routes = [
     {
     path: 'crisis',
     component: Crisis,
-    children: [
-        { path: 'insertar', component: CrisisInsert },
-        { path: 'edits/:id', component: CrisisInsert },
-    ],
+    // children: [
+    //     { path: 'insertar', component: CrisisInsert },
+    //     { path: 'edits/:id', component: CrisisInsert },
+    // ],
     },
 ];
 
