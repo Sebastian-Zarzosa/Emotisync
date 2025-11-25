@@ -84,7 +84,7 @@ aceptar():void{
         });
       });
     }
-    this.router.navigate(['ejercicios']);
+    this.router.navigate(['/ejercicios']);
   }
 }
 

@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 import { Inicio } from './components/inicio/inicio';
 import { Conocer } from './components/conocer/conocer';
+import { Rol } from './components/rol/rol';
+import { Insertarrol } from './components/rol/insertarrol/insertarrol';
 import { Usuario } from './components/usuario/usuario';
 import { UsuarioInsert } from './components/usuario/usuario-insert/usuario-insert';
 import { Sintoma } from './components/sintoma/sintoma';
@@ -18,6 +20,10 @@ import { RecursoInsert } from './components/recurso/recurso-insert/recurso-inser
 import { Ejercicio } from './models/ejercicio';
 import { Ejercicioinsertar } from './components/ejercicios/ejercicioinsertar/ejercicioinsertar';
 import { Ejercicios } from './components/ejercicios/ejercicios';
+import { Crisis } from './components/crisis/crisis';
+// import { CrisisInsert } from './components/crisis/crisis-insert/crisis-insert';
+import { Login } from './components/login/login';
+import { Registro } from './components/registro/registro';
 import { UsuarioEjercicios } from './components/usuario-ejercicios/usuario-ejercicios';
 import { UsuarioEjerciciosinsertar } from './components/usuario-ejercicios/usuario-ejerciciosinsertar/usuario-ejerciciosinsertar';
 
@@ -26,6 +32,10 @@ export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   { path: 'inicio', component: Inicio },
   { path: 'conocer', component: Conocer },
+
+  //Rutas de login/registro
+  { path: 'login', component: Login },
+  {path: 'registro', component: Registro},
 
   //Rutas de usuario
   {
@@ -85,7 +95,17 @@ export const routes: Routes = [
   },
 
   { path: '', redirectTo: 'usuario-suscripcion', pathMatch: 'full' },
-  
+
+  // Rutas de crisis
+    {
+    path: 'crisis',
+    component: Crisis,
+    // children: [
+    //     { path: 'insertar', component: CrisisInsert },
+    //     { path: 'edits/:id', component: CrisisInsert },
+    // ],
+    },
+    
   {
     path: 'alerta',
     component: Alertas,
@@ -113,6 +133,21 @@ export const routes: Routes = [
         ],
     },
     { path: '', redirectTo: 'ejercicios', pathMatch: 'full'},
+  
+  
+  // Rutas de roles
+  {
+    path: 'roles',
+    component: Rol,
+    children: [
+        { path: 'insertar', component: Insertarrol },
+        { path: 'edits/:id', component: Insertarrol },
+      ],
+    },
+  { path: '', redirectTo: 'roles', pathMatch: 'full' },
 
+  {path: '**', redirectTo: 'inicio'},
 
+  
 ];
+

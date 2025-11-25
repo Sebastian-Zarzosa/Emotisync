@@ -55,8 +55,8 @@
 
         <mat-form-field>
           <mat-label>Teléfono</mat-label>
-          <input matInput formControlName="telefono" />
-          <mat-error>Teléfono requerido</mat-error>
+          <input matInput formControlName="telefono" (input)="formatearTelefono($event)" placeholder="999-999-999" />
+          <mat-error>Teléfono requerido, Formato requerido: 999-999-999</mat-error>
         </mat-form-field>
 
         <mat-form-field>

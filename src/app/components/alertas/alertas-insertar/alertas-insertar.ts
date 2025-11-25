@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Alerta } from '../../../models/alertas';
 import { AlertasService } from '../../../services/alertasservice';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { UsuarioService } from '../../../services/usuarioservice';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -43,7 +43,15 @@ export class AlertasInsertar implements OnInit{
   ) { }
   
   ngOnInit(): void {
-    this.route.params.subscribe((data) => {
+    this.form = this.formBuilder.group({
+      codigo: [''],
+      alerta: ['', Validators.required],
+      mensaje: ['', Validators.required],
+      nivel: ['', Validators.required],
+      usuario: ['', Validators.required]
+    })
+
+    this.route.params.subscribe((data: Params) => {
       this.id = data['id']
       this.edicion = data['id'] != null
       this.init()
@@ -53,14 +61,6 @@ export class AlertasInsertar implements OnInit{
     this.uS.listar().subscribe(data => {
       this.listaUsuarios = data;
     })
-
-    this.form = this.formBuilder.group({
-      codigo: [''],
-      alerta: ['', Validators.required],
-      mensaje: ['', Validators.required],
-      nivel: ['', Validators.required],
-      usuario: ['', Validators.required]
-    })
   }
 
   aceptar(): void {
@@ -69,7 +69,7 @@ export class AlertasInsertar implements OnInit{
       this.alert.tipo_alerta = this.form.value.alerta
       this.alert.mensaje = this.form.value.mensaje
       this.alert.nivel_alerta = this.form.value.nivel
-      this.alert.usuario = this.form.value.usuario.id
+      this.alert.usuario.idUsuario = this.form.value.usuario
 
       if (this.edicion) {
         this.aS.update(this.alert).subscribe(() => {
@@ -97,7 +97,7 @@ export class AlertasInsertar implements OnInit{
           alerta: new FormControl(data.tipo_alerta),
           mensaje: new FormControl(data.mensaje),
           nivel: new FormControl(data.nivel_alerta),
-          usuario: new FormControl(data.usuario)
+          usuario: new FormControl(data.usuario?.idUsuario)
         })
       })
     }
