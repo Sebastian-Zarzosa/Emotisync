@@ -1,14 +1,12 @@
 <div class="container" style="padding: 20px">
-  <mat-card class="custom-card">
-    <mat-card-header class="custom-card-header">
-      <h2>Lista de Diarios</h2>
+  <mat-card>
+    <mat-card-header class="list-header">
+      <mat-card-title>Lista de Diarios</mat-card-title>
+      <button mat-raised-button color="primary" routerLink="insert">
+        <mat-icon>add</mat-icon> Nuevo Diario
+      </button>
     </mat-card-header>
     <mat-card-content class="custom-card-content">
-      <div style="margin: 1rem 0">
-        <button mat-raised-button color="primary" routerLink="insert">
-          <mat-icon>add</mat-icon> Nuevo Diario
-        </button>
-      </div>
       <table mat-table [dataSource]="dataSource">
         <!-- Name Column -->
 
