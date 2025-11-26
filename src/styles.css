@@ -2,3 +2,32 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: 'Poppins', sans-serif; line-height: 1.6;}
+
+/* Estilo mejorado para errores de Angular Material */
+mat-error {
+  display: flex !important;
+  align-items: center;
+  gap: 6px; /* Espacio entre icono y texto */
+  font-size: 0.85rem;
+  margin-top: 4px;
+  animation: slideInError 0.3s ease-out forwards; /* Animación de entrada */
+}
+
+/* Pequeño "truco" para poner un icono antes del texto del error usando CSS puro */
+mat-error::before {
+  content: '⚠'; /* O puedes usar un código de icono de fuente */
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+/* Animación de caída suave */
+@keyframes slideInError {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

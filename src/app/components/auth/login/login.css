@@ -1,0 +1,207 @@
+/* Contenedor principal con el degradado de NeuroBridge */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #E6F3FF 0%, #B4C0DF 50%, #7590BA 100%);
+    padding: 20px;
+}
+
+/* Tarjeta blanca flotante ("Glassmorphism" limpio) */
+.login-card {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px 30px;
+    border-radius: 24px;
+    /* Bordes muy redondeados */
+    box-shadow: 0 10px 40px rgba(54, 64, 224, 0.15);
+    /* Sombra azulada suave */
+    width: 100%;
+    max-width: 420px;
+    /* Ancho máximo elegante */
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.login-card:hover {
+    transform: translateY(-5px);
+    /* Efecto sutil de levitación */
+}
+
+/* Encabezado y Títulos */
+.header {
+    margin-bottom: 30px;
+}
+
+.logo-img {
+    width: 80px;
+    margin-bottom: 15px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.brand-title {
+    font-family: 'Marko One', serif;
+    /* Tipografía del documento */
+    color: #3640E0;
+    /* Azul fuerte */
+    font-size: 2rem;
+    margin: 0;
+    font-weight: normal;
+}
+
+.subtitle {
+    font-family: 'Roboto', sans-serif;
+    color: #627A96;
+    /* Gris azulado */
+    font-size: 0.95rem;
+    margin-top: 5px;
+}
+
+/* Inputs personalizados */
+.custom-input {
+    width: 100%;
+    margin-bottom: 5px;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Botón Principal "Cápsula" */
+.btn-login {
+    width: 100%;
+    background-color: #3640E0 !important;
+    color: white !important;
+    border-radius: 50px !important;
+    /* Forma de píldora */
+    padding: 8px 0 !important;
+    /* Altura cómoda */
+    font-family: 'Marko One', serif !important;
+    font-size: 1.1rem !important;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(54, 64, 224, 0.3);
+    transition: all 0.3s ease !important;
+}
+
+.btn-login:hover {
+    background-color: #2b33b5 !important;
+    box-shadow: 0 6px 20px rgba(54, 64, 224, 0.5);
+}
+
+/* Enlaces y Textos */
+.actions-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: #627A96;
+    margin-top: -10px;
+    margin-bottom: 15px;
+}
+
+.forgot-link {
+    text-decoration: none;
+    color: #3640E0;
+    font-weight: 500;
+}
+
+.footer-text {
+    margin-top: 30px;
+    font-size: 0.9rem;
+    color: #32343D;
+}
+
+.footer-text a {
+    color: #3640E0;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* Separador visual "o" */
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+    color: #9CA4BC;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #ddd;
+}
+
+.divider span {
+    padding: 0 10px;
+    font-size: 0.9rem;
+}
+
+/* Botones Sociales (Círculos) */
+.social-login {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.social-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 1px solid #E0E0E0;
+    background: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.social-btn.google {
+    color: #DB4437;
+}
+
+.social-btn.facebook {
+    color: #4267B2;
+}
+
+.social-btn:hover {
+    transform: scale(1.1);
+    background-color: #f9f9f9;
+}
+
+.btn-back {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    background-color: rgba(255, 255, 255, 0.6); /* Semi-transparente */
+    color: #3640E0; /* Azul de la marca */
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    z-index: 10; /* Asegura que esté encima */
+}
+
+.btn-back:hover {
+    background-color: #ffffff;
+    transform: translateX(-3px); /* Pequeña animación hacia la izquierda */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Ajuste para móviles */
+@media (max-width: 480px) {
+    .btn-back {
+        top: 15px;
+        left: 15px;
+        width: 40px;
+        height: 40px;
+    }
+}
