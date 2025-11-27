@@ -53,4 +53,15 @@ export class UsuarioService {
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
   }
+
+  getPacientesPorEspecialidad() {
+    return this.http.get<any[]>(`${this.url}/totalPacientesPorEspecialidad`);
+  }
+
+  searchPatientsOfEspecialist(email: string) {
+    const params = { email: email };
+    return this.http.get<Usuario[]>(`${this.url}/pacientesPorEspecialista`, {
+      params: params,
+    });
+  }
 }

@@ -27,7 +27,7 @@ import { UsuarioEjercicios } from './components/herramientas/usuario-ejercicios/
 import { UsuarioEjerciciosinsertar } from './components/herramientas/usuario-ejercicios/usuario-ejerciciosinsertar/usuario-ejerciciosinsertar';
 import { roleGuard } from './core/guard/role.guard';
 import { Principal } from './components/dashboard/principal/principal';
-
+import { PacientesEspecialidad } from './components/dashboard/reportes/pacientes-especialidad/pacientes-especialidad';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -36,11 +36,16 @@ export const routes: Routes = [
   { path: 'login', component: Login },
   { path: 'registro', component: Registro },
 
-  { 
-    path: 'dashboard', 
-    component: Principal, 
+  {
+    path: 'dashboard',
+    component: Principal,
     canActivate: [roleGuard],
-    data: { expectedRole: 'AMBOS' } // Haremos un truco en el Guard o ponemos ADMIN y que el guard deje pasar si es paciente
+    data: { expectedRole: 'AMBOS' }, // Haremos un truco en el Guard o ponemos ADMIN y que el guard deje pasar si es paciente
+  },
+
+  {
+    path: 'reportes/pacientes-especialidad',
+    component: PacientesEspecialidad,
   },
 
   //RUTAS DEL ADMIN
@@ -52,7 +57,7 @@ export const routes: Routes = [
       { path: 'edit/:id', component: UsuarioInsert },
     ],
     canActivate: [roleGuard],
-    data: { expectedRole: 'ADMIN' }
+    data: { expectedRole: 'ADMIN' },
   },
   {
     path: 'sintomas',
@@ -62,7 +67,7 @@ export const routes: Routes = [
       { path: 'editar/:id', component: SintomaInsert }, // Antes era 'edits/:id'
     ],
     canActivate: [roleGuard],
-    data: { expectedRole: 'ADMIN' }
+    data: { expectedRole: 'ADMIN' },
   },
   {
     path: 'roles',
@@ -72,7 +77,7 @@ export const routes: Routes = [
       { path: 'edits/:id', component: Insertarrol },
     ],
     canActivate: [roleGuard],
-    data: { expectedRole: 'ADMIN' }
+    data: { expectedRole: 'ADMIN' },
   },
   {
     path: 'planes',
@@ -82,7 +87,7 @@ export const routes: Routes = [
       { path: 'editar/:id', component: PlanesSuscripcioninsertar },
     ],
     canActivate: [roleGuard],
-    data: { expectedRole: 'ADMIN' } 
+    data: { expectedRole: 'ADMIN' },
   },
   {
     path: 'usuario-suscripcion',
@@ -91,8 +96,8 @@ export const routes: Routes = [
       { path: 'insertar', component: UsuarioSuscripcioninsertar },
       { path: 'editar/:id', component: UsuarioSuscripcioninsertar },
     ],
-    canActivate: [roleGuard], 
-    data: { expectedRole: 'ADMIN' }
+    canActivate: [roleGuard],
+    data: { expectedRole: 'ADMIN' },
   },
   {
     path: 'ejercicios',
@@ -101,29 +106,29 @@ export const routes: Routes = [
       { path: 'insertar', component: Ejercicioinsertar }, // Antes era 'news'
       { path: 'editar/:id', component: Ejercicioinsertar }, // Antes era 'edits/:id'
     ],
-    canActivate: [roleGuard], 
-    data: { expectedRole: 'ADMIN' }
+    canActivate: [roleGuard],
+    data: { expectedRole: 'ADMIN' },
   },
   {
-    path: 'alerta', 
+    path: 'alerta',
     component: Alertas,
     children: [
       { path: 'insertar', component: AlertasInsertar },
-      { path: 'editar/:id', component: AlertasInsertar }
+      { path: 'editar/:id', component: AlertasInsertar },
     ],
     canActivate: [roleGuard],
-    data: { expectedRole: 'ADMIN' } 
+    data: { expectedRole: 'ADMIN' },
   },
   {
-    path: 'crisis', 
+    path: 'crisis',
     component: Crisis,
     children: [
       { path: 'insertar', component: CrisisInsert },
       { path: 'edits/:id', component: CrisisInsert },
     ],
     canActivate: [roleGuard],
-    data: { expectedRole: 'ADMIN' } 
-  },  
+    data: { expectedRole: 'ADMIN' },
+  },
 
   //RUTAS DEL PACIENTE
   {
@@ -134,17 +139,17 @@ export const routes: Routes = [
       { path: 'edit/:id', component: DiarioInsertar },
     ],
     canActivate: [roleGuard],
-    data: { expectedRole: 'PACIENTE' }
+    data: { expectedRole: 'PACIENTE' },
   },
   {
     path: 'usuarioEjercicios',
     component: UsuarioEjercicios,
     children: [
       { path: 'insertar', component: UsuarioEjerciciosinsertar },
-      { path: 'editar/:id', component: UsuarioEjerciciosinsertar }
+      { path: 'editar/:id', component: UsuarioEjerciciosinsertar },
     ],
     canActivate: [roleGuard],
-    data: { expectedRole: 'PACIENTE' }
+    data: { expectedRole: 'PACIENTE' },
   },
   {
     path: 'recursos',
@@ -154,7 +159,7 @@ export const routes: Routes = [
       { path: 'edit/:id', component: RecursoInsert },
     ],
     canActivate: [roleGuard],
-    data: { expectedRole: 'PACIENTE' }
+    data: { expectedRole: 'PACIENTE' },
   },
 
   { path: '**', redirectTo: 'inicio' },
