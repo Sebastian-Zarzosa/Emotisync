@@ -1,0 +1,58 @@
+/* Contenedor principal del stepper */
+.stepper-container {
+  max-width: 800px;
+  margin: 24px auto;
+  padding: 16px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.stepper-container h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 24px;
+}
+
+/* Contenido de CADA paso */
+.form-step-content {
+  display: flex;
+  flex-direction: column;
+  padding: 24px 0;
+  gap: 16px;
+}
+
+/* Asegurar que los campos ocupen todo el ancho */
+mat-form-field {
+  width: 100%;
+}
+
+/* Acciones al final de cada paso */
+.step-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.final-actions {
+  justify-content: space-between;
+}
+
+/* Estilos para el grupo de radio buttons */
+.radio-group-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 10px;
+}
+
+.radio-group-container mat-label {
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+mat-radio-group {
+  display: flex;
+  gap: 20px;
+}

@@ -1,0 +1,126 @@
+<!-- <p>crisis-insert works!</p> -->
+ <div class="stepper-container">
+  <h2>{{ edicion ? 'Editar Crisis' : 'Registro de Crisis' }}</h2>
+
+  <mat-horizontal-stepper [linear]="true" #stepper>
+    
+    <!-- Paso 1: Datos Generales -->
+    <mat-step [stepControl]="formStep1">
+      <ng-template matStepLabel>Datos Generales</ng-template>
+      <div [formGroup]="formStep1" class="form-step-content">
+        
+        <!-- ID solo visible en edición -->
+        @if(edicion){
+        <mat-form-field>
+          <mat-label>ID</mat-label>
+          <input matInput formControlName="idCrisis" readonly />
+        </mat-form-field>
+        }
+
+        <!-- Selección de Fecha -->
+        <mat-form-field>
+          <mat-label>Fecha de la Crisis</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="fecha" />
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error>La fecha es requerida</mat-error>
+        </mat-form-field>
+        
+        <!-- Selección de Usuario -->
+        <mat-form-field>
+          <mat-label>Usuario Asociado</mat-label>
+          <mat-select formControlName="usuario">
+            @for (u of listaUsuarios; track u.idUsuario) {
+              <mat-option [value]="u.idUsuario">
+                {{ u.nombre }} {{ u.apellido }} ({{ u.username }})
+              </mat-option>
+            }
+          </mat-select>
+          <mat-error>Debe seleccionar un usuario</mat-error>
+        </mat-form-field>
+
+        <div class="step-actions">
+          <button mat-flat-button color="primary" matStepperNext>
+            Siguiente
+          </button>
+        </div>
+      </div>
+    </mat-step>
+
+    <!-- Paso 2: Métricas Temporales -->
+    <mat-step [stepControl]="formStep2">
+      <ng-template matStepLabel>Métricas Temporales</ng-template>
+      <div [formGroup]="formStep2" class="form-step-content">
+        
+        <mat-form-field>
+          <mat-label>Tiempo de Respuesta (ms)</mat-label>
+          <input matInput type="number" formControlName="tiempoRespuesta" />
+          <mat-error>Valor requerido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Ritmo</mat-label>
+          <input matInput type="number" formControlName="ritmo" />
+          <mat-error>Valor requerido</mat-error>
+        </mat-form-field>
+
+        <div class="step-actions">
+          <button mat-button matStepperPrevious>Atrás</button>
+          <button mat-flat-button color="primary" matStepperNext>
+            Siguiente
+          </button>
+        </div>
+      </div>
+    </mat-step>
+
+    <!-- Paso 3: Metricas Acústicas -->
+    <mat-step [stepControl]="formStep3">
+      <ng-template matStepLabel>Métricas Acústicas</ng-template>
+      <div [formGroup]="formStep3" class="form-step-content">
+        
+        <mat-form-field>
+          <mat-label>Articulación</mat-label>
+          <input matInput type="number" formControlName="articulacion" />
+          <mat-error>Valor requerido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>F0 Promedio (Hz)</mat-label>
+          <input matInput type="number" formControlName="f0_promedio" />
+          <mat-error>Valor requerido</mat-error>
+        </mat-form-field>
+
+        <div class="step-actions">
+          <button mat-button matStepperPrevious>Atrás</button>
+          <button mat-flat-button color="primary" matStepperNext>
+            Siguiente
+          </button>
+        </div>
+      </div>
+    </mat-step>
+
+    <!-- Paso 4: Analisis Avanzado -->
+    <mat-step [stepControl]="formStep4">
+      <ng-template matStepLabel>Analisis Avanzado</ng-template>
+      <div [formGroup]="formStep4" class="form-step-content">
+        
+        <mat-form-field>
+          <mat-label>Formantes Detectados</mat-label>
+          <input matInput formControlName="formantesDetectados" placeholder="Ej: F1, F2..." />
+          <mat-error>Este campo es requerido</mat-error>
+        </mat-form-field>
+
+        <div class="step-actions final-actions">
+          <button mat-button matStepperPrevious>Atras</button>
+          <button mat-stroked-button color="warn" (click)="cancelar()">
+            Cancelar
+          </button>
+          <button mat-flat-button color="primary" (click)="aceptar()">
+            {{ edicion ? 'Actualizar' : 'Registrar' }}
+          </button>
+        </div>
+      </div>
+    </mat-step>
+
+  </mat-horizontal-stepper>
+</div>

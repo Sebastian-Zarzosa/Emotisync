@@ -1,0 +1,36 @@
+/* Estilo para la cabecera de la tarjeta (título y botón) */
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Estilos para los botones de acción en la tabla (editar/eliminar) */
+td button[mat-icon-button] {
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+}
+
+/* Botón primario (Nueva Suscripción) */
+button[mat-raised-button][color="primary"] {
+    font-weight: 500;
+    border-radius: 6px;
+    padding: 6px 16px;
+    text-transform: none;
+    background-color: #2b4bff;
+    color: #FFFFFF;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+    transition: all 0.25s ease;
+}
+
+/* --- Responsivo --- */
+@media (max-width: 768px) {
+    .list-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}

@@ -1,0 +1,86 @@
+<div class="container" style="padding: 20px;">
+    <mat-card>
+        <mat-card-header class="list-header">
+            <mat-card-title>Lista de Crisis</mat-card-title>
+            <button mat-raised-button color="primary" routerLink="insertar">
+                <mat-icon>add</mat-icon>
+                Nueva Crisis
+            </button>
+        </mat-card-header>
+
+        <mat-card-content>
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                <ng-container matColumnDef="idCrisis">
+                    <th mat-header-cell *matHeaderCellDef>Id Crisis</th>
+                    <td mat-cell *matCellDef="let element">{{element.idCrisis}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="fecha">
+                    <th mat-header-cell *matHeaderCellDef>Fecha</th>
+                    <td mat-cell *matCellDef="let element">{{element.fecha}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="tiempoRespuesta">
+                    <th mat-header-cell *matHeaderCellDef>Tiempo de Respuesta</th>
+                    <td mat-cell *matCellDef="let element">{{element.tiempoRespuesta}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="ritmo">
+                    <th mat-header-cell *matHeaderCellDef>Ritmo</th>
+                    <td mat-cell *matCellDef="let element">{{element.ritmo}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="articulacion">
+                    <th mat-header-cell *matHeaderCellDef>Articulacion</th>
+                    <td mat-cell *matCellDef="let element">{{element.articulacion}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="f0_promedio">
+                    <th mat-header-cell *matHeaderCellDef>F0 Promedio</th>
+                    <td mat-cell *matCellDef="let element">{{element.f0_promedio}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="formantesDetectados">
+                    <th mat-header-cell *matHeaderCellDef>Formantes Detectados</th>
+                    <td mat-cell *matCellDef="let element">{{element.formantesDetectados}}
+                    </td>
+                </ng-container>
+
+                <!-- campo usuario -->
+                <ng-container matColumnDef="usuario">
+                    <th mat-header-cell *matHeaderCellDef>Usuario</th>
+                    <td mat-cell *matCellDef="let element">{{element.usuario?.nombre}} {{element.usuario?.apellido}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="edit">
+                    <th mat-header-cell *matHeaderCellDef>Editar</th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-icon-button color="primary" [routerLink]="['edits', element.idCrisis]">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="delete">
+                    <th mat-header-cell *matHeaderCellDef>Eliminar</th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-icon-button color="warn" (click)="eliminar(element.idCrisis)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 15, 30]" showFirstLastButtons></mat-paginator>
+        </mat-card-content>
+    </mat-card>
+</div>
