@@ -1,45 +1,51 @@
 import { Routes } from '@angular/router';
-import { Inicio } from './components/inicio/inicio';
-import { Conocer } from './components/conocer/conocer';
-import { Rol } from './components/rol/rol';
-import { Insertarrol } from './components/rol/insertarrol/insertarrol';
-import { Usuario } from './components/usuario/usuario';
-import { UsuarioInsert } from './components/usuario/usuario-insert/usuario-insert';
-import { Sintoma } from './components/sintoma/sintoma';
-import { SintomaInsert } from './components/sintoma/sintoma-insert/sintoma-insert';
-import { PlanesSuscripcion } from './components/planes-suscripcion/planes-suscripcion';
-import { PlanesSuscripcioninsertar } from './components/planes-suscripcion/planes-suscripcioninsertar/planes-suscripcioninsertar';
-import { Diario } from './components/diario/diario';
-import { DiarioInsertar } from './components/diario/diario-insertar/diario-insertar';
-import { UsuarioSuscripcion } from './components/usuario-suscripcion/usuario-suscripcion';
-import { UsuarioSuscripcioninsertar } from './components/usuario-suscripcion/usuario-suscripcioninsertar/usuario-suscripcioninsertar';
-import { Alertas } from './components/alertas/alertas';
-import { AlertasInsertar } from './components/alertas/alertas-insertar/alertas-insertar';
-import { Recurso } from './components/recurso/recurso';
-import { RecursoInsert } from './components/recurso/recurso-insert/recurso-insert';
-import { Ejercicio } from './models/ejercicio';
-import { Ejercicioinsertar } from './components/ejercicios/ejercicioinsertar/ejercicioinsertar';
-import { Ejercicios } from './components/ejercicios/ejercicios';
-import { Crisis } from './components/crisis/crisis';
-import { CrisisInsert } from './components/crisis/crisis-insert/crisis-insert';
-import { Login } from './components/login/login';
-import { Registro } from './components/registro/registro';
-import { UsuarioEjercicios } from './components/usuario-ejercicios/usuario-ejercicios';
-import { UsuarioEjerciciosinsertar } from './components/usuario-ejercicios/usuario-ejerciciosinsertar/usuario-ejerciciosinsertar';
+import { Inicio } from './components/landing/inicio/inicio';
+import { Conocer } from './components/landing/conocer/conocer';
+import { Rol } from './components/administracion/rol/rol';
+import { Insertarrol } from './components/administracion/rol/insertarrol/insertarrol';
+import { Usuario } from './components/administracion/usuario/usuario';
+import { UsuarioInsert } from './components/administracion/usuario/usuario-insert/usuario-insert';
+import { Sintoma } from './components/clinica/sintoma/sintoma';
+import { SintomaInsert } from './components/clinica/sintoma/sintoma-insert/sintoma-insert';
+import { PlanesSuscripcion } from './components/administracion/planes-suscripcion/planes-suscripcion';
+import { PlanesSuscripcioninsertar } from './components/administracion/planes-suscripcion/planes-suscripcioninsertar/planes-suscripcioninsertar';
+import { Diario } from './components/herramientas/diario/diario';
+import { DiarioInsertar } from './components/herramientas/diario/diario-insertar/diario-insertar';
+import { UsuarioSuscripcion } from './components/administracion/usuario-suscripcion/usuario-suscripcion';
+import { UsuarioSuscripcioninsertar } from './components/administracion/usuario-suscripcion/usuario-suscripcioninsertar/usuario-suscripcioninsertar';
+import { Alertas } from './components/clinica/alertas/alertas';
+import { AlertasInsertar } from './components/clinica/alertas/alertas-insertar/alertas-insertar';
+import { Recurso } from './components/herramientas/recurso/recurso';
+import { RecursoInsert } from './components/herramientas/recurso/recurso-insert/recurso-insert';
+import { Ejercicioinsertar } from './components/herramientas/ejercicios/ejercicioinsertar/ejercicioinsertar';
+import { Ejercicios } from './components/herramientas/ejercicios/ejercicios';
+import { Crisis } from './components/clinica/crisis/crisis';
+import { CrisisInsert } from './components/clinica/crisis/crisis-insert/crisis-insert';
+import { Login } from './components/auth/login/login';
+import { Registro } from './components/auth/registro/registro';
+import { UsuarioEjercicios } from './components/herramientas/usuario-ejercicios/usuario-ejercicios';
+import { UsuarioEjerciciosinsertar } from './components/herramientas/usuario-ejercicios/usuario-ejerciciosinsertar/usuario-ejerciciosinsertar';
+import { roleGuard } from './core/guard/role.guard';
+import { Principal } from './components/dashboard/principal/principal';
+
 import { EmocionesInsert } from './components/emociones/emociones-insert/emociones-insert';
 import { Emociones } from './components/emociones/emociones';
-
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   { path: 'inicio', component: Inicio },
   { path: 'conocer', component: Conocer },
-
-  //Rutas de login/registro
   { path: 'login', component: Login },
-  {path: 'registro', component: Registro},
+  { path: 'registro', component: Registro },
 
-  //Rutas de usuario
+  { 
+    path: 'dashboard', 
+    component: Principal, 
+    canActivate: [roleGuard],
+    data: { expectedRole: 'AMBOS' } // Haremos un truco en el Guard o ponemos ADMIN y que el guard deje pasar si es paciente
+  },
+
+  //RUTAS DEL ADMIN
   {
     path: 'usuarios',
     component: Usuario,
@@ -47,30 +53,29 @@ export const routes: Routes = [
       { path: 'insert', component: UsuarioInsert },
       { path: 'edit/:id', component: UsuarioInsert },
     ],
+    canActivate: [roleGuard],
+    data: { expectedRole: 'ADMIN' }
   },
-  { path: '', redirectTo: 'inicio', pathMatch: 'full' },
-
-  //Rutas de sintomas
   {
     path: 'sintomas',
     component: Sintoma,
     children: [
-      { path: 'new', component: SintomaInsert },
-      { path: 'edits/:id', component: SintomaInsert },
+      { path: 'insertar', component: SintomaInsert }, // Antes era 'new'
+      { path: 'editar/:id', component: SintomaInsert }, // Antes era 'edits/:id'
     ],
+    canActivate: [roleGuard],
+    data: { expectedRole: 'ADMIN' }
   },
-
-  { path: '', redirectTo: 'sintomas', pathMatch: 'full' },
-  
   {
-    path: 'recursos',
-    component: Recurso,
+    path: 'roles',
+    component: Rol,
     children: [
-      { path: 'insert', component: RecursoInsert },
-      { path: 'edit/:id', component: RecursoInsert },
+      { path: 'insertar', component: Insertarrol },
+      { path: 'edits/:id', component: Insertarrol },
     ],
+    canActivate: [roleGuard],
+    data: { expectedRole: 'ADMIN' }
   },
-  //Rutas de planes de suscripcion
   {
     path: 'planes',
     component: PlanesSuscripcion,
@@ -78,14 +83,8 @@ export const routes: Routes = [
       { path: 'insertar', component: PlanesSuscripcioninsertar },
       { path: 'editar/:id', component: PlanesSuscripcioninsertar },
     ],
-  },
-  {
-    path: 'diarios',
-    component: Diario,
-    children: [
-      { path: 'insert', component: DiarioInsertar },
-      { path: 'edit/:id', component: DiarioInsertar },
-    ],
+    canActivate: [roleGuard],
+    data: { expectedRole: 'ADMIN' } 
   },
   {
     path: 'usuario-suscripcion',
@@ -94,58 +93,71 @@ export const routes: Routes = [
       { path: 'insertar', component: UsuarioSuscripcioninsertar },
       { path: 'editar/:id', component: UsuarioSuscripcioninsertar },
     ],
+    canActivate: [roleGuard], 
+    data: { expectedRole: 'ADMIN' }
   },
-
-  { path: '', redirectTo: 'usuario-suscripcion', pathMatch: 'full' },
-
-  // Rutas de crisis
-    {
-    path: 'crisis',
-    component: Crisis,
-    children: [
-        { path: 'insertar', component: CrisisInsert },
-        { path: 'edits/:id', component: CrisisInsert },
-    ],
-    },
-
   {
-    path: 'alerta',
+    path: 'ejercicios',
+    component: Ejercicios,
+    children: [
+      { path: 'insertar', component: Ejercicioinsertar }, // Antes era 'news'
+      { path: 'editar/:id', component: Ejercicioinsertar }, // Antes era 'edits/:id'
+    ],
+    canActivate: [roleGuard], 
+    data: { expectedRole: 'ADMIN' }
+  },
+  {
+    path: 'alerta', 
     component: Alertas,
     children: [
       { path: 'insertar', component: AlertasInsertar },
       { path: 'editar/:id', component: AlertasInsertar }
-    ]
+    ],
+    canActivate: [roleGuard],
+    data: { expectedRole: 'ADMIN' } 
   },
+  {
+    path: 'crisis', 
+    component: Crisis,
+    children: [
+      { path: 'insertar', component: CrisisInsert },
+      { path: 'edits/:id', component: CrisisInsert },
+    ],
+    canActivate: [roleGuard],
+    data: { expectedRole: 'ADMIN' } 
+  },  
 
-
-  { path: '', redirectTo: 'alerta', pathMatch: 'full'},
+  //RUTAS DEL PACIENTE
+  {
+    path: 'diarios',
+    component: Diario,
+    children: [
+      { path: 'insert', component: DiarioInsertar },
+      { path: 'edit/:id', component: DiarioInsertar },
+    ],
+    canActivate: [roleGuard],
+    data: { expectedRole: 'PACIENTE' }
+  },
   {
     path: 'usuarioEjercicios',
     component: UsuarioEjercicios,
     children: [
-      {path: 'insertar', component: UsuarioEjerciciosinsertar},
-      {path: 'editar/:id', component: UsuarioEjerciciosinsertar}
-      ],
+      { path: 'insertar', component: UsuarioEjerciciosinsertar },
+      { path: 'editar/:id', component: UsuarioEjerciciosinsertar }
+    ],
+    canActivate: [roleGuard],
+    data: { expectedRole: 'PACIENTE' }
   },
-    {path: 'ejercicios',
-        component: Ejercicios,
-        children: [
-            {path: 'news', component: Ejercicioinsertar},
-            {path: 'edits/:id', component: Ejercicioinsertar},
-        ],
-    },
-    { path: '', redirectTo: 'ejercicios', pathMatch: 'full'},
-  
-  
-  // Rutas de roles
   {
-    path: 'roles',
-    component: Rol,
+    path: 'recursos',
+    component: Recurso,
     children: [
-        { path: 'insertar', component: Insertarrol },
-        { path: 'edits/:id', component: Insertarrol },
-      ],
-    },
+      { path: 'insert', component: RecursoInsert },
+      { path: 'edit/:id', component: RecursoInsert },
+    ],
+    canActivate: [roleGuard],
+    data: { expectedRole: 'PACIENTE' }
+  },
 
   // Rutas de emocinoes
     {
@@ -158,10 +170,6 @@ export const routes: Routes = [
     },
 
 
-  { path: '', redirectTo: 'roles', pathMatch: 'full' },
 
-  {path: '**', redirectTo: 'inicio'},
-
-  
+  { path: '**', redirectTo: 'inicio' },
 ];
-
