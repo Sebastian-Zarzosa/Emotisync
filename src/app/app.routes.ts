@@ -29,6 +29,7 @@ import { roleGuard } from './core/guard/role.guard';
 import { Principal } from './components/dashboard/principal/principal';
 
 
+
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   { path: 'inicio', component: Inicio },
