@@ -1,0 +1,71 @@
+<!-- <p>emociones-insert works!</p> -->
+ <mat-card class="simple-form-card">
+    <br>
+    <mat-card-title>
+        {{ edicion ? 'Editar Emocion' : 'Registrar nueva Emocion' }}
+    </mat-card-title>
+    <br>
+    <mat-card-content>
+        <form [formGroup]="form" (submit)="aceptar()">
+            @if(edicion){
+            <mat-form-field>
+                <mat-label>ID Emocion</mat-label>
+                <input matInput formControlName="idEmociones" readonly />
+            </mat-form-field>
+            }
+
+            <mat-form-field>
+                <mat-label>Tipo Emocion</mat-label>
+                    <input matInput formControlName="tipoEmocion">
+                <mat-error>
+                    @if (form.get('tipoEmocion')?.hasError('required')) { El campo es obligatorio }
+                </mat-error>
+            </mat-form-field>
+
+            <!-- <mat-form-field>
+                <mat-label>Intensidad</mat-label>
+                    <input matInput formControlName="intensidad">
+                <mat-error>
+                    @if (form.get('intensidad')?.hasError('required')) { El campo es obligatorio }
+                </mat-error>
+            </mat-form-field> -->
+
+            <mat-form-field>
+                <mat-label>Intensidad</mat-label>
+                    <mat-select formControlName="intensidad">
+                        @for (nivel of niveles; track nivel) {
+                            <mat-option [value]="nivel">
+                                {{ nivel }}
+                            </mat-option>
+                        }
+                    </mat-select>
+                <mat-error>
+                    @if (form.get('intensidad')?.hasError('required')) { El campo es obligatorio }
+                </mat-error>
+            </mat-form-field>
+
+            <!-- lista de crisis disponibles, para poder seleccionar una mediante un menú desplegable <mat-select> -->
+            <mat-form-field>
+                <mat-label>Seleccionar Crisis</mat-label>
+                <mat-select formControlName="crisis">
+                    @for (c of listaCrisis; track c) {
+                        <mat-option [value]="c">
+                            Crisis ID: {{ c.idCrisis }}
+                        </mat-option>
+                    }
+                </mat-select>
+                <mat-error>
+                    @if (form.get('crisis')?.hasError('required')) { Debe seleccionar una crisis }
+                </mat-error>
+            </mat-form-field>
+
+        </form>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+        <button mat-stroked-button (click)="cancelar()">Cancelar</button>
+        <button mat-raised-button color="primary" (click)="aceptar()" [disabled]="form.invalid">
+            {{ edicion ? 'Actualizar' : 'Agregar' }}
+        </button>
+    </mat-card-actions>
+</mat-card>

@@ -26,6 +26,8 @@ import { Login } from './components/login/login';
 import { Registro } from './components/registro/registro';
 import { UsuarioEjercicios } from './components/usuario-ejercicios/usuario-ejercicios';
 import { UsuarioEjerciciosinsertar } from './components/usuario-ejercicios/usuario-ejerciciosinsertar/usuario-ejerciciosinsertar';
+import { EmocionesInsert } from './components/emociones/emociones-insert/emociones-insert';
+import { Emociones } from './components/emociones/emociones';
 
 
 export const routes: Routes = [
@@ -144,6 +146,18 @@ export const routes: Routes = [
         { path: 'edits/:id', component: Insertarrol },
       ],
     },
+
+  // Rutas de emocinoes
+    {
+    path: 'emociones',
+    component: Emociones,
+    children: [
+        { path: 'insertar', component: EmocionesInsert },
+        { path: 'edits/:id', component: EmocionesInsert },
+    ],
+    },
+
+
   { path: '', redirectTo: 'roles', pathMatch: 'full' },
 
   {path: '**', redirectTo: 'inicio'},
