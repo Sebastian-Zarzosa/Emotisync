@@ -1,0 +1,31 @@
+<div class="recorder-screen">
+
+    <div class="status-text">
+        @if(isRecording) {
+        <span class="recording-dot">🔴</span> Grabando... {{ recordingTime }}
+        } @else {
+        Toca para empezar tu bitácora
+        }
+    </div>
+
+    <button class="mic-button" [class.recording]="isRecording" (click)="toggleRecording()">
+        <mat-icon class="mic-icon">mic</mat-icon>
+    </button>
+
+    @if(hasRecording && audioUrl) {
+    <mat-card class="audio-preview">
+        <p style="text-align:center; color:#666; margin-bottom:10px;">Escucha tu grabación:</p>
+
+        <audio controls [src]="audioUrl" style="width: 100%; margin-bottom: 15px;"></audio>
+
+        <div style="display:flex; gap:10px; justify-content:center;">
+            <button mat-flat-button color="primary" (click)="guardarAudio()">
+                <mat-icon>download</mat-icon> Descargar
+            </button>
+            <button mat-stroked-button color="warn" (click)="descartarAudio()">
+                <mat-icon>delete</mat-icon> Borrar
+            </button>
+        </div>
+    </mat-card>
+    }
+</div>

@@ -70,6 +70,7 @@
             <mat-icon matListItemIcon>favorite</mat-icon>
             <span matListItemTitle>Historial de Crisis</span>
           </a>
+          
         }
 
         @if (loginService.isPaciente() || loginService.isAdmin()) {
@@ -83,8 +84,33 @@
             <mat-icon matListItemIcon>accessibility_new</mat-icon>
             <span matListItemTitle>Mis Ejercicios</span>
           </a>
+          <a mat-list-item routerLink="/progreso" routerLinkActive="active-link">
+            <mat-icon matListItemIcon>insights</mat-icon>
+            <span matListItemTitle>Mi Progreso</span>
+          </a>
+          <a mat-list-item routerLink="/juegos" routerLinkActive="active-link">
+            <mat-icon matListItemIcon>sports_esports</mat-icon>
+            <span matListItemTitle>Gimnasio Emocional</span>
+          </a>
+          <a mat-list-item routerLink="/biblioteca" routerLinkActive="active-link">
+            <mat-icon matListItemIcon>menu_book</mat-icon>
+            <span matListItemTitle>Biblioteca</span>
+          </a>
         }
 
+        @if (loginService.isPaciente() || loginService.isAdmin()) {
+          <div mat-subheader>HERRAMIENTAS DE CALMA</div>
+
+          <a mat-list-item routerLink="/modo-reflexion" routerLinkActive="active-link">
+            <mat-icon matListItemIcon>self_improvement</mat-icon> 
+            <span matListItemTitle>Modo Reflexión</span>
+          </a>
+
+          <a mat-list-item routerLink="/grabadora" routerLinkActive="active-link">
+            <mat-icon matListItemIcon>mic</mat-icon>
+            <span matListItemTitle>Bitácora de Voz</span>
+          </a>
+        }
       </mat-nav-list>
     </mat-sidenav>
 

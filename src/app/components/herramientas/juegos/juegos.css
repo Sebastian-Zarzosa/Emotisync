@@ -1,0 +1,53 @@
+.games-container {
+    padding: 30px;
+}
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.game-card {
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.game-card img {
+    height: 150px;
+    object-fit: cover;
+    background: #e0e0e0;
+}
+
+.game-card h3 {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+.difficulty mat-icon {
+    font-size: 18px;
+    color: #ddd;
+}
+
+.difficulty mat-icon.active {
+    color: #ffca28;
+}
+
+.play-btn {
+    width: 100%;
+    border-radius: 20px;
+}
+
+.hover-effect {
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.hover-effect:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}

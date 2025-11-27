@@ -7,7 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router, RouterLink } from '@angular/router';
 import { UsuarioService } from '../../../core/services/usuarioservice';
-import { Rol } from '../../../models/Rol';
+import { Rol } from '../../../models/rol';
 import { Usuario } from '../../../models/Usuario';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';

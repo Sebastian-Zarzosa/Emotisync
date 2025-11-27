@@ -20,6 +20,9 @@ import { Emocionesservice } from '../../../../core/services/emocionesservice';
 import { Emociones } from '../../../../models/Emociones';
 import { MatCardModule } from '@angular/material/card';
 import { UsuarioService } from '../../../../core/services/usuarioservice';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-diario-insertar',
@@ -33,6 +36,9 @@ import { UsuarioService } from '../../../../core/services/usuarioservice';
     MatNativeDateModule,
     MatButtonModule,
     MatCardModule,
+    MatButtonToggleModule,
+    MatSliderModule,
+    MatIconModule
   ],
   templateUrl: './diario-insertar.html',
   styleUrl: './diario-insertar.css',

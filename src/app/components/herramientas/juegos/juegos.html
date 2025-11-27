@@ -1,0 +1,24 @@
+<div class="games-container">
+    <h1 class="page-title">Gimnasio Emocional</h1>
+    <p class="subtitle">Diviértete mientras aprendes a reconocer tus emociones</p>
+
+    <div class="games-grid">
+        @for (juego of juegos; track juego.id) {
+        <mat-card class="game-card hover-effect">
+            <img mat-card-image [src]="juego.imagen" alt="Imagen del juego">
+            <mat-card-content>
+                <h3>{{ juego.titulo }}</h3>
+                <p>{{ juego.descripcion }}</p>
+                <div class="difficulty">
+                    @for (star of [1,2,3]; track $index) {
+                    <mat-icon [class.active]="$index < juego.dificultad">star</mat-icon>
+                    }
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-flat-button color="accent" class="play-btn">JUGAR AHORA</button>
+            </mat-card-actions>
+        </mat-card>
+        }
+    </div>
+</div>

@@ -1,0 +1,35 @@
+.progreso-container {
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    text-align: center;
+    padding: 20px;
+    background: #f5f7fa;
+}
+
+.stat-card h2 {
+    font-size: 2rem;
+    margin: 0;
+    color: #3f51b5;
+}
+
+.chart-card {
+    padding: 20px;
+}
