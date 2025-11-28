@@ -64,7 +64,7 @@ export class Insertarrol implements OnInit {
   }
   aceptar(): void {
     if (this.form.valid) {
-      this.ro.rol = this.form.value.rol;
+      this.ro.idRol = this.form.value.rol;
       if (this.edicion) {
         this.ro.idRol = this.form.value.idRol
         this.rS.update(this.ro).subscribe(() => {
