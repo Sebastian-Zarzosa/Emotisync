@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Emociones } from '../../models/Emociones';
+import { AverageDTOEmocionesInt } from '../../models/AverageDTOEmocionesInt';
 
 const base_url = environment.base;
 
@@ -41,4 +42,9 @@ export class Emocionesservice {
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
   }   
+
+  //agregando para reporte
+  getPromEmocioInten(): Observable<AverageDTOEmocionesInt[]> {
+    return this.http.get<AverageDTOEmocionesInt[]>(`${this.url}/promemociointen`);
+  }
 }
