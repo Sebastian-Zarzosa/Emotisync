@@ -18,7 +18,7 @@ import { UsuarioService } from '../../../../core/services/usuarioservice';
 import { UsuarioSuscripcionService } from '../../../../core/services/usuario_suscripcionservice';
 
 // Imports de Modelos
-import { planesSuscripcion } from '../../../../models/planes_suscripcionModel';
+import { planesSuscripcion } from '../../../../models/planes_suscripcion';
 import { Usuario } from '../../../../models/Usuario';
 import { usuarioSuscripcion } from '../../../../models/usuario_suscripcion';
 
