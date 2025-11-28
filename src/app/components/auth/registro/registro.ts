@@ -51,6 +51,7 @@ export class Registro {
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
       email: ['', Validators.required],
+      username: ['', [Validators.required, Validators.maxLength(30), Validators.minLength(4)]],
       telefono: ['', [Validators.required, Validators.pattern('^[0-9]{3}-[0-9]{3}-[0-9]{3}$')]],
       fechaNacimiento: ['',Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -75,8 +76,14 @@ export class Registro {
       nuevoUsuario.nombre = data.nombre;
       nuevoUsuario.apellido = data.apellido;
       nuevoUsuario.email = data.email;
+      nuevoUsuario.username = data.username
       nuevoUsuario.telefono = data.telefono;
-      nuevoUsuario.fechaNacimiento = data.fechaNacimiento;
+
+      if (data.fechaNacimiento) {
+        const fecha = new Date(data.fechaNacimiento);
+        (nuevoUsuario as any).fechaNacimiento = fecha.toISOString().split('T')[0]
+      }
+
       nuevoUsuario.password = data.password;
       
       // Datos técnicos obligatorios
@@ -115,7 +122,7 @@ export class Registro {
           Swal.fire({
             icon: 'error',
             title: 'Error en el registro',
-            text: 'No se pudo crear la cuenta. Es posible que el correo ya esta en uso',
+            text: err.error?.message || 'No se pudo crear la cuenta. Es posible que el correo ya esta en uso',
             confirmButtonColor: '#d33'
           })
         }

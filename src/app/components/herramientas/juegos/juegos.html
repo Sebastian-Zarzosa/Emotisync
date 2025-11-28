@@ -6,6 +6,7 @@
         @for (juego of juegos; track juego.id) {
         <mat-card class="game-card hover-effect">
             <img mat-card-image [src]="juego.imagen" alt="Imagen del juego">
+            
             <mat-card-content>
                 <h3>{{ juego.titulo }}</h3>
                 <p>{{ juego.descripcion }}</p>
@@ -15,8 +16,11 @@
                     }
                 </div>
             </mat-card-content>
+            
             <mat-card-actions>
-                <button mat-flat-button color="accent" class="play-btn">JUGAR AHORA</button>
+                <button mat-flat-button color="accent" class="play-btn" (click)="navegarAJuego(juego.url)">
+                    JUGAR AHORA
+                </button>
             </mat-card-actions>
         </mat-card>
         }

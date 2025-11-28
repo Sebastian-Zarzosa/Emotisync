@@ -32,6 +32,7 @@ import { ModoReflexionComponent } from './components/clinica/crisis/modo-reflexi
 import { ProgresoComponent } from './components/herramientas/progreso/progreso';
 import { JuegosComponent } from './components/herramientas/juegos/juegos';
 import { BibliotecaComponent } from './components/herramientas/biblioteca/biblioteca';
+import { PerfilComponent } from './components/dashboard/perfil/perfil';
 
 
 export const routes: Routes = [
@@ -176,5 +177,10 @@ export const routes: Routes = [
   { path: 'juegos', component: JuegosComponent, canActivate: [roleGuard], data: { expectedRole: 'PACIENTE' } },
   { path: 'biblioteca', component: BibliotecaComponent, canActivate: [roleGuard], data: { expectedRole: 'PACIENTE' } },
 
+  {
+    path: 'perfil',
+    component: PerfilComponent,
+    canActivate: [roleGuard]
+  },
   { path: '**', redirectTo: 'inicio' },
 ];

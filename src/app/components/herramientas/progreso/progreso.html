@@ -2,33 +2,42 @@
     <div class="header-section">
         <h1>Mi Evolución Emocional</h1>
         <button mat-raised-button color="primary" (click)="exportarPDF()">
-            <mat-icon>picture_as_pdf</mat-icon> Exportar para Especialista
+            <mat-icon>picture_as_pdf</mat-icon> Exportar PDF
         </button>
     </div>
 
-    <div class="stats-grid">
-        <mat-card class="stat-card">
-            <h2>😄 12</h2>
-            <p>Días Felices</p>
-        </mat-card>
-        <mat-card class="stat-card">
-            <h2>😰 3</h2>
-            <p>Momentos de Ansiedad</p>
-        </mat-card>
-        <mat-card class="stat-card">
-            <h2>📅 15</h2>
-            <p>Días Registrados</p>
+    <div id="contenidoParaPDF" style="padding: 20px; background: white;">
+        
+        <div style="text-align: center; margin-bottom: 20px;">
+            <h2>Reporte de Paciente: {{ username }}</h2>
+            <p>Fecha de emisión: {{ today | date:'medium' }}</p>
+        </div>
+
+        <div class="stats-grid">
+            <mat-card class="stat-card">
+                <h2>😄 {{ diasFelices }}</h2>
+                <p>Días Felices</p>
+            </mat-card>
+            <mat-card class="stat-card">
+                <h2>😰 {{ diasAnsiedad }}</h2>
+                <p>Momentos de Ansiedad</p>
+            </mat-card>
+            <mat-card class="stat-card">
+                <h2>📅 {{ diasRegistrados }}</h2>
+                <p>Total Registros</p>
+            </mat-card>
+        </div>
+
+        <mat-card class="chart-card">
+            <mat-card-header>
+                <mat-card-title>Tendencia Emocional</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div style="height: 300px;">
+                    <canvas baseChart [type]="'line'" [data]="lineChartData" [options]="lineChartOptions" [legend]="lineChartLegend">
+                    </canvas>
+                </div>
+            </mat-card-content>
         </mat-card>
     </div>
-
-    <mat-card class="chart-card">
-        <mat-card-header>
-            <mat-card-title>Tendencia Semanal</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <canvas baseChart [type]="'line'" [data]="lineChartData" [options]="lineChartOptions"
-                [legend]="lineChartLegend">
-            </canvas>
-        </mat-card-content>
-    </mat-card>
 </div>

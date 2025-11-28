@@ -8,6 +8,10 @@ import { ChartConfiguration, ChartOptions } from 'chart.js';
 import { Diarioservice } from '../../../core/services/diarioservice';
 import { LoginService } from '../../../core/services/login';
 
+// Imports para PDF
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+
 @Component({
   selector: 'app-progreso',
   standalone: true,
@@ -17,18 +21,18 @@ import { LoginService } from '../../../core/services/login';
 })
 export class ProgresoComponent implements OnInit {
   
-  // Datos para las tarjetas de resumen
   diasRegistrados = 0;
   diasFelices = 0;
   diasAnsiedad = 0;
+  username: string = '';
+  today: Date = new Date(); // Fecha actual para el reporte
 
-  // Configuración del Gráfico
   public lineChartData: ChartConfiguration<'line'>['data'] = {
-    labels: [], // Se llenará dinámicamente con fechas reales
+    labels: [],
     datasets: [
       {
-        data: [], // Se llenará con intensidades reales
-        label: 'Nivel de Intensidad Emocional',
+        data: [],
+        label: 'Intensidad Emocional',
         fill: true,
         tension: 0.4,
         borderColor: '#3f51b5',
@@ -39,9 +43,9 @@ export class ProgresoComponent implements OnInit {
   
   public lineChartOptions: ChartOptions<'line'> = {
     responsive: true,
-    plugins: { legend: { display: true } }
+    maintainAspectRatio: false
   };
-lineChartLegend: boolean|undefined;
+  lineChartLegend = true;
 
   constructor(
     private diarioService: Diarioservice,
@@ -49,39 +53,49 @@ lineChartLegend: boolean|undefined;
   ) {}
 
   ngOnInit() {
+    this.username = this.loginService.getUsername();
     this.cargarDatosReales();
   }
 
   cargarDatosReales() {
-    const usuarioActual = this.loginService.getUsername(); // Obtener usuario logueado
-
     this.diarioService.listar().subscribe(data => {
-      // 1. Filtrar solo los diarios de este usuario
-      const misDiarios = data.filter((d: any) => d.usuario.username === usuarioActual);
+      // 1. Filtrar solo los diarios del usuario logueado
+      const misDiarios = data.filter((d: any) => 
+          d.usuario && d.usuario.username === this.username
+      );
       
-      // 2. Ordenar por fecha (antiguo a nuevo)
+      // 2. Ordenar por fecha
       misDiarios.sort((a: any, b: any) => new Date(a.fecha).getTime() - new Date(b.fecha).getTime());
 
-      // 3. Mapear datos para el gráfico
-      this.lineChartData.labels = misDiarios.map((d: any) => new Date(d.fecha).toLocaleDateString('es-ES', { weekday: 'short' }));
-      
-      // Asumimos que en 'emociones' guardas la intensidad. Si es una lista, tomamos la primera o promedio.
-      this.lineChartData.datasets[0].data = misDiarios.map((d: any) => {
-         return d.emociones ? d.emociones.intensidad : 5; // Valor por defecto si no hay emoción
-      });
+      // 3. Mapear datos
+      this.lineChartData.labels = misDiarios.map((d: any) => new Date(d.fecha).toLocaleDateString('es-ES', { day: '2-digit', month: 'short' }));
+      this.lineChartData.datasets[0].data = misDiarios.map((d: any) => d.emociones ? d.emociones.intensidad : 0);
 
       // 4. Calcular Estadísticas
       this.diasRegistrados = misDiarios.length;
-      this.diasFelices = misDiarios.filter((d: any) => d.emociones?.tipoEmocion === 'Feliz').length;
-      this.diasAnsiedad = misDiarios.filter((d: any) => d.emociones?.tipoEmocion === 'Ansioso').length;
+      this.diasFelices = misDiarios.filter((d: any) => d.emociones?.tipoEmocion?.toLowerCase().includes('feliz')).length;
+      this.diasAnsiedad = misDiarios.filter((d: any) => d.emociones?.tipoEmocion?.toLowerCase().includes('ansioso')).length;
 
-      // Actualizar gráfico (truco para refrescar ng2-charts)
+      // 5. Refrescar gráfico
       this.lineChartData = { ...this.lineChartData };
     });
   }
 
   exportarPDF() {
-    // Aquí podrías usar jsPDF para generar el reporte real con los datos de 'misDiarios'
-    alert('Generando reporte PDF con tus ' + this.diasRegistrados + ' registros...');
+    // Capturamos el elemento por ID
+    const DATA = document.getElementById('contenidoParaPDF');
+    
+    if(DATA) {
+      html2canvas(DATA).then(canvas => {
+        const imgWidth = 208;
+        const pageHeight = 295;
+        const imgHeight = canvas.height * imgWidth / canvas.width;
+        
+        const contentDataURL = canvas.toDataURL('image/png');
+        let pdf = new jsPDF('p', 'mm', 'a4');
+        pdf.addImage(contentDataURL, 'PNG', 0, 0, imgWidth, imgHeight);
+        pdf.save(`Reporte_Progreso_${this.username}.pdf`);
+      });
+    }
   }
 }

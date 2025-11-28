@@ -11,7 +11,7 @@
     }
     <mat-sidenav #sidenav mode="side" opened class="app-sidenav">
       
-      <div class="sidenav-header" routerLink="/inicio" style="cursor: pointer; padding: 20px; display: flex; align-items: center; gap: 10px;">
+      <div class="sidenav-header" routerLink="/perfil" matRipple>
         <div class="user-avatar">
           {{ loginService.getUsername().charAt(0).toUpperCase() }}
         </div>
