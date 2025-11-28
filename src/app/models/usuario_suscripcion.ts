@@ -1,4 +1,4 @@
-import { planesSuscripcion } from "./planes_suscripcionModel"
+import { planesSuscripcion } from "./planes_suscripcion"
 import { Usuario } from "./Usuario"
 
 export class usuarioSuscripcion {

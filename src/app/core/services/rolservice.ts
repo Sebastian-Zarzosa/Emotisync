@@ -1,5 +1,5 @@
 import { Subject } from "rxjs";
-import { Rol } from "../../models/Rol";
+import { Rol } from "../../models/rol";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../../environments/environment";

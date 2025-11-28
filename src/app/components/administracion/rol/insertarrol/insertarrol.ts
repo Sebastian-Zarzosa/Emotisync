@@ -17,7 +17,7 @@ import { MatNativeDateModule} from '@angular/material/core';
 import { provideNativeDateAdapter} from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from "@angular/material/card";
-import { Rol } from '../../../../models/Rol';
+import { Rol } from '../../../../models/rol';
 
 @Component({
   selector: 'app-insertarrol',
@@ -64,7 +64,7 @@ export class Insertarrol implements OnInit {
   }
   aceptar(): void {
     if (this.form.valid) {
-      this.ro.rol = this.form.value.rol;
+      this.ro.idRol = this.form.value.rol;
       if (this.edicion) {
         this.ro.idRol = this.form.value.idRol
         this.rS.update(this.ro).subscribe(() => {

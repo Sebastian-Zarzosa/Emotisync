@@ -1,0 +1,66 @@
+<div class="recorder-screen">
+    <div class="status-text">
+        @if(isRecording) { 
+            <span class="recording-badge">🔴 Grabando {{ recordingTime }}</span> 
+        } @else { 
+            <span class="instruction-text">Toca el micrófono para comenzar</span> 
+        }
+    </div>
+
+    <div class="mic-container">
+        <button class="mic-button" [class.recording]="isRecording" (click)="toggleRecording()">
+            <mat-icon class="mic-icon">{{ isRecording ? 'stop' : 'mic' }}</mat-icon>
+            @if(isRecording){ <div class="ripple"></div> }
+        </button>
+    </div>
+
+    @if(hasRecording && audioUrl) {
+    <div class="preview-card animate-slide-down">
+        <div class="preview-header">Vista Previa</div>
+        <audio controls [src]="audioUrl" class="custom-player"></audio>
+        <div class="preview-actions">
+            <button mat-stroked-button color="warn" (click)="descartarAudio()">
+                <mat-icon>delete</mat-icon> Descartar
+            </button>
+            <button mat-raised-button color="primary" (click)="guardarAudio()">
+                <mat-icon>save</mat-icon> Guardar Bitácora
+            </button>
+        </div>
+    </div>
+    }
+
+    <div class="history-section">
+        <h3><mat-icon>history</mat-icon> Mis Bitácoras</h3>
+        
+        <div class="cards-container">
+            @for (rec of misGrabaciones; track rec.id) {
+                <div class="recording-card">
+                    <div class="card-edge"></div>
+                    
+                    <div class="card-body">
+                        <div class="card-info">
+                            <span class="card-title">{{ rec.titulo || 'Nota de voz' }}</span>
+                            <span class="card-date">{{ rec.fechaCr | date:'d MMMM y, h:mm a' }}</span>
+                        </div>
+                        
+                        <audio controls [src]="rec.enlace" class="mini-player"></audio>
+                    </div>
+
+                    <div class="card-actions">
+                        <button mat-icon-button (click)="descargarAudio(rec.enlace, false)" matTooltip="Descargar">
+                            <mat-icon class="action-icon download">download</mat-icon>
+                        </button>
+                        <button mat-icon-button (click)="eliminarGrabacion(rec.id)" matTooltip="Eliminar">
+                            <mat-icon class="action-icon delete">delete_outline</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            } @empty {
+                <div class="empty-state">
+                    <mat-icon>graphic_eq</mat-icon>
+                    <p>Aún no tienes grabaciones guardadas.</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
