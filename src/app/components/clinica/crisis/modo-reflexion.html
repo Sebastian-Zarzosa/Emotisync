@@ -1,0 +1,20 @@
+<div class="breathing-container">
+    <h2>Respira, estás a salvo</h2>
+
+    <div class="breathing-circle" [class.inhale]="isInhaling && isActive" [class.exhale]="!isInhaling && isActive">
+
+        <span class="instruction">{{ instructionText }}</span>
+        <div class="timer" *ngIf="isActive">{{ timerText }}</div>
+
+    </div>
+
+    <div class="controls">
+        <button mat-fab color="primary" (click)="toggleBreathing()" class="big-play-btn">
+            <mat-icon>{{ isActive ? 'pause' : 'play_arrow' }}</mat-icon>
+        </button>
+
+        <button mat-button color="warn" (click)="stopBreathing()" *ngIf="seconds > 0">
+            Detener
+        </button>
+    </div>
+</div>

@@ -27,6 +27,12 @@ import { UsuarioEjercicios } from './components/herramientas/usuario-ejercicios/
 import { UsuarioEjerciciosinsertar } from './components/herramientas/usuario-ejercicios/usuario-ejerciciosinsertar/usuario-ejerciciosinsertar';
 import { roleGuard } from './core/guard/role.guard';
 import { Principal } from './components/dashboard/principal/principal';
+import { GrabadoraComponent } from './components/herramientas/grabadora/grabadora';
+import { ModoReflexionComponent } from './components/clinica/crisis/modo-reflexion';
+import { ProgresoComponent } from './components/herramientas/progreso/progreso';
+import { JuegosComponent } from './components/herramientas/juegos/juegos';
+import { BibliotecaComponent } from './components/herramientas/biblioteca/biblioteca';
+import { PerfilComponent } from './components/dashboard/perfil/perfil';
 
 
 export const routes: Routes = [
@@ -39,8 +45,7 @@ export const routes: Routes = [
   { 
     path: 'dashboard', 
     component: Principal, 
-    canActivate: [roleGuard],
-    data: { expectedRole: 'AMBOS' } // Haremos un truco en el Guard o ponemos ADMIN y que el guard deje pasar si es paciente
+    canActivate: [roleGuard]// Haremos un truco en el Guard o ponemos ADMIN y que el guard deje pasar si es paciente
   },
 
   //RUTAS DEL ADMIN
@@ -156,6 +161,26 @@ export const routes: Routes = [
     canActivate: [roleGuard],
     data: { expectedRole: 'PACIENTE' }
   },
+  {
+    path: 'grabadora',
+    component: GrabadoraComponent,
+    canActivate: [roleGuard],
+    data: { expectedRole: 'PACIENTE' }
+  },
+  {
+    path: 'modo-reflexion',
+    component: ModoReflexionComponent,
+    canActivate: [roleGuard],
+    data: { expectedRole: 'PACIENTE' }
+  },
+  { path: 'progreso', component: ProgresoComponent, canActivate: [roleGuard], data: { expectedRole: 'PACIENTE' } },
+  { path: 'juegos', component: JuegosComponent, canActivate: [roleGuard], data: { expectedRole: 'PACIENTE' } },
+  { path: 'biblioteca', component: BibliotecaComponent, canActivate: [roleGuard], data: { expectedRole: 'PACIENTE' } },
 
+  {
+    path: 'perfil',
+    component: PerfilComponent,
+    canActivate: [roleGuard]
+  },
   { path: '**', redirectTo: 'inicio' },
 ];
