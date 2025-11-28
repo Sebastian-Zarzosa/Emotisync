@@ -7,7 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router, RouterLink } from '@angular/router';
 import { UsuarioService } from '../../../core/services/usuarioservice';
-import { Rol } from '../../../models/Rol';
+import { Rol } from '../../../models/rol';
 import { Usuario } from '../../../models/Usuario';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -53,7 +53,11 @@ export class Registro {
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
       email: ['', Validators.required],
+<<<<<<< HEAD
       username: ['', [Validators.required, Validators.maxLength(30)]],
+=======
+      username: ['', [Validators.required, Validators.maxLength(30), Validators.minLength(4)]],
+>>>>>>> gerardo_huaman
       telefono: ['', [Validators.required, Validators.pattern('^[0-9]{3}-[0-9]{3}-[0-9]{3}$')]],
       fechaNacimiento: ['',Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -72,18 +76,73 @@ export class Registro {
     const nuevoUsuario = new Usuario();
     const data = this.form.value;
 
-    nuevoUsuario.idUsuario = 0;
-    nuevoUsuario.nombre = data.nombre;
-    nuevoUsuario.apellido = data.apellido;
-    nuevoUsuario.email = data.email;
-    nuevoUsuario.username = data.username;
-    nuevoUsuario.telefono = data.telefono;
-    nuevoUsuario.password = data.password;
-    
-    if (data.fechaNacimiento) {
-       const fecha = new Date(data.fechaNacimiento);
-       const fechaStr = fecha.toISOString().split('T')[0]; 
-       (nuevoUsuario as any).fechaNacimiento = fechaStr; 
+      // 1. Mapear datos personales completos
+      nuevoUsuario.idUsuario = 0;
+      nuevoUsuario.nombre = data.nombre;
+      nuevoUsuario.apellido = data.apellido;
+      nuevoUsuario.email = data.email;
+      nuevoUsuario.username = data.username
+      nuevoUsuario.telefono = data.telefono;
+
+      if (data.fechaNacimiento) {
+        const fecha = new Date(data.fechaNacimiento);
+        (nuevoUsuario as any).fechaNacimiento = fecha.toISOString().split('T')[0]
+      }
+
+      nuevoUsuario.password = data.password;
+      
+      // Datos técnicos obligatorios
+      nuevoUsuario.username = data.email;
+      nuevoUsuario.enabled = true;
+      // Institución/Colegiatura son opcionales en BD, los dejamos vacíos
+      nuevoUsuario.institucion = ""; 
+      nuevoUsuario.nroColegiatura = 0;
+
+      // 2. Asignar el Rol seleccionado
+      const rolSeleccionado = new Rol();
+      rolSeleccionado.idRol = data.rolId;
+      // Buscamos el nombre del rol solo para enviarlo completo (opcional)
+      const rolObj = this.rolesDisponibles.find(r => r.id === data.rolId);
+      rolSeleccionado.rol = rolObj ? rolObj.nombre.toUpperCase() : 'PACIENTE';
+      
+      nuevoUsuario.roles = [rolSeleccionado];
+
+      // 3. Guardar
+      this.usuarioService.insertar(nuevoUsuario).subscribe({
+        next: () => {
+          Swal.fire({
+            icon: 'success',
+            title: '¡Registro Existoso',
+            text: 'Tu cuenta ha sido creada. Ahora puedes iniciar sesion',
+            confirmButtonText: 'Ir al login',
+            confirmButtonColor: '#3085d6'
+          }).then((result) => {
+            if(result.isConfirmed){
+              this.router.navigate(['/login'])
+            }
+          })
+        },
+        error: (err) => {
+          console.error('Error:', err)
+          Swal.fire({
+            icon: 'error',
+            title: 'Error en el registro',
+            text: err.error?.message || 'No se pudo crear la cuenta. Es posible que el correo ya esta en uso',
+            confirmButtonColor: '#d33'
+          })
+        }
+      });
+    } else {
+      this.form.markAllAsTouched();
+      Swal.fire({
+          icon: 'warning',
+          title: 'Datos faltantes',
+          text: 'Revisa el formulario, hay campos obligatorios sin llenar.',
+          toast: true, // Estilo "Toast" pequeño
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000
+      });
     }
     
     const usernameCorto = data.email.split('@')[0];

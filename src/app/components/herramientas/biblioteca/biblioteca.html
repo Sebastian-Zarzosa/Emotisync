@@ -1,0 +1,37 @@
+<div class="library-container">
+    <div class="search-bar">
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Buscar recurso...</mat-label>
+            <mat-icon matPrefix>search</mat-icon>
+            <input matInput placeholder="Ej. Ansiedad, Alexitimia...">
+        </mat-form-field>
+    </div>
+
+    <mat-accordion>
+        @for (tema of temas; track tema.titulo) {
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <mat-icon class="topic-icon">{{ tema.icono }}</mat-icon>
+                    {{ tema.titulo }}
+                </mat-panel-title>
+                <mat-panel-description>
+                    {{ tema.recursos.length }} artículos
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <mat-list>
+                @for (res of tema.recursos; track res) {
+                <mat-list-item>
+                    <mat-icon matListItemIcon>description</mat-icon>
+                    <span matListItemTitle>{{ res }}</span>
+                    <button mat-icon-button matListItemMeta color="primary">
+                        <mat-icon>download</mat-icon>
+                    </button>
+                </mat-list-item>
+                }
+            </mat-list>
+        </mat-expansion-panel>
+        }
+    </mat-accordion>
+</div>

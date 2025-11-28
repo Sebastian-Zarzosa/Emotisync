@@ -1,0 +1,63 @@
+<div class="profile-container">
+    <div class="profile-header">
+        <div class="avatar-circle">
+            <img src="/assets/avatar-placeholder.png" alt="Avatar" *ngIf="false; else textAvatar">
+            <ng-template #textAvatar>
+                <span>{{ usuario.nombre?.charAt(0) || 'U' }}</span>
+            </ng-template>
+            
+            <button mat-mini-fab color="primary" class="edit-avatar-btn" (click)="abrirEdicion()" matTooltip="Editar datos">
+                <mat-icon>edit</mat-icon>
+            </button>
+        </div>
+        
+        <h2 class="profile-name">
+            {{ usuario.nombre }} {{ usuario.apellido }}
+        </h2>
+        <p style="color: rgba(255,255,255,0.8); margin-top: 5px;">{{ usuario.email }}</p>
+        <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem;">📞 {{ usuario.telefono }}</p>
+    </div>
+
+    <div class="status-list">
+    
+    <div class="status-item">
+        <div class="status-pill">Cuenta de Paciente</div>
+        <div class="checkbox-box" [class.checked]="esPaciente()">
+            <mat-icon *ngIf="esPaciente()">check</mat-icon>
+        </div>
+    </div>
+
+    <div class="status-item clickable" (click)="!esEspecialista() && solicitarCambio('ESPECIALISTA')">
+        <div class="status-pill">
+            {{ esEspecialista() ? 'Cuenta de Especialista' : 'Solicitar ser Especialista' }}
+        </div>
+        
+        <div class="checkbox-box success" *ngIf="esEspecialista(); else lockIconSpec">
+            <mat-icon>check</mat-icon>
+        </div>
+        <ng-template #lockIconSpec>
+            <div class="checkbox-box action">
+                <mat-icon>upgrade</mat-icon> </div>
+        </ng-template>
+    </div>
+
+    <div class="status-item clickable" (click)="!esFamiliar() && solicitarCambio('FAMILIAR')">
+        <div class="status-pill">
+            {{ esFamiliar() ? 'Cuenta de Familiar' : 'Vincular como Familiar' }}
+        </div>
+        
+        <div class="checkbox-box" *ngIf="esFamiliar(); else lockIconFam">
+            <mat-icon>check</mat-icon>
+        </div>
+        <ng-template #lockIconFam>
+            <div class="checkbox-box action">
+                <mat-icon>person_add</mat-icon>
+            </div>
+        </ng-template>
+    </div>
+
+</div>
+
+    <div class="bottom-nav-placeholder">
+        </div>
+</div>
