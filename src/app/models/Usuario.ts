@@ -1,4 +1,4 @@
-import { Rol } from './rol';
+import { Rol } from './Rol';
 
 export class Usuario {
   idUsuario: number = 0;

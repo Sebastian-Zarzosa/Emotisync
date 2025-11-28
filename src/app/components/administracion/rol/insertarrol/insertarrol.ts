@@ -17,7 +17,7 @@ import { MatNativeDateModule} from '@angular/material/core';
 import { provideNativeDateAdapter} from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from "@angular/material/card";
-import { Rol } from '../../../../models/rol';
+import { Rol } from '../../../../models/Rol';
 
 @Component({
   selector: 'app-insertarrol',

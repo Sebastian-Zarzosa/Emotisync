@@ -34,6 +34,9 @@ import { JuegosComponent } from './components/herramientas/juegos/juegos';
 import { BibliotecaComponent } from './components/herramientas/biblioteca/biblioteca';
 import { PerfilComponent } from './components/dashboard/perfil/perfil';
 
+import { EmocionesInsert } from './components/emociones/emociones-insert/emociones-insert';
+import { Emociones } from './components/emociones/emociones';
+import { EmocionesPromemociointen } from './components/dashboard/reportes/emociones-promemociointen/emociones-promemociointen';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -161,6 +164,29 @@ export const routes: Routes = [
     canActivate: [roleGuard],
     data: { expectedRole: 'PACIENTE' }
   },
+
+  // Rutas de emocinoes
+    {
+    path: 'emociones',
+    component: Emociones,
+    children: [
+        { path: 'insertar', component: EmocionesInsert },
+        { path: 'edits/:id', component: EmocionesInsert },
+    ],
+    },
+
+    // REPORTES
+  {
+    path: 'reportes',  // Esto hace match con routerLink="/reportes"
+    component: EmocionesPromemociointen, // Aquí cargará tu componente del gráfico
+  },
+
+// crisis/buscarporritmo
+// crisis/buscarporusurangofechas
+// crisis/cantidadporusu
+// emociones/busquedaemoint5
+// emociones/promemociointen
+
   {
     path: 'grabadora',
     component: GrabadoraComponent,
