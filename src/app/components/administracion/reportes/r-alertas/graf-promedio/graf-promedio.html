@@ -1,0 +1,28 @@
+<div style="text-align: center; padding: 20px;">
+    <h2>Promedio de Alertas Críticas</h2>
+    
+    <div style="margin-bottom: 20px;">
+        <mat-form-field appearance="outline">
+            <mat-label>Nivel Mínimo</mat-label>
+            <input matInput type="number" [(ngModel)]="nivel">
+        </mat-form-field>
+        <button mat-raised-button color="accent" (click)="generar()" style="margin-left: 10px; height: 56px;">
+            Generar Curva
+        </button>
+    </div>
+
+    @if(hasData){
+        <div style="width: 70%; margin: 0 auto;">
+            
+            <canvas baseChart 
+                [data]="chartData" 
+                [options]="chartOptions" 
+                [legend]="true" 
+                [type]="chartType">
+            </canvas>
+
+        </div>
+    } @else {
+        <p>Ingresa un nivel y genera el reporte.</p>
+    }
+</div>

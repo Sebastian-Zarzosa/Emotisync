@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { Emociones } from '../../models/Emociones';
 import { AverageDTOEmocionesInt } from '../../models/AverageDTOEmocionesInt';
+import { EmocionesDTOList } from '../../models/EmocionesDTOList';
 
 const base_url = environment.base;
 
@@ -46,5 +47,10 @@ export class Emocionesservice {
   //agregando para reporte
   getPromEmocioInten(): Observable<AverageDTOEmocionesInt[]> {
     return this.http.get<AverageDTOEmocionesInt[]>(`${this.url}/promemociointen`);
+  }
+
+  //agregando para busquedaemoint5
+  getbusquedaemoint5(): Observable<EmocionesDTOList[]> {
+    return this.http.get<EmocionesDTOList[]>(`${this.url}/busquedaemoint5`);
   }
 }

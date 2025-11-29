@@ -38,8 +38,18 @@ import { EmocionesInsert } from './components/emociones/emociones-insert/emocion
 import { Emociones } from './components/emociones/emociones';
 import { ReportesMenu } from './components/administracion/reportes/reportes-menu/reportes-menu';
 import { GrafPromemociointen } from './components/administracion/reportes/r-emociones/graf-promemociointen/graf-promemociointen';
+import { GrafConteoComponent } from './components/administracion/reportes/r-alertas/graf-conteo/graf-conteo';
+import { GrafBusquedaComponent } from './components/administracion/reportes/r-alertas/graf-busqueda/graf-busqueda';
+import { GrafPromedioComponent } from './components/administracion/reportes/r-alertas/graf-promedio/graf-promedio';
+import { GrafCriticasComponent } from './components/administracion/reportes/r-alertas/graf-criticas/graf-criticas';
+
+import { CrisisSintoma } from './components/clinica/crisis-sintoma/crisis-sintoma';
+import { CrisisSintomaInsert } from './components/clinica/crisis-sintoma/crisis-sintomainsert/crisis-sintomainsert';
 import { GrafCantidadporusu } from './components/administracion/reportes/r-crisis/graf-cantidadporusu/graf-cantidadporusu';
 import { BusqBuscarporritmo } from './components/administracion/reportes/r-crisis/busq-buscarporritmo/busq-buscarporritmo';
+
+
+
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -71,6 +81,16 @@ export const routes: Routes = [
     children: [
       { path: 'insertar', component: SintomaInsert }, // Antes era 'new'
       { path: 'editar/:id', component: SintomaInsert }, // Antes era 'edits/:id'
+    ],
+    canActivate: [roleGuard],
+    data: { expectedRole: 'ADMIN' }
+  },
+  {
+    path: 'crisis-sintomas',
+    component: CrisisSintoma,
+    children: [
+      { path: 'insertar', component: CrisisSintomaInsert },
+      { path: 'editar/:id', component: CrisisSintomaInsert }
     ],
     canActivate: [roleGuard],
     data: { expectedRole: 'ADMIN' }
@@ -186,6 +206,10 @@ export const routes: Routes = [
         { path: 'emociones-promedio', component: GrafPromemociointen }, // Muestra el GRÁFICO
         { path: 'crisis-cantidad', component: GrafCantidadporusu },
         { path: 'crisis-ritmo', component: BusqBuscarporritmo }, 
+        { path: 'alertas-conteo', component: GrafConteoComponent },
+        { path: 'alertas-buscar', component: GrafBusquedaComponent },
+        { path: 'alertas-promedio', component: GrafPromedioComponent },
+        { path: 'alertas-criticas', component: GrafCriticasComponent },
     ],
   },
 

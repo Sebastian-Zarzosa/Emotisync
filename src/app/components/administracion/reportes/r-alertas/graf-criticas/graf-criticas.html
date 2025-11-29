@@ -1,0 +1,18 @@
+<div style="text-align: center; padding: 20px;">
+  <h2>Distribución de Alertas Críticas</h2>
+  <p style="color: gray; font-size: 0.9rem;">Usuarios con nivel máximo >= 4</p>
+  
+  @if(hasData) {
+    <div style="width: 50%; min-width: 300px; margin: 0 auto;">
+      <canvas baseChart
+        [data]="pieChartData"
+        [type]="pieChartType"
+        [options]="pieChartOptions">
+      </canvas>
+    </div>
+  } @else {
+    <div style="margin-top: 30px; color: #777;">
+      <p>No se encontraron alertas críticas con este criterio.</p>
+    </div>
+  }
+</div>
