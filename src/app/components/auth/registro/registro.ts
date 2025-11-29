@@ -7,13 +7,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router, RouterLink } from '@angular/router';
 import { UsuarioService } from '../../../core/services/usuarioservice';
-import { Rol } from '../../../models/rol';
 import { Usuario } from '../../../models/Usuario';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 
 import Swal from 'sweetalert2';
+import { Rol } from '../../../models/Rol';
 @Component({
   selector: 'app-registro',
   standalone: true,
