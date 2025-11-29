@@ -38,6 +38,10 @@ import { EmocionesInsert } from './components/emociones/emociones-insert/emocion
 import { Emociones } from './components/emociones/emociones';
 import { ReportesMenu } from './components/administracion/reportes/reportes-menu/reportes-menu';
 import { GrafPromemociointen } from './components/administracion/reportes/r-emociones/graf-promemociointen/graf-promemociointen';
+import { GrafConteoComponent } from './components/administracion/reportes/r-alertas/graf-conteo/graf-conteo';
+import { GrafBusquedaComponent } from './components/administracion/reportes/r-alertas/graf-busqueda/graf-busqueda';
+import { GrafPromedioComponent } from './components/administracion/reportes/r-alertas/graf-promedio/graf-promedio';
+import { GrafCriticasComponent } from './components/administracion/reportes/r-alertas/graf-criticas/graf-criticas';
 
 
 export const routes: Routes = [
@@ -183,6 +187,10 @@ export const routes: Routes = [
     children: [
         { path: '', component: ReportesMenu }, // Al hacer clic en el botón "Promedio"
         { path: 'emociones-promedio', component: GrafPromemociointen }, // Muestra el GRÁFICO
+        { path: 'alertas-conteo', component: GrafConteoComponent },
+        { path: 'alertas-buscar', component: GrafBusquedaComponent },
+        { path: 'alertas-promedio', component: GrafPromedioComponent },
+        { path: 'alertas-criticas', component: GrafCriticasComponent },
     ],
   },
 
