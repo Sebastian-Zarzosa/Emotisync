@@ -1,0 +1,20 @@
+<div class="container" style="text-align: center; padding: 20px;">
+    <h2>Buscar Alertas por Nombre</h2>
+    <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;">
+        <mat-form-field appearance="outline">
+            <mat-label>Letra inicial</mat-label>
+            <input matInput [(ngModel)]="letra" (keyup.enter)="buscar()">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="buscar()" style="height: 56px;">
+            <mat-icon>search</mat-icon>
+        </button>
+    </div>
+
+    @if(hasData){
+        <div style="width: 70%; margin: 0 auto;">
+            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
+                [options]="barChartOptions" [legend]="barChartLegend" [type]="barChartType">
+            </canvas>
+        </div>
+    }
+</div>
