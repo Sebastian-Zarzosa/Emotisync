@@ -1,0 +1,85 @@
+<div class="menu-container">
+  <h1 style="text-align: center; margin-bottom: 30px">Panel de Reportes</h1>
+
+  <div class="cards-wrapper">
+    <mat-card class="menu-card">
+      <mat-card-header>
+        <mat-card-title>Crisis</mat-card-title>
+        <mat-card-subtitle>Estadísticas</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="grid-icons">
+        <div class="icon-item" routerLink="crisis-ritmo">
+          <div class="icon-box blue"><mat-icon>favorite</mat-icon></div>
+          <span>Busqueda por Ritmo</span>
+        </div>
+        <div class="icon-item" routerLink="crisis-fechas">
+          <div class="icon-box gray"><mat-icon>date_range</mat-icon></div>
+          <span>Busqueda por Rango de Fechas</span>
+        </div>
+        <div class="icon-item" routerLink="crisis-cantidad">
+          <div class="icon-box gray"><mat-icon>bar_chart</mat-icon></div>
+          <span>Grafico de Cantidad de Crisis por Usuario</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="menu-card">
+      <mat-card-header>
+        <mat-card-title>Emociones</mat-card-title>
+        <mat-card-subtitle>Análisis</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="grid-icons">
+        <div class="icon-item" routerLink="emociones-promedio">
+          <div class="icon-box blue"><mat-icon>pie_chart</mat-icon></div>
+          <span>Grafico de Promedio Intensidad de cada Usuario</span>
+        </div>
+
+        <div class="icon-item" routerLink="emociones-int5">
+          <div class="icon-box gray"><mat-icon>search</mat-icon></div>
+          <span>Busqueda de Emociones con Intensidad=5</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="menu-card">
+      <mat-card-header>
+        <mat-card-title>Alertas</mat-card-title>
+        <mat-card-subtitle>Monitoreo</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="grid-icons">
+        <div class="icon-item" routerLink="alertas-conteo">
+          <div class="icon-box blue"><mat-icon>bar_chart</mat-icon></div>
+          <span>Conteo</span>
+        </div>
+        <div class="icon-item" routerLink="alertas-buscar">
+          <div class="icon-box gray"><mat-icon>search</mat-icon></div>
+          <span>Búsqueda</span>
+        </div>
+        <div class="icon-item" routerLink="alertas-promedio">
+          <div class="icon-box blue"><mat-icon>show_chart</mat-icon></div>
+          <span>Promedio</span>
+        </div>
+        <div class="icon-item" routerLink="alertas-criticas">
+          <div class="icon-box gray"><mat-icon>pie_chart</mat-icon></div>
+          <span>Críticas</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="menu-card">
+      <mat-card-header>
+        <mat-card-title>Usuarios</mat-card-title>
+        <mat-card-subtitle>Estadísticas</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="grid-icons">
+        <div class="icon-item" routerLink="pacientes-especialidad">
+          <div class="icon-box gray"><mat-icon>pie_chart</mat-icon></div>
+          <span>Grafico de total de Pacientes por Especialidad</span>
+        </div>
+        <div class="icon-item" routerLink="buscar-pacientes">
+          <div class="icon-box gray"><mat-icon>search</mat-icon></div>
+          <span>Buscar pacientes</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

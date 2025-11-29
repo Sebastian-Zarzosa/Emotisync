@@ -1,35 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
-// import {
-//     ChartDataset,
-//     ChartOptions,
-//     ChartType,
-// } from './../../../../node_modules/chart.js';
-import { Emocionesservice } from '../../../../core/services/emocionesservice';
 import { ChartDataset, ChartOptions, ChartType } from 'chart.js';
+import { Emocionesservice } from '../../../../../core/services/emocionesservice';
 
 @Component({
-  selector: 'app-emociones-promemociointen',
+  selector: 'app-graf-promemociointen',
   imports: [BaseChartDirective, MatIconModule],
-  templateUrl: './emociones-promemociointen.html',
-  styleUrl: './emociones-promemociointen.css',
+  templateUrl: './graf-promemociointen.html',
+  styleUrl: './graf-promemociointen.css',
   providers: [provideCharts(withDefaultRegisterables())],
 })
-export class EmocionesPromemociointen implements OnInit {
+export class GrafPromemociointen implements OnInit  {
   hasData = false;
-  barChartOptions: ChartOptions = {
-    responsive: true,
-  };
-  barChartLabels: string[] = [];
-  barChartLegend = true;
-  barChartData: ChartDataset[] = [];
-  // tipo 'pie' (torta), 'bar' (barras), 'doughnut' (dona)
-  barChartType: ChartType = 'pie';
+    barChartOptions: ChartOptions = {
+      responsive: true,
+    };
+    barChartLabels: string[] = [];
+    barChartLegend = true;
+    barChartData: ChartDataset[] = [];
+    // tipo 'pie' (torta), 'bar' (barras), 'doughnut' (dona)
+    barChartType: ChartType = 'pie';
+  
+    constructor(private eService: Emocionesservice) {}
 
-  constructor(private eService: Emocionesservice) {}
-
-  ngOnInit(): void {
+    ngOnInit(): void {
     // Llamamos al servicio
     this.eService.getPromEmocioInten().subscribe((data) => {
       // Un console.log para que veas en el navegador qué llega
@@ -63,5 +58,4 @@ export class EmocionesPromemociointen implements OnInit {
       }
     });
   }
-
 }

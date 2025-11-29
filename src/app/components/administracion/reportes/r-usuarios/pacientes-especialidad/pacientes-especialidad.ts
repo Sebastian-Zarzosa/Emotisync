@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartDataset, ChartOptions, ChartType } from 'chart.js';
-import { UsuarioService } from '../../../../core/services/usuarioservice';
+import { UsuarioService } from '../../../../../core/services/usuarioservice';
 import {
   BaseChartDirective,
   provideCharts,
@@ -27,7 +27,7 @@ export class PacientesEspecialidad implements OnInit {
 
   constructor(private usuarioService: UsuarioService) {}
   ngOnInit(): void {
-    this.usuarioService.getPacientesPorEspecialidad().subscribe((data) => {
+    this.usuarioService.totalPacientesPorEspecialista().subscribe((data) => {
       if (data.length > 0) {
         this.hasData = true;
         this.barChartLabels = data.map((item) => item.especialidad);

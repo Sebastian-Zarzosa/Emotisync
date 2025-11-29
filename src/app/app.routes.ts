@@ -36,7 +36,17 @@ import { PerfilComponent } from './components/dashboard/perfil/perfil';
 
 import { EmocionesInsert } from './components/emociones/emociones-insert/emociones-insert';
 import { Emociones } from './components/emociones/emociones';
-import { EmocionesPromemociointen } from './components/dashboard/reportes/emociones-promemociointen/emociones-promemociointen';
+import { ReportesMenu } from './components/administracion/reportes/reportes-menu/reportes-menu';
+import { GrafPromemociointen } from './components/administracion/reportes/r-emociones/graf-promemociointen/graf-promemociointen';
+import { GrafConteoComponent } from './components/administracion/reportes/r-alertas/graf-conteo/graf-conteo';
+import { GrafBusquedaComponent } from './components/administracion/reportes/r-alertas/graf-busqueda/graf-busqueda';
+import { GrafPromedioComponent } from './components/administracion/reportes/r-alertas/graf-promedio/graf-promedio';
+import { GrafCriticasComponent } from './components/administracion/reportes/r-alertas/graf-criticas/graf-criticas';
+
+import { CrisisSintoma } from './components/clinica/crisis-sintoma/crisis-sintoma';
+import { CrisisSintomaInsert } from './components/clinica/crisis-sintoma/crisis-sintomainsert/crisis-sintomainsert';
+import { PacientesEspecialidad } from './components/administracion/reportes/r-usuarios/pacientes-especialidad/pacientes-especialidad';
+import { BusquedaPacientes } from './components/administracion/reportes/r-usuarios/busqueda-pacientes/busqueda-pacientes';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -68,6 +78,26 @@ export const routes: Routes = [
     children: [
       { path: 'insertar', component: SintomaInsert }, // Antes era 'new'
       { path: 'editar/:id', component: SintomaInsert }, // Antes era 'edits/:id'
+    ],
+    canActivate: [roleGuard],
+    data: { expectedRole: 'ADMIN' },
+  },
+  {
+    path: 'crisis-sintomas',
+    component: CrisisSintoma,
+    children: [
+      { path: 'insertar', component: CrisisSintomaInsert },
+      { path: 'editar/:id', component: CrisisSintomaInsert },
+    ],
+    canActivate: [roleGuard],
+    data: { expectedRole: 'ADMIN' },
+  },
+  {
+    path: 'crisis-sintomas',
+    component: CrisisSintoma,
+    children: [
+      { path: 'insertar', component: CrisisSintomaInsert },
+      { path: 'editar/:id', component: CrisisSintomaInsert },
     ],
     canActivate: [roleGuard],
     data: { expectedRole: 'ADMIN' },
@@ -176,10 +206,10 @@ export const routes: Routes = [
   },
 
   // REPORTES
-  {
-    path: 'reportes', // Esto hace match con routerLink="/reportes"
-    component: EmocionesPromemociointen, // Aquí cargará tu componente del gráfico
-  },
+  // {
+  //   path: 'reportes', // Esto hace match con routerLink="/reportes"
+  //   component: EmocionesPromemociointen, // Aquí cargará tu componente del gráfico
+  // },
 
   // crisis/buscarporritmo
   // crisis/buscarporusurangofechas
@@ -231,7 +261,16 @@ export const routes: Routes = [
   // REPORTES
   {
     path: 'reportes', // Esto hace match con routerLink="/reportes"
-    component: EmocionesPromemociointen, // Aquí cargará tu componente del gráfico
+    children: [
+      { path: '', component: ReportesMenu }, // Al hacer clic en el botón "Promedio"
+      { path: 'emociones-promedio', component: GrafPromemociointen }, // Muestra el GRÁFICO
+      { path: 'alertas-conteo', component: GrafConteoComponent },
+      { path: 'alertas-buscar', component: GrafBusquedaComponent },
+      { path: 'alertas-promedio', component: GrafPromedioComponent },
+      { path: 'alertas-criticas', component: GrafCriticasComponent },
+      { path: 'pacientes-especialidad', component: PacientesEspecialidad },
+      { path: 'buscar-pacientes', component: BusquedaPacientes },
+    ],
   },
 
   // crisis/buscarporritmo

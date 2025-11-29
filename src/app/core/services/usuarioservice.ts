@@ -3,6 +3,7 @@ import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { Usuario } from '../../models/Usuario';
+import { TotalPacienteDTO } from '../../models/TotalPacienteDTO';
 
 const base_url = environment.base;
 
@@ -54,26 +55,16 @@ export class UsuarioService {
     return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
   }
 
-  getPacientesPorEspecialidad() {
-    return this.http.get<any[]>(`${this.url}/totalPacientesPorEspecialidad`);
-  }
-
   searchPatientsOfEspecialist(email: string) {
     const params = { email: email };
-    return this.http.get<Usuario[]>(`${this.url}/pacientesPorEspecialista`, {
+    return this.http.get<Usuario[]>(`${this.url}/pacientesPorMedico`, {
       params: params,
     });
   }
 
-  solicitarCambioRol(idUsuario: number, nuevoRol: string, datoExtra: string) {
-    return this.http.post(
-      `${this.url}/solicitar-rol`,
-      {
-        idUsuario,
-        nuevoRol,
-        datoExtra,
-      },
-      { responseType: 'text' }
+  totalPacientesPorEspecialista() {
+    return this.http.get<TotalPacienteDTO[]>(
+      `${this.url}/totalPacientesPorEspecialista`
     );
   }
 }
