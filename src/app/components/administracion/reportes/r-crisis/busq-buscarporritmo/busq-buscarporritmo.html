@@ -1,0 +1,33 @@
+<!-- <p>busq-buscarporritmo works!</p> -->
+<div class="container">
+  
+  <h2 style="color: #8e24aa;">Búsqueda por Ritmo Cardíaco</h2>
+
+  <!-- CAJA DE BÚSQUEDA -->
+  <div class="search-section">
+    <mat-form-field appearance="outline">
+      <mat-label>Ingresa Ritmo</mat-label>
+      <input matInput type="number" [(ngModel)]="ritmoBusqueda" placeholder="Ej: 80">
+      <mat-icon matSuffix>favorite</mat-icon>
+    </mat-form-field>
+
+    <button mat-raised-button class="btn-morado" (click)="buscar()">
+      BUSCAR
+    </button>
+  </div>
+
+  <!-- ERROR O VACÍO -->
+  <div *ngIf="mensajeError" class="error-msg">
+    <mat-icon>sentiment_dissatisfied</mat-icon> {{ mensajeError }}
+  </div>
+
+  <!-- GRÁFICO -->
+  <div *ngIf="hasData" class="chart-wrapper">
+    <canvas baseChart
+      [data]="barChartData"
+      [options]="barChartOptions"
+      [type]="barChartType">
+    </canvas>
+  </div>
+
+</div>

@@ -1,8 +1,10 @@
 import { Injectable } from "@angular/core";
 import { environment } from "../../../environments/environment";
 import { HttpClient } from "@angular/common/http";
-import { Subject } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { Crisis } from "../../models/crisis";
+import { QuantityDTOCrisis } from "../../models/QuantityDTOCrisis";
+import { CrisisDTO } from "../../models/CrisisDTO";
 
 
 const base_url=environment.base;
@@ -40,5 +42,21 @@ export class CrisisService{
 
     delete(id: number) {
         return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
-    }   
+    }
+
+    //agregando para reporte grafico
+    getCantidadporusu(): Observable<QuantityDTOCrisis[]> {
+        return this.http.get<QuantityDTOCrisis[]>(`${this.url}/cantidadporusu`);
+    }
+
+    //agregando para tabla filtrable con busqueda por ritmo
+    getBuscarporritmo(ritmo:number): Observable<CrisisDTO[]> {
+        return this.http.get<CrisisDTO[]>(`${this.url}/buscarporritmo`,
+            {
+            params: {
+                ritmo: ritmo.toString() // ritmo es float
+            }
+        }
+        );
+    }
 }
