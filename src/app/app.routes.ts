@@ -45,6 +45,11 @@ import { GrafCriticasComponent } from './components/administracion/reportes/r-al
 
 import { CrisisSintoma } from './components/clinica/crisis-sintoma/crisis-sintoma';
 import { CrisisSintomaInsert } from './components/clinica/crisis-sintoma/crisis-sintomainsert/crisis-sintomainsert';
+import { GrafCantidadporusu } from './components/administracion/reportes/r-crisis/graf-cantidadporusu/graf-cantidadporusu';
+import { BusqBuscarporritmo } from './components/administracion/reportes/r-crisis/busq-buscarporritmo/busq-buscarporritmo';
+
+
+
 import { PacientesEspecialidad } from './components/administracion/reportes/r-usuarios/pacientes-especialidad/pacientes-especialidad';
 import { BusquedaPacientes } from './components/administracion/reportes/r-usuarios/busqueda-pacientes/busqueda-pacientes';
 
@@ -262,12 +267,14 @@ export const routes: Routes = [
   {
     path: 'reportes', // Esto hace match con routerLink="/reportes"
     children: [
-      { path: '', component: ReportesMenu }, // Al hacer clic en el botón "Promedio"
-      { path: 'emociones-promedio', component: GrafPromemociointen }, // Muestra el GRÁFICO
-      { path: 'alertas-conteo', component: GrafConteoComponent },
-      { path: 'alertas-buscar', component: GrafBusquedaComponent },
-      { path: 'alertas-promedio', component: GrafPromedioComponent },
-      { path: 'alertas-criticas', component: GrafCriticasComponent },
+        { path: '', component: ReportesMenu }, // Al hacer clic en el botón "Promedio"
+        { path: 'emociones-promedio', component: GrafPromemociointen }, // Muestra el GRÁFICO
+        { path: 'crisis-cantidad', component: GrafCantidadporusu },
+        { path: 'crisis-ritmo', component: BusqBuscarporritmo }, 
+        { path: 'alertas-conteo', component: GrafConteoComponent },
+        { path: 'alertas-buscar', component: GrafBusquedaComponent },
+        { path: 'alertas-promedio', component: GrafPromedioComponent },
+        { path: 'alertas-criticas', component: GrafCriticasComponent },
       { path: 'pacientes-especialidad', component: PacientesEspecialidad },
       { path: 'buscar-pacientes', component: BusquedaPacientes },
     ],
