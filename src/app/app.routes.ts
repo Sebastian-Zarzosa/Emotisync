@@ -38,6 +38,8 @@ import { EmocionesInsert } from './components/emociones/emociones-insert/emocion
 import { Emociones } from './components/emociones/emociones';
 import { ReportesMenu } from './components/administracion/reportes/reportes-menu/reportes-menu';
 import { GrafPromemociointen } from './components/administracion/reportes/r-emociones/graf-promemociointen/graf-promemociointen';
+import { GrafCantidadporusu } from './components/administracion/reportes/r-crisis/graf-cantidadporusu/graf-cantidadporusu';
+import { BusqBuscarporritmo } from './components/administracion/reportes/r-crisis/busq-buscarporritmo/busq-buscarporritmo';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -182,6 +184,8 @@ export const routes: Routes = [
     children: [
         { path: '', component: ReportesMenu }, // Al hacer clic en el botón "Promedio"
         { path: 'emociones-promedio', component: GrafPromemociointen }, // Muestra el GRÁFICO
+        { path: 'crisis-cantidad', component: GrafCantidadporusu },
+        { path: 'crisis-ritmo', component: BusqBuscarporritmo }, 
     ],
   },
 
