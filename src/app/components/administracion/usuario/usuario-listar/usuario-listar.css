@@ -27,7 +27,7 @@ button[mat-raised-button] {
 /* Botón primario (Nuevo Usuario) */
 button[mat-raised-button][color="primary"] {
   background-color: #2b4bff;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 /* --- Responsivo (botones más compactos en pantallas pequeñas) --- */
