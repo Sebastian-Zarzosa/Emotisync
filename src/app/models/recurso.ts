@@ -10,4 +10,5 @@ export class Recurso {
   creador: Usuario = new Usuario();
   destinatario: Usuario = new Usuario();
   esPublico: boolean = false;
+  nombreCreador: string = ''
 }

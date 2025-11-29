@@ -1,0 +1,117 @@
+.profile-container {
+    background: linear-gradient(180deg, #5B9BD5 0%, #4472C4 100%); /* Azul del mockup */
+    min-height: 100vh;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Header & Avatar */
+.profile-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.avatar-circle {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: #fff; /* Círculo blanco para la imagen */
+    border: 4px solid white;
+    overflow: hidden;
+    margin: 0 auto 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.avatar-circle span {
+    font-size: 4rem;
+    color: #4472C4;
+    font-weight: bold;
+}
+
+.avatar-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-name {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 0;
+    color: #1a1a1a; /* Texto oscuro como en la imagen */
+    background: rgba(255,255,255,0.0); /* Transparente */
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Lista de Estados */
+.status-list {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.status-pill {
+    background-color: white;
+    color: #333;
+    padding: 15px 25px;
+    border-radius: 50px; /* Forma de píldora */
+    font-weight: 600;
+    flex-grow: 1;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.checkbox-box {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.checkbox-box.checked {
+    background-color: #66BB6A; /* Verde check */
+    color: white;
+    box-shadow: 0 0 10px rgba(102, 187, 106, 0.5);
+}
+
+/* Navegación inferior (decorativa para simular mockup) */
+.bottom-nav-placeholder {
+    margin-top: auto;
+    display: flex;
+    gap: 30px;
+    padding-top: 40px;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.bottom-nav-placeholder .active {
+    color: #00BFFF; /* Azul claro resaltado */
+}
+
+.edit-avatar-btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transform: translate(25%, 25%);
+    z-index: 10;
+}

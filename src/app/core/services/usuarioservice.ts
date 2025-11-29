@@ -53,4 +53,12 @@ export class UsuarioService {
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
   }
+
+  solicitarCambioRol(idUsuario: number, nuevoRol: string, datoExtra: string){
+    return this.http.post(`${this.url}/solicitar-rol`, {
+      idUsuario,
+      nuevoRol,
+      datoExtra
+    }, {responseType: 'text'})
+  }
 }
