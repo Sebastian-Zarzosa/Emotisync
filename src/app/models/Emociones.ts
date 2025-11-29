@@ -1,4 +1,4 @@
-import { Crisis } from './Crisis';
+import { Crisis } from "./crisis";
 
 export class Emociones {
   idEmociones: number = 0;

@@ -6,7 +6,7 @@
   <mat-card>
         <mat-card-header class="list-header">
             <mat-card-title>Lista de Ejercicios</mat-card-title>
-            <button mat-raised-button color="primary" routerLink="news">
+            <button mat-raised-button color="primary" routerLink="insertar">
                 <mat-icon>add</mat-icon>
                 Nuevo Ejercicio
             </button>
@@ -51,7 +51,7 @@
         <th mat-header-cell *matHeaderCellDef>Actualizar</th>
         <td mat-cell *matCellDef="let element">
           <button  matButton
-            [routerLink]="['edits',element.idEjercicio]" >
+            [routerLink]="['editar',element.idEjercicio]" >
             <mat-icon>edit</mat-icon>
           </button>
         </td>
