@@ -37,6 +37,7 @@ import { PerfilComponent } from './components/dashboard/perfil/perfil';
 import { EmocionesInsert } from './components/emociones/emociones-insert/emociones-insert';
 import { Emociones } from './components/emociones/emociones';
 import { EmocionesPromemociointen } from './components/dashboard/reportes/emociones-promemociointen/emociones-promemociointen';
+import { Musica } from './components/herramientas/musica/musica';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -202,6 +203,13 @@ export const routes: Routes = [
   { path: 'progreso', component: ProgresoComponent, canActivate: [roleGuard], data: { expectedRole: 'PACIENTE' } },
   { path: 'juegos', component: JuegosComponent, canActivate: [roleGuard], data: { expectedRole: 'PACIENTE' } },
   { path: 'biblioteca', component: BibliotecaComponent, canActivate: [roleGuard], data: { expectedRole: 'PACIENTE' } },
+
+  {
+    path: 'musica',
+    component: Musica,
+    canActivate: [roleGuard],
+    data: {expectedRole: 'PACIENTE'}
+  },
 
   {
     path: 'perfil',

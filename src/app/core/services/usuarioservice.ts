@@ -20,7 +20,7 @@ export class UsuarioService {
   }
 
   insertar(usuario: Usuario) {
-    return this.http.post(this.url, usuario);
+    return this.http.post(`${this.url}/registrar`, usuario);
   }
 
   setLista(listaNueva: Usuario[]) {
