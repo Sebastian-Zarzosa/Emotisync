@@ -11,7 +11,7 @@
     }
     <mat-sidenav #sidenav mode="side" opened class="app-sidenav">
       
-      <div class="sidenav-header" routerLink="/inicio" style="cursor: pointer; padding: 20px; display: flex; align-items: center; gap: 10px;">
+      <div class="sidenav-header" routerLink="/perfil" matRipple>
         <div class="user-avatar">
           {{ loginService.getUsername().charAt(0).toUpperCase() }}
         </div>
@@ -58,10 +58,10 @@
             <mat-icon matListItemIcon>healing</mat-icon>
             <span matListItemTitle>Catálogo Síntomas</span>
           </a>
-          <!-- <a mat-list-item routerLink="/emociones" routerLinkActive="active-link">
+          <a mat-list-item routerLink="/emociones" routerLinkActive="active-link">
             <span matListItemIcon style="font-size: 20px;">😺</span>
             <span matListItemTitle>Catálogo Emociones</span>
-          </a> -->
+          </a>
           <a mat-list-item routerLink="/alerta" routerLinkActive="active-link">
             <mat-icon matListItemIcon>add_alert</mat-icon>
             <span matListItemTitle>Alertas Globales</span>
@@ -70,6 +70,12 @@
             <mat-icon matListItemIcon>favorite</mat-icon>
             <span matListItemTitle>Historial de Crisis</span>
           </a>
+          <!-- // Reportes, aqui todos los graficos -->
+          <a mat-list-item routerLink="/reportes" routerLinkActive="active-link">
+            <mat-icon matListItemIcon>reportes</mat-icon>
+            <span matListItemTitle>Graficos de Reportes</span>
+          </a>
+          
         }
 
         @if (loginService.isPaciente() || loginService.isAdmin()) {
@@ -83,8 +89,33 @@
             <mat-icon matListItemIcon>accessibility_new</mat-icon>
             <span matListItemTitle>Mis Ejercicios</span>
           </a>
+          <a mat-list-item routerLink="/progreso" routerLinkActive="active-link">
+            <mat-icon matListItemIcon>insights</mat-icon>
+            <span matListItemTitle>Mi Progreso</span>
+          </a>
+          <a mat-list-item routerLink="/juegos" routerLinkActive="active-link">
+            <mat-icon matListItemIcon>sports_esports</mat-icon>
+            <span matListItemTitle>Gimnasio Emocional</span>
+          </a>
+          <a mat-list-item routerLink="/biblioteca" routerLinkActive="active-link">
+            <mat-icon matListItemIcon>menu_book</mat-icon>
+            <span matListItemTitle>Biblioteca</span>
+          </a>
         }
 
+        @if (loginService.isPaciente() || loginService.isAdmin()) {
+          <div mat-subheader>HERRAMIENTAS DE CALMA</div>
+
+          <a mat-list-item routerLink="/modo-reflexion" routerLinkActive="active-link">
+            <mat-icon matListItemIcon>self_improvement</mat-icon> 
+            <span matListItemTitle>Modo Reflexión</span>
+          </a>
+
+          <a mat-list-item routerLink="/grabadora" routerLinkActive="active-link">
+            <mat-icon matListItemIcon>mic</mat-icon>
+            <span matListItemTitle>Bitácora de Voz</span>
+          </a>
+        }
       </mat-nav-list>
     </mat-sidenav>
 
