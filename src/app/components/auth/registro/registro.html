@@ -38,6 +38,15 @@
                 <mat-icon matPrefix>email</mat-icon>
             </mat-form-field>
 
+            <mat-form-field appearance="outline" class="custom-input">
+                <mat-label>Nombre de Usuario</mat-label>
+                <input matInput formControlName="username" placeholder="Elige un usuario único">
+                <mat-icon matPrefix>account_circle</mat-icon>
+                <mat-error>
+                    @if (form.get('username')?.hasError('maxlength')) { Máximo 30 caracteres }
+                    @if (form.get('username')?.hasError('required')) { Requerido }
+                </mat-error>
+            </mat-form-field>
             <div style="display: flex; gap: 10px;">
                 <mat-form-field appearance="outline" class="custom-input" style="flex: 1;">
                     <mat-label>Teléfono</mat-label>

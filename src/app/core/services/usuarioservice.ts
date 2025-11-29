@@ -64,4 +64,16 @@ export class UsuarioService {
       params: params,
     });
   }
+
+  solicitarCambioRol(idUsuario: number, nuevoRol: string, datoExtra: string) {
+    return this.http.post(
+      `${this.url}/solicitar-rol`,
+      {
+        idUsuario,
+        nuevoRol,
+        datoExtra,
+      },
+      { responseType: 'text' }
+    );
+  }
 }

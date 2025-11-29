@@ -1,0 +1,220 @@
+/* Contenedor Principal */
+.recorder-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* --- SECCIÓN MICRÓFONO --- */
+.status-text {
+    height: 40px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.instruction-text {
+    color: #666;
+    font-weight: 500;
+}
+
+.recording-badge {
+    background-color: #ffebee;
+    color: #d32f2f;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    animation: pulse 1.5s infinite;
+}
+
+.mic-container {
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.mic-button {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg, #3640E0 0%, #5b65ff 100%);
+    color: white;
+    box-shadow: 0 10px 25px rgba(54, 64, 224, 0.4);
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mic-button:active { transform: scale(0.95); }
+.mic-button.recording { background: #d32f2f; }
+.mic-icon { font-size: 40px; height: 40px; width: 40px; }
+
+/* Onda de grabación */
+.ripple {
+    position: absolute;
+    top: -5px; left: -5px; right: -5px; bottom: -5px;
+    border-radius: 50%;
+    border: 2px solid #d32f2f;
+    animation: ripple-anim 1.5s infinite;
+    z-index: 1;
+}
+
+/* --- TARJETA DE PREVISUALIZACIÓN --- */
+.preview-card {
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    width: 100%;
+    margin-bottom: 40px;
+    border: 1px solid #eee;
+}
+
+.preview-header {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.preview-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.custom-player { width: 100%; margin: 5px 0; }
+
+/* --- LISTA DE HISTORIAL (TARJETAS) --- */
+.history-section {
+    width: 100%;
+}
+
+.history-section h3 {
+    color: #333;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.recording-card {
+    background: #fff;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+    height: 90px;
+}
+
+.recording-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(54, 64, 224, 0.1);
+}
+
+.card-edge {
+    width: 6px;
+    height: 100%;
+    background-color: #3640E0;
+}
+
+.card-body {
+    flex-grow: 1;
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 5px;
+}
+
+.card-title {
+    font-weight: 600;
+    color: #333;
+    font-size: 1rem;
+}
+
+.card-date {
+    font-size: 0.75rem;
+    color: #999;
+}
+
+.mini-player {
+    width: 100%;
+    height: 30px;
+}
+
+.card-actions {
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-left: 1px solid #f0f0f0;
+}
+
+.action-icon.download { color: #3640E0; }
+.action-icon.delete { color: #d32f2f; }
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    color: #aaa;
+    border: 2px dashed #e0e0e0;
+    border-radius: 12px;
+}
+
+.empty-state mat-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 10px;
+    opacity: 0.5;
+}
+
+/* Animaciones */
+@keyframes ripple-anim {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(1.6); opacity: 0; }
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.6; }
+    100% { opacity: 1; }
+}
+
+.animate-slide-down {
+    animation: slideDown 0.4s ease-out;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

@@ -27,7 +27,16 @@ import { UsuarioEjercicios } from './components/herramientas/usuario-ejercicios/
 import { UsuarioEjerciciosinsertar } from './components/herramientas/usuario-ejercicios/usuario-ejerciciosinsertar/usuario-ejerciciosinsertar';
 import { roleGuard } from './core/guard/role.guard';
 import { Principal } from './components/dashboard/principal/principal';
-import { PacientesEspecialidad } from './components/dashboard/reportes/pacientes-especialidad/pacientes-especialidad';
+import { GrabadoraComponent } from './components/herramientas/grabadora/grabadora';
+import { ModoReflexionComponent } from './components/clinica/crisis/modo-reflexion';
+import { ProgresoComponent } from './components/herramientas/progreso/progreso';
+import { JuegosComponent } from './components/herramientas/juegos/juegos';
+import { BibliotecaComponent } from './components/herramientas/biblioteca/biblioteca';
+import { PerfilComponent } from './components/dashboard/perfil/perfil';
+
+import { EmocionesInsert } from './components/emociones/emociones-insert/emociones-insert';
+import { Emociones } from './components/emociones/emociones';
+import { EmocionesPromemociointen } from './components/dashboard/reportes/emociones-promemociointen/emociones-promemociointen';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -39,13 +48,7 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     component: Principal,
-    canActivate: [roleGuard],
-    data: { expectedRole: 'AMBOS' }, // Haremos un truco en el Guard o ponemos ADMIN y que el guard deje pasar si es paciente
-  },
-
-  {
-    path: 'reportes/pacientes-especialidad',
-    component: PacientesEspecialidad,
+    canActivate: [roleGuard], // Haremos un truco en el Guard o ponemos ADMIN y que el guard deje pasar si es paciente
   },
 
   //RUTAS DEL ADMIN
@@ -162,5 +165,116 @@ export const routes: Routes = [
     data: { expectedRole: 'PACIENTE' },
   },
 
+  // Rutas de emocinoes
+  {
+    path: 'emociones',
+    component: Emociones,
+    children: [
+      { path: 'insertar', component: EmocionesInsert },
+      { path: 'edits/:id', component: EmocionesInsert },
+    ],
+  },
+
+  // REPORTES
+  {
+    path: 'reportes', // Esto hace match con routerLink="/reportes"
+    component: EmocionesPromemociointen, // Aquí cargará tu componente del gráfico
+  },
+
+  // crisis/buscarporritmo
+  // crisis/buscarporusurangofechas
+  // crisis/cantidadporusu
+  // emociones/busquedaemoint5
+  // emociones/promemociointen
+
+  {
+    path: 'grabadora',
+    component: GrabadoraComponent,
+    canActivate: [roleGuard],
+    data: { expectedRole: 'PACIENTE' },
+  },
+  {
+    path: 'modo-reflexion',
+    component: ModoReflexionComponent,
+    canActivate: [roleGuard],
+    data: { expectedRole: 'PACIENTE' },
+  },
+  {
+    path: 'progreso',
+    component: ProgresoComponent,
+    canActivate: [roleGuard],
+    data: { expectedRole: 'PACIENTE' },
+  },
+  {
+    path: 'juegos',
+    component: JuegosComponent,
+    canActivate: [roleGuard],
+    data: { expectedRole: 'PACIENTE' },
+  },
+  {
+    path: 'biblioteca',
+    component: BibliotecaComponent,
+    canActivate: [roleGuard],
+    data: { expectedRole: 'PACIENTE' },
+  },
+
+  // Rutas de emocinoes
+  {
+    path: 'emociones',
+    component: Emociones,
+    children: [
+      { path: 'insertar', component: EmocionesInsert },
+      { path: 'edits/:id', component: EmocionesInsert },
+    ],
+  },
+
+  // REPORTES
+  {
+    path: 'reportes', // Esto hace match con routerLink="/reportes"
+    component: EmocionesPromemociointen, // Aquí cargará tu componente del gráfico
+  },
+
+  // crisis/buscarporritmo
+  // crisis/buscarporusurangofechas
+  // crisis/cantidadporusu
+  // emociones/busquedaemoint5
+  // emociones/promemociointen
+
+  {
+    path: 'grabadora',
+    component: GrabadoraComponent,
+    canActivate: [roleGuard],
+    data: { expectedRole: 'PACIENTE' },
+  },
+  {
+    path: 'modo-reflexion',
+    component: ModoReflexionComponent,
+    canActivate: [roleGuard],
+    data: { expectedRole: 'PACIENTE' },
+  },
+  {
+    path: 'progreso',
+    component: ProgresoComponent,
+    canActivate: [roleGuard],
+    data: { expectedRole: 'PACIENTE' },
+  },
+  {
+    path: 'juegos',
+    component: JuegosComponent,
+    canActivate: [roleGuard],
+    data: { expectedRole: 'PACIENTE' },
+  },
+  {
+    path: 'biblioteca',
+    component: BibliotecaComponent,
+    canActivate: [roleGuard],
+    data: { expectedRole: 'PACIENTE' },
+  },
+
+  {
+    path: 'perfil',
+    component: PerfilComponent,
+    canActivate: [roleGuard],
+  },
   { path: '**', redirectTo: 'inicio' },
 ];
