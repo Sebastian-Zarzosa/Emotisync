@@ -13,7 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatIconModule } from '@angular/material/icon';
 import { provideNativeDateAdapter } from '@angular/material/core';
-import { Crisis } from '../../../../models/crisis';
+import { Crisis } from '../../../../models/Crisis';
 import { CrisisService } from '../../../../core/services/crisisservice';
 import { UsuarioService } from '../../../../core/services/usuarioservice';
 import { Usuario } from '../../../../models/Usuario';

@@ -38,6 +38,8 @@ import { EmocionesInsert } from './components/emociones/emociones-insert/emocion
 import { Emociones } from './components/emociones/emociones';
 import { ReportesMenu } from './components/administracion/reportes/reportes-menu/reportes-menu';
 import { GrafPromemociointen } from './components/administracion/reportes/r-emociones/graf-promemociointen/graf-promemociointen';
+import { CrisisSintoma } from './components/clinica/crisis-sintoma/crisis-sintoma';
+import { CrisisSintomaInsert } from './components/clinica/crisis-sintoma/crisis-sintomainsert/crisis-sintomainsert';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
