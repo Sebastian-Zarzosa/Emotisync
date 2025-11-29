@@ -36,7 +36,8 @@ import { PerfilComponent } from './components/dashboard/perfil/perfil';
 
 import { EmocionesInsert } from './components/emociones/emociones-insert/emociones-insert';
 import { Emociones } from './components/emociones/emociones';
-import { EmocionesPromemociointen } from './components/dashboard/reportes/emociones-promemociointen/emociones-promemociointen';
+import { ReportesMenu } from './components/administracion/reportes/reportes-menu/reportes-menu';
+import { GrafPromemociointen } from './components/administracion/reportes/r-emociones/graf-promemociointen/graf-promemociointen';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -178,7 +179,10 @@ export const routes: Routes = [
     // REPORTES
   {
     path: 'reportes',  // Esto hace match con routerLink="/reportes"
-    component: EmocionesPromemociointen, // Aquí cargará tu componente del gráfico
+    children: [
+        { path: '', component: ReportesMenu }, // Al hacer clic en el botón "Promedio"
+        { path: 'emociones-promedio', component: GrafPromemociointen }, // Muestra el GRÁFICO
+    ],
   },
 
 // crisis/buscarporritmo
