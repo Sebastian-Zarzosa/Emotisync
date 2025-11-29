@@ -1,0 +1,21 @@
+.simple-form-card {
+    max-width: 500px;
+    margin: 24px auto;
+    padding: 16px;
+}
+
+mat-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+mat-card-actions {
+    padding: 16px;
+    display: flex;
+    gap: 10px;
+}

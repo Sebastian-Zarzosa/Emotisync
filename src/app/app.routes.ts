@@ -37,6 +37,8 @@ import { PerfilComponent } from './components/dashboard/perfil/perfil';
 import { EmocionesInsert } from './components/emociones/emociones-insert/emociones-insert';
 import { Emociones } from './components/emociones/emociones';
 import { EmocionesPromemociointen } from './components/dashboard/reportes/emociones-promemociointen/emociones-promemociointen';
+import { CrisisSintoma } from './components/clinica/crisis-sintoma/crisis-sintoma';
+import { CrisisSintomaInsert } from './components/clinica/crisis-sintoma/crisis-sintomainsert/crisis-sintomainsert';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -68,6 +70,16 @@ export const routes: Routes = [
     children: [
       { path: 'insertar', component: SintomaInsert }, // Antes era 'new'
       { path: 'editar/:id', component: SintomaInsert }, // Antes era 'edits/:id'
+    ],
+    canActivate: [roleGuard],
+    data: { expectedRole: 'ADMIN' }
+  },
+  {
+    path: 'crisis-sintomas',
+    component: CrisisSintoma,
+    children: [
+      { path: 'insertar', component: CrisisSintomaInsert },
+      { path: 'editar/:id', component: CrisisSintomaInsert }
     ],
     canActivate: [roleGuard],
     data: { expectedRole: 'ADMIN' }
