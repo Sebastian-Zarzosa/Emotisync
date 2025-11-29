@@ -1,0 +1,40 @@
+<div class="container" style="max-width: 600px; margin: 20px auto; text-align: center;">
+  <h2 style="color: #673ab7;">Verificar Relación en Recursos</h2>
+  <p style="color: #666;">Ingresa los IDs de los usuarios para verificar si han compartido recursos.</p>
+
+  <mat-card style="padding: 20px; margin-bottom: 20px;">
+    <div style="display: flex; gap: 15px; justify-content: center; align-items: center; flex-wrap: wrap;">
+      
+      <mat-form-field appearance="outline">
+        <mat-label>ID Creador</mat-label>
+        <input matInput type="number" [(ngModel)]="creadorId">
+      </mat-form-field>
+
+      <mat-icon style="color: gray;">swap_horiz</mat-icon>
+
+      <mat-form-field appearance="outline">
+        <mat-label>ID Destinatario</mat-label>
+        <input matInput type="number" [(ngModel)]="destinatarioId">
+      </mat-form-field>
+
+    </div>
+
+    <button mat-raised-button color="primary" (click)="buscar()" [disabled]="!creadorId || !destinatarioId">
+      <mat-icon>search</mat-icon> VERIFICAR
+    </button>
+  </mat-card>
+
+  @if(buscado && resultado) {
+    <div class="resultado-box" [class.existe]="resultado.existeRelacion" [class.no-existe]="!resultado.existeRelacion">
+      @if(resultado.existeRelacion) {
+        <mat-icon class="big-icon">check_circle</mat-icon>
+        <h3>¡SÍ EXISTE RELACIÓN!</h3>
+        <p>El usuario {{resultado.creadorId}} ha creado recursos para el usuario {{resultado.destinatarioId}}.</p>
+      } @else {
+        <mat-icon class="big-icon">cancel</mat-icon>
+        <h3>NO EXISTE RELACIÓN</h3>
+        <p>No se encontraron recursos entre estos usuarios.</p>
+      }
+    </div>
+  }
+</div>
