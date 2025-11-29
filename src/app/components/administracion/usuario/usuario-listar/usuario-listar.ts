@@ -6,8 +6,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatCardModule } from "@angular/material/card";
+import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
+import {
+  Form,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-usuario-listar',
@@ -19,7 +26,9 @@ import { CommonModule } from '@angular/common';
     RouterLink,
     MatPaginatorModule,
     MatCardModule,
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
   ],
   templateUrl: './usuario-listar.html',
   styleUrl: './usuario-listar.css',
@@ -37,9 +46,17 @@ export class UsuarioListar implements OnInit, AfterViewInit {
     'eliminar',
   ];
 
+  results: boolean = false;
+  formEmail: FormGroup;
+  emailBusqueda: string = '';
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private usuarioService: UsuarioService) {}
+  constructor(private usuarioService: UsuarioService, private fb: FormBuilder) {
+    this.formEmail = fb.group({
+      email: [''],
+    });
+  }
 
   ngOnInit(): void {
     this.usuarioService.listar().subscribe((data) => {
@@ -48,6 +65,11 @@ export class UsuarioListar implements OnInit, AfterViewInit {
 
     this.usuarioService.getLista().subscribe((data) => {
       this.dataSource.data = data;
+    });
+
+    this.formEmail.get('emailBusqueda')?.valueChanges.subscribe((value) => {
+      this.emailBusqueda = value;
+      this.buscar();
     });
   }
 
@@ -61,5 +83,22 @@ export class UsuarioListar implements OnInit, AfterViewInit {
         this.usuarioService.setLista(data);
       });
     });
+  }
+  buscar() {
+    const termino = this.emailBusqueda.trim();
+    this.usuarioService.searchPatientsOfEspecialist(termino).subscribe(
+      (data) => {
+        this.dataSource = new MatTableDataSource(data);
+        this.results = data.length === 0; // si no hay resultados, mostrar mensaje
+      },
+      (err) => {
+        if (err.status === 404) {
+          this.dataSource = new MatTableDataSource(); // limpiar tabla
+          this.results = true; // activar mensaje de “no hay resultados”
+        } else {
+          console.error('Error inesperado:', err);
+        }
+      }
+    );
   }
 }
