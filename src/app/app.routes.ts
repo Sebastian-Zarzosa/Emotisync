@@ -43,6 +43,8 @@ import { GrafBusquedaComponent } from './components/administracion/reportes/r-al
 import { GrafPromedioComponent } from './components/administracion/reportes/r-alertas/graf-promedio/graf-promedio';
 import { GrafCriticasComponent } from './components/administracion/reportes/r-alertas/graf-criticas/graf-criticas';
 
+import { CrisisSintoma } from './components/clinica/crisis-sintoma/crisis-sintoma';
+import { CrisisSintomaInsert } from './components/clinica/crisis-sintoma/crisis-sintomainsert/crisis-sintomainsert';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -74,6 +76,16 @@ export const routes: Routes = [
     children: [
       { path: 'insertar', component: SintomaInsert }, // Antes era 'new'
       { path: 'editar/:id', component: SintomaInsert }, // Antes era 'edits/:id'
+    ],
+    canActivate: [roleGuard],
+    data: { expectedRole: 'ADMIN' }
+  },
+  {
+    path: 'crisis-sintomas',
+    component: CrisisSintoma,
+    children: [
+      { path: 'insertar', component: CrisisSintomaInsert },
+      { path: 'editar/:id', component: CrisisSintomaInsert }
     ],
     canActivate: [roleGuard],
     data: { expectedRole: 'ADMIN' }
