@@ -95,3 +95,45 @@
   font-size: 1.2rem;
 }
 .user-name { font-weight: 600; font-size: 1rem; color: #333; }
+
+/* src/app/app.css */
+
+.app-sidenav {
+  display: flex;
+  flex-direction: column; /* Importante para usar flexbox vertical */
+  width: 260px; /* Un poco más ancho para nombres largos */
+  border-right: none;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.05);
+}
+
+/* Área de scroll para los items */
+.nav-scroll-container {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-bottom: 20px;
+}
+
+/* Footer fijo abajo */
+.sidenav-footer {
+  margin-top: auto; /* Empuja esto hacia abajo */
+  background-color: #fff;
+  padding-bottom: 10px;
+}
+
+.logout-item {
+  color: #d32f2f !important;
+  transition: background 0.2s;
+}
+.logout-item:hover {
+  background-color: #ffebee !important;
+}
+
+.role-badge {
+  font-size: 0.75rem;
+  background-color: #e3f2fd;
+  color: #3640E0;
+  padding: 2px 8px;
+  border-radius: 12px;
+  margin-top: 4px;
+  display: inline-block;
+}

@@ -60,4 +60,8 @@ export class App implements OnInit{
       }
     });
   }
+
+  get isAdmin() {return this.loginService.isAdmin()}
+  get isPaciente() {return this.loginService.isPaciente()}
+  get isEspecialista() {return this.loginService.getRole() === 'ESPECIALISTA'}
 }

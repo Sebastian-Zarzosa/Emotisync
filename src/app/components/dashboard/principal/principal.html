@@ -1,54 +1,109 @@
 <div class="dashboard-container">
-  <h1 class="welcome-title">Hola, {{ username }} 👋</h1>
-  <p class="subtitle">Aquí tienes un resumen de hoy</p>
-
-  <div class="cards-grid">
-    <mat-card class="dashboard-card info-card">
-      <mat-card-header>
-        <mat-icon mat-card-avatar>calendar_today</mat-icon>
-        <mat-card-title>{{ today | date:'fullDate' }}</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <p>Recuerda revisar tus pendientes del día.</p>
-      </mat-card-content>
-    </mat-card>
-
-    @if (isAdmin) {
-      <mat-card class="dashboard-card admin-card" routerLink="/usuarios">
-        <mat-card-header>
-          <mat-icon mat-card-avatar>group</mat-icon>
-          <mat-card-title>Usuarios</mat-card-title>
-          <mat-card-subtitle>Gestión</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <h1>+15</h1>
-          <p>Usuarios nuevos esta semana</p>
-        </mat-card-content>
-      </mat-card>
-
-      <mat-card class="dashboard-card alert-card" routerLink="/alerta">
-        <mat-card-header>
-          <mat-icon mat-card-avatar>warning</mat-icon>
-          <mat-card-title>Alertas</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <h1>3</h1>
-          <p>Alertas críticas pendientes</p>
-        </mat-card-content>
-      </mat-card>
-    }
-
-    @if (isPaciente) {
-      <mat-card class="dashboard-card progress-card" routerLink="/diarios/insert">
-        <mat-card-header>
-          <mat-icon mat-card-avatar>edit_note</mat-icon>
-          <mat-card-title>Mi Diario</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>¿Cómo te sientes hoy? Registra tu entrada.</p>
-          <button mat-button>Escribir ahora</button>
-        </mat-card-content>
-      </mat-card>
-    }
+  <div class="welcome-header">
+    <h1>Hola, {{ username }} 👋</h1>
+    <p class="subtitle">
+      @if(isPaciente) { Es un buen momento para cuidar de ti. }
+      @if(isEspecialista) { Aquí está el resumen de tus pacientes. }
+      @if(isFamiliar) { Estado actual de tu familiar vinculado. }
+    </p>
   </div>
+
+  @if (isPaciente) {
+    <div class="patient-dashboard">
+      <div class="panic-section">
+        <button mat-raised-button color="warn" class="panic-btn" routerLink="/crisis">
+          <mat-icon>warning</mat-icon> Registrar Crisis Ahora
+        </button>
+      </div>
+
+      <div class="cards-grid">
+        <mat-card class="dash-card" routerLink="/diarios">
+          <mat-card-header>
+            <mat-icon mat-card-avatar class="icon-bg blue">book</mat-icon>
+            <mat-card-title>Mi Diario</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>Registra tus pensamientos y emociones del día.</p>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="dash-card" routerLink="/modo-reflexion">
+          <mat-card-header>
+            <mat-icon mat-card-avatar class="icon-bg purple">self_improvement</mat-icon>
+            <mat-card-title>Modo Calma</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>Ejercicios de respiración y música para relajarte.</p>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="dash-card" routerLink="/usuarioEjercicios">
+          <mat-card-header>
+            <mat-icon mat-card-avatar class="icon-bg green">check_circle</mat-icon>
+            <mat-card-title>Mis Ejercicios</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>Tienes actividades pendientes asignadas por tu médico.</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  }
+
+  @if (isEspecialista) {
+    <div class="specialist-dashboard">
+      <div class="stats-row">
+        <mat-card class="stat-card">
+          <h2>12</h2>
+          <p>Pacientes Activos</p>
+        </mat-card>
+        <mat-card class="stat-card alert">
+          <h2>3</h2>
+          <p>Alertas Recientes</p> </mat-card>
+      </div>
+
+      <h3>Acciones Rápidas</h3>
+      <div class="cards-grid">
+        <mat-card class="dash-card" routerLink="/usuarios/pacientes">
+          <mat-card-header>
+            <mat-icon mat-card-avatar class="icon-bg teal">groups</mat-icon>
+            <mat-card-title>Mis Pacientes</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>Ver historial clínico y asignar tareas.</mat-card-content>
+        </mat-card>
+
+        <mat-card class="dash-card" routerLink="/alertas">
+          <mat-card-header>
+            <mat-icon mat-card-avatar class="icon-bg orange">notifications</mat-icon>
+            <mat-card-title>Centro de Alertas</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>Revisar crisis reportadas recientemente.</mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  }
+
+  @if (isFamiliar) {
+    <div class="family-dashboard">
+      <mat-card class="status-card">
+        <div class="status-indicator safe">
+            <mat-icon>sentiment_satisfied</mat-icon>
+        </div>
+        <h2>Estado de tu Familiar: Estable</h2>
+        <p>Último registro: Hace 2 horas (Diario)</p>
+        <mat-divider></mat-divider>
+        <mat-card-actions>
+            <button mat-button color="primary">VER HISTORIAL RECIENTE</button>
+            <button mat-raised-button color="warn">CONTACTAR EMERGENCIA</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  }
+
+    <!-- @if (isAdmin) {
+    <div class="admin-panel">
+        <h3>Panel de Administración</h3>
+        <app-emociones-promemociointen></app-emociones-promemociointen>
+    </div>
+    } -->
 </div>

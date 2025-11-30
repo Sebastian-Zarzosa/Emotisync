@@ -62,6 +62,7 @@ import { Gatitos } from './components/herramientas/gatitos/gatitos';
 import { InformacionComponent } from './components/herramientas/informacion/informacion';
 import { Musica } from './components/herramientas/musica/musica';
 import { SugerenciasComponent } from './components/herramientas/sugerencias/sugerencias';
+import { UsuarioListar } from './components/administracion/usuario/usuario-listar/usuario-listar';
 
 
 
@@ -85,9 +86,10 @@ export const routes: Routes = [
     children: [
       { path: 'insert', component: UsuarioInsert },
       { path: 'edit/:id', component: UsuarioInsert },
+      {path: 'pacientes', component: UsuarioListar}
     ],
     canActivate: [roleGuard],
-    data: { expectedRole: 'ADMIN' },
+    data: { expectedRole: ['ADMIN', 'ESPECIALISTA'] },
   },
   {
     path: 'sintomas',
@@ -354,6 +356,7 @@ export const routes: Routes = [
     path: 'perfil',
     component: PerfilComponent,
     canActivate: [roleGuard],
+    data: {expectedRole: ['ADMIN', 'PACIENTE', 'ESPECIALISTA', 'FAMILIAR']}
   },
   
 
