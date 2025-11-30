@@ -14,7 +14,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { Emociones } from '../../../models/Emociones';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 // import { Emocionesservice } from '../../../services/emocionesservice';
-import { Crisis } from '../../../models/Crisis';
+import { Crisis } from '../../../models/crisis';
 // import { CrisisService } from '../../../services/crisisservice';
 import { Emocionesservice } from '../../../core/services/emocionesservice';
 import { CrisisService } from '../../../core/services/crisisservice';
