@@ -105,12 +105,27 @@
         <mat-card-subtitle>Catálogo</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content class="grid-icons">
-        
         <div class="icon-item" routerLink="sintomas-buscar">
           <div class="icon-box gray"><mat-icon>search</mat-icon></div>
           <span>Búsqueda Avanzada</span>
         </div>
+      </mat-card-content>
+    </mat-card>
 
+    <mat-card class="menu-card">
+      <mat-card-header>
+        <mat-card-title>Ejercicios</mat-card-title>
+        <mat-card-subtitle>Estadísticas</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="grid-icons">
+        <div class="icon-item" routerLink="buscar-ejercicios">
+          <div class="icon-box gray"><mat-icon>search</mat-icon></div>
+          <span>Búsqueda Avanzada</span>
+        </div>
+        <div class="icon-item" routerLink="ejercicios-completados">
+          <div class="icon-box gray"><mat-icon>bar_chart</mat-icon></div>
+          <span>Grafico de ejercicios completados</span>
+        </div>
       </mat-card-content>
     </mat-card>
   </div>

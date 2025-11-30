@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, FormControl } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+  FormControl,
+} from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
@@ -13,8 +19,8 @@ import { CrisisSintoma } from '../../../../models/CrisisSintoma';
 import { CrisisSintomaService } from '../../../../core/services/crisis-sintomaservice';
 import { CrisisService } from '../../../../core/services/crisisservice';
 import { Sintomaservice } from '../../../../core/services/sintomaservice';
-import { Crisis } from '../../../../models/crisis';
 import { Sintoma } from '../../../../models/sintoma';
+import { Crisis } from '../../../../models/crisis';
 
 @Component({
   selector: 'app-crisis-sintoma-insert',
@@ -26,11 +32,11 @@ import { Sintoma } from '../../../../models/sintoma';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './crisis-sintomainsert.html',
-  styleUrl: './crisis-sintomainsert.css'
+  styleUrl: './crisis-sintomainsert.css',
 })
 export class CrisisSintomaInsert implements OnInit {
   form: FormGroup = new FormGroup({});
@@ -57,7 +63,7 @@ export class CrisisSintomaInsert implements OnInit {
       sintomaId: ['', Validators.required],
       sever: ['', [Validators.required, Validators.min(1), Validators.max(10)]],
       observacion: ['', Validators.required],
-      notas: ['']
+      notas: [''],
     });
 
     this.route.params.subscribe((data: Params) => {
@@ -67,8 +73,8 @@ export class CrisisSintomaInsert implements OnInit {
     });
 
     // Cargar listas para los selects
-    this.crisisService.list().subscribe(data => this.listaCrisis = data);
-    this.sintomaService.list().subscribe(data => this.listaSintomas = data);
+    this.crisisService.list().subscribe((data) => (this.listaCrisis = data));
+    this.sintomaService.list().subscribe((data) => (this.listaSintomas = data));
   }
 
   aceptar(): void {
@@ -87,12 +93,16 @@ export class CrisisSintomaInsert implements OnInit {
 
       if (this.edicion) {
         this.csService.update(this.cs).subscribe(() => {
-          this.csService.list().subscribe(data => this.csService.setList(data));
+          this.csService
+            .list()
+            .subscribe((data) => this.csService.setList(data));
           this.router.navigate(['crisis-sintomas']);
         });
       } else {
         this.csService.insert(this.cs).subscribe(() => {
-          this.csService.list().subscribe(data => this.csService.setList(data));
+          this.csService
+            .list()
+            .subscribe((data) => this.csService.setList(data));
           this.router.navigate(['crisis-sintomas']);
         });
       }
@@ -109,7 +119,7 @@ export class CrisisSintomaInsert implements OnInit {
           sintomaId: data.sintoma?.id,
           sever: data.sever,
           observacion: data.observacion,
-          notas: data.notas
+          notas: data.notas,
         });
       });
     }

@@ -3,7 +3,12 @@ import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { CrisisList } from '../crisis-list/crisis-list';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -13,14 +18,26 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatIconModule } from '@angular/material/icon';
 import { provideNativeDateAdapter } from '@angular/material/core';
-import { Crisis } from '../../../../models/crisis';
 import { CrisisService } from '../../../../core/services/crisisservice';
 import { UsuarioService } from '../../../../core/services/usuarioservice';
 import { Usuario } from '../../../../models/Usuario';
+import { Crisis } from '../../../../models/crisis';
 
 @Component({
   selector: 'app-crisis-insert',
-  imports: [CommonModule,MatCardModule,ReactiveFormsModule,MatFormFieldModule,MatInputModule,MatSelectModule,MatRadioModule,MatDatepickerModule,MatButtonModule,MatStepperModule,MatIconModule],
+  imports: [
+    CommonModule,
+    MatCardModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatDatepickerModule,
+    MatButtonModule,
+    MatStepperModule,
+    MatIconModule,
+  ],
   templateUrl: './crisis-insert.html',
   styleUrl: './crisis-insert.css',
   providers: [provideNativeDateAdapter()],
@@ -33,9 +50,9 @@ export class CrisisInsert implements OnInit {
   formStep4: FormGroup = new FormGroup({});
 
   crisis: Crisis = new Crisis();
-  
+
   // Listas necesarias para los selectores
-  listaUsuarios: Usuario[] = []; 
+  listaUsuarios: Usuario[] = [];
 
   edicion: boolean = false;
   id: number = 0;
@@ -103,7 +120,9 @@ export class CrisisInsert implements OnInit {
         this.formStep3.get('f0_promedio')?.setValue(data.f0_promedio);
 
         // Paso 4
-        this.formStep4.get('formantesDetectados')?.setValue(data.formantesDetectados);
+        this.formStep4
+          .get('formantesDetectados')
+          ?.setValue(data.formantesDetectados);
       });
     }
   }
@@ -176,5 +195,3 @@ export class CrisisInsert implements OnInit {
     this.router.navigate(['/crisis']);
   }
 }
-
-

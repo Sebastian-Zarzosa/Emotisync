@@ -68,28 +68,40 @@ export class UsuarioInsert implements OnInit {
     // Inicializar grupo
     this.formStep1 = this.formBuilder.group({
       idUsuario: [0],
-      email: ['', [Validators.required, Validators.email, noWhitespaceValidator]],
+      email: [
+        '',
+        [Validators.required, Validators.email, noWhitespaceValidator],
+      ],
       username: ['', [Validators.required, noWhitespaceValidator]],
-      password: ['', [Validators.required, Validators.minLength(6), noWhitespaceValidator]],
+      password: [
+        '',
+        [Validators.required, Validators.minLength(6), noWhitespaceValidator],
+      ],
     });
     this.formStep2 = this.formBuilder.group({
-      nombre: ['', [Validators.required, Validators.minLength(2), noWhitespaceValidator]],
-      apellido: ['', [Validators.required, Validators.minLength(2), noWhitespaceValidator]],
+      nombre: [
+        '',
+        [Validators.required, Validators.minLength(2), noWhitespaceValidator],
+      ],
+      apellido: [
+        '',
+        [Validators.required, Validators.minLength(2), noWhitespaceValidator],
+      ],
       telefono: [
         '',
         [
           Validators.required,
           Validators.pattern('^[0-9]{3}-[0-9]{3}-[0-9]{3}$'),
-          Validators.maxLength(12), noWhitespaceValidator
+          Validators.maxLength(12),
+          noWhitespaceValidator,
         ],
       ],
       fechaNacimiento: ['', [Validators.required]],
     });
     this.formStep3 = this.formBuilder.group({
-      institucion: ['', noWhitespaceValidator],
-      nroColegiatura: ['',
-        [Validators.pattern('^[0-9]*$'), noWhitespaceValidator]],
-      especialidad: ['', noWhitespaceValidator],
+      institucion: [''],
+      nroColegiatura: ['', [Validators.pattern('^[0-9]*$')]],
+      especialidad: [''],
     });
     this.formStep4 = this.formBuilder.group({
       familiar: [''],
@@ -107,12 +119,15 @@ export class UsuarioInsert implements OnInit {
       value = value.substring(0, 9);
     }
     if (value.length > 6) {
-      value = `${value.substring(0, 3)}-${value.substring(3, 6)}-${value.substring(6)}`;
+      value = `${value.substring(0, 3)}-${value.substring(
+        3,
+        6
+      )}-${value.substring(6)}`;
     } else if (value.length > 3) {
       value = `${value.substring(0, 3)}-${value.substring(3)}`;
     }
     input.value = value;
-    this.formStep2.get('telefono')?.setValue(value); 
+    this.formStep2.get('telefono')?.setValue(value);
   }
 
   ngOnInit(): void {
@@ -133,23 +148,26 @@ export class UsuarioInsert implements OnInit {
       this.listaFamiliares = data;
     });
 
-    this.formStep4.get('roles')?.valueChanges.subscribe(roles => {
-      const esEspecialista = roles.some((r: any) => r.idRol === 3)
-      const colegiaturaControl = this.formStep3.get('nroColegiatura')
-      const especialidadControl = this.formStep3.get('especialidad')
+    this.formStep4.get('roles')?.valueChanges.subscribe((roles) => {
+      const esEspecialista = roles.some((r: any) => r.idRol === 3);
+      const colegiaturaControl = this.formStep3.get('nroColegiatura');
+      const especialidadControl = this.formStep3.get('especialidad');
 
       if (esEspecialista) {
-        colegiaturaControl?.setValidators([Validators.required, Validators.pattern('^[0-9]*$')]);
+        colegiaturaControl?.setValidators([
+          Validators.required,
+          Validators.pattern('^[0-9]*$'),
+        ]);
         especialidadControl?.setValidators([Validators.required]);
       } else {
         colegiaturaControl?.clearValidators();
         especialidadControl?.clearValidators();
       }
-      
+
       // Importante para actualizar el estado visual
       colegiaturaControl?.updateValueAndValidity();
       especialidadControl?.updateValueAndValidity();
-    })
+    });
   }
 
   init() {
@@ -179,7 +197,6 @@ export class UsuarioInsert implements OnInit {
           ?.setValue(data.especialista?.idUsuario);
         this.formStep4.get('enabled')?.setValue(data.enabled);
         this.formStep4.get('roles')?.setValue(data.roles);
-        
       });
     }
   }
@@ -210,8 +227,10 @@ export class UsuarioInsert implements OnInit {
     this.user.fechaNacimiento = finalUserData.fechaNacimiento;
     this.user.institucion = finalUserData.institucion;
 
-    this.user.nroColegiatura = finalUserData.nroColegiatura ? finalUserData.nroColegiatura : 0;
-    
+    this.user.nroColegiatura = finalUserData.nroColegiatura
+      ? finalUserData.nroColegiatura
+      : 0;
+
     this.user.especialidad = finalUserData.especialidad;
     this.user.enabled = finalUserData.enabled;
 

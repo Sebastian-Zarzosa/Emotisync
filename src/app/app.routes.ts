@@ -48,8 +48,6 @@ import { GrafCantidadporusu } from './components/administracion/reportes/r-crisi
 import { CrisisSintoma } from './components/clinica/crisis-sintoma/crisis-sintoma';
 import { CrisisSintomaInsert } from './components/clinica/crisis-sintoma/crisis-sintomainsert/crisis-sintomainsert';
 
-
-
 import { BusqBuscarporusurangofechas } from './components/administracion/reportes/r-crisis/busq-buscarporusurangofechas/busq-buscarporusurangofechas';
 import { BusqBusquedaemoint5 } from './components/administracion/reportes/r-emociones/busq-busquedaemoint5/busq-busquedaemoint5';
 import { BusqRelacionRecursos } from './components/administracion/reportes/r-recursos/busq-relacion-recursos/busq-relacion-recursos';
@@ -63,8 +61,8 @@ import { InformacionComponent } from './components/herramientas/informacion/info
 import { Musica } from './components/herramientas/musica/musica';
 import { SugerenciasComponent } from './components/herramientas/sugerencias/sugerencias';
 import { UsuarioListar } from './components/administracion/usuario/usuario-listar/usuario-listar';
-
-
+import { REjercicios } from './components/administracion/reportes/r-ejercicios/r-ejercicios';
+import { EjerciciosCompletados } from './components/administracion/reportes/r-ejercicios/ejercicios-completados/ejercicios-completados';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -86,7 +84,7 @@ export const routes: Routes = [
     children: [
       { path: 'insert', component: UsuarioInsert },
       { path: 'edit/:id', component: UsuarioInsert },
-      {path: 'pacientes', component: UsuarioListar}
+      { path: 'pacientes', component: UsuarioListar },
     ],
     canActivate: [roleGuard],
     data: { expectedRole: ['ADMIN', 'ESPECIALISTA'] },
@@ -101,7 +99,7 @@ export const routes: Routes = [
     canActivate: [roleGuard],
     data: { expectedRole: 'ADMIN' },
   },
-  
+
   {
     path: 'crisis-sintomas',
     component: CrisisSintoma,
@@ -272,21 +270,23 @@ export const routes: Routes = [
   {
     path: 'reportes', // Esto hace match con routerLink="/reportes"
     children: [
-        { path: '', component: ReportesMenu }, // Al hacer clic en el botón "Promedio"
-        { path: 'emociones-promedio', component: GrafPromemociointen }, // Muestra el GRÁFICO
-        { path: 'crisis-cantidad', component: GrafCantidadporusu },
-        { path: 'crisis-ritmo', component: BusqBuscarporritmo }, 
-        { path: 'alertas-conteo', component: GrafConteoComponent },
-        { path: 'alertas-buscar', component: GrafBusquedaComponent },
-        { path: 'alertas-promedio', component: GrafPromedioComponent },
-        { path: 'alertas-criticas', component: GrafCriticasComponent },
-        { path: 'pacientes-especialidad', component: PacientesEspecialidad },
-        { path: 'buscar-pacientes', component: BusquedaPacientes },
-        { path: 'recursos-promedio', component: GrafPromedioRecursos },
-        { path: 'recursos-relacion', component: BusqRelacionRecursos },
-        { path: 'sintomas-buscar', component: BusqSintomas },
-        { path: 'emociones-int5', component: BusqBusquedaemoint5 },
-        { path: 'crisis-fechas', component: BusqBuscarporusurangofechas }, // el ts en reportes
+      { path: '', component: ReportesMenu }, // Al hacer clic en el botón "Promedio"
+      { path: 'emociones-promedio', component: GrafPromemociointen }, // Muestra el GRÁFICO
+      { path: 'crisis-cantidad', component: GrafCantidadporusu },
+      { path: 'crisis-ritmo', component: BusqBuscarporritmo },
+      { path: 'alertas-conteo', component: GrafConteoComponent },
+      { path: 'alertas-buscar', component: GrafBusquedaComponent },
+      { path: 'alertas-promedio', component: GrafPromedioComponent },
+      { path: 'alertas-criticas', component: GrafCriticasComponent },
+      { path: 'pacientes-especialidad', component: PacientesEspecialidad },
+      { path: 'buscar-pacientes', component: BusquedaPacientes },
+      { path: 'recursos-promedio', component: GrafPromedioRecursos },
+      { path: 'recursos-relacion', component: BusqRelacionRecursos },
+      { path: 'sintomas-buscar', component: BusqSintomas },
+      { path: 'emociones-int5', component: BusqBusquedaemoint5 },
+      { path: 'crisis-fechas', component: BusqBuscarporusurangofechas }, // el ts en reportes
+      { path: 'buscar-ejercicios', component: REjercicios }, // el ts en reportes
+      { path: 'ejercicios-completados', component: EjerciciosCompletados }, // el ts en reportes
     ],
   },
 
@@ -331,41 +331,40 @@ export const routes: Routes = [
     path: 'musica',
     component: Musica,
     canActivate: [roleGuard],
-    data: {expectedRole: 'PACIENTE'}
+    data: { expectedRole: 'PACIENTE' },
   },
   {
     path: 'informacion',
     component: InformacionComponent,
     canActivate: [roleGuard],
-    data: {expectedRole: 'PACIENTE'}
+    data: { expectedRole: 'PACIENTE' },
   },
   {
     path: 'sugerencias',
     component: SugerenciasComponent,
     canActivate: [roleGuard],
-    data: {expectedRole: 'PACIENTE'}
+    data: { expectedRole: 'PACIENTE' },
   },
   {
     path: 'chatbot',
     component: Chatbot,
     canActivate: [roleGuard],
-    data: {expectedRole: 'PACIENTE'}
+    data: { expectedRole: 'PACIENTE' },
   },
 
   {
     path: 'perfil',
     component: PerfilComponent,
     canActivate: [roleGuard],
-    data: {expectedRole: ['ADMIN', 'PACIENTE', 'ESPECIALISTA', 'FAMILIAR']}
+    data: { expectedRole: ['ADMIN', 'PACIENTE', 'ESPECIALISTA', 'FAMILIAR'] },
   },
-  
-
 
   // gatitos
-  { path: 'gatitos',
+  {
+    path: 'gatitos',
     component: Gatitos,
     canActivate: [roleGuard],
-    data: {expectedRole: 'PACIENTE'}
+    data: { expectedRole: 'PACIENTE' },
   },
 
   { path: '**', redirectTo: 'inicio' },
