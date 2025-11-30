@@ -1,4 +1,4 @@
-import { Crisis } from "./crisis";
+import { Crisis } from "./Crisis";
 import { Sintoma } from "./sintoma";
 
 export class CrisisSintoma {

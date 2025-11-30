@@ -13,7 +13,7 @@ import { CrisisSintoma } from '../../../../models/CrisisSintoma';
 import { CrisisSintomaService } from '../../../../core/services/crisis-sintomaservice';
 import { CrisisService } from '../../../../core/services/crisisservice';
 import { Sintomaservice } from '../../../../core/services/sintomaservice';
-import { Crisis } from '../../../../models/crisis';
+import { Crisis } from '../../../../models/Crisis';
 import { Sintoma } from '../../../../models/sintoma';
 
 @Component({
