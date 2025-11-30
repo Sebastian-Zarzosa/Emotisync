@@ -1,1 +1,38 @@
-<p>chatbot works!</p>
+<div class="chat-container">
+    <div class="chat-header">
+        <h2><mat-icon>smart_toy</mat-icon> EmotiBot</h2>
+        <p>Tu asistente de apoyo emocional</p>
+    </div>
+
+    <div class="messages-area" #scrollContainer>
+        @for (msg of mensajes; track msg) {
+            <div class="message-bubble" [class.user]="msg.esUsuario" [class.bot]="!msg.esUsuario">
+                <div class="content">
+                    {{ msg.texto }}
+                </div>
+                <div class="time">
+                    {{ msg.hora | date:'shortTime' }}
+                </div>
+            </div>
+        }
+
+        @if (escribiendo) {
+            <div class="message-bubble bot loading">
+                <mat-spinner diameter="20"></mat-spinner> Escribiendo...
+            </div>
+        }
+    </div>
+
+    <div class="input-area">
+        <input 
+            type="text" 
+            [(ngModel)]="nuevoMensaje" 
+            (keyup.enter)="enviar()"
+            placeholder="Escribe tu pregunta aquí..."
+            [disabled]="escribiendo">
+        
+        <button mat-icon-button color="primary" (click)="enviar()" [disabled]="!nuevoMensaje.trim() || escribiendo">
+            <mat-icon>send</mat-icon>
+        </button>
+    </div>
+</div>

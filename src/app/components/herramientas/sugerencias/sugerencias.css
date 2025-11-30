@@ -1,0 +1,111 @@
+.suggestions-container {
+    min-height: 100vh;
+    /* Degradado azul similar al mockup */
+    background: linear-gradient(180deg, #5B9BD5 0%, #4472C4 100%);
+    padding: 20px;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.back-btn {
+    align-self: flex-start;
+    background: transparent;
+    border: none;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 1rem;
+}
+
+.content-wrapper {
+    max-width: 500px;
+    width: 100%;
+    margin-top: 40px;
+    text-align: center;
+}
+
+.page-title {
+    font-family: 'Marko One', serif;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+    color: #e3f2fd;
+}
+
+.options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.option-card {
+    background-color: #00BFFF; /* Azul claro vibrante (Botón 1) */
+    border-radius: 12px;
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    height: 100px;
+}
+
+.option-card.professional {
+    background-color: #1E90FF; /* Azul un poco más oscuro (Botón 2) */
+}
+
+.option-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.card-text {
+    text-align: left;
+}
+
+.card-text h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.card-text p {
+    margin: 0;
+    font-size: 0.8rem;
+    opacity: 0.9;
+}
+
+.card-icon {
+    background: white;
+    border-radius: 12px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+.card-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .page-title { font-size: 2rem; }
+    .option-card { padding: 15px; }
+}

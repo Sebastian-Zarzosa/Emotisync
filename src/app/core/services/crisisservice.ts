@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { environment } from "../../../environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { Observable, Subject } from "rxjs";
-import { Crisis } from "../../models/Crisis";
+import { Crisis } from "../../models/crisis";
 import { QuantityDTOCrisis } from "../../models/QuantityDTOCrisis";
 import { CrisisDTO } from "../../models/CrisisDTO";
 

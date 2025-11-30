@@ -1,0 +1,177 @@
+.music-container {
+    padding: 30px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    font-family: 'Poppins', sans-serif;
+}
+
+.music-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.music-header h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: #3640E0;
+    font-size: 2rem;
+}
+
+/* --- RECOMENDACIÓN --- */
+.recommendation-box {
+    background-color: #f5f9ff;
+    padding: 20px;
+    border-radius: 16px;
+    text-align: center;
+}
+
+.mood-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+/* Colores suaves para botones de emoción */
+.mood-btn.ansioso { background-color: #e3f2fd; color: #1565c0; }
+.mood-btn.triste { background-color: #f3e5f5; color: #7b1fa2; }
+.mood-btn.enojado { background-color: #ffebee; color: #c62828; }
+.mood-btn.feliz { background-color: #fffde7; color: #fbc02d; }
+
+/* --- BÚSQUEDA --- */
+.search-section {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.search-bar {
+    width: 100%;
+    max-width: 600px;
+}
+
+.genres-section {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+/* --- GRID DE CANCIONES --- */
+.tracks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 20px;
+}
+
+.track-card {
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    background: white;
+}
+
+.track-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.card-image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1/1;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.play-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.play-overlay mat-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    color: white;
+}
+
+.track-card:hover .play-overlay {
+    opacity: 1;
+}
+
+.card-content {
+    padding: 12px;
+    text-align: center;
+}
+
+.card-content h4 {
+    margin: 0;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-content small {
+    color: #666;
+}
+
+/* --- REPRODUCTOR FLOTANTE --- */
+.player-card {
+    position: sticky;
+    top: 20px;
+    z-index: 100;
+    background: white;
+    border-radius: 16px;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 10px 30px rgba(54, 64, 224, 0.2);
+    margin-bottom: 30px;
+    border: 1px solid #eee;
+    animation: slideDown 0.4s ease;
+}
+
+.album-art {
+    width: 70px;
+    height: 70px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.track-info {
+    flex-grow: 1;
+}
+
+.audio-control {
+    width: 100%;
+    height: 32px;
+    margin-top: 5px;
+}
+
+.no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 50px;
+    color: #888;
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
