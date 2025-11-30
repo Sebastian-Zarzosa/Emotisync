@@ -53,6 +53,7 @@ import { BusqBuscarporritmo } from './components/administracion/reportes/r-crisi
 import { PacientesEspecialidad } from './components/administracion/reportes/r-usuarios/pacientes-especialidad/pacientes-especialidad';
 import { BusquedaPacientes } from './components/administracion/reportes/r-usuarios/busqueda-pacientes/busqueda-pacientes';
 import { Musica } from './components/herramientas/musica/musica';
+import { InformacionComponent } from './components/herramientas/informacion/informacion';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -321,6 +322,12 @@ export const routes: Routes = [
   {
     path: 'musica',
     component: Musica,
+    canActivate: [roleGuard],
+    data: {expectedRole: 'PACIENTE'}
+  },
+  {
+    path: 'informacion',
+    component: InformacionComponent,
     canActivate: [roleGuard],
     data: {expectedRole: 'PACIENTE'}
   },

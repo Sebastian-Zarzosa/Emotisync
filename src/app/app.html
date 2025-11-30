@@ -106,6 +106,9 @@
             <mat-icon matListItemIcon>menu_book</mat-icon>
             <span matListItemTitle>Biblioteca</span>
           </a>
+          <a mat-list-item routerLink="/informacion" routerLinkActive="active-link">
+            <mat-icon matListItemIcon>school</mat-icon> <span matListItemTitle>Aprende sobre IE</span>
+          </a>
         }
 
         @if (loginService.isPaciente() || loginService.isAdmin()) {

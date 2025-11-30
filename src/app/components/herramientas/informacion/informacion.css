@@ -1,0 +1,114 @@
+.info-container {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #5B9BD5 0%, #4472C4 100%); /* Fondo azul del mockup */
+    padding: 20px;
+    font-family: 'Poppins', sans-serif; /* O la fuente que uses globalmente */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.back-btn {
+    align-self: flex-start;
+    background: none;
+    border: none;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+.content-wrapper {
+    max-width: 800px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.page-title {
+    font-family: 'Marko One', serif;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.info-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+/* Imagen */
+.image-box {
+    flex: 1 1 300px;
+    max-width: 400px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    border: 4px solid rgba(255, 255, 255, 0.3);
+}
+
+.image-box img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Tarjeta de Texto Blanca */
+.text-card {
+    flex: 1 1 300px;
+    background-color: white;
+    color: #333;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    text-align: justify;
+    position: relative;
+}
+
+/* Pequeño detalle decorativo (opcional) */
+.text-card::before {
+    content: '"';
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    font-size: 4rem;
+    color: #e3f2fd;
+    font-family: serif;
+}
+
+.action-area {
+    margin-top: 50px;
+}
+
+.info-btn {
+    background-color: #00BFFF !important; /* Azul brillante del botón en mockup */
+    color: white !important;
+    padding: 10px 30px !important;
+    border-radius: 30px !important;
+    font-size: 1.1rem !important;
+    box-shadow: 0 4px 15px rgba(0, 191, 255, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 2rem;
+    }
+    .info-layout {
+        flex-direction: column;
+    }
+}
