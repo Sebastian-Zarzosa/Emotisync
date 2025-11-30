@@ -3,6 +3,7 @@ import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Diario } from '../../models/Diario';
 import { Subject } from 'rxjs';
+import { DiarioDTOInsert } from '../../models/DiarioInsert';
 
 const base_url = environment.base;
 
@@ -19,7 +20,7 @@ export class Diarioservice {
     return this.http.get<Diario[]>(this.url);
   }
 
-  insertar(diario: Diario) {
+  insertar(diario: DiarioDTOInsert) {
     return this.http.post(this.url, diario, { responseType: 'text' });
   }
 
@@ -27,7 +28,7 @@ export class Diarioservice {
     return this.listaCambio.asObservable();
   }
 
-  modificar(diario: Diario) {
+  modificar(diario: DiarioDTOInsert) {
     return this.http.put(`${this.url}`, diario, { responseType: 'text' });
   }
 
