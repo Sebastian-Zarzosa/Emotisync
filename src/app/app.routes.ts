@@ -59,6 +59,8 @@ import { Chatbot } from './components/herramientas/chatbot/chatbot';
 import { GrafPromedioRecursos } from './components/administracion/reportes/r-recursos/graf-promedio-recursos/graf-promedio-recursos';
 import { BusqRelacionRecursos } from './components/administracion/reportes/r-recursos/busq-relacion-recursos/busq-relacion-recursos';
 import { BusqSintomas } from './components/administracion/reportes/r-sintomas/busq-sintomas/busq-sintomas';
+import { BusqBusquedaemoint5 } from './components/administracion/reportes/r-emociones/busq-busquedaemoint5/busq-busquedaemoint5';
+import { BusqBuscarporusurangofechas } from './components/administracion/reportes/r-crisis/busq-buscarporusurangofechas/busq-buscarporusurangofechas';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -273,11 +275,13 @@ export const routes: Routes = [
         { path: 'alertas-buscar', component: GrafBusquedaComponent },
         { path: 'alertas-promedio', component: GrafPromedioComponent },
         { path: 'alertas-criticas', component: GrafCriticasComponent },
-      { path: 'pacientes-especialidad', component: PacientesEspecialidad },
-      { path: 'buscar-pacientes', component: BusquedaPacientes },
-      { path: 'recursos-promedio', component: GrafPromedioRecursos },
-      { path: 'recursos-relacion', component: BusqRelacionRecursos },
-      { path: 'sintomas-buscar', component: BusqSintomas },
+        { path: 'pacientes-especialidad', component: PacientesEspecialidad },
+        { path: 'buscar-pacientes', component: BusquedaPacientes },
+        { path: 'recursos-promedio', component: GrafPromedioRecursos },
+        { path: 'recursos-relacion', component: BusqRelacionRecursos },
+        { path: 'sintomas-buscar', component: BusqSintomas },
+        { path: 'emociones-int5', component: BusqBusquedaemoint5 },
+        { path: 'crisis-fechas', component: BusqBuscarporusurangofechas }, // el ts en reportes
     ],
   },
 

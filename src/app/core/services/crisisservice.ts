@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { environment } from "../../../environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { Observable, Subject } from "rxjs";
-import { Crisis } from "../../models/crisis";
+import { Crisis } from "../../models/Crisis";
 import { QuantityDTOCrisis } from "../../models/QuantityDTOCrisis";
 import { CrisisDTO } from "../../models/CrisisDTO";
 
@@ -55,6 +55,19 @@ export class CrisisService{
             {
             params: {
                 ritmo: ritmo.toString() // ritmo es float
+            }
+        }
+        );
+    }
+
+    //agregando para buscar por rango fechas
+    getBuscarporusurangofechas(id: number, fechaInicio: string, fechaFin: string): Observable<CrisisDTO[]> {
+        return this.http.get<CrisisDTO[]>(`${this.url}/buscarporusurangofechas`,
+            {
+            params: {
+                id: id.toString(),
+                fechaInicio: fechaInicio, // Debe ser formato YYYY-MM-DD
+                fechaFin: fechaFin        // Debe ser formato YYYY-MM-DD
             }
         }
         );

@@ -1,4 +1,4 @@
-import { Crisis } from "./crisis";
+import { Crisis } from "./Crisis";
 
 export class EmocionesDTOList {
     idEmociones: number = 0;

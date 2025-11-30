@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { RouterLink } from '@angular/router';
-import { Crisis } from '../../../../models/crisis';
+import { Crisis } from '../../../../models/Crisis';
 import { CrisisService } from '../../../../core/services/crisisservice';
 
 
