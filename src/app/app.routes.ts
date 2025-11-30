@@ -56,6 +56,9 @@ import { Musica } from './components/herramientas/musica/musica';
 import { InformacionComponent } from './components/herramientas/informacion/informacion';
 import { SugerenciasComponent } from './components/herramientas/sugerencias/sugerencias';
 import { Chatbot } from './components/herramientas/chatbot/chatbot';
+import { GrafPromedioRecursos } from './components/administracion/reportes/r-recursos/graf-promedio-recursos/graf-promedio-recursos';
+import { BusqRelacionRecursos } from './components/administracion/reportes/r-recursos/busq-relacion-recursos/busq-relacion-recursos';
+import { BusqSintomas } from './components/administracion/reportes/r-sintomas/busq-sintomas/busq-sintomas';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -85,22 +88,13 @@ export const routes: Routes = [
     path: 'sintomas',
     component: Sintoma,
     children: [
-      { path: 'insertar', component: SintomaInsert }, // Antes era 'new'
+      { path: 'insert', component: SintomaInsert }, // Antes era 'new'
       { path: 'editar/:id', component: SintomaInsert }, // Antes era 'edits/:id'
     ],
     canActivate: [roleGuard],
     data: { expectedRole: 'ADMIN' },
   },
-  {
-    path: 'crisis-sintomas',
-    component: CrisisSintoma,
-    children: [
-      { path: 'insertar', component: CrisisSintomaInsert },
-      { path: 'editar/:id', component: CrisisSintomaInsert },
-    ],
-    canActivate: [roleGuard],
-    data: { expectedRole: 'ADMIN' },
-  },
+  
   {
     path: 'crisis-sintomas',
     component: CrisisSintoma,
@@ -281,6 +275,9 @@ export const routes: Routes = [
         { path: 'alertas-criticas', component: GrafCriticasComponent },
       { path: 'pacientes-especialidad', component: PacientesEspecialidad },
       { path: 'buscar-pacientes', component: BusquedaPacientes },
+      { path: 'recursos-promedio', component: GrafPromedioRecursos },
+      { path: 'recursos-relacion', component: BusqRelacionRecursos },
+      { path: 'sintomas-buscar', component: BusqSintomas },
     ],
   },
 
