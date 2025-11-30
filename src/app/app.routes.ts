@@ -61,6 +61,9 @@ import { BusqRelacionRecursos } from './components/administracion/reportes/r-rec
 import { BusqSintomas } from './components/administracion/reportes/r-sintomas/busq-sintomas/busq-sintomas';
 import { BusqBusquedaemoint5 } from './components/administracion/reportes/r-emociones/busq-busquedaemoint5/busq-busquedaemoint5';
 import { BusqBuscarporusurangofechas } from './components/administracion/reportes/r-crisis/busq-buscarporusurangofechas/busq-buscarporusurangofechas';
+import { Gatitos } from './components/herramientas/gatitos/gatitos';
+
+
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -352,5 +355,15 @@ export const routes: Routes = [
     component: PerfilComponent,
     canActivate: [roleGuard],
   },
+  
+
+
+  // gatitos
+  { path: 'gatitos',
+    component: Gatitos,
+    canActivate: [roleGuard],
+    data: {expectedRole: 'PACIENTE'}
+  },
+
   { path: '**', redirectTo: 'inicio' },
 ];
