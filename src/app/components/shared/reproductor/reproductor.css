@@ -1,0 +1,157 @@
+.global-player {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 10px 20px;
+    border-radius: 50px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 9999; /* Para que flote sobre todo */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    animation: slideUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.track-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1;
+    overflow: hidden;
+}
+
+.cover-art {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #3640E0;
+    animation: spin 10s linear infinite;
+    animation-play-state: paused;
+}
+
+/* Girar disco si está sonando */
+.global-player:has(.play-circle_filled) .cover-art { /* Hack o usar clase dinámica */ }
+
+.text-info {
+    display: flex;
+    flex-direction: column;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.track-title {
+    font-weight: 600;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.artist-name {
+    font-size: 0.75rem;
+    color: #666;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.play-btn mat-icon {
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
+    color: #3640E0;
+}
+
+.close-btn {
+    color: #999;
+}
+
+@keyframes slideUp {
+    from { transform: translate(-50%, 100px); opacity: 0; }
+    to { transform: translate(-50%, 0); opacity: 1; }
+}
+
+@keyframes spin { 100% { transform: rotate(360deg); } }
+.global-player {
+    /* Asegúrate de que sea flex y space-between */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* ... resto de tus estilos ... */
+}
+
+/* Alinear controles centrales */
+.controls-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.play-btn mat-icon {
+    font-size: 45px;
+    width: 45px;
+    height: 45px;
+    color: #3640E0;
+}
+
+/* Sección Derecha (Volumen y Cerrar) */
+.controls-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.volume-box {
+    display: flex;
+    align-items: center;
+    background: rgba(0,0,0,0.03); /* Fondo sutil */
+    padding: 0 10px;
+    border-radius: 20px;
+    transition: all 0.3s;
+}
+
+.volume-box:hover {
+    background: rgba(0,0,0,0.06);
+}
+
+/* Hacemos el slider más pequeño */
+.vol-slider {
+    width: 80px !important; /* Ancho fijo pequeño */
+    margin-left: -5px;
+}
+
+.mute-btn mat-icon {
+    font-size: 20px;
+    color: #666;
+}
+
+.divider {
+    width: 1px;
+    height: 25px;
+    background-color: #ddd;
+    margin: 0 5px;
+}
+
+.close-btn {
+    color: #888;
+}
+
+.close-btn:hover {
+    color: #d32f2f;
+}
+
+/* Responsivo: Ocultar slider en móviles muy pequeños si hace falta */
+@media (max-width: 500px) {
+    .text-info { max-width: 100px; } /* Evitar que el texto empuje todo */
+    .vol-slider { width: 60px !important; }
+    .volume-box { padding: 0 5px; }
+}

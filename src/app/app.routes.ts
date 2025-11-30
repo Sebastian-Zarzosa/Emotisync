@@ -52,6 +52,10 @@ import { BusqBuscarporritmo } from './components/administracion/reportes/r-crisi
 
 import { PacientesEspecialidad } from './components/administracion/reportes/r-usuarios/pacientes-especialidad/pacientes-especialidad';
 import { BusquedaPacientes } from './components/administracion/reportes/r-usuarios/busqueda-pacientes/busqueda-pacientes';
+import { Musica } from './components/herramientas/musica/musica';
+import { InformacionComponent } from './components/herramientas/informacion/informacion';
+import { SugerenciasComponent } from './components/herramientas/sugerencias/sugerencias';
+import { Chatbot } from './components/herramientas/chatbot/chatbot';
 import { GrafPromedioRecursos } from './components/administracion/reportes/r-recursos/graf-promedio-recursos/graf-promedio-recursos';
 import { BusqRelacionRecursos } from './components/administracion/reportes/r-recursos/busq-relacion-recursos/busq-relacion-recursos';
 import { BusqSintomas } from './components/administracion/reportes/r-sintomas/busq-sintomas/busq-sintomas';
@@ -312,6 +316,31 @@ export const routes: Routes = [
     component: BibliotecaComponent,
     canActivate: [roleGuard],
     data: { expectedRole: 'PACIENTE' },
+  },
+
+  {
+    path: 'musica',
+    component: Musica,
+    canActivate: [roleGuard],
+    data: {expectedRole: 'PACIENTE'}
+  },
+  {
+    path: 'informacion',
+    component: InformacionComponent,
+    canActivate: [roleGuard],
+    data: {expectedRole: 'PACIENTE'}
+  },
+  {
+    path: 'sugerencias',
+    component: SugerenciasComponent,
+    canActivate: [roleGuard],
+    data: {expectedRole: 'PACIENTE'}
+  },
+  {
+    path: 'chatbot',
+    component: Chatbot,
+    canActivate: [roleGuard],
+    data: {expectedRole: 'PACIENTE'}
   },
 
   {

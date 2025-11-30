@@ -1,1 +1,84 @@
-<p>musica works!</p>
+<div class="music-container">
+    <header class="music-header">
+        <h1><mat-icon>headphones</mat-icon> Espacio Musical</h1>
+        <p>Encuentra el sonido perfecto para tu momento actual.</p>
+    </header>
+
+    @if (currentTrack) {
+        <div class="player-card animate-up">
+            <img [src]="currentTrack.image" alt="Cover" class="album-art">
+            <div class="track-info">
+                <h3>{{ currentTrack.name }}</h3>
+                <p class="artist">{{ currentTrack.artist_name }}</p>
+                <audio [src]="currentTrack.audio" controls autoplay class="audio-control"></audio>
+            </div>
+            <button mat-icon-button (click)="currentTrack = null"><mat-icon>close</mat-icon></button>
+        </div>
+    }
+
+    <div class="recommendation-box">
+        <h3>¿Cómo te sientes ahora?</h3>
+        <div class="mood-buttons">
+            <button mat-flat-button class="mood-btn ansioso" (click)="recomendarPorEmocion('ansioso')">
+                😰 Ansiedad
+            </button>
+            <button mat-flat-button class="mood-btn triste" (click)="recomendarPorEmocion('triste')">
+                😢 Tristeza
+            </button>
+            <button mat-flat-button class="mood-btn enojado" (click)="recomendarPorEmocion('enojado')">
+                😠 Enojo
+            </button>
+            <button mat-flat-button class="mood-btn feliz" (click)="recomendarPorEmocion('feliz')">
+                😄 Felicidad
+            </button>
+        </div>
+    </div>
+
+    <mat-divider style="margin: 25px 0;"></mat-divider>
+
+    <div class="search-section">
+        <mat-form-field appearance="outline" class="search-bar">
+            <mat-label>Buscar artista o canción...</mat-label>
+            <input matInput [(ngModel)]="terminoBusqueda" (keyup.enter)="buscarLibre()" placeholder="Ej. Mozart, Lofi Beats...">
+            <button mat-icon-button matSuffix (click)="buscarLibre()">
+                <mat-icon>search</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+
+    <div class="genres-section">
+        <mat-chip-set aria-label="Selección de género">
+            @for (gen of generos; track gen.value) {
+                <mat-chip-option (click)="buscarPorGenero(gen.value)" selected>
+                    {{ gen.label }}
+                </mat-chip-option>
+            }
+        </mat-chip-set>
+    </div>
+
+    @if (cargando) {
+        <p class="loading-text">Buscando las mejores melodías...</p>
+    } @else {
+        <div class="tracks-grid">
+            @for (track of canciones; track track.id) {
+                <mat-card class="track-card" (click)="reproducir(track)">
+                    <div class="card-image">
+                        <img [src]="track.image" alt="Album" loading="lazy">
+                        <div class="play-overlay">
+                            <mat-icon>play_circle_filled</mat-icon>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h4>{{ track.name }}</h4>
+                        <small>{{ track.artist_name }}</small>
+                    </div>
+                </mat-card>
+            } @empty {
+                <div class="no-results">
+                    <mat-icon>music_off</mat-icon>
+                    <p>No encontramos canciones. Intenta otra búsqueda.</p>
+                </div>
+            }
+        </div>
+    }
+</div>
