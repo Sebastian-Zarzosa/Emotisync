@@ -1,0 +1,36 @@
+<!-- <p>gatitos works!</p> -->
+<div class="cats-container">
+    <div class="cats-header">
+        <h1>Galería de Gatitos 🐱</h1>
+        <p>Ingresa un número y obtén esa cantidad de gatos.</p>
+        
+        <div class="controls">
+            <input type="number" [(ngModel)]="cantidad" min="1" max="50" class="input-numero" placeholder="Cant.">
+            <button (click)="loadCats()" class="reload-btn" [disabled]="loading">
+                {{ loading ? 'Cargando...' : 'Obtener Gatos' }}
+            </button>
+        </div>
+    </div>
+
+    <div *ngIf="error" class="error-msg">
+        {{ error }}
+    </div>
+
+    <div class="cats-grid" *ngIf="!loading && cats.length > 0">
+        
+        <div *ngFor="let cat of cats; let i = index" class="cat-card" (click)="viewLargeImagen(cat.url)">
+            <div class="cat-image-wrapper">
+                <img [src]="cat.url" [alt]="'Gato ' + cat.id" (error)="handleImageError(cat)">
+            </div>
+            <div class="cat-info">
+                <span class="badge">#{{ i + 1 }}</span>
+                <span class="size">{{ cat.width }}x{{ cat.height }}</span>
+            </div>
+        </div>
+
+    </div>
+
+    <div *ngIf="loading" class="loading">
+        <div class="spinner"></div>
+    </div>
+</div>
