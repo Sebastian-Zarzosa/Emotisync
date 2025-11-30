@@ -1,0 +1,21 @@
+<div class="title-container" style="text-align: center; width: 90%; margin: auto; padding-top: 20px;">
+  <h2 style="color: #d32f2f; margin-bottom: 10px;">Planes con Menos Suscriptores Activos</h2>
+  <p style="color: #666; font-size: 0.9rem; margin-bottom: 30px;">Análisis de baja demanda para optimización</p>
+
+  @if(hasData){
+    <div class="chart-wrapper" style="width: 60%; min-width: 320px; margin: 0 auto;">
+      <canvas baseChart
+        [datasets]="pieChartData"
+        [labels]="pieChartLabels"
+        [options]="pieChartOptions"
+        [legend]="true"
+        [type]="pieChartType">
+      </canvas>
+    </div>
+  } @else {
+    <div class="no-data" style="margin-top: 50px; color: gray; display: flex; flex-direction: column; align-items: center;">
+      <mat-icon style="font-size: 60px; width: 60px; height: 60px; opacity: 0.5;">pie_chart_outlined</mat-icon>
+      <p style="margin-top: 10px; font-size: 1.1rem;">No hay datos suficientes para generar el gráfico.</p>
+    </div>
+  }
+</div>

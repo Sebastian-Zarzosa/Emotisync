@@ -1,0 +1,20 @@
+<div class="title-container" style="text-align: center; width: 90%; margin: auto; padding-top: 20px;">
+  <h2 style="color: #673ab7; margin-bottom: 20px;">Rendimiento y Proyección por Plan</h2>
+
+  @if(hasData){
+    <div class="chart-wrapper" style="width: 90%; max-width: 900px; margin: 0 auto; height: 450px;">
+      <canvas baseChart
+        [datasets]="barChartData"
+        [labels]="barChartLabels"
+        [options]="barChartOptions"
+        [legend]="barChartLegend"
+        [type]="barChartType">
+      </canvas>
+    </div>
+  } @else {
+    <div class="no-data" style="margin-top: 50px; color: gray; display: flex; flex-direction: column; align-items: center;">
+      <mat-icon style="font-size: 60px; width: 60px; height: 60px; opacity: 0.5;">sentiment_dissatisfied</mat-icon>
+      <p style="margin-top: 10px; font-size: 1.1rem;">No hay datos de rendimiento disponibles.</p>
+    </div>
+  }
+</div>

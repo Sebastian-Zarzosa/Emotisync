@@ -63,7 +63,10 @@ import { SugerenciasComponent } from './components/herramientas/sugerencias/suge
 import { UsuarioListar } from './components/administracion/usuario/usuario-listar/usuario-listar';
 import { REjercicios } from './components/administracion/reportes/r-ejercicios/r-ejercicios';
 import { EjerciciosCompletados } from './components/administracion/reportes/r-ejercicios/ejercicios-completados/ejercicios-completados';
-
+import { RepSuscripcionesActivas } from './components/administracion/reportes/r-suscripciones/rep-suscripciones-activas/rep-suscripciones-activas';
+import { BusqHistorialEmail } from './components/administracion/reportes/r-suscripciones/busq-historial-email/busq-historial-email';
+import { GrafRendimientoPlanes } from './components/administracion/reportes/r-suscripciones/graf-rendimiento-planes/graf-rendimiento-planes';
+import { GrafMenosSuscriptores } from './components/administracion/reportes/r-suscripciones/graf-menos-suscriptores/graf-menos-suscriptores';
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   { path: 'inicio', component: Inicio },
@@ -287,6 +290,10 @@ export const routes: Routes = [
       { path: 'crisis-fechas', component: BusqBuscarporusurangofechas }, // el ts en reportes
       { path: 'buscar-ejercicios', component: REjercicios }, // el ts en reportes
       { path: 'ejercicios-completados', component: EjerciciosCompletados }, // el ts en reportes
+      { path: 'suscripciones-activas', component: RepSuscripcionesActivas },
+      { path: 'suscripciones-historial', component: BusqHistorialEmail },
+      { path: 'suscripciones-rendimiento', component: GrafRendimientoPlanes },
+      { path: 'suscripciones-baja-demanda', component: GrafMenosSuscriptores },
     ],
   },
 

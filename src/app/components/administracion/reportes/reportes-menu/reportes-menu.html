@@ -128,5 +128,45 @@
         </div>
       </mat-card-content>
     </mat-card>
+    <mat-card class="menu-card">
+  <mat-card-header>
+    <mat-card-title>Suscripciones</mat-card-title>
+    <mat-card-subtitle>Estadísticas</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content class="grid-icons">
+
+    <div class="icon-item" routerLink="suscripciones-activas">
+      <div class="icon-box blue">
+        <mat-icon>people</mat-icon>
+      </div>
+      <span>Activos</span>
+    </div>
+
+    <div class="icon-item" routerLink="suscripciones-historial">
+      <div class="icon-box gray">
+        <mat-icon>history</mat-icon>
+      </div>
+      <span>Historial</span>
+    </div>
+
+    <div class="icon-item" routerLink="suscripciones-rendimiento">
+      <div class="icon-box blue">
+        <mat-icon>monetization_on</mat-icon>
+      </div>
+      <span>Rendimiento</span>
+    </div>
+
+    <div class="icon-item" routerLink="suscripciones-baja-demanda">
+      <div class="icon-box gray">
+        <mat-icon>trending_down</mat-icon>
+      </div>
+      <span>Baja Demanda</span>
+    </div>
+
+  </mat-card-content>
+</mat-card>
+
+    
   </div>
 </div>
