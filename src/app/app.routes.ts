@@ -54,6 +54,8 @@ import { PacientesEspecialidad } from './components/administracion/reportes/r-us
 import { BusquedaPacientes } from './components/administracion/reportes/r-usuarios/busqueda-pacientes/busqueda-pacientes';
 import { Musica } from './components/herramientas/musica/musica';
 import { InformacionComponent } from './components/herramientas/informacion/informacion';
+import { SugerenciasComponent } from './components/herramientas/sugerencias/sugerencias';
+import { Chatbot } from './components/herramientas/chatbot/chatbot';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -328,6 +330,18 @@ export const routes: Routes = [
   {
     path: 'informacion',
     component: InformacionComponent,
+    canActivate: [roleGuard],
+    data: {expectedRole: 'PACIENTE'}
+  },
+  {
+    path: 'sugerencias',
+    component: SugerenciasComponent,
+    canActivate: [roleGuard],
+    data: {expectedRole: 'PACIENTE'}
+  },
+  {
+    path: 'chatbot',
+    component: Chatbot,
     canActivate: [roleGuard],
     data: {expectedRole: 'PACIENTE'}
   },
