@@ -34,3 +34,14 @@ button[mat-raised-button][color="primary"] {
         gap: 10px;
     }
 }
+
+.badge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-weight: bold;
+    color: white;
+    font-size: 0.8rem;
+}
+.b-alta { background-color: #d32f2f; } /* Rojo */
+.b-media { background-color: #f57c00; } /* Naranja */
+.b-baja { background-color: #388e3c; } /* Verde */

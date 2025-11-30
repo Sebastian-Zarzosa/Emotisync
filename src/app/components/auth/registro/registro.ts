@@ -19,6 +19,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 
 import Swal from 'sweetalert2';
 import { Rol } from '../../../models/Rol';
+import { noWhitespaceValidator } from '../../../util/no-whitespace.validator';
 @Component({
   selector: 'app-registro',
   standalone: true,
@@ -40,6 +41,7 @@ import { Rol } from '../../../models/Rol';
 export class Registro {
   form: FormGroup;
   hidePassword = true;
+  maxDate: Date = new Date()
 
   rolesDisponibles = [
     { id: 2, nombre: 'Paciente' },
@@ -53,15 +55,16 @@ export class Registro {
     private usuarioService: UsuarioService
   ) {
     this.form = this.fb.group({
-      nombre: ['', Validators.required],
-      apellido: ['', Validators.required],
-      email: ['', Validators.required],
+      nombre: ['', [Validators.required, noWhitespaceValidator]],
+      apellido: ['', [Validators.required, noWhitespaceValidator]],
+      email: ['', [Validators.required, Validators.email, noWhitespaceValidator]],
       username: [
         '',
         [
           Validators.required,
           Validators.maxLength(30),
           Validators.minLength(4),
+          noWhitespaceValidator
         ],
       ],
       telefono: [
@@ -69,12 +72,29 @@ export class Registro {
         [
           Validators.required,
           Validators.pattern('^[0-9]{3}-[0-9]{3}-[0-9]{3}$'),
+          noWhitespaceValidator
         ],
       ],
-      fechaNacimiento: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      rolId: [2, Validators.required],
-    });
+      fechaNacimiento: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(6), noWhitespaceValidator]],
+      confirmPassword: ['',[Validators.required, noWhitespaceValidator]],
+      rolId: [2, [Validators.required]],
+    }, {
+      validators:this.passwordMatchValidator
+    }
+  );
+  }
+
+  passwordMatchValidator(form: FormGroup){
+    const password = form.get('password')
+    const confirmPassword = form.get('confirmPassword')
+
+    if(password?.value !== confirmPassword?.value){
+      confirmPassword?.setErrors({ mismatch: true })
+    } else{
+      confirmPassword?.setErrors(null)
+    }
+    return null
   }
 
   registrarse() {

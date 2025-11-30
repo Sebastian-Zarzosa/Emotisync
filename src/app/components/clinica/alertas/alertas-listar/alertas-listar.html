@@ -28,9 +28,19 @@
                 </ng-container>
 
                 <ng-container matColumnDef="nivelAlerta">
-                    <th mat-header-cell *matHeaderCellDef>Nivel de Alerta</th>
-                    <td mat-cell *matCellDef="let element">{{element.nivel_alerta}}</td>
+                    <th mat-header-cell *matHeaderCellDef>Nivel</th>
+                    <td mat-cell *matCellDef="let element">
+                        <span class="badge" 
+                            [ngClass]="{
+                                'b-alta': element.nivel_alerta >= 4,
+                                'b-media': element.nivel_alerta === 3,
+                                'b-baja': element.nivel_alerta < 3
+                            }">
+                            {{ element.nivel_alerta }}
+                        </span>
+                    </td>
                 </ng-container>
+                
                 <ng-container matColumnDef="usuario">
                     <th mat-header-cell *matHeaderCellDef>Nombre de Usuario</th>  
                     <td mat-cell *matCellDef="let element">{{element.usuario?.nombre}}</td>
@@ -45,14 +55,17 @@
                     </td>
                 </ng-container>
 
-                <ng-container matColumnDef="eliminar">
-                    <th mat-header-cell *matHeaderCellDef>Eliminar</th>
-                    <td mat-cell *matCellDef="let element">
-                        <button mat-icon-button color="warn" (click)="eliminar(element.idAlerta)">
-                            <mat-icon>delete</mat-icon>
-                        </button>
-                    </td>
-                </ng-container>
+                @if (loginService.isAdmin()) {
+                    <ng-container matColumnDef="eliminar">
+                        <th mat-header-cell *matHeaderCellDef>Eliminar</th>
+                        <td mat-cell *matCellDef="let element">
+                            <button mat-icon-button color="warn" (click)="eliminar(element.idAlerta)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+                }
+                
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>

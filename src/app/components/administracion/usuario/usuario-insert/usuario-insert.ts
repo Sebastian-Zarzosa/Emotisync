@@ -22,6 +22,7 @@ import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatIconModule } from '@angular/material/icon';
+import { noWhitespaceValidator } from '../../../../util/no-whitespace.validator';
 
 @Component({
   selector: 'app-usuario-insert',
@@ -67,33 +68,33 @@ export class UsuarioInsert implements OnInit {
     // Inicializar grupo
     this.formStep1 = this.formBuilder.group({
       idUsuario: [0],
-      email: ['', [Validators.required, Validators.email]],
-      username: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      email: ['', [Validators.required, Validators.email, noWhitespaceValidator]],
+      username: ['', [Validators.required, noWhitespaceValidator]],
+      password: ['', [Validators.required, Validators.minLength(6), noWhitespaceValidator]],
     });
     this.formStep2 = this.formBuilder.group({
-      nombre: ['', [Validators.required, Validators.minLength(2)]],
-      apellido: ['', [Validators.required, Validators.minLength(2)]],
+      nombre: ['', [Validators.required, Validators.minLength(2), noWhitespaceValidator]],
+      apellido: ['', [Validators.required, Validators.minLength(2), noWhitespaceValidator]],
       telefono: [
         '',
         [
           Validators.required,
           Validators.pattern('^[0-9]{3}-[0-9]{3}-[0-9]{3}$'),
-          Validators.maxLength(12),
+          Validators.maxLength(12), noWhitespaceValidator
         ],
       ],
-      fechaNacimiento: ['', Validators.required],
+      fechaNacimiento: ['', [Validators.required]],
     });
     this.formStep3 = this.formBuilder.group({
-      institucion: [''],
+      institucion: ['', noWhitespaceValidator],
       nroColegiatura: ['',
-        [Validators.pattern('^[0-9]*$')]],
-      especialidad: [''],
+        [Validators.pattern('^[0-9]*$'), noWhitespaceValidator]],
+      especialidad: ['', noWhitespaceValidator],
     });
     this.formStep4 = this.formBuilder.group({
       familiar: [''],
       especialista: [''],
-      roles: [[], Validators.required],
+      roles: [[], [Validators.required]],
       enabled: [true],
     });
   }
@@ -131,6 +132,24 @@ export class UsuarioInsert implements OnInit {
     this.usuarioService.getListaFamiliares().subscribe((data) => {
       this.listaFamiliares = data;
     });
+
+    this.formStep4.get('roles')?.valueChanges.subscribe(roles => {
+      const esEspecialista = roles.some((r: any) => r.idRol === 3)
+      const colegiaturaControl = this.formStep3.get('nroColegiatura')
+      const especialidadControl = this.formStep3.get('especialidad')
+
+      if (esEspecialista) {
+        colegiaturaControl?.setValidators([Validators.required, Validators.pattern('^[0-9]*$')]);
+        especialidadControl?.setValidators([Validators.required]);
+      } else {
+        colegiaturaControl?.clearValidators();
+        especialidadControl?.clearValidators();
+      }
+      
+      // Importante para actualizar el estado visual
+      colegiaturaControl?.updateValueAndValidity();
+      especialidadControl?.updateValueAndValidity();
+    })
   }
 
   init() {

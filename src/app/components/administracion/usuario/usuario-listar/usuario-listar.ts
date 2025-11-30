@@ -15,6 +15,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { LoginService } from '../../../../core/services/login';
 
 @Component({
   selector: 'app-usuario-listar',
@@ -52,13 +53,29 @@ export class UsuarioListar implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private usuarioService: UsuarioService, private fb: FormBuilder) {
+  constructor(
+    private usuarioService: UsuarioService, 
+    private fb: FormBuilder,
+    public loginService: LoginService
+  ) {
     this.formEmail = fb.group({
       email: [''],
     });
   }
 
   ngOnInit(): void {
+    if(this.loginService.isEspecialista()){
+      const emailEspecialista = this.loginService.getUsername()
+
+      this.usuarioService.searchPatientsOfEspecialist(emailEspecialista).subscribe(data => {
+        this.dataSource.data = data
+      })
+    } else {
+      this.usuarioService.listar().subscribe((data) => {
+        this.dataSource.data = data
+      })
+    }
+
     this.usuarioService.listar().subscribe((data) => {
       this.dataSource.data = data;
     });
@@ -71,6 +88,10 @@ export class UsuarioListar implements OnInit, AfterViewInit {
       this.emailBusqueda = value;
       this.buscar();
     });
+
+    if(!this.loginService.isAdmin()){
+      this.displayedColumns = this.displayedColumns.filter(c => c !== 'roles')
+    }
   }
 
   ngAfterViewInit() {
