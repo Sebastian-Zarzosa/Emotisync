@@ -67,6 +67,7 @@ import { RepSuscripcionesActivas } from './components/administracion/reportes/r-
 import { BusqHistorialEmail } from './components/administracion/reportes/r-suscripciones/busq-historial-email/busq-historial-email';
 import { GrafRendimientoPlanes } from './components/administracion/reportes/r-suscripciones/graf-rendimiento-planes/graf-rendimiento-planes';
 import { GrafMenosSuscriptores } from './components/administracion/reportes/r-suscripciones/graf-menos-suscriptores/graf-menos-suscriptores';
+import { PlanesPacienteComponent } from './components/administracion/planes-suscripcion/planes-paciente/planes-paciente';
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   { path: 'inicio', component: Inicio },
@@ -135,13 +136,16 @@ export const routes: Routes = [
   },
   {
     path: 'usuario-suscripcion',
-    component: UsuarioSuscripcion,
     children: [
-      { path: 'insertar', component: UsuarioSuscripcioninsertar },
+      { 
+        path: 'insertar', 
+        component: UsuarioSuscripcioninsertar, 
+        canActivate: [roleGuard],
+        data: { expectedRole: ['ADMIN', 'PACIENTE'] },
+      },
       { path: 'editar/:id', component: UsuarioSuscripcioninsertar },
     ],
-    canActivate: [roleGuard],
-    data: { expectedRole: 'ADMIN' },
+    
   },
   {
     path: 'ejercicios',
@@ -183,7 +187,7 @@ export const routes: Routes = [
       { path: 'edit/:id', component: DiarioInsertar },
     ],
     canActivate: [roleGuard],
-    data: { expectedRole: 'PACIENTE' },
+    data: { expectedRoles: ['PACIENTE', 'ADMIN'] },
   },
   {
     path: 'usuarioEjercicios',
@@ -193,7 +197,7 @@ export const routes: Routes = [
       { path: 'editar/:id', component: UsuarioEjerciciosinsertar },
     ],
     canActivate: [roleGuard],
-    data: { expectedRole: 'PACIENTE' },
+    data: { expectedRoles: ['PACIENTE', 'ADMIN'] },
   },
   {
     path: 'recursos',
@@ -203,7 +207,7 @@ export const routes: Routes = [
       { path: 'edit/:id', component: RecursoInsert },
     ],
     canActivate: [roleGuard],
-    data: { expectedRole: 'PACIENTE' },
+    data: { expectedRoles: ['PACIENTE', 'ADMIN'] },
   },
 
   // Rutas de emocinoes
@@ -232,31 +236,31 @@ export const routes: Routes = [
     path: 'grabadora',
     component: GrabadoraComponent,
     canActivate: [roleGuard],
-    data: { expectedRole: 'PACIENTE' },
+    data: { expectedRoles: ['PACIENTE', 'ADMIN'] },
   },
   {
     path: 'modo-reflexion',
     component: ModoReflexionComponent,
     canActivate: [roleGuard],
-    data: { expectedRole: 'PACIENTE' },
+    data: { expectedRoles: ['PACIENTE', 'ADMIN'] },
   },
   {
     path: 'progreso',
     component: ProgresoComponent,
     canActivate: [roleGuard],
-    data: { expectedRole: 'PACIENTE' },
+    data: { expectedRoles: ['PACIENTE', 'ADMIN'] },
   },
   {
     path: 'juegos',
     component: JuegosComponent,
     canActivate: [roleGuard],
-    data: { expectedRole: 'PACIENTE' },
+    data: { expectedRoles: ['PACIENTE', 'ADMIN'] },
   },
   {
     path: 'biblioteca',
     component: BibliotecaComponent,
     canActivate: [roleGuard],
-    data: { expectedRole: 'PACIENTE' },
+    data: { expectedRoles: ['PACIENTE', 'ADMIN'] },
   },
 
   // Rutas de emocinoes
@@ -303,42 +307,12 @@ export const routes: Routes = [
   // emociones/busquedaemoint5
   // emociones/promemociointen
 
-  {
-    path: 'grabadora',
-    component: GrabadoraComponent,
-    canActivate: [roleGuard],
-    data: { expectedRole: 'PACIENTE' },
-  },
-  {
-    path: 'modo-reflexion',
-    component: ModoReflexionComponent,
-    canActivate: [roleGuard],
-    data: { expectedRole: 'PACIENTE' },
-  },
-  {
-    path: 'progreso',
-    component: ProgresoComponent,
-    canActivate: [roleGuard],
-    data: { expectedRole: 'PACIENTE' },
-  },
-  {
-    path: 'juegos',
-    component: JuegosComponent,
-    canActivate: [roleGuard],
-    data: { expectedRole: 'PACIENTE' },
-  },
-  {
-    path: 'biblioteca',
-    component: BibliotecaComponent,
-    canActivate: [roleGuard],
-    data: { expectedRole: 'PACIENTE' },
-  },
 
   {
     path: 'musica',
     component: Musica,
     canActivate: [roleGuard],
-    data: { expectedRole: 'PACIENTE' },
+    data: { expectedRoles: ['PACIENTE', 'ADMIN'] },
   },
   {
     path: 'informacion',
@@ -365,13 +339,19 @@ export const routes: Routes = [
     canActivate: [roleGuard],
     data: { expectedRole: ['ADMIN', 'PACIENTE', 'ESPECIALISTA', 'FAMILIAR'] },
   },
+  {
+    path: 'planes-disponibles',
+    component: PlanesPacienteComponent,
+    canActivate: [roleGuard],
+    data: { expectedRoles: ['PACIENTE'] }
+  },
 
   // gatitos
   {
     path: 'gatitos',
     component: Gatitos,
     canActivate: [roleGuard],
-    data: { expectedRole: 'PACIENTE' },
+    data: { expectedRoles: ['PACIENTE', 'ADMIN'] },
   },
 
   { path: '**', redirectTo: 'inicio' },

@@ -69,7 +69,10 @@
 
         @if (loginService.isPaciente() || loginService.isAdmin()) {
           <div mat-subheader>VISTA PACIENTE</div>
-          
+          <a mat-list-item routerLink="/planes-disponibles" routerLinkActive="active-link">
+            <mat-icon matListItemIcon>loyalty</mat-icon> 
+            <span matListItemTitle>Planes y Precios</span>
+          </a>
           <a mat-list-item routerLink="/diarios" routerLinkActive="active-link">
             <mat-icon matListItemIcon>book</mat-icon>
             <span matListItemTitle>Mi Diario</span>
@@ -112,7 +115,7 @@
           <mat-divider></mat-divider>
         }
 
-        @if (loginService.isFamiliar() || loginService.isAdmin()) {
+        @if (loginService.isFamiliar() || loginService.isAdmin() || loginService.isPaciente()) {
           <div mat-subheader>FAMILIAR</div>
           
           <a mat-list-item routerLink="/progreso" routerLinkActive="active-link">
