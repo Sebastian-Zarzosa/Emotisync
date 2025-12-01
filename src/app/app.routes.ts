@@ -86,6 +86,7 @@ export const routes: Routes = [
     path: 'usuarios',
     component: Usuario,
     children: [
+      {path: '', component: UsuarioListar},
       { path: 'insert', component: UsuarioInsert },
       { path: 'edit/:id', component: UsuarioInsert },
       { path: 'pacientes', component: UsuarioListar },
