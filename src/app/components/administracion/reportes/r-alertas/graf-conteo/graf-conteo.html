@@ -1,0 +1,15 @@
+<div class="title-container" style="text-align: center; margin-top: 20px;">
+  <h2>Conteo de Alertas por Usuario</h2>
+
+  @if(hasData){
+    <div style="width: 70%; height: 400px; margin: 0 auto;">
+      <canvas baseChart 
+        [data]="barChartData" 
+        [options]="barChartOptions" 
+        [legend]="barChartLegend" 
+        [type]="barChartType">
+      </canvas>
+    </div>
+  } @else {
+    }
+</div>

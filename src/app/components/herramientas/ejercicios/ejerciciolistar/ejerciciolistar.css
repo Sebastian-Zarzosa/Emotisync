@@ -1,43 +1,40 @@
-/* Contenedor principal */
-.container {
-  max-width: 90%;
-  margin: 2rem auto;
-  padding: 2.5rem;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-}
-
-/* NUEVO: Clase para alinear Título a la izq y Botón a la der */
+/* Estilo para la nueva cabecera de la tarjeta */
 .list-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 10px; /* Un poco de espacio lateral */
+  padding: 16px 24px;
+  border-bottom: 1px solid #eee;
 }
 
-/* Estilos de la tabla */
-table {
-  width: 100%;
+/* Estilos para los botones de acción en la tabla (editar/eliminar) */
+td button[mat-icon-button] {
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
 }
 
-/* Botón */
+/* Tu estilo original para botones, ahora aplicado al botón "Nuevo Usuario" */
 button[mat-raised-button] {
-  /* width: 100%;  <-- ELIMINAR O COMENTAR ESTA LÍNEA para que no sea gigante */
-  width: auto; /* Dejar que el tamaño se ajuste al texto */
-  background: linear-gradient(135deg, #3993fa 0%, #2874d4 100%);
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem; /* Padding más pequeño para botón de lista */
-  font-weight: 600;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(57, 147, 250, 0.3);
-  /* margin-top: 1rem; <-- ELIMINAR, esto lo empujaba hacia abajo */
+  font-weight: 500;
+  border-radius: 6px;
+  padding: 6px 16px;
+  text-transform: none;
+  transition: all 0.25s ease;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
 }
 
-button[mat-raised-button]:hover {
-  background: linear-gradient(135deg, #2874d4 0%, #1a5ca8 100%);
-  transform: translateY(-2px);
+/* Botón primario (Nuevo Usuario) */
+button[mat-raised-button][color="primary"] {
+  background-color: #2b4bff;
+  color: #ffffff;
+}
+
+/* --- Responsivo (botones más compactos en pantallas pequeñas) --- */
+@media (max-width: 768px) {
+  .list-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
 }

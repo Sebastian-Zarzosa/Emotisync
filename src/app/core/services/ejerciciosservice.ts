@@ -5,14 +5,14 @@ import { HttpClient } from '@angular/common/http';
 import { Ejercicio } from '../../models/ejercicio';
 import { environment } from '../../../environments/environment';
 
-const base_url= environment.base;
+const base_url = environment.base;
 
 @Injectable({
   providedIn: 'root',
 })
 export class Ejerciciosservice {
   private url = `${base_url}/ejercicios`;
-  
+
   private listaCambio = new Subject<Ejercicio[]>();
 
   constructor(private http: HttpClient) {}
@@ -24,7 +24,7 @@ export class Ejerciciosservice {
   insert(e: Ejercicio) {
     return this.http.post(this.url, e);
   }
-  
+
   setList(listaNueva: Ejercicio[]) {
     this.listaCambio.next(listaNueva);
   }
@@ -43,5 +43,8 @@ export class Ejerciciosservice {
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
   }
-  
+
+  findByName(nombre: string) {
+    return this.http.get<Ejercicio[]>(`${this.url}/busqueda/${nombre}`);
+  }
 }

@@ -1,0 +1,63 @@
+<mat-card class="simple-form-card">
+    <mat-card-title>
+        {{ edicion ? 'Editar Registro' : 'Asignar Síntoma a Crisis' }}
+    </mat-card-title>
+
+    <mat-card-content>
+        <form [formGroup]="form" (submit)="aceptar()">
+            
+            @if(edicion){
+            <mat-form-field>
+                <mat-label>ID</mat-label>
+                <input matInput formControlName="id" readonly />
+            </mat-form-field>
+            }
+
+            <mat-form-field>
+                <mat-label>Crisis</mat-label>
+                <mat-select formControlName="crisisId">
+                    @for (c of listaCrisis; track c.idCrisis) {
+                        <mat-option [value]="c.idCrisis">
+                            {{ c.fecha | date:'shortDate' }} (ID: {{c.idCrisis}})
+                        </mat-option>
+                    }
+                </mat-select>
+                <mat-error>Seleccione una crisis</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Síntoma</mat-label>
+                <mat-select formControlName="sintomaId">
+                    @for (s of listaSintomas; track s.id) {
+                        <mat-option [value]="s.id">{{ s.nombre }}</mat-option>
+                    }
+                </mat-select>
+                <mat-error>Seleccione un síntoma</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Severidad (1-10)</mat-label>
+                <input matInput type="number" formControlName="sever" min="1" max="10">
+                <mat-error>Ingrese un valor entre 1 y 10</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Nivel de Observación</mat-label>
+                <input matInput type="number" formControlName="observacion">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Notas</mat-label>
+                <textarea matInput formControlName="notas"></textarea>
+            </mat-form-field>
+
+        </form>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+        <button mat-stroked-button (click)="cancelar()">Cancelar</button>
+        <button mat-raised-button color="primary" (click)="aceptar()" [disabled]="form.invalid">
+            {{ edicion ? 'Actualizar' : 'Guardar' }}
+        </button>
+    </mat-card-actions>
+</mat-card>

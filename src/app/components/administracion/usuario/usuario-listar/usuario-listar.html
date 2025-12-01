@@ -9,6 +9,16 @@
     </mat-card-header>
 
     <mat-card-content>
+      <!-- <form [formGroup]="formEmail">
+        <mat-form-field>
+          <mat-label>Buscar por email</mat-label>
+          <input
+            matInput
+            formControlName="emailBusqueda"
+            placeholder="ejemplo@correo.com"
+          />
+        </mat-form-field>
+      </form> -->
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         <ng-container matColumnDef="nombre">
           <th mat-header-cell *matHeaderCellDef>Nombre</th>
@@ -37,14 +47,16 @@
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="roles">
+        @if (loginService.isAdmin()){
+          <ng-container matColumnDef="roles">
           <th mat-header-cell *matHeaderCellDef>Roles</th>
           <td mat-cell *matCellDef="let element">
             @for (rol of element.roles; track $index){
-              <span>{{ rol.rol }}</span>
+            <span>{{ rol.rol }}</span>
             }
           </td>
-        </ng-container>
+        </ng-container>  
+        }
 
         <ng-container matColumnDef="editar">
           <th mat-header-cell *matHeaderCellDef>Actualizar</th>

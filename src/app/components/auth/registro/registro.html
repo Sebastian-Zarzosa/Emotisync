@@ -57,7 +57,7 @@
 
                 <mat-form-field appearance="outline" class="custom-input" style="flex: 1;">
                     <mat-label>Fecha Nacimiento</mat-label>
-                    <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento">
+                    <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento" [max]="maxDate">
                     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
@@ -69,6 +69,20 @@
                 <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
                     <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
+                <mat-error *ngIf="form.get('password')?.hasError('minlength')">
+                    Mínimo 6 caracteres
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="custom-input">
+                <mat-label>Confirmar Contraseña</mat-label>
+                <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="confirmPassword">
+                <mat-error *ngIf="form.get('confirmPassword')?.hasError('mismatch')">
+                    Las contraseñas no coinciden
+                </mat-error>
+                <mat-error *ngIf="form.get('confirmPassword')?.hasError('required')">
+                    La confirmación es obligatoria
+                </mat-error>
             </mat-form-field>
 
             <button mat-raised-button class="btn-login" type="submit" [disabled]="form.invalid">

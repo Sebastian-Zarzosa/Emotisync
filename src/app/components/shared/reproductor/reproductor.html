@@ -1,0 +1,38 @@
+@if (playerService.currentTrack()) {
+  <div class="global-player slide-up">
+    
+    <div class="track-info">
+      <img [src]="playerService.currentTrack().image" class="cover-art" alt="Cover">
+      <div class="text-info">
+        <span class="track-title">{{ playerService.currentTrack().name }}</span>
+        <span class="artist-name">{{ playerService.currentTrack().artist_name }}</span>
+      </div>
+    </div>
+
+    <div class="controls-center">
+      <button mat-icon-button class="play-btn" (click)="playerService.toggle()">
+        <mat-icon>{{ playerService.isPlaying() ? 'pause_circle_filled' : 'play_circle_filled' }}</mat-icon>
+      </button>
+    </div>
+
+    <div class="controls-right">
+        
+        <div class="volume-box">
+            <button mat-icon-button class="mute-btn" (click)="playerService.toggleMute()">
+                <mat-icon>{{ playerService.volume() === 0 ? 'volume_off' : 'volume_up' }}</mat-icon>
+            </button>
+            
+            <mat-slider min="0" max="1" step="0.01" class="vol-slider">
+                <input matSliderThumb [value]="playerService.volume()" (input)="onVolumeChange($event)">
+            </mat-slider>
+        </div>
+
+        <div class="divider"></div>
+
+        <button mat-icon-button class="close-btn" (click)="playerService.close()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+  </div>
+}

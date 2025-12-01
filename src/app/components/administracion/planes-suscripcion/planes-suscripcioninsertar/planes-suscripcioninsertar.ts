@@ -37,11 +37,8 @@ export class PlanesSuscripcioninsertar implements OnInit {
 
   edicion: boolean = false;
   id: number = 0;
-  tipos: {value: string, viewValue: string}[] = [
-    {value: 'Basico', viewValue: 'Basico'},
-    {value: 'Premium', viewValue: 'Premium'},
-    {value: 'Pro', viewValue: 'Pro'}
-  ];
+  nombresBase: string[] = ['Básico', 'Estándar', 'Premium', 'Familiar', 'Gold'];
+  duraciones: string[] = ['Mensual', 'Semestral', 'Anual'];
 
   constructor(
     private pS: PlanesSuscripcionService,
@@ -53,8 +50,9 @@ export class PlanesSuscripcioninsertar implements OnInit {
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       codigo: [''],
-      nombre_plan: ['', [Validators.required, Validators.maxLength(30)]],
-      precio: ['', [Validators.required, Validators.pattern('^[0-9]+(\\.[0-9]{1,2})?$'), Validators.min(0)]],
+      nombreBase: ['', Validators.required], 
+      duracion: ['', Validators.required],   
+      precio: ['', [Validators.required, Validators.min(0)]],
       descripcion: ['', [Validators.required, Validators.maxLength(255)]]
     });
     
@@ -67,35 +65,16 @@ export class PlanesSuscripcioninsertar implements OnInit {
 
   aceptar(): void{
     if (this.form.valid) {
-      this.plan.idPlanesSuscripcion = this.form.value.codigo;
-      this.plan.nombre_plan = this.form.value.nombre_plan;
+      this.plan.idPlanesSuscripcion = this.form.value.codigo || 0;
+      this.plan.nombre_plan = `${this.form.value.nombreBase} ${this.form.value.duracion}`;
+      
       this.plan.precio = this.form.value.precio;
       this.plan.descripcion = this.form.value.descripcion;
 
       if (this.edicion) {
-        this.pS.update(this.plan).subscribe({
-          next: () => {
-            this.pS.list().subscribe((data) => {
-              this.pS.setList(data);
-              this.router.navigate(['/planes']);
-            })
-          },
-          error: (err) => {
-            console.error('Error al actualizar plan:', err);
-          }
-        })
+        this.pS.update(this.plan).subscribe(() => this.router.navigate(['/planes']));
       } else {
-        this.pS.insert(this.plan).subscribe({
-          next: () => {
-            this.pS.list().subscribe((data) => {
-              this.pS.setList(data);
-              this.router.navigate(['/planes']);
-            })
-          },
-          error: (err) => {
-            console.error('Error al insertar plan:', err);
-          }
-        })
+        this.pS.insert(this.plan).subscribe(() => this.router.navigate(['/planes']));
       }
     }
   }
@@ -107,13 +86,20 @@ export class PlanesSuscripcioninsertar implements OnInit {
   init() {
     if (this.edicion) {
       this.pS.listId(this.id).subscribe((data) => {
-        this.form = new FormGroup({
-          codigo: new FormControl(data.idPlanesSuscripcion),
-          nombre_plan: new FormControl(data.nombre_plan),
-          precio: new FormControl(data.precio),
-          descripcion: new FormControl(data.descripcion)
-        })
-      })
+        // Al editar, intentamos separar el nombre para mostrarlo en los campos
+        // Si el nombre es "Premium Anual", separamos en "Premium" y "Anual"
+        const partes = data.nombre_plan.split(' ');
+        const duracionDetectada = this.duraciones.find(d => data.nombre_plan.includes(d)) || 'Mensual';
+        const nombreDetectado = data.nombre_plan.replace(duracionDetectada, '').trim();
+
+        this.form.patchValue({
+          codigo: data.idPlanesSuscripcion,
+          nombreBase: nombreDetectado,
+          duracion: duracionDetectada,
+          precio: data.precio,
+          descripcion: data.descripcion
+        });
+      });
     }
   }
 }

@@ -173,6 +173,9 @@ export class GrabadoraComponent implements OnInit, OnDestroy {
     this.audioBlob = null;
     this.recordingTime = '00:00';
     this.seconds = 0;
+    this.chunks = []
+
+    this.cdr.detectChanges()
   }
 
   eliminarGrabacion(id: number) {

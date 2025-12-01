@@ -25,6 +25,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatIconModule } from '@angular/material/icon';
 import { LoginService } from '../../../../core/services/login';
+import { DiarioDTOInsert } from '../../../../models/DiarioInsert';
 
 @Component({
   selector: 'app-diario-insertar',
@@ -40,14 +41,14 @@ import { LoginService } from '../../../../core/services/login';
     MatCardModule,
     MatButtonToggleModule,
     MatSliderModule,
-    MatIconModule
+    MatIconModule,
   ],
   templateUrl: './diario-insertar.html',
   styleUrl: './diario-insertar.css',
 })
 export class DiarioInsertar implements OnInit {
   form: FormGroup = new FormGroup({});
-  diario: Diario = new Diario();
+  diario: DiarioDTOInsert = new DiarioDTOInsert();
   edicion: boolean = false;
 
   listaUsuarios: Usuario[] = [];
@@ -55,6 +56,8 @@ export class DiarioInsertar implements OnInit {
 
   id: number = 0;
   today = new Date();
+  usuarioSeleccionado: Usuario = new Usuario();
+  emocionSeleccionada: Emociones = new Emociones();
 
   constructor(
     private diarioService: Diarioservice,
@@ -83,49 +86,53 @@ export class DiarioInsertar implements OnInit {
     this.form = this.formBuilder.group({
       id: [],
       tipoEmocion: ['', Validators.required],
-      intensidad: [5, [Validators.required, Validators.min(1), Validators.max(10)]],
+      titulo: [
+        '',
+        [Validators.required, Validators.min(1), Validators.max(10)],
+      ],
       notas: ['', Validators.maxLength(255)],
-      fecha: [new Date()]
+      fecha: [new Date()],
     });
   }
 
   aceptar(): void {
     if (this.form.valid) {
-      const formValue = this.form.value
-      
+      const formValue = this.form.value;
+
       this.diario.idDiario = formValue.id || 0;
-      this.diario.fecha = formValue.fecha || new Date()
+      this.diario.fecha = formValue.fecha || new Date();
 
-      this.diario.contenido = formValue.notas
-      this.diario.titulo = "Entrada del " + new Date(this.diario.fecha).toLocaleDateString()
+      this.diario.contenido = formValue.notas;
+      this.diario.titulo = formValue.titulo;
 
-      this.diario.emociones = new Emociones()
-      this.diario.emociones.idEmociones = 0
-      this.diario.emociones.tipoEmocion = formValue.tipoEmocion
-      this.diario.emociones.intensidad = formValue.intensidad
+      this.diario.emociones = formValue.tipoEmocion.idEmociones;
 
-      const username = this.loginService.getUsername()
-
-      let u = new Usuario()
-
-      this.diario.usuario = u
+      this.usuarioSeleccionado = this.listaUsuarios.find(
+        (u) => u.username === this.loginService.getUsername()
+      ) as Usuario;
+      this.diario.usuario = this.usuarioSeleccionado.idUsuario;
 
       if (this.edicion) {
         this.diarioService.modificar(this.diario).subscribe({
           next: () => {
-            this.diarioService.listar().subscribe(data => this.diarioService.setLista(data))
-            this.router.navigate(['diarios'])
+            this.diarioService
+              .listar()
+              .subscribe((data) => this.diarioService.setLista(data));
+            this.router.navigate(['diarios']);
           },
-          error: (e) => console.error(e)
-        })
+          error: (e) => console.error(e),
+        });
       } else {
+        console.log('Diario a insertar:', this.diario);
         this.diarioService.insertar(this.diario).subscribe({
           next: () => {
-            this.diarioService.listar().subscribe(data => this.diarioService.setLista(data))
-            this.router.navigate(['diarios'])
+            this.diarioService
+              .listar()
+              .subscribe((data) => this.diarioService.setLista(data));
+            this.router.navigate(['diarios']);
           },
-          error: (e) => console.error("Error al guardar:", e)
-        })
+          error: (e) => console.error('Error al guardar:', e),
+        });
       }
       this.router.navigate(['diarios']);
     }
@@ -138,8 +145,8 @@ export class DiarioInsertar implements OnInit {
           id: data.idDiario,
           fecha: data.fecha,
           notas: data.contenido,
-          tipoEmocion: data.emociones?.tipoEmocion,
-          intensidad: data.emociones?.intensidad
+          titulo: data.titulo,
+          tipoEmocion: data.emociones, // Usar la emoción encontrada
         });
       });
     }
@@ -147,5 +154,10 @@ export class DiarioInsertar implements OnInit {
 
   cancelar(): void {
     this.router.navigate(['/diarios']);
+  }
+
+  // Función para comparar emociones por ID
+  compareEmociones(e1: Emociones, e2: Emociones): boolean {
+    return e1 && e2 ? e1.idEmociones === e2.idEmociones : e1 === e2;
   }
 }

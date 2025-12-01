@@ -9,7 +9,6 @@ import { usuarioSuscripcion } from '../../../../models/usuario_suscripcion';
 import { UsuarioSuscripcionService } from '../../../../core/services/usuario_suscripcionservice';
 import { CommonModule } from '@angular/common';
 
-
 @Component({
   selector: 'app-usuario-suscripcionlistar',
   imports: [
@@ -19,27 +18,35 @@ import { CommonModule } from '@angular/common';
     MatCardModule,
     RouterLink,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
   ],
   templateUrl: './usuario-suscripcionlistar.html',
   styleUrl: './usuario-suscripcionlistar.css',
 })
-export class UsuarioSuscripcionlistar implements OnInit, AfterViewInit{
+export class UsuarioSuscripcionlistar implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<usuarioSuscripcion> = new MatTableDataSource();
 
-  displayedColumns: string[] = ['usuario', 'plan', 'estado', 'fechaInicio', 'fechaFin', 'editar', 'eliminar'];
+  displayedColumns: string[] = [
+    'usuario',
+    'plan',
+    'estado',
+    'fechaInicio',
+    'fechaFin',
+    'editar',
+    'eliminar',
+  ];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private uS: UsuarioSuscripcionService) { }
-  
+  constructor(private uS: UsuarioSuscripcionService) {}
+
   ngOnInit(): void {
     this.uS.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
-    })
+    });
     this.uS.getList().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
-    })
+    });
   }
 
   ngAfterViewInit(): void {
@@ -50,7 +57,7 @@ export class UsuarioSuscripcionlistar implements OnInit, AfterViewInit{
     this.uS.delete(id).subscribe(() => {
       this.uS.list().subscribe((data) => {
         this.uS.setList(data);
-      })
-    })
+      });
+    });
   }
 }

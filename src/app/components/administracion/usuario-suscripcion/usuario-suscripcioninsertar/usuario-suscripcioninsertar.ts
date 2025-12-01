@@ -22,6 +22,11 @@ import { planesSuscripcion } from '../../../../models/planes_suscripcion';
 import { Usuario } from '../../../../models/Usuario';
 import { usuarioSuscripcion } from '../../../../models/usuario_suscripcion';
 
+import Swal from 'sweetalert2';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from "@angular/material/list";
+import { LoginService } from '../../../../core/services/login';
+
 @Component({
   selector: 'app-usuario-suscripcioninsertar',
   standalone: true,
@@ -33,105 +38,98 @@ import { usuarioSuscripcion } from '../../../../models/usuario_suscripcion';
     MatDatepickerModule,
     MatButtonModule,
     MatCardModule,
-    ReactiveFormsModule
-  ],
+    ReactiveFormsModule,
+    MatIconModule,
+    MatListModule
+],
   templateUrl: './usuario-suscripcioninsertar.html',
   styleUrl: './usuario-suscripcioninsertar.css',
 })
 export class UsuarioSuscripcioninsertar implements OnInit{
-  form: FormGroup = new FormGroup({})
-  suscripcion: usuarioSuscripcion = new usuarioSuscripcion();
-  edicion: boolean = false;
-  id: number = 0;
-
-  //Listas para los dropdowns
-  listaUsuarios: Usuario[] = [];
+  form: FormGroup = new FormGroup({});
   listaPlanes: planesSuscripcion[] = [];
-  estados: string[] = ['ACTIVO', 'INACTIVO', 'SUSPENDIDO'];
 
+  esAdmin: boolean = false
   constructor(
     private usS: UsuarioSuscripcionService,
     private uS: UsuarioService,
     private pS: PlanesSuscripcionService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private loginService: LoginService
   ) { }
   
   ngOnInit(): void {
+    this.esAdmin = this.loginService.isAdmin();
     this.form = this.formBuilder.group({
-      idUsuarioSuscripcion: [''],
-      usuario: ['', Validators.required],
+      idUsuarioSuscripcion: [0],
       planesSuscripcion: ['', Validators.required],
-      fechaInicio: ['', Validators.required],
-      fechaFin: ['', Validators.required],
-      estado: ['Activo', [Validators.required, Validators.maxLength(20)]]
-    })
+      // Validaciones de tarjeta (Visuales)
+      nombreTarjeta: ['', [Validators.required, Validators.minLength(3)]],
+      numeroTarjeta: ['', [Validators.required, Validators.pattern('^[0-9]{16}$')]],
+      fechaExp: ['', [Validators.required, Validators.pattern('^(0[1-9]|1[0-2])\\/?([0-9]{2})$')]],
+      cvv: ['', [Validators.required, Validators.pattern('^[0-9]{3}$')]]
+    });
 
-    this.route.params.subscribe((data) => {
-      this.id = data['id'];
-      this.edicion = data['id'] != null;
-      this.init();
-    })
+    // Cargar planes
+    this.pS.list().subscribe(data => this.listaPlanes = data);
 
-    //Cargar los dropdowns
-    this.uS.listar().subscribe(data => {
-      this.listaUsuarios = data;
-    })
-
-    this.pS.list().subscribe(data => {
-      this.listaPlanes = data;
-    })
-  }
-
-  aceptar(): void{
-    if (this.form.valid) {
-      let suscripcionParaEnviar = {
-        idUsuarioSuscripcion: this.form.value.idUsuarioSuscripcion,
-        usuario: { idUsuario: this.form.value.usuario },
-        planesSuscripcion: { idPlanesSuscripcion: this.form.value.planesSuscripcion },
-        fechaInicio: this.form.value.fechaInicio,
-        fechaFin: this.form.value.fechaFin,
-        estado: this.form.value.estado,
-      };
-      if (this.edicion) {
-        //@ts-ignore
-        this.usS.update(suscripcionParaEnviar).subscribe({
-          next: () => {
-            this.usS.list().subscribe(data => this.usS.setList(data));
-            this.router.navigate(['/usuario-suscripcion']);
-          },
-          error: (err) => console.error('Error al actualizar:', err)
-        });
-      } else {
-        //@ts-ignore
-        this.usS.insert(suscripcionParaEnviar).subscribe({
-          next: () => {
-            this.usS.list().subscribe(data => this.usS.setList(data));
-            this.router.navigate(['/usuario-suscripcion']);
-          },
-          error: (err) => console.error('Error al insertar:', err)
+    this.route.queryParams.subscribe(params => {
+      const planId = params['planId'];
+      if (planId) {
+        // PatchValue llena el campo automáticamente
+        this.form.patchValue({
+          planesSuscripcion: Number(planId)
         });
       }
+    });
+  }
+
+  aceptar(): void {
+    if (this.form.valid) {
+      // 1. Preparar objeto para el Backend
+      // Solo enviamos el ID del plan. Las fechas y el usuario los pone el backend.
+      const suscripcionParaEnviar = {
+        idUsuarioSuscripcion: 0,
+        planesSuscripcion: { 
+          idPlanesSuscripcion: this.form.value.planesSuscripcion 
+        },
+        // Campos nulos explícitos para que Java no se queje
+        usuario: null,
+        fechaInicio: null,
+        fechaFin: null,
+        estado: null
+      };
+
+      // 2. Enviar
+      // @ts-ignore
+      this.usS.insert(suscripcionParaEnviar).subscribe({
+        next: (data: any) => {
+          // Éxito: data ahora es un objeto { mensaje: "..." }
+          Swal.fire({
+            icon: 'success',
+            title: '¡Suscripción Activa!',
+            text: data.mensaje || 'Tu plan ha sido activado correctamente.',
+            confirmButtonColor: '#3085d6'
+          }).then(() => {
+             this.router.navigate(['/dashboard']); // O a donde prefieras
+          });
+        },
+        error: (err) => {
+          console.error(err);
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'No se pudo procesar el pago.',
+            confirmButtonColor: '#d33'
+          });
+        }
+      });
     }
   }
 
-  cancelar(): void{
-    this.router.navigate(['/usuario-suscripcion']);
-  }
-
-  init() {
-    if (this.edicion) {
-      this.usS.listId(this.id).subscribe((data) => {
-        this.form = new FormGroup({
-          idUsuarioSuscripcion: new FormControl(data.idUsuarioSuscripcion),
-          usuario: new FormControl(data.usuario.idUsuario),
-          planesSuscripcion: new FormControl(data.planesSuscripcion.idPlanesSuscripcion),
-          fechaInicio: new FormControl(data.fechaInicio),
-          fechaFin: new FormControl(data.fechaFin),
-          estado: new FormControl(data.estado)
-        })
-      })
-    }
+  cancelar(): void {
+    this.router.navigate(['/dashboard']); // O volver atrás
   }
 }

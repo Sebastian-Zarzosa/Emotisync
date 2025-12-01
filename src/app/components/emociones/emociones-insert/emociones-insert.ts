@@ -14,7 +14,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { Emociones } from '../../../models/Emociones';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 // import { Emocionesservice } from '../../../services/emocionesservice';
-import { Crisis } from '../../../models/Crisis';
+import { Crisis } from '../../../models/crisis';
 // import { CrisisService } from '../../../services/crisisservice';
 import { Emocionesservice } from '../../../core/services/emocionesservice';
 import { CrisisService } from '../../../core/services/crisisservice';
@@ -32,7 +32,7 @@ export class EmocionesInsert implements OnInit {
 
   listaCrisis: Crisis[] = []; // <--- Lista para llenar el Select, al momento de registrar emociones, que salga el listado de crisis para elegir
   // Lista para el desplegable de intensidad:
-  niveles: number[] = [1, 2, 3, 4, 5];
+  niveles: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   edicion: boolean = false;
   id: number = 0;

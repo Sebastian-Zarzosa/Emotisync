@@ -1,71 +1,64 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-modo-reflexion',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatIconModule],
+  imports: [CommonModule, MatButtonModule, MatIconModule, RouterLink],
   templateUrl: './modo-reflexion.html',
   styleUrls: ['./modo-reflexion.css']
 })
-export class ModoReflexionComponent implements OnDestroy {
-  isActive = false;
-  isInhaling = true; // true = Inhala (grande), false = Exhala (pequeño)
-  instructionText = 'Presiona Play';
-  timerText = '00:00';
-  intervalId: any;
-  seconds = 0;
+export class ModoReflexionComponent implements OnInit, OnDestroy {
+  mensaje: string = 'Prepárate...';
+  fase: string = 'inicio'; // inicio, inhalar, retener, exhalar
+  intervalo: any;
+  
+  // Configuración del ciclo (4-7-8 o simple)
+  // Haremos un ciclo simple: 4s Inhalar, 4s Retener, 4s Exhalar
+  
+  ngOnInit(): void {
+    this.iniciarCiclo();
+  }
 
-  toggleBreathing() {
-    this.isActive = !this.isActive;
+  iniciarCiclo() {
+    this.fase = 'inhalar';
+    this.mensaje = 'Inhala profundamente...';
     
-    if (this.isActive) {
-      this.startSession();
-    } else {
-      this.pauseSession();
+    this.intervalo = setInterval(() => {
+      this.cicloRespiracion();
+    }, 12000); // Ciclo total de 12 segundos (4+4+4)
+    
+    // Iniciar el primer paso inmediatamente
+    this.cicloRespiracion();
+  }
+
+  cicloRespiracion() {
+    // 1. Inhalar (0s - 4s)
+    this.fase = 'inhalar';
+    this.mensaje = 'Inhala... 🌸';
+
+    // 2. Retener (4s - 8s)
+    setTimeout(() => {
+      if (!this.intervalo) return; // Evitar ejecución si salió
+      this.fase = 'retener';
+      this.mensaje = 'Mantén el aire... 😐';
+    }, 4000);
+
+    // 3. Exhalar (8s - 12s)
+    setTimeout(() => {
+      if (!this.intervalo) return;
+      this.fase = 'exhalar';
+      this.mensaje = 'Exhala suavemente... 💨';
+    }, 8000);
+  }
+
+  ngOnDestroy(): void {
+    if (this.intervalo) {
+      clearInterval(this.intervalo);
+      this.intervalo = null;
     }
-  }
-
-  startSession() {
-    this.instructionText = 'Inhala...';
-    this.isInhaling = true;
-
-    // Cambia entre Inhala/Exhala cada 4 segundos
-    this.intervalId = setInterval(() => {
-      this.seconds++;
-      this.timerText = this.formatTime(this.seconds);
-
-      // Ciclo de 4 segundos para respiración cuadrada simple
-      if (this.seconds % 4 === 0) {
-        this.isInhaling = !this.isInhaling;
-        this.instructionText = this.isInhaling ? 'Inhala...' : 'Exhala...';
-      }
-    }, 1000);
-  }
-
-  pauseSession() {
-    clearInterval(this.intervalId);
-    this.instructionText = 'Pausado';
-  }
-
-  stopBreathing() {
-    this.pauseSession();
-    this.isActive = false;
-    this.seconds = 0;
-    this.timerText = '00:00';
-    this.instructionText = 'Listo para empezar';
-    this.isInhaling = true; // Reset al tamaño original
-  }
-
-  formatTime(sec: number): string {
-    const minutes = Math.floor(sec / 60);
-    const seconds = sec % 60;
-    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-  }
-
-  ngOnDestroy() {
-    if (this.intervalId) clearInterval(this.intervalId);
   }
 }

@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Alerta } from '../../models/alertas';
+import { UsuarioAlertaCountDTO, AlertasBusquedaDTO, UsuarioPromedioAlertasDTO, UsuarioAlertaDTO } from '../../models/alertasDTO';
 const base_url = environment.base;
 
 @Injectable({
@@ -44,5 +45,29 @@ export class AlertasService{
 
     listId(id: number) {
         return this.http.get<Alerta>(`${this.apiUrl}/${id}`);
+    }
+
+
+   // 1. Conteo
+    getConteoUsuarios(): Observable<UsuarioAlertaCountDTO[]> {
+        return this.http.get<UsuarioAlertaCountDTO[]>(`${this.apiUrl}/conteo-usuarios`);
+    }
+
+    // 2. Búsqueda (Param: letra)
+    buscarPorNombre(letra: string): Observable<AlertasBusquedaDTO[]> {
+        const params = new HttpParams().set('letra', letra);
+        return this.http.get<AlertasBusquedaDTO[]>(`${this.apiUrl}/buscar-por-nombre`, { params });
+    }
+
+    // 3. Promedio Crítico (Param: nivel)
+    getPromedioCritico(nivel: number): Observable<UsuarioPromedioAlertasDTO[]> {
+        const params = new HttpParams().set('nivel', nivel.toString());
+        return this.http.get<UsuarioPromedioAlertasDTO[]>(`${this.apiUrl}/promedio-critico`, { params });
+    }
+
+    // 4. Alertas Críticas (Param: nivel, default 4)
+    getAlertasCriticas(nivel: number = 4): Observable<UsuarioAlertaDTO[]> {
+        const params = new HttpParams().set('nivel', nivel.toString());
+        return this.http.get<UsuarioAlertaDTO[]>(`${this.apiUrl}/criticas`, { params });
     }
 }
