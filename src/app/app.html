@@ -1,162 +1,212 @@
-@if (!showPanel) {
-  @if (loadingService.isLoading$ | async) {
-    <mat-progress-bar mode="indeterminate" color="accent" style="position: fixed; top: 0; left: 0; z-index: 9999; width: 100%;"></mat-progress-bar>
-  }
-  
-  <router-outlet></router-outlet>
-} @else {
-  <mat-sidenav-container class="app-container">
-    @if (loadingService.isLoading$ | async) {
-      <mat-progress-bar mode="indeterminate" color="accent" style="position: absolute; top: 0; z-index: 9999;"></mat-progress-bar>
-    }
-    <mat-sidenav #sidenav mode="side" opened class="app-sidenav">
-      
-      <div class="sidenav-header" routerLink="/perfil" matRipple>
-        <div class="user-avatar">
-          {{ loginService.getUsername().charAt(0).toUpperCase() }}
-        </div>
-        <div class="header-text">
-          <span class="user-name">{{ loginService.getUsername() }}</span>
-          <span class="role-badge">
-            {{ loginService.isAdmin() ? 'Administrador' : 'Paciente' }}
-          </span>
-        </div>
-      </div>
-
-      <div style="flex-grow: 1"></div> <mat-divider style="margin: 10px 0;"></mat-divider>
-
-        <a mat-list-item (click)="loginService.cerrarSesion()" routerLink="/login" style="cursor: pointer;">
-          <mat-icon matListItemIcon style="color: #d32f2f;">logout</mat-icon>
-          <span matListItemTitle style="color: #d32f2f; font-weight: 500;">Cerrar Sesión</span>
-        </a>
-
-      <mat-nav-list>
-  
-        @if (loginService.isAdmin()) {
-          <div mat-subheader style="color: #d32f2f; font-weight: bold;">PANEL DE CONTROL</div>
-
-          <a mat-list-item routerLink="/usuarios" routerLinkActive="active-link">
-            <mat-icon matListItemIcon>manage_accounts</mat-icon>
-            <span matListItemTitle>Usuarios</span>
-          </a>
-          <a mat-list-item routerLink="/roles" routerLinkActive="active-link">
-            <mat-icon matListItemIcon>admin_panel_settings</mat-icon>
-            <span matListItemTitle>Roles</span>
-          </a>
-          <a mat-list-item routerLink="/planes" routerLinkActive="active-link">
-            <mat-icon matListItemIcon>card_membership</mat-icon>
-            <span matListItemTitle>Planes</span>
-          </a>
-          <a mat-list-item routerLink="/usuario-suscripcion" routerLinkActive="active-link">
-            <mat-icon matListItemIcon>assignment_ind</mat-icon>
-            <span matListItemTitle>Suscripciones</span>
-          </a>
-          
-          <a mat-list-item routerLink="/sintomas" routerLinkActive="active-link">
-            <mat-icon matListItemIcon>healing</mat-icon> <span matListItemTitle>Síntomas</span>
-          </a>
-          <a mat-list-item routerLink="/crisis" routerLinkActive="active-link">
-            <mat-icon matListItemIcon>emergency</mat-icon> <span matListItemTitle>Crisis</span>
-          </a>
-          <a mat-list-item routerLink="/crisis-sintomas" routerLinkActive="active-link">
-            <mat-icon matListItemIcon>emergency</mat-icon> <span matListItemTitle>Crisis y sintomas</span>
-          </a>
-          <a mat-list-item routerLink="/alerta" routerLinkActive="active-link">
-            <mat-icon matListItemIcon>notification_important</mat-icon> <span matListItemTitle>Alertas</span>
-          </a>
-          <a mat-list-item routerLink="/reportes" routerLinkActive="active-link">
-            <mat-icon matListItemIcon>analytics</mat-icon> <span matListItemTitle>Reportes</span>
-          </a>
-          <mat-divider></mat-divider>
-        }
-
-        @if (loginService.isPaciente() || loginService.isAdmin()) {
-          <div mat-subheader>VISTA PACIENTE</div>
-          <a mat-list-item routerLink="/planes-disponibles" routerLinkActive="active-link">
-            <mat-icon matListItemIcon>loyalty</mat-icon> 
-            <span matListItemTitle>Planes y Precios</span>
-          </a>
-          <a mat-list-item routerLink="/diarios" routerLinkActive="active-link">
-            <mat-icon matListItemIcon>book</mat-icon>
-            <span matListItemTitle>Mi Diario</span>
-          </a>
-          <a mat-list-item routerLink="/usuarioEjercicios" routerLinkActive="active-link">
-            <mat-icon matListItemIcon>fitness_center</mat-icon>
-            <span matListItemTitle>Ejercicios</span>
-          </a>
-          <a mat-list-item routerLink="/progreso" routerLinkActive="active-link">
-            <mat-icon matListItemIcon>show_chart</mat-icon>
-            <span matListItemTitle>Progreso</span>
-          </a>
-          <a mat-list-item routerLink="/emociones" routerLinkActive="active-link">
-            <span matListItemIcon style="font-size: 20px;">😺</span>
-            <span matListItemTitle>Catálogo Emociones</span>
-          </a>
-          
-          <a mat-list-item routerLink="/modo-reflexion" routerLinkActive="active-link">
-            <mat-icon matListItemIcon>self_improvement</mat-icon> <span matListItemTitle>Reflexión</span>
-          </a>
-          <a mat-list-item routerLink="/grabadora" routerLinkActive="active-link">
-            <mat-icon matListItemIcon>mic</mat-icon> <span matListItemTitle>Grabadora</span>
-          </a>
-          <a mat-list-item routerLink="/musica" routerLinkActive="active-link">
-            <mat-icon matListItemIcon>music_note</mat-icon> <span matListItemTitle>Música</span>
-          </a>
-          <a mat-list-item routerLink="/gatitos" routerLinkActive="active-link">
-            <mat-icon matListItemIcon>pets</mat-icon> <span matListItemTitle>Gatitos</span>
-          </a>
-          <mat-divider></mat-divider>
-        }
-
-        @if (loginService.isEspecialista() || loginService.isAdmin()) {
-          <div mat-subheader>GABINETE CLÍNICO</div>
-          
-          <a mat-list-item routerLink="/usuarios/pacientes" routerLinkActive="active-link">
-            <mat-icon matListItemIcon>groups</mat-icon>
-            <span matListItemTitle>Mis Pacientes</span>
-          </a>
-          <a mat-list-item routerLink="/alertas" routerLinkActive="active-link">
-            <mat-icon matListItemIcon>notifications_active</mat-icon>
-            <span matListItemTitle>Gestión de Alertas</span>
-          </a>
-          <mat-divider></mat-divider>
-        }
-
-        @if (loginService.isFamiliar() || loginService.isAdmin() || loginService.isPaciente()) {
-          <div mat-subheader>FAMILIAR</div>
-          
-          <a mat-list-item routerLink="/progreso" routerLinkActive="active-link">
-            <mat-icon matListItemIcon>visibility</mat-icon>
-            <span matListItemTitle>Monitoreo</span>
-          </a>
-          <a mat-list-item routerLink="/sugerencias" routerLinkActive="active-link">
-            <mat-icon matListItemIcon>lightbulb</mat-icon>
-            <span matListItemTitle>Consejos</span>
-          </a>
-        }
-
-      </mat-nav-list>
-    </mat-sidenav>
-
-    <mat-sidenav-content class="app-content">
-      <mat-toolbar class="content-toolbar" color="primary">
-        <button mat-icon-button (click)="sidenav.toggle()">
-          <mat-icon>menu</mat-icon>
-        </button>
-        
-        <span>NeuroBridge</span>
-        
-        <span class="spacer" style="flex: 1 1 auto;"></span>
-        
-        <button mat-button (click)="loginService.cerrarSesion()" routerLink="/login">
-          <mat-icon>logout</mat-icon> Salir
-        </button>
-      </mat-toolbar>
-
-      <div class="page-content" style="padding: 20px;">
-        <router-outlet></router-outlet>
-      </div>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+```@if (!showPanel) { @if (loadingService.isLoading$ | async) {
+<mat-progress-bar
+  mode="indeterminate"
+  color="accent"
+  style="position: fixed; top: 0; left: 0; z-index: 9999; width: 100%"
+></mat-progress-bar>
 }
-<app-reproductor></app-reproductor>
+
+<router-outlet></router-outlet>
+} @else {
+<mat-sidenav-container class="app-container">
+  @if (loadingService.isLoading$ | async) {
+  <mat-progress-bar
+    mode="indeterminate"
+    color="accent"
+    style="position: absolute; top: 0; z-index: 9999"
+  ></mat-progress-bar>
+  }
+  <mat-sidenav #sidenav mode="side" opened class="app-sidenav">
+    <div class="sidenav-header" routerLink="/perfil" matRipple>
+      <div class="user-avatar">
+        {{ loginService.getUsername().charAt(0).toUpperCase() }}
+      </div>
+      <div class="header-text">
+        <span class="user-name">{{ loginService.getUsername() }}</span>
+        <span class="role-badge">
+          {{ loginService.isAdmin() ? 'Administrador' : 'Paciente' }}
+        </span>
+      </div>
+    </div>
+
+    <div style="flex-grow: 1"></div>
+    <mat-divider style="margin: 10px 0"></mat-divider>
+
+    <a
+      mat-list-item
+      (click)="loginService.cerrarSesion()"
+      routerLink="/login"
+      style="cursor: pointer"
+    >
+      <mat-icon matListItemIcon style="color: #d32f2f">logout</mat-icon>
+      <span matListItemTitle style="color: #d32f2f; font-weight: 500"
+        >Cerrar Sesión</span
+      >
+    </a>
+
+    <mat-nav-list>
+      @if (loginService.isAdmin()) {
+      <div mat-subheader style="color: #d32f2f; font-weight: bold">
+        PANEL DE CONTROL
+      </div>
+
+      <a mat-list-item routerLink="/usuarios" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>manage_accounts</mat-icon>
+        <span matListItemTitle>Usuarios</span>
+      </a>
+      <a mat-list-item routerLink="/roles" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>admin_panel_settings</mat-icon>
+        <span matListItemTitle>Roles</span>
+      </a>
+      <a mat-list-item routerLink="/planes" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>card_membership</mat-icon>
+        <span matListItemTitle>Planes</span>
+      </a>
+      <a
+        mat-list-item
+        routerLink="/usuario-suscripcion"
+        routerLinkActive="active-link"
+      >
+        <mat-icon matListItemIcon>assignment_ind</mat-icon>
+        <span matListItemTitle>Suscripciones</span>
+      </a>
+
+      <a mat-list-item routerLink="/sintomas" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>healing</mat-icon>
+        <span matListItemTitle>Síntomas</span>
+      </a>
+      <a mat-list-item routerLink="/crisis" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>emergency</mat-icon>
+        <span matListItemTitle>Crisis</span>
+      </a>
+      <a
+        mat-list-item
+        routerLink="/crisis-sintomas"
+        routerLinkActive="active-link"
+      >
+        <mat-icon matListItemIcon>emergency</mat-icon>
+        <span matListItemTitle>Crisis y sintomas</span>
+      </a>
+      <a mat-list-item routerLink="/alerta" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>notification_important</mat-icon>
+        <span matListItemTitle>Alertas</span>
+      </a>
+      <a mat-list-item routerLink="/ejercicios" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>fitness_center</mat-icon>
+        <span matListItemTitle>Ejercicios</span>
+      </a>
+      <a mat-list-item routerLink="/reportes" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>analytics</mat-icon>
+        <span matListItemTitle>Reportes</span>
+      </a>
+      <mat-divider></mat-divider>
+      } @if (loginService.isPaciente() || loginService.isAdmin()) {
+      <div mat-subheader>VISTA PACIENTE</div>
+      <a
+        mat-list-item
+        routerLink="/planes-disponibles"
+        routerLinkActive="active-link"
+      >
+        <mat-icon matListItemIcon>loyalty</mat-icon>
+        <span matListItemTitle>Planes y Precios</span>
+      </a>
+      <a mat-list-item routerLink="/diarios" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>book</mat-icon>
+        <span matListItemTitle>Mi Diario</span>
+      </a>
+      <a
+        mat-list-item
+        routerLink="/usuarioEjercicios"
+        routerLinkActive="active-link"
+      >
+        <mat-icon matListItemIcon>fitness_center</mat-icon>
+        <span matListItemTitle>Ejercicios</span>
+      </a>
+      <a mat-list-item routerLink="/progreso" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>show_chart</mat-icon>
+        <span matListItemTitle>Progreso</span>
+      </a>
+      <a mat-list-item routerLink="/emociones" routerLinkActive="active-link">
+        <span matListItemIcon style="font-size: 20px">😺</span>
+        <span matListItemTitle>Catálogo Emociones</span>
+      </a>
+
+      <a
+        mat-list-item
+        routerLink="/modo-reflexion"
+        routerLinkActive="active-link"
+      >
+        <mat-icon matListItemIcon>self_improvement</mat-icon>
+        <span matListItemTitle>Reflexión</span>
+      </a>
+      <a mat-list-item routerLink="/grabadora" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>mic</mat-icon>
+        <span matListItemTitle>Grabadora</span>
+      </a>
+      <a mat-list-item routerLink="/musica" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>music_note</mat-icon>
+        <span matListItemTitle>Música</span>
+      </a>
+      <a mat-list-item routerLink="/gatitos" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>pets</mat-icon>
+        <span matListItemTitle>Gatitos</span>
+      </a>
+      <mat-divider></mat-divider>
+      } @if (loginService.isEspecialista() || loginService.isAdmin()) {
+      <div mat-subheader>GABINETE CLÍNICO</div>
+
+      <a
+        mat-list-item
+        routerLink="/usuarios/pacientes"
+        routerLinkActive="active-link"
+      >
+        <mat-icon matListItemIcon>groups</mat-icon>
+        <span matListItemTitle>Mis Pacientes</span>
+      </a>
+      <a mat-list-item routerLink="/alerta" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>notifications_active</mat-icon>
+        <span matListItemTitle>Gestión de Alertas</span>
+      </a>
+      <mat-divider></mat-divider>
+      } @if (loginService.isFamiliar() || loginService.isAdmin() ||
+      loginService.isPaciente()) {
+      <div mat-subheader>FAMILIAR</div>
+
+      <a mat-list-item routerLink="/progreso" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>visibility</mat-icon>
+        <span matListItemTitle>Monitoreo</span>
+      </a>
+      <a mat-list-item routerLink="/sugerencias" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>lightbulb</mat-icon>
+        <span matListItemTitle>Consejos</span>
+      </a>
+      }
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="app-content">
+    <mat-toolbar class="content-toolbar" color="primary">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <span>NeuroBridge</span>
+
+      <span class="spacer" style="flex: 1 1 auto"></span>
+
+      <button
+        mat-button
+        (click)="loginService.cerrarSesion()"
+        routerLink="/login"
+      >
+        <mat-icon>logout</mat-icon> Salir
+      </button>
+    </mat-toolbar>
+
+    <div class="page-content" style="padding: 20px">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+}
+<app-reproductor></app-reproductor>```

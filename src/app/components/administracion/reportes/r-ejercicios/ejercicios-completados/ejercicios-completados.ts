@@ -38,8 +38,8 @@ export class EjerciciosCompletados {
               data: data.map((item) => item.ejerciciosCompletados),
               label: 'Cantidad de Ejercicios Completados por Usuario',
               backgroundColor: [
-                'rgba(75, 143, 43, 0.88)',
-                'rgba(150, 238, 100, 1)',
+                'rgba(83, 164, 218, 0.88)',
+                'rgba(95, 255, 207, 1)',
               ],
             },
           ];

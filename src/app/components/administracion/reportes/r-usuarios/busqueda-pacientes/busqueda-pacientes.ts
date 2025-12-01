@@ -23,7 +23,7 @@ import { MatInputModule } from '@angular/material/input';
 export class BusquedaPacientes {
   dataSource: MatTableDataSource<Usuario> = new MatTableDataSource();
 
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7'];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c7'];
   nombrebusqueda: string = '';
   mensaje: string = '';
   form: FormGroup;
