@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder,
+import {
+  FormBuilder,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
-  Validators
+  Validators,
 } from '@angular/forms';
 
 import { RolService } from '../../../../core/services/rolservice';
@@ -13,10 +14,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
 import { MatRadioModule } from '@angular/material/radio';
-import { MatNativeDateModule} from '@angular/material/core';
-import { provideNativeDateAdapter} from '@angular/material/core';
+import { MatNativeDateModule } from '@angular/material/core';
+import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from "@angular/material/card";
+import { MatCardModule } from '@angular/material/card';
 import { Rol } from '../../../../models/Rol';
 
 @Component({
@@ -30,8 +31,8 @@ import { Rol } from '../../../../models/Rol';
     MatRadioModule,
     MatNativeDateModule,
     MatButtonModule,
-    MatCardModule
-],
+    MatCardModule,
+  ],
   templateUrl: './insertarrol.html',
   providers: [provideNativeDateAdapter()],
   styleUrl: './insertarrol.css',
@@ -64,15 +65,19 @@ export class Insertarrol implements OnInit {
   }
   aceptar(): void {
     if (this.form.valid) {
-      this.ro.idRol = this.form.value.rol;
       if (this.edicion) {
-        this.ro.idRol = this.form.value.idRol
+        this.ro.idRol = this.form.value.idRol;
+        this.ro.rol = this.form.value.rol;
+
         this.rS.update(this.ro).subscribe(() => {
           this.rS.list().subscribe((data) => {
-            this.rS.setList(data)
-          })
-        })
+            this.rS.setList(data);
+          });
+        });
       } else {
+        this.ro.idRol = this.form.value.idRol;
+        this.ro.rol = this.form.value.rol;
+
         this.rS.insert(this.ro).subscribe(() => {
           this.rS.list().subscribe((data) => {
             this.rS.setList(data);
@@ -87,15 +92,14 @@ export class Insertarrol implements OnInit {
     if (this.edicion) {
       this.rS.listId(this.id).subscribe((data) => {
         this.form = new FormGroup({
-          idRol: new FormControl(data.idRol), 
-          rol: new FormControl(data.rol)
+          idRol: new FormControl(data.idRol),
+          rol: new FormControl(data.rol),
         });
       });
     }
   }
 
   cancelar() {
-    this.router.navigate(['/roles'])
+    this.router.navigate(['/roles']);
   }
 }
-

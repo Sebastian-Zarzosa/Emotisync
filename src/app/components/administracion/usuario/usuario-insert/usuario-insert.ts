@@ -67,7 +67,7 @@ export class UsuarioInsert implements OnInit {
   ) {
     // Inicializar grupo
     this.formStep1 = this.formBuilder.group({
-      idUsuario: [0],
+      idUsuario: [''],
       email: [
         '',
         [Validators.required, Validators.email, noWhitespaceValidator],
@@ -217,7 +217,7 @@ export class UsuarioInsert implements OnInit {
       ...this.formStep3.value,
       ...this.formStep4.value,
     };
-    this.user.idUsuario = finalUserData.idUsuario ? finalUserData.idUsuario : 0;
+    this.user.idUsuario = finalUserData.idUsuario;
     this.user.nombre = finalUserData.nombre;
     this.user.apellido = finalUserData.apellido;
     this.user.password = finalUserData.password;
@@ -265,10 +265,10 @@ export class UsuarioInsert implements OnInit {
         },
         error: (err) => {
           console.error('Error al actualizar usuario:', err);
+          console.error('Detalles del error:', err.error);
         },
       });
     } else {
-      console.log(this.user);
       this.usuarioService.insertar(this.user).subscribe({
         next: () => {
           this.usuarioService.listar().subscribe((data) => {
@@ -278,6 +278,7 @@ export class UsuarioInsert implements OnInit {
         },
         error: (err) => {
           console.error('Error al registrar usuario:', err);
+          console.error('Detalles del error:', err.error);
         },
       });
     }
