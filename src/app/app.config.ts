@@ -13,7 +13,9 @@ import {
 } from '@angular/common/http';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { JwtModule } from '@auth0/angular-jwt';
+import { authInterceptor } from './core/interceptors/auth.interceptor';
 import { loadingInterceptor } from './core/interceptors/loading.interceptor';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 export function tokenGetter() {
   return sessionStorage.getItem('token');
@@ -25,7 +27,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(
-      withInterceptors([loadingInterceptor]),
+      withInterceptors([loadingInterceptor, authInterceptor]),
       withInterceptorsFromDi()
     ),
     provideNativeDateAdapter(),
@@ -38,5 +40,6 @@ export const appConfig: ApplicationConfig = {
         },
       })
     ),
+    provideCharts(withDefaultRegisterables()),
   ],
 };

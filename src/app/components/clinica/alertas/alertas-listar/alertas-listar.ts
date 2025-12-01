@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { MatCardModule } from "@angular/material/card";
 import { MatPaginatorModule } from "@angular/material/paginator";
+import { LoginService } from '../../../../core/services/login';
 
 @Component({
   selector: 'app-alertas-listar',
@@ -27,7 +28,7 @@ export class AlertasListar implements OnInit{
   dataSource: MatTableDataSource<Alerta> = new MatTableDataSource();
   displayedColumns: string[] = ['id', 'tipoAlerta', 'mensaje', 'nivelAlerta','usuario', 'editar', 'eliminar'];
 
-  constructor(private aS: AlertasService) { }
+  constructor(private aS: AlertasService, public loginService: LoginService) { }
 
   ngOnInit(): void {
     this.aS.list().subscribe((data) => {
@@ -37,6 +38,10 @@ export class AlertasListar implements OnInit{
     this.aS.getList().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
     })
+
+    if(!this.loginService.isAdmin()){
+      this.displayedColumns =this.displayedColumns.filter(c => c !== 'eliminar')
+    }
   }
 
   eliminar(id: number) {

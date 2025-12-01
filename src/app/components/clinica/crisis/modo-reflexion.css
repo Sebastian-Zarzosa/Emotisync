@@ -1,0 +1,114 @@
+.reflexion-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Pantalla completa */
+    background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%); /* Fondo relajante lila */
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255,255,255,0.2);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+    z-index: 10;
+}
+
+.close-btn:hover {
+    background: rgba(255,255,255,0.4);
+}
+
+/* --- CÍRCULO DE RESPIRACIÓN --- */
+.breathing-circle-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circle {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 60px rgba(255, 255, 255, 0.4);
+    z-index: 1;
+    transform: scale(1);
+    transition: transform 4s ease-in-out; /* Suavidad clave */
+}
+
+/* Estados de la animación controlados por TypeScript */
+.breathing-circle-container.inhalar .circle {
+    transform: scale(1.5); /* Crece */
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.breathing-circle-container.retener .circle {
+    transform: scale(1.5); /* Se queda grande */
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 80px rgba(255, 255, 255, 0.6);
+}
+
+.breathing-circle-container.exhalar .circle {
+    transform: scale(1); /* Se encoge */
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.circle-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    z-index: 0;
+    transform: scale(1.5); /* Marca el límite de inhalación */
+}
+
+.message-content {
+    z-index: 2;
+    text-align: center;
+}
+
+.message-content h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    animation: fadeIn 1s ease;
+}
+
+/* --- INSTRUCCIONES --- */
+.instructions {
+    margin-top: 80px;
+    text-align: center;
+    opacity: 0.8;
+}
+
+.steps {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

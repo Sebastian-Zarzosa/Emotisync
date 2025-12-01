@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Sintoma } from '../../models/sintoma';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs'; // <--- Asegúrate de importar Observable
 
 const base_url = environment.base;
 
@@ -41,5 +41,14 @@ export class Sintomaservice {
 
   getList() {
     return this.listaCambio.asObservable();
+  }
+
+  // === NUEVOS MÉTODOS DE BÚSQUEDA ===
+  buscarPorNombre(nombre: string): Observable<Sintoma[]> {
+    return this.http.get<Sintoma[]>(`${this.url}/buscar-nombre/${nombre}`);
+  }
+
+  buscarPorDescripcion(desc: string): Observable<Sintoma[]> {
+    return this.http.get<Sintoma[]>(`${this.url}/buscar-descripcion/${desc}`);
   }
 }

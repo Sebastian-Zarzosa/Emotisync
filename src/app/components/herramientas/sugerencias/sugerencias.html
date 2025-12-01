@@ -1,0 +1,37 @@
+<div class="suggestions-container">
+    <button class="back-btn" routerLink="/dashboard">
+        <mat-icon>arrow_back</mat-icon> Volver
+    </button>
+
+    <div class="content-wrapper">
+        <h1 class="page-title">Inteligencia emocional</h1>
+        
+        <p class="subtitle">
+            Puedes aprender a relacionarte con:
+        </p>
+
+        <div class="options-grid">
+            
+            <div class="option-card" (click)="navegarChatbot()">
+                <div class="card-text">
+                    <h2>Asistente virtual</h2>
+                    <p>Respuestas inmediatas con IA</p>
+                </div>
+                <div class="card-icon">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2040/2040946.png" alt="AI">
+                </div>
+            </div>
+
+            <div class="option-card professional" (click)="navegarAsesor()">
+                <div class="card-text">
+                    <h2>Asesor profesional</h2>
+                    <p>Ayuda especializada humana</p>
+                </div>
+                <div class="card-icon">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3022/3022198.png" alt="Pro">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -32,9 +32,11 @@ import { Usuario } from '../../../../models/Usuario';
     MatDatepickerModule,
     MatNativeDateModule,
   ],
+  providers: [FormBuilder],
   templateUrl: './recurso-insert.html',
-  styleUrl: './recurso-insert.css',
+  styleUrls: ['./recurso-insert.css'],
 })
+
 export class RecursoInsert implements OnInit {
   form: FormGroup = new FormGroup({});
   recurso: Recurso = new Recurso();

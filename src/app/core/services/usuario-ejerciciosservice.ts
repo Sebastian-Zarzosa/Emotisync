@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { usuarioEjercicio } from '../../models/usuario-ejercicio';
 import { environment } from '../../../environments/environment';
+import { EjerciciosCompletados } from '../../components/administracion/reportes/r-ejercicios/ejercicios-completados/ejercicios-completados';
+import { EjercicioCompletadoDTO } from '../../models/EjercicioCompletadoDTO';
 
 const base_url = environment.base;
 
@@ -11,8 +13,8 @@ const base_url = environment.base;
 })
 export class UsuarioEjerciciosService {
   private apiUrl = `${base_url}/usuarioejercicios`;
-  private listaCambio = new Subject<usuarioEjercicio[]>
-  constructor(private http: HttpClient) { }
+  private listaCambio = new Subject<usuarioEjercicio[]>();
+  constructor(private http: HttpClient) {}
 
   list() {
     return this.http.get<usuarioEjercicio[]>(this.apiUrl);
@@ -31,14 +33,20 @@ export class UsuarioEjerciciosService {
   }
 
   delete(id: number) {
-    return this.http.delete(`${this.apiUrl}/${id}`, {responseType: 'text'});
+    return this.http.delete(`${this.apiUrl}/${id}`, { responseType: 'text' });
   }
 
   update(e: usuarioEjercicio) {
-    return this.http.put(this.apiUrl, e, {responseType: 'text'});
+    return this.http.put(this.apiUrl, e, { responseType: 'text' });
   }
 
   listId(id: number) {
     return this.http.get<usuarioEjercicio>(`${this.apiUrl}/${id}`);
+  }
+
+  ejerciciosCompletadosPorUsuario() {
+    return this.http.get<EjercicioCompletadoDTO[]>(
+      `${this.apiUrl}/ejercicioscompletados`
+    );
   }
 }

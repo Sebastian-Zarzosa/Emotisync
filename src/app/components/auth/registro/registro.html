@@ -38,6 +38,15 @@
                 <mat-icon matPrefix>email</mat-icon>
             </mat-form-field>
 
+            <mat-form-field appearance="outline" class="custom-input">
+                <mat-label>Nombre de Usuario</mat-label>
+                <input matInput formControlName="username" placeholder="Elige un usuario único">
+                <mat-icon matPrefix>account_circle</mat-icon>
+                <mat-error>
+                    @if (form.get('username')?.hasError('maxlength')) { Máximo 30 caracteres }
+                    @if (form.get('username')?.hasError('required')) { Requerido }
+                </mat-error>
+            </mat-form-field>
             <div style="display: flex; gap: 10px;">
                 <mat-form-field appearance="outline" class="custom-input" style="flex: 1;">
                     <mat-label>Teléfono</mat-label>
@@ -48,7 +57,7 @@
 
                 <mat-form-field appearance="outline" class="custom-input" style="flex: 1;">
                     <mat-label>Fecha Nacimiento</mat-label>
-                    <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento">
+                    <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento" [max]="maxDate">
                     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
@@ -60,6 +69,20 @@
                 <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
                     <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
+                <mat-error *ngIf="form.get('password')?.hasError('minlength')">
+                    Mínimo 6 caracteres
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="custom-input">
+                <mat-label>Confirmar Contraseña</mat-label>
+                <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="confirmPassword">
+                <mat-error *ngIf="form.get('confirmPassword')?.hasError('mismatch')">
+                    Las contraseñas no coinciden
+                </mat-error>
+                <mat-error *ngIf="form.get('confirmPassword')?.hasError('required')">
+                    La confirmación es obligatoria
+                </mat-error>
             </mat-form-field>
 
             <button mat-raised-button class="btn-login" type="submit" [disabled]="form.invalid">

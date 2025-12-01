@@ -11,6 +11,7 @@ import { LoginService } from './core/services/login';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { LoadingService } from './core/services/loading';
 import { MatDividerModule } from '@angular/material/divider';
+import { ReproductorComponent } from './components/shared/reproductor/reproductor';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -24,7 +25,8 @@ import { MatDividerModule } from '@angular/material/divider';
     MatButtonModule,
     MatToolbarModule,
     MatProgressBarModule,
-    MatDividerModule
+    MatDividerModule,
+    ReproductorComponent
   ],
   templateUrl: './app.html',
   styleUrl: './app.css'
@@ -58,4 +60,8 @@ export class App implements OnInit{
       }
     });
   }
+
+  get isAdmin() {return this.loginService.isAdmin()}
+  get isPaciente() {return this.loginService.isPaciente()}
+  get isEspecialista() {return this.loginService.getRole() === 'ESPECIALISTA'}
 }

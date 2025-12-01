@@ -1,0 +1,22 @@
+<div class="reflexion-container">
+    <button class="close-btn" routerLink="/dashboard">
+        <mat-icon>close</mat-icon>
+    </button>
+
+    <div class="breathing-circle-container" [ngClass]="fase">
+        <div class="circle"></div>
+        
+        <div class="circle-bg"></div>
+        
+        <div class="message-content">
+            <h2>{{ mensaje }}</h2>
+        </div>
+    </div>
+
+    <div class="instructions">
+        <p>Sigue el ritmo del círculo para regular tu respiración.</p>
+        <div class="steps">
+            <span>Inhala (4s)</span> • <span>Retén (4s)</span> • <span>Exhala (4s)</span>
+        </div>
+    </div>
+</div>

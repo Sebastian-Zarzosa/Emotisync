@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Subject } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http'; // <--- Agregar HttpParams
+import { Subject, Observable } from 'rxjs'; // <--- Agregar Observable
 import { environment } from '../../../environments/environment';
 import { Recurso } from '../../models/recurso';
+// Importamos los nuevos DTOs
+import { RecursoPromedioDTO } from '../../models/RecursoPromedioDTO';
+import { RecursoRelacionDTO } from '../../models/RecursoRelacionDTO';
 
 const base_url = environment.base;
 
@@ -41,5 +44,21 @@ export class RecursoService {
 
   getList() {
     return this.listaCambio.asObservable();
+  }
+
+  // === NUEVOS MÉTODOS PARA REPORTES ===
+
+  // 1. Obtener promedio de recursos por creador
+  getPromedioRecursos(): Observable<RecursoPromedioDTO[]> {
+    return this.http.get<RecursoPromedioDTO[]>(`${this.url}/promedio`);
+  }
+
+  // 2. Verificar relación (usa @RequestParam en el backend)
+  verificarRelacion(creadorId: number, destinatarioId: number): Observable<RecursoRelacionDTO> {
+    const params = new HttpParams()
+      .set('creadorId', creadorId.toString())
+      .set('destinatarioId', destinatarioId.toString());
+
+    return this.http.get<RecursoRelacionDTO>(`${this.url}/relacion`, { params });
   }
 }

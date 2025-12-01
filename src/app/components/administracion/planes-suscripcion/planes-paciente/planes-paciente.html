@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="header">
+    <h1>Nuestros Planes</h1>
+    <p>Elige el plan que mejor se adapte a tu bienestar emocional</p>
+  </div>
+
+  <div class="planes-grid">
+    @for (plan of listaPlanes; track plan.idPlanesSuscripcion) {
+      <mat-card class="plan-card" [class.featured]="plan.nombre_plan.includes('Anual')">
+        <mat-card-header>
+          <mat-card-title>{{ plan.nombre_plan }}</mat-card-title>
+          <mat-card-subtitle>Suscripción {{ plan.nombre_plan.includes('Anual') ? 'Anual' : 'Mensual' }}</mat-card-subtitle>
+        </mat-card-header>
+        
+        <mat-card-content>
+          <div class="price">
+            <span class="currency">S/.</span>
+            <span class="amount">{{ plan.precio }}</span>
+          </div>
+          <p class="description">{{ plan.descripcion }}</p>
+          
+          <ul class="features">
+            <li><mat-icon>check</mat-icon> Acceso a herramientas</li>
+            <li><mat-icon>check</mat-icon> Reportes de progreso</li>
+            <li><mat-icon>check</mat-icon> Soporte prioritario</li>
+          </ul>
+        </mat-card-content>
+
+        <mat-card-actions class="actions-centered"> 
+  
+            <button mat-raised-button 
+                    color="primary" 
+                    class="btn-subscribe" 
+                    (click)="suscribirse(plan.idPlanesSuscripcion)">
+                <mat-icon>touch_app</mat-icon>
+                QUIERO ESTE PLAN
+            </button>
+
+        </mat-card-actions>
+      </mat-card>
+      
+    }
+  </div>
+</div>

@@ -1,70 +1,90 @@
-<mat-card class="simple-form-card">
-    <mat-card-title>
-        {{ edicion ? 'Editar Suscripción' : 'Asignar Suscripción a Usuario' }}
-    </mat-card-title>
+<div class="container">
+  <mat-card class="subscription-card">
+    <mat-card-header class="card-header">
+      <div class="header-content">
+        <mat-card-title>Contratar Suscripción</mat-card-title>
+        <mat-card-subtitle>Selecciona un plan y completa el pago seguro</mat-card-subtitle>
+      </div>
+      <mat-icon class="header-icon">verified_user</mat-icon>
+    </mat-card-header>
 
     <mat-card-content>
-        <form [formGroup]="form" (submit)="aceptar()">
-            @if(edicion){
-            <mat-form-field>
-                <mat-label>ID</mat-label>
-                <input matInput formControlName="idUsuarioSuscripcion" readonly />
-            </mat-form-field>
+      <form [formGroup]="form" (submit)="aceptar()">
+
+        <div class="section-title">
+          <span class="step-number">1</span>
+          <h3>Selecciona tu Plan</h3>
+        </div>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Plan Disponible</mat-label>
+          <mat-select formControlName="planesSuscripcion">
+            @for (plan of listaPlanes; track plan.idPlanesSuscripcion) {
+              <mat-option [value]="plan.idPlanesSuscripcion">
+                {{ plan.nombre_plan }} - S/. {{ plan.precio }}
+              </mat-option>
             }
+          </mat-select>
+          <mat-icon matSuffix>star</mat-icon>
+          <mat-error>Es necesario seleccionar un plan</mat-error>
+        </mat-form-field>
 
-            <mat-form-field>
-                <mat-label>Usuario</mat-label>
-                <mat-select formControlName="usuario">
-                    @for (u of listaUsuarios; track u.idUsuario) {
-                    <mat-option [value]="u.idUsuario">{{ u.nombre }} {{ u.apellido }}</mat-option>
-                    }
-                </mat-select>
-                <mat-error>Debe seleccionar un usuario</mat-error>
+        <mat-divider></mat-divider>
+
+        <div class="section-title">
+          <span class="step-number">2</span>
+          <h3>Método de Pago</h3>
+        </div>
+
+        <div class="payment-box">
+          <div class="card-icons">
+            <mat-icon>credit_card</mat-icon>
+            <span>Tarjeta de Crédito / Débito</span>
+          </div>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Titular de la Tarjeta</mat-label>
+            <input matInput formControlName="nombreTarjeta" placeholder="COMO APARECE EN LA TARJETA" style="text-transform: uppercase;">
+            <mat-icon matSuffix>person</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Número de Tarjeta</mat-label>
+            <input matInput formControlName="numeroTarjeta" placeholder="0000 0000 0000 0000" maxlength="16">
+            <mat-icon matSuffix>payment</mat-icon>
+            <mat-error>Debe tener 16 dígitos</mat-error>
+          </mat-form-field>
+
+          <div class="row">
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Vencimiento (MM/YY)</mat-label>
+              <input matInput formControlName="fechaExp" placeholder="MM/YY" maxlength="5">
             </mat-form-field>
 
-            <mat-form-field>
-                <mat-label>Plan</mat-label>
-                <mat-select formControlName="planesSuscripcion">
-                    @for (p of listaPlanes; track p.idPlanesSuscripcion) {
-                    <mat-option [value]="p.idPlanesSuscripcion">{{ p.nombre_plan }} (S/. {{p.precio}})</mat-option>
-                    }
-                </mat-select>
-                <mat-error>Debe seleccionar un plan</mat-error>
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>CVV</mat-label>
+              <input matInput formControlName="cvv" type="password" placeholder="123" maxlength="3">
+              <mat-icon matSuffix>lock</mat-icon>
             </mat-form-field>
+          </div>
+          
+          <div class="secure-badge">
+            <mat-icon>lock</mat-icon> Transacción encriptada y segura
+          </div>
+        </div>
 
-            <mat-form-field>
-                <mat-label>Fecha Inicio</mat-label>
-                <input matInput [matDatepicker]="pickerInicio" formControlName="fechaInicio" />
-                <mat-datepicker-toggle matIconSuffix [for]="pickerInicio"></mat-datepicker-toggle>
-                <mat-datepicker #pickerInicio></mat-datepicker>
-                <mat-error>Fecha de inicio es requerida</mat-error>
-            </mat-form-field>
+        <div class="actions">
+          <button mat-button type="button" color="warn" (click)="cancelar()">
+            Cancelar
+          </button>
+          
+          <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid" class="btn-pay">
+            <mat-icon>shopping_cart_checkout</mat-icon>
+            Pagar y Suscribirse
+          </button>
+        </div>
 
-            <mat-form-field>
-                <mat-label>Fecha Fin</mat-label>
-                <input matInput [matDatepicker]="pickerFin" formControlName="fechaFin" />
-                <mat-datepicker-toggle matIconSuffix [for]="pickerFin"></mat-datepicker-toggle>
-                <mat-datepicker #pickerFin></mat-datepicker>
-                <mat-error>Fecha de fin es requerida</mat-error>
-            </mat-form-field>
-
-            <mat-form-field>
-                <mat-label>Estado</mat-label>
-                <mat-select formControlName="estado">
-                    @for (e of estados; track e) {
-                    <mat-option [value]="e">{{ e }}</mat-option>
-                    }
-                </mat-select>
-                <mat-error>El estado es requerido</mat-error>
-            </mat-form-field>
-
-        </form>
+      </form>
     </mat-card-content>
-
-    <mat-card-actions align="end">
-        <button mat-stroked-button (click)="cancelar()">Cancelar</button>
-        <button mat-raised-button color="primary" (click)="aceptar()" [disabled]="form.invalid">
-            {{ edicion ? 'Actualizar' : 'Guardar' }}
-        </button>
-    </mat-card-actions>
-</mat-card>
+  </mat-card>
+</div>

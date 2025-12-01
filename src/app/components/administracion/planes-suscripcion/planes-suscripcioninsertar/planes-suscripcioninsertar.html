@@ -1,53 +1,56 @@
-<mat-card class="simple-form-card">
-    <mat-card-title>
-        {{ edicion ? 'Editar Plan' : 'Registrar Plan de Suscripción' }}
-    </mat-card-title>
+<mat-card class="simple-form-card" style="max-width: 500px; margin: 20px auto;">
+    <mat-card-header>
+        <mat-card-title>{{ edicion ? 'Editar Plan' : 'Nuevo Plan de Suscripción' }}</mat-card-title>
+    </mat-card-header>
 
     <mat-card-content>
         <form [formGroup]="form" (submit)="aceptar()">
-            @if(edicion){
-            <mat-form-field>
-                <mat-label>ID</mat-label>
-                <input matInput formControlName="codigo" readonly />
-            </mat-form-field>
-            }
+            
+            <div style="display: flex; gap: 10px;">
+                <mat-form-field appearance="outline" style="flex: 1;">
+                    <mat-label>Nombre del Plan</mat-label>
+                    <mat-select formControlName="nombreBase">
+                        @for (nombre of nombresBase; track nombre) {
+                            <mat-option [value]="nombre">{{ nombre }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
 
-            <mat-form-field>
-                <mat-label>Tipo de Plan</mat-label>
-                <mat-select formControlName="nombre_plan">
-                    @for (tipo of tipos; track tipo) {
-                    <mat-option [value]="tipo.value">{{ tipo.viewValue }}</mat-option>
-                    }
-                </mat-select>
-                <mat-error>
-                    @if (form.get('nombre_plan')?.hasError('required')) { El campo es obligatorio }
-                </mat-error>
+                <mat-form-field appearance="outline" style="flex: 1;">
+                    <mat-label>Duración</mat-label>
+                    <mat-select formControlName="duracion">
+                        @for (d of duraciones; track d) {
+                            <mat-option [value]="d">{{ d }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            
+            <div style="margin-bottom: 15px; color: #666; font-size: 13px;">
+                Nombre final en sistema: 
+                <strong>
+                    {{ form.value.nombreBase }} {{ form.value.duracion }}
+                </strong>
+            </div>
+
+            <mat-form-field appearance="outline" style="width: 100%;">
+                <mat-label>Precio (S/.)</mat-label>
+                <input matInput type="number" formControlName="precio" min="0" placeholder="0.00" />
+                <mat-icon matSuffix>attach_money</mat-icon>
+                <mat-error>El precio es requerido</mat-error>
             </mat-form-field>
 
-            <mat-form-field>
-                <mat-label>Precio</mat-label>
-                <input matInput type="number" formControlName="precio" />
-                <mat-error>
-                    @if (form.get('precio')?.hasError('required')) { El precio es obligatorio }
-                    @if (form.get('precio')?.hasError('pattern')) { Ingrese un precio válido (ej. 15.50) }
-                </mat-error>
+            <mat-form-field appearance="outline" style="width: 100%;">
+                <mat-label>Descripción (Beneficios)</mat-label>
+                <textarea matInput formControlName="descripcion" rows="3" placeholder="Ej: Acceso a reportes avanzados..."></textarea>
             </mat-form-field>
 
-            <mat-form-field>
-                <mat-label>Descripcion</mat-label>
-                <textarea matInput formControlName="descripcion"></textarea>
-                <mat-error>
-                    @if (form.get('descripcion')?.hasError('required')) { El campo es obligatorio }
-                </mat-error>
-            </mat-form-field>
-
+            <div style="text-align: right;">
+                <button mat-button type="button" (click)="cancelar()">Cancelar</button>
+                <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+                    Guardar Plan
+                </button>
+            </div>
         </form>
     </mat-card-content>
-
-    <mat-card-actions align="end">
-        <button mat-stroked-button (click)="cancelar()">Cancelar</button>
-        <button mat-raised-button color="primary" (click)="aceptar()" [disabled]="form.invalid">
-            {{ edicion ? 'Actualizar' : 'Agregar' }}
-        </button>
-    </mat-card-actions>
 </mat-card>

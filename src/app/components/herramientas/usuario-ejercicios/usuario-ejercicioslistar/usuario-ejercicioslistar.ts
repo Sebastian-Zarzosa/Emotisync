@@ -11,40 +11,48 @@ import { UsuarioEjerciciosService } from '../../../../core/services/usuario-ejer
 
 @Component({
   selector: 'app-usuario-ejercicioslistar',
-  imports: [CommonModule,
+  imports: [
+    CommonModule,
     MatTableModule,
     MatPaginatorModule,
     MatCardModule,
     RouterLink,
     MatButtonModule,
-    MatIconModule],
+    MatIconModule,
+  ],
   templateUrl: './usuario-ejercicioslistar.html',
   styleUrl: './usuario-ejercicioslistar.css',
 })
-export class UsuarioEjercicioslistar implements OnInit, AfterViewInit{
+export class UsuarioEjercicioslistar implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<usuarioEjercicio> = new MatTableDataSource();
-  displayedColumns: string[] = ['usuario', 'ejercicio', 'fechaRealizacion', 'resultado', 'editar', 'eliminar'];
-@ViewChild(MatPaginator) paginator!: MatPaginator;
+  displayedColumns: string[] = [
+    'ejercicio',
+    'fechaRealizacion',
+    'resultado',
+    'editar',
+    'eliminar',
+  ];
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-constructor(private uE: UsuarioEjerciciosService) { }
+  constructor(private uE: UsuarioEjerciciosService) {}
 
-ngOnInit(): void {
+  ngOnInit(): void {
     this.uE.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
-    })
+    });
     this.uE.getList().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
-    })
-}
+    });
+  }
 
-ngAfterViewInit(): void {
+  ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
-}
-eliminar(id: number) {
+  }
+  eliminar(id: number) {
     this.uE.delete(id).subscribe(() => {
       this.uE.list().subscribe((data) => {
         this.uE.setList(data);
-      })
-    })  
-}
+      });
+    });
+  }
 }
