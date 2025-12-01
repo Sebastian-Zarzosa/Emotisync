@@ -67,6 +67,7 @@ import { RepSuscripcionesActivas } from './components/administracion/reportes/r-
 import { BusqHistorialEmail } from './components/administracion/reportes/r-suscripciones/busq-historial-email/busq-historial-email';
 import { GrafRendimientoPlanes } from './components/administracion/reportes/r-suscripciones/graf-rendimiento-planes/graf-rendimiento-planes';
 import { GrafMenosSuscriptores } from './components/administracion/reportes/r-suscripciones/graf-menos-suscriptores/graf-menos-suscriptores';
+import { PlanesPacienteComponent } from './components/administracion/planes-suscripcion/planes-paciente/planes-paciente';
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   { path: 'inicio', component: Inicio },
@@ -135,13 +136,16 @@ export const routes: Routes = [
   },
   {
     path: 'usuario-suscripcion',
-    component: UsuarioSuscripcion,
     children: [
-      { path: 'insertar', component: UsuarioSuscripcioninsertar },
+      { 
+        path: 'insertar', 
+        component: UsuarioSuscripcioninsertar, 
+        canActivate: [roleGuard],
+        data: { expectedRole: ['ADMIN', 'PACIENTE'] },
+      },
       { path: 'editar/:id', component: UsuarioSuscripcioninsertar },
     ],
-    canActivate: [roleGuard],
-    data: { expectedRole: 'ADMIN' },
+    
   },
   {
     path: 'ejercicios',
@@ -334,6 +338,12 @@ export const routes: Routes = [
     component: PerfilComponent,
     canActivate: [roleGuard],
     data: { expectedRole: ['ADMIN', 'PACIENTE', 'ESPECIALISTA', 'FAMILIAR'] },
+  },
+  {
+    path: 'planes-disponibles',
+    component: PlanesPacienteComponent,
+    canActivate: [roleGuard],
+    data: { expectedRoles: ['PACIENTE'] }
   },
 
   // gatitos
