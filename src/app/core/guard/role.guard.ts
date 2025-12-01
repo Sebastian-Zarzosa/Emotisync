@@ -1,11 +1,10 @@
-import { CanActivateFn, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { CanActivateFn, Router } from '@angular/router';
 import { inject } from '@angular/core';
 import { LoginService } from '../services/login';
-import Swal from 'sweetalert2';
 
 export const roleGuard: CanActivateFn = (route, state) => {
-  const loginService = inject(LoginService)
-  const router = inject(Router)
+  const loginService = inject(LoginService);
+  const router = inject(Router);
 
   // 1. Validar si está logueado
   if (!loginService.verificar()) {
@@ -13,29 +12,50 @@ export const roleGuard: CanActivateFn = (route, state) => {
     return false;
   }
 
-  const currentRole = loginService.getRole();
+  // 2. Obtener Rol de forma SEGURA
+  // Si getRole() es null/undefined, usamos cadena vacía '' para evitar el crash
+  const roleRaw = loginService.getRole();
+  const currentRole = roleRaw ? roleRaw.trim().toUpperCase() : '';
 
-  // 2. ADMIN SIEMPRE PASA (Modo Dios)
+  if (!currentRole) {
+    // Si no hay rol, algo está mal con el token. Mandar al login.
+    router.navigate(['/login']);
+    return false;
+  }
+
+  // 3. ADMIN: Acceso total
   if (currentRole === 'ADMIN') {
     return true;
   }
 
-  // 3. Obtener roles esperados desde la ruta (ahora esperamos un Array)
-  const expectedRoles = route.data['expectedRoles'] as Array<string>;
+  // 4. Validar permisos de ruta
+  const dataRole = route.data['expectedRoles'] || route.data['expectedRole'];
+  
+  if (!dataRole) {
+    // Si la ruta no tiene roles definidos, asumimos que es pública o error de config
+    return true; 
+  }
 
-  // 4. Validar si el rol actual está en la lista permitida
-  if (expectedRoles && expectedRoles.includes(currentRole)) {
+  const allowedRoles = Array.isArray(dataRole) ? dataRole : [dataRole];
+
+  // Comparamos mayúsculas con mayúsculas
+  const hasPermission = allowedRoles.some((r: string) => r.toUpperCase() === currentRole);
+
+  if (hasPermission) {
     return true;
   }
 
-  // 5. Si no tiene permiso, redirigir según su rol para evitar bucles
-  if (currentRole === 'PACIENTE') {
-    router.navigate(['/diarios']);
-  } else if (currentRole === 'ESPECIALISTA') {
-    router.navigate(['/usuarios/pacientes']); // Redirigir a su home
-  } else {
-    router.navigate(['/inicio']);
+  // 5. Redirección Segura (Anti-Bucle)
+  let targetUrl = '/inicio';
+  if (currentRole === 'PACIENTE') targetUrl = '/diarios';
+  else if (currentRole === 'ESPECIALISTA') targetUrl = '/usuarios/pacientes';
+  else if (currentRole === 'FAMILIAR') targetUrl = '/progreso';
+
+  // Si ya estoy intentando ir a mi home y no puedo entrar, NO redirigir (evita bucle)
+  if (state.url === targetUrl) {
+    return false;
   }
-  
+
+  router.navigate([targetUrl]);
   return false;
 };
